@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.ohgym.dao.MemberDao">
+    <update id="mImage" parameterType="MemberDto">
+        update member
+        set moriname=#{moriname}, msysname=#{msysname}
+        where membernum=1;
+    </update>
+
+    <select id="selectMember" resultType="MemberDto" parameterType="Integer">
+        select * from member where membernum=#{membernum}
+    </select>
+
+    <select id="selectMarkedGyms" resultType="GmListDto" parameterType="Integer">
+        select * from gmlist where membernum=#{membernum}
+    </select>
+</mapper>

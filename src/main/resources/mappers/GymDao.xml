@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.ohgym.dao.GymDao">
+    <update id="gImage" parameterType="GymDto">
+        update gym
+        set goriname=#{goriname}, gsysname=#{gsysname}
+        where gymnum=1;
+    </update>
+    <select id="selectGym" resultType="GymDto" parameterType="integer">
+        select * from gym where gymnum=#{gymnum}
+    </select>
+    <select id="numCheck" resultType="int" parameterType="int">
+        SELECT count(*) FROM gym WHERE gymnum=#{gymnum}
+    </select>
+</mapper>

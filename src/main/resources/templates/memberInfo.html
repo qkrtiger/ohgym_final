@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>memberInfo</title>
+    <link rel="stylesheet" th:href="@{css/info.css}">
+    <script th:src="@{js/popup.js}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script th:inline="javascript">
+        $(function () {
+            let m = [[${msg}]]; // msg 변수를 가져옴
+            if (m != null) {
+                alert(m); // 경고창 띄우기
+            }
+        });
+
+        const closePopup = function () {
+            window.close(); // 팝업 창 종료
+            window.opener.location.reload(); // 부모 창 새로고침
+        };
+    </script>
+</head>
+<body>
+<div id="info-popup" class="popup-hidden">
+    <div class="popup-content">
+        <form th:action="@{mImage}" method="POST" enctype="multipart/form-data">
+            <div class="popup-top">
+                <th:block th:if="${member.msysname} == null">
+                    <img th:onclick="|openPopup(1)|"
+                         th:src="@{images/bbbbb.jpg}" height="150" width="150">
+                </th:block>
+                <th:block th:unless="${member.msysname} == null">
+                    <img th:onclick="|openPopup(1)|"
+                         th:src="@{upload/} + ${member.msysname}" height="150" width="150">
+                </th:block>
+                <p th:text="${member.mname}"></p>
+            </div>
+            <div class="popup-lmidde">
+                <div>
+                    <label>성별:</label>
+                    <input type="text" id="genderInput" th:placeholder="${member.mgender}">
+                </div>
+                <div>
+                    <label>전화번호:</label>
+                    <input type="text" id="phoneInput" th:placeholder="${member.mphone}">
+                </div>
+                <div>
+                    <label>나의 다짐:</label>
+                    <input type="text" id="resolutionInput" th:placeholder="${member.mresolution}">
+                </div>
+                <div>
+                    <label>관심 지역:</label>
+                    <input type="text" id="regionInput" th:placeholder="${member.mregion}">
+                </div>
+            </div>
+            <div class="passbtn">
+                <input type="button" value="비밀번호 수정">
+            </div>
+            <div class="popup-btns">
+                <input type="button" value="닫기" onclick="closePopup()">
+                <input type="submit" value="등록">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

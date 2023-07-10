@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>mTrainer</title>
+    <link rel="stylesheet" th:href="@{css/mTrainer.css}">
+    <script th:src="@{js/popup.js}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+</head>
+<script th:inline="javascript">
+    $(function () {
+        let m = [[${msg}]]; // msg 변수를 가져옴
+        if (m != null) {
+            alert(m); // 경고창 띄우기
+        }
+    });
+    const closePopup = function () {
+        window.close(); // 팝업 창 종료
+        window.opener.location.reload(); // 부모 창 새로고침
+    };
+</script>
+<body>
+<div id="popup" class="popup-hidden">
+    <div class="popup-content">
+        <form th:action="@{tMember}" method="POST" enctype="multipart/form-data" target="_blank">
+            <div class="popup-top">
+                <h1>트레이너 등록</h1>
+                <div>
+                    <input type="number" id="gnum" placeholder="헬스장 고유번호를 입력하세요">
+                    <input type="submit" value="확인" onclick="numCheck()">
+                </div>
+            </div>
+            <div class="popup-btns">
+                <input type="button" value="닫기" onclick="closePopup()">
+                <input type="submit" value="등록">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<script th:inline="javascript">
+
+    let ck = false;
+    function numCheck() {
+        let gnum = $("#gnum").val();
+
+        if (gnum == "") {
+            alert("고유번호를 입력하세요.");
+            $("#gnum").focus();
+            return;
+        }
+
+        let checkNum = {"gymnum": gnum};
+        console.log(checkNum);
+
+        $.ajax({
+            url: "numCheck",
+            type: "post",
+            data: checkNum,
+            success: function (res){
+                if(res == "ok"){
+                    alert("고유번호가 확인되었습니다.")
+                    ck = true;
+                    console.log(res);
+                } else {
+                    alert("고유번호를 잘못 입력하셨습니다.")
+                    $("#gnum").val("");
+                    $("#gnum").focus();
+                    ck = false;
+                    console.log(ck);
+                }
+            },
+            error: function (err){
+                console.log(err);
+                ck = false;
+            }
+        });
+    }
+</script>
+</html>

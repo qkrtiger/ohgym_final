@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>wishList</title>
+    <link rel="stylesheet" th:href="@{css/mypage.css}">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>찜 목록</h1>
+
+
+    <h1>검색결과출력</h1>
+    <div id="result">
+        <th:block th:if="${#lists.isEmpty(gList)}">
+            등록된 헬스장이 없습니다.
+        </th:block>
+        <th:block th:unless="${#lists.isEmpty(gList)}">
+            <th:block th:each="gitem:${gList}">
+                <div class="card" style="width: 18rem;">
+                    <th:block th:if="${gitem.gsysname} == null">
+                        <img th:src="@{images/no_image.jpg}" class="card-img-top" alt="...">
+                    </th:block>
+                    <th:block th:unless="${gitem.gsysname} == null">
+                        <img th:src="@{upload/}+${gitem.gsysname}" class="card-img-top" alt="...">
+                    </th:block>
+                    <div class="card-body">
+                        <a th:href="@{detail(gcode=${gitem.gymnum})}" th:text="${gitem.gname}"></a>
+                        <p th:text="${gitem.glocation}"></p>
+                    </div>
+                </div>
+            </th:block>
+        </th:block>
+    </div>
+</body>
+</html>
