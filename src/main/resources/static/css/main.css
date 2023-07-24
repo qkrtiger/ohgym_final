@@ -1,0 +1,135 @@
+* {margin: 0; padding: 0;}
+li{list-style: none}
+a{text-decoration: none; color: white}
+
+header {
+    /*width: 100%;*/
+    height: 150px;
+    color: white;
+    background: teal;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+img {
+    height: 130px;
+    margin-bottom: 10px;
+    margin: 0 auto;
+}
+
+.menu {
+    width: 1000px;
+    height: 150px;
+    margin: 0 auto;
+    /*bottom: 0;*/
+    /*left: 300px;*/
+}
+
+.nav {
+    float: left;
+    /*width: 100%;*/
+    /*height: 150px;*/
+    overflow: hidden;
+    /*position: absolute;*/
+    /*top: 0;*/
+}
+
+.nav>li {
+    float: left;
+    width: 200px;
+    box-sizing: border-box;
+}
+
+.nav>li>a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    line-height: 150px;
+    /*line-height: 15px;*/
+    color: #fcfcfc;
+    font-size: 15px;
+}
+
+.nav>li>a:hover{
+    background-color: #016969;
+    display: block;
+}
+
+.submenu {
+    width: 200px;
+    margin: 0 auto;
+    /*position: absolute;*/
+    /*top: 50px;*/
+    /*left: 0;*/
+    z-index: 1;
+    display: none;
+}
+
+.submenu>li {
+    width: 200px;
+    height: 50px;
+    /*border-bottom: 1px solid #000;*/
+    color: #fff;
+    background-color: #a9bbf8;
+    box-sizing: border-box;
+}
+
+.submenu>li:last-child {
+    border: 0;
+}
+
+.submenu>li>a:hover {
+    background-color: #94a9ff;
+    color: #fff;
+}
+
+.submenu>li>a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    line-height: 3.4;
+    /*line-height: 15px;*/
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.login {
+    float: right !important;
+}
+
+.login-nav {
+    list-style: none;
+    padding: 0px;
+    margin: 10px 50px 0 30px;
+}
+
+.login-nav li {
+    float: left;
+    padding-left: 20px;
+}
+
+.login-nav li a {
+    text-decoration: none;
+}
+
+.login-nav li a:link {
+    color: white;
+}
+
+.login-nav li a:visited {
+    color: #fff;
+}
+
+.login-nav li a:hover {
+    color: #8c8c8c;
+}
+
+.suc {
+    display: block;
+}
+
+.bef {
+    display: block;
+}

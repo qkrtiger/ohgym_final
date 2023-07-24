@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>아이디 찾기</title>
+    <link rel="stylesheet" th:href="@{css/join.css}">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script th:inline="javascript">
+      $(function (){
+        let m = [[${msg}]]; //msg가 없으면 null.
+        if (m != null){
+          alert(m);
+        }
+      });
+    </script>
+</head>
+<body>
+
+<div class="wrap">
+    <form th:action="findProc" method="post" class="login-form" name="jForm" onsubmit="return check()">
+      <h2 class="login-header">내 계정 찾기</h2>
+      <p style="text-align: center">회원정보에 등록한 이메일로 인증</p>
+      <p>회원정보에 등록한 이메일주소와 현재 입력하신 이메일 주소가 일치해야, 인증번호를 받을 수 있습니다.</p>
+      <input type="text" class="login-input" id="mname" name="mname" title="이름" placeholder="이름" required autofocus>
+      <input type="text" class="login-input" id="mmail" name="mmail" title="이메일" placeholder="이메일" required>
+      <input type="button" class="emailsend-btn" id="msend" value="인증받기">
+      <input type="text" class="login-input" id="checknum" title="인증번호" placeholder="인증번호" required>
+      <input type="button" class="emailcheck-btn" id="mcheck" value="인증">
+      <input type="submit" class="login-btn" value="다음">
+    </form>
+</div>
+
+</body>
+
+<script th:inline="javascript">
+    let ek = false; //false일 경우 중복체크를 안했거나 중복된 아이디를 입력한 경우
+    let authcode = "";
+
+    $("#msend").click(function (){
+
+        let mname = $("#mname").val();
+        //이름 값을 입력했는지 검사
+        if (mname == ""){ //입력을 안했을 경우
+            alert("이름을 입력하세요");
+            $("#mname").focus();
+            return;
+        }
+
+
+        let mmail = $("#mmail").val();
+        //이메일 값을 입력했는지 검사
+        if (mmail == ""){ //입력을 안했을 경우
+            alert("이메일을 입력하세요.");
+            $("#mmail").focus();
+            return;
+        }
+
+        let idFind = {"mmail": mmail, "mname": mname}
+        console.log(idFind);
+
+        $.ajax({
+            type: "post",
+            url: "idFind",
+            data: idFind,
+            success: function (data){
+                if (data =="ok"){
+                    let sendMail = {"email": mmail};
+                    console.log(sendMail);
+
+                    $.ajax({
+                        type: "POST",
+                        url: "mailCheck",
+                        data: sendMail,
+                        success: function (data){
+                            alert("인증번호가 발송되었습니다.")
+                            console.log(data);
+                            authcode = data;
+                        },
+                        error: function (err){
+                            alert("인증번호 발송을 실패했습니다.")
+                            console.log(err);
+                        }
+                    });
+                } else {
+                    alert("너 우리 회원 아님 ㅅㄱ");
+                    $("#mname").val("");
+                    $("#mname").focus();
+                    $("#mmail").val("");
+                }
+            },
+            error: function (err){
+                alert("너 우리 회원 아님 ㅅㄱ");
+                console.log(err);
+            }
+        })
+
+
+
+    });
+
+    //이메일 인증번호 대조
+    $("#mcheck").click(function (){
+        let num = $("#checknum").val();
+        if (num == authcode){
+            $("#checknum").attr("disabled", true);
+            alert("인증되었습니다");
+            ek = true;
+        } else {
+            $("#checknum").attr("autofocus", true);
+            alert("인증번호가 일치하지 않습니다.");
+            ek = false;
+        }
+    })
+
+    //중복확인이 되었고, 모든 입력이 된 다음에 전송하도록 하는 함수 check() (+ onsubmit 속성)
+    function check(){
+
+        // 이메일이 인증이 되었는가?
+        if(ek == false){
+            alert("이메일 인증을 해주세요.");
+            return false;//submit 중지!(전송 안됨)
+        }
+
+        return true;
+    }
+</script>
+
+</html>

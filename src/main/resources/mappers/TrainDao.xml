@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.ohgym.dao.TrainDao">
+
+    <insert id="inserttMGoods" parameterType="TrainGoodsDto" useGeneratedKeys="true" keyProperty="tgoodsint">
+        <selectKey keyProperty="tgoodsint" resultType="Integer" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into traingoods (tgoodsint, tgoodsname, tgoodsturn, tgoodscontents, tgoodsprice, tgoodsnum, membernum, gymnum)
+        values (null, #{tgoodsname}, 1, #{tgoodscontents}, #{tgoodsprice}, #{tgoodsnum}, #{membernum}, #{gymnum})
+    </insert>
+
+
+    <update id="tMGoodsOnOff" parameterType="TrainGoodsDto">
+        UPDATE traingoods
+        SET tgoodsturn = CASE
+                             WHEN tgoodsturn = 0 THEN 1
+                             ELSE 0
+            END
+        WHERE tgoodsint = #{tgoodsint};
+    </update>
+    <update id="updateAddData" parameterType="trainerDto">
+        update member
+        set mgender=#{mgender}, tcareer=#{tcareer}, tlicence=#{tlicence}, tpr=#{tpr}, toriname=#{toriname}, tsysname=#{tsysname}
+        where membernum=#{membernum}
+    </update>
+
+
+    <delete id="tMGoodsDelete" parameterType="Integer">
+        delete from traingoods where tgoodsint in (#{tgoodsint});
+    </delete>
+
+
+    <select id="selectTrainer" resultType="TrainerDto" parameterType="integer">
+        select * from TMember where membernum=#{membernum}
+    </select>
+    <select id="tMPay" resultType="MPayDto" parameterType="Integer">
+        SELECT mpay.*, member.mname
+        FROM traingoods
+                 INNER JOIN mpay ON traingoods.tgoodsint = mpay.tgoodsint
+                 INNER JOIN member ON mpay.membernum = member.membernum
+        WHERE traingoods.membernum = #{membernum};
+    </select>
+    <select id="GettrainerGoods" resultType="TrainGoodsDto" parameterType="Integer">
+        select * from traingoods where membernum=#{membernum}
+    </select>
+    <select id="selectTGoods" resultType="TrainGoodsDto">
+        select * from traingoods where tgoodsint = #{tgoodsint}
+    </select>
+
+    <select id="getGoods" resultType="Integer" parameterType="integer">
+        select membernum from traingoods where gymnum=#{gymnum};
+    </select>
+    <select id="trainGoods" resultType="TrainGoodsDto" parameterType="integer">
+        select * from traingoods where membernum=#{membernum}
+    </select>
+    <select id="selectTrainList" resultType="MaptrainDto">
+        select group_concat(mname) mname, gname, glocation from maptrain
+        <if test="glocation != null and glocation != ''">
+            where glocation
+        </if>
+        group by gname, glocation
+    </select>
+
+
+</mapper>

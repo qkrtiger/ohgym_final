@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>tAdditionInfo</title>
+  <link rel="stylesheet" th:href="@{css/addition.css}">
+  <script th:src="@{js/popup.js}" defer></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  </head>
+<body>
+<header class="header">
+  <th:block th:if="${gym} == null">
+    <th:block th:insert="~{header.html}"></th:block>
+  </th:block>
+  <th:block th:unless="${gym} == null">
+    <th:block th:insert="~{headerGym.html}"></th:block>
+  </th:block>
+</header>
+<div style="margin-top: 200px">
+  <form th:action="AddInfoMo" method="get" enctype="multipart/form-data">
+  <input type="hidden" name="membernum" th:value="${trainer.membernum}">
+    <div>
+      <div id="content" class="content">
+        <h2 class="info-title">추가 정보</h2>
+        <div class="info-row">
+          <span class="info-label">트레이너 이름:</span>
+          <span class="info-value" th:text="${trainer.mname}"></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">헬스장 이름:</span>
+          <span class="info-value" th:text="${trainer.gname}"></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">성별:</span>
+          <span class="info-value" th:text="${trainer.mgender}"></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">경력:</span>
+          <span class="info-value" th:text="${trainer.tcareer}"></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">자격증:</span>
+          <span class="info-value" th:text="${trainer.tlicence}"></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">설명:</span>
+          <span class="info-value" th:text="${trainer.tpr}"></span>
+        </div>
+      </div>
+      <div>
+        <th:block th:if="${trainer.tsysname} == null">
+          <h3>등록된 이미지가 없습니다</h3>
+        </th:block>
+        <th:block th:unless="${trainer.tsysname} == null">
+          <img th:src="@{upload/} + ${trainer.tsysname}" class="image">
+        </th:block>
+      </div>
+      <div>
+        <table id="myTable">
+          <thead>
+          <tr>
+            <th>No.</th>
+            <th>상품명</th>
+            <th>횟수</th>
+            <th>결제금액</th>
+            <th>추가사항</th>
+            <th>활성화</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="item : ${tgList}">
+            <td th:text="${item.tgoodsint}">No.</td>
+            <td th:text="${item.tgoodsname}">상품명</td>
+            <td th:text="${item.tgoodsnum}">횟수</td>
+            <td th:text="${item.tgoodsprice}">가격</td>
+            <td th:text="${item.tgoodscontents}">추가사항</td>
+            <td th:text="${item.tgoodsturn}">활성화</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <input type="button" value="이전으로" th:onclick ="|back(membernum=${trainer.membernum})|">
+        <input type="submit" value="수정하기">
+      </div>
+    </div>
+  </form>
+</div>
+
+</body>
+<script th:inline="javascript">
+  $(function() {
+    var count = 0; // 파일이 추가된 횟수
+    $('input[type=file]').change(function() {
+      count++; // 파일 추가 횟수 증가
+      var table = $('#myTable');
+      // 새로운 행 추가
+      var newRow = $('<tr>').appendTo(table);
+      $('<td>').appendTo(newRow).text();
+      $('<td>').appendTo(newRow).text();
+      $('<td>').appendTo(newRow).text();
+      $('<td>').appendTo(newRow).text();
+      $('<td>').appendTo(newRow).text();
+      $('<td>').appendTo(newRow).text();
+    });
+  });
+
+  $(function () {
+    let m = [[${msg}]];//msg가 없으면 null
+    if(m != null){
+      alert(m);
+    }
+  });
+
+  function back(membernum) {
+    location.href = '/trainerMypage?membernum=' + membernum;
+  }
+</script>
+</html>

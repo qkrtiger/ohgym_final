@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>오짐 - 로그인</title>
+    <link rel="shortcut icon" href="/images/header/lgo_face.ico">
+    <link rel="stylesheet" th:href="@{css/join.css}">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <th:block th:insert="~{header.html}"></th:block>
+</head>
+<body class="renewal">
+<div class="footBtwrap">
+    <a th:href="@{memberLoginForm}" class="btn" style="margin-top:20px;">일반 로그인</a>
+    <a th:href="@{gymLoginForm}" class="btn" style="background-color:#2c7fdf;">헬스장 로그인</a>
+    <a th:href="@{terms}" class="btn" style="background-color:#394f77;">회원가입</a>
+</div>
+</body>
+<footer class="footer">
+    <th:block th:insert="~{footer.html}"></th:block>
+</footer>
+</html>

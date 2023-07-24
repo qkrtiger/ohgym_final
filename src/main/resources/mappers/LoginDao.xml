@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.ohgym.dao.LoginDao">
+    <insert id="memberInsert" parameterType="MemberDto">
+        insert into member
+        values (null, #{mid}, #{mpass}, #{mmail}, #{mname}, #{mbirth}, #{mgender}, #{mphone}, #{mnickname},
+                null, null, null, null, null, null, null, null, null, null)
+    </insert>
+
+    <insert id="insertCheckC" parameterType="GymConvenientDto">
+        insert into gymConvenient
+        values (#{gymnum}, #{gc_cloths}, #{gc_towel}, #{gc_wifi}, #{gc_parking}, #{gc_inbody}, #{gc_sauna})
+    </insert>
+    <insert id="insertCheckM" parameterType="GymMachineDto">
+        insert into gymmachine
+        values (#{gymnum}, #{gm_latpull}, #{gm_shoulderpress}, #{gm_citydraw}, #{gm_legpress},
+                #{gm_smithmachine},#{gm_lyinglegcurl}, #{gm_chestfly}, #{gm_hyperextension})
+    </insert>
+    <insert id="gymInsert" parameterType="GymDto">
+        <selectKey keyProperty="gymnum" order="AFTER" resultType="Integer">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into gym
+        values (null, #{gname}, #{gregistnum}, #{gid}, #{gpass}, #{gphone},
+        null, null, null, null, null, null, null, null)
+    </insert>
+
+
+    <update id="passChange" parameterType="String">
+        update member
+        set mpass=#{mpass}
+        where mid=#{mid}
+    </update>
+    <update id="passGymChange" parameterType="GymDto">
+        update gym
+        set gpass=#{gpass}
+        where gid=#{gid}
+    </update>
+
+    <select id="idCheck" resultType="java.lang.Integer" parameterType="String">
+        select count(*) from member where mid=#{mid}
+    </select>
+    <select id="nicknameCheck" resultType="java.lang.Integer" parameterType="String">
+        select count(*) from member where mnickname=#{mnickname}
+    </select>
+    <select id="mailDoubleCheck" resultType="java.lang.Integer" parameterType="String">
+        select count(*) from member where mmail=#{mmail}
+    </select>
+    <select id="gidCheck" resultType="java.lang.Integer" parameterType="String">
+        select count(*) from gym where gid=#{gid}
+    </select>
+    <select id="idFind" resultType="java.lang.String" parameterType="String">
+        select mname from  member where mmail=#{mmail}
+    </select>
+    <select id="loginFind" resultType="java.lang.String" parameterType="MemberDto">
+        select mid from member where mname=#{mname}
+    </select>
+    <select id="findGym" resultType="java.lang.String" parameterType="GymDto">
+        select gid from gym where gname=#{gname} and gregistnum=#{gregistnum}
+    </select>
+    <select id="selectMember" resultType="MemberDto" parameterType="String">
+        select * from member where mid=#{mid}
+    </select>
+    <select id="mSelectPass" resultType="java.lang.String" parameterType="String">
+        select mpass from member where mid=#{mid}
+    </select>
+    <select id="gSelectPass" resultType="java.lang.String" parameterType="String">
+        select gpass from gym where gid=#{gid}
+    </select>
+    <select id="selectGym" resultType="GymDto" parameterType="String">
+        select * from gym where gid=#{gid}
+    </select>
+
+
+</mapper>

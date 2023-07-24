@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>오짐- 헬스장 로그인</title>
+  <link rel="shortcut icon" href="/images/header/lgo_face.ico">
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" th:href="@{css/join.css}">
+  <th:block th:insert="~{header.html}"></th:block>
+  <script th:inline="javascript">
+    $(function () {
+      let m = [[${msg}]];//msg가 없으면 null.
+      if(m != null){
+        alert(m);
+      }
+    });
+  </script>
+
+</head>
+<body class="renewal">
+<div class="wrap">
+  <form th:action="@{gymLoginProc}" method="post" class="login-form" name="jForm" onsubmit="return check()">
+    <h2 class="login-header">헬스장 로그인</h2>
+    <input type="text" class="login-input" id="gid" name="gid" title=" 헬스장 아이디" autofocus placeholder="헬스장 아이디">
+    <input type="password" class="login-input" name="gpass" title="비밀번호" placeholder="비밀번호">
+    <input type="submit" class="login-btn" value="헬스장login">
+  </form>
+</div>
+
+<div class="login-form">
+  <a th:href="@{loginGymFind}" class="linkfindid">ID 찾기</a>
+</div>
+</body>
+<footer class="footer">
+  <th:block th:insert="~{footer.html}"></th:block>
+</footer>
+<script th:inline="javascript">
+
+  function check(){
+    const jfrm = $("[name=jForm]");
+
+    console.log(jfrm);
+
+    let length = jfrm.length - 1; //submit 제외
+
+    for (let i = 0; i <length; i++){
+      if (jfrm[i].value == "" | jfrm[i].value == null){
+        alert(jfrm[i].title + "입력!");
+        jfrm[i].focus();
+        return false;
+      }
+    }
+
+    return true;
+  }
+</script>
+</html>

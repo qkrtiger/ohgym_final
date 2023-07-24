@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>memberMypage</title>
+  <link rel="stylesheet" th:href="@{css/mypage.css}">
+  <script th:src="@{js/popup.js}" defer></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="sidebar" class="sidebar">
+  <div class="user-image">
+    <th:block th:if="${trainer.msysname} == null">
+      <img th:onclick="|openPopup(2)|" th:src="@{images/bbbbb.jpg}" height="100" width="100">
+    </th:block>
+    <th:block th:unless="${trainer.msysname} == null">
+      <img th:onclick="|openPopup(2)|" th:src="@{upload/} + ${trainer.msysname}" height="100" width="100">
+    </th:block>
+  </div>
+  <ul class="sidebar-menu">
+    <li><a th:href="@{trainerMypage(membernum=${trainer.membernum})}" class="menu-item">내 정보</a></li>
+    <li><a href="wishList" class="menu-item">찜목록</a></li>
+    <li><a th:href="@{tMypayList(membernum=${trainer.membernum})}" class="menu-item">결제 내역</a></li>
+    <li><a th:href="@{trainerGoods(membernum=${trainer.membernum})}" class="menu-item">상품 관리</a></li>
+    <li><a th:href="@{faq}" class="menu-item">FAQ</a></li>
+    <li><a th:onclick="|openTrainer(${trainer.membernum})|" class="menu-item">트레이너 등록</a></li>
+  </ul>
+  <button th:onclick="|openInfo(${trainer.membernum})|" class="edit-info-button">정보수정</button>
+</div>
+<div id="content" class="content">
+  <h2 class="info-title">결제내역</h2>
+  <tbody>
+  <table style="width: 100%", id="mtable">
+  <thead>
+  <tr>
+    <th>No.</th>
+    <th>회원 이름</th>
+    <th>수강일</th>
+    <th>횟수</th>
+    <th>결제금액</th>
+  </tr>
+  </thead>
+  <tbody id="tb">
+    <div th:unless="${#lists.isEmpty(mPList)}">
+      <tr th:each="MPitem, iterstat: ${mPList}">
+        <td th:text="${iterstat.count}"></td>
+        <td th:text="${MPitem.mname}"></td>
+        <td th:text="${MPitem.mpayperiod}"></td>
+        <td th:text="${MPitem.tgoodsint} + '회'"></td>
+        <td th:text="${#numbers.formatInteger(MPitem.mpayprice, 3, 'COMMA') + '원'}"></td>
+      </tr>
+    </div>
+    <div th:if="${#lists.isEmpty(mPList)}">
+      <td colspan="5">결제 내역이 없습니다.</td>
+    </div>
+  </tbody>
+  </table>
+</div>
+<div class="paging-area">
+  <div class="paging" th:utext="${paging}"></div>
+</div>
+</body>
+</html>
+

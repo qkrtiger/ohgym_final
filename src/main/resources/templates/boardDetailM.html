@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="js/jquery-3.7.0.min.js"></script>
+    <script th:inline="javascript">
+        $(function () {
+            let m = [[${msg}]]; // msg가 없으면 null
+            if (m != null) {
+                alert(m);
+            }
+        });
+    </script>
+    <style>
+        .content-board {
+            margin-top: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 70px;
+            min-width: 1000px !important;
+            width: 60%;
+            padding: 20px 30px;
+        }
+
+        .card {
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-header {
+            border-radius: 5px 5px 0 0;
+            color: #0061F2;
+            font-weight: 500;
+            border: 1px solid #2c7fdf;
+            padding: 20px 30px;
+        }
+
+        .card-body {
+            border-right: 1px solid #c5ccd6;
+            border-left: 1px solid #c5ccd6;
+            border-bottom: 1px solid #c5ccd6;
+            border-radius: 0 0 5px 5px;
+            font-weight: 500;
+            padding: 20px 30px;
+        }
+
+        .info-row {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 15px;
+        }
+
+        .info-label {
+            border-radius: 5px 0 0 5px;
+            width: 150px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px 5px;
+            background-color: #e8eaec;
+        }
+
+        .info-value {
+            border-radius: 0 5px 5px 0;
+            width: 100%;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-left: none;
+            padding: 10px 5px;
+        }
+
+
+        .textarea {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            height: 500px;
+            overflow: auto;
+            margin-bottom: 10px;
+            padding: 10px 5px;
+        }
+
+        .mb-1 {
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .mb-2 {
+            width: 100%;
+            margin-bottom: 15px;
+            color: #016969;
+            font-size: 24px;
+
+        }
+
+        .write-input {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 0.875rem 1.125rem;
+            border: 1px solid #c5ccd6;
+            border-radius: 0.35rem;
+            font-weight: 400;
+            color: #69707a;
+        }
+
+        .btn-write {
+            display: inline-flex;
+            text-align: center;
+            justify-content: center;
+            width: 85px;
+            padding: 10px 16px;
+            font-size: 16px;
+            line-height: 1.5;
+            border-radius: 6px;
+            color: #fff;
+            background-color: #0061F2;
+            border-color: #2c7fdf;
+        }
+
+        .w-3 {
+            text-wrap: nowrap;
+        }
+
+        .line {
+            margin: 30px 0px 10px 0px;
+        }
+
+        .reply {
+            width: 100%;
+        }
+
+        #recomment {
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+
+        .reply {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .rtitle {
+            padding: 10px 10px;
+            font-weight: bold;
+            color: #666060;
+            width: 10%;
+            float: left;
+        }
+
+        .na {
+            font-size: 18px;
+        }
+
+        .day {
+            font-style: italic;
+        }
+
+        .rtext {
+            padding: 10px 10px;
+            height: 50px;
+            overflow: auto;
+            color: #666060;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>boardDetail</title>
+</head>
+<body>
+<header>
+    <th:block th:if="${session.gym} == null">
+        <th:block th:insert="~{header.html}"></th:block>
+    </th:block>
+    <th:block th:unless="${session.gym} == null">
+        <th:block th:insert="~{headerGym.html}"></th:block>
+    </th:block>
+</header>
+<section>
+    <h2>상세보기</h2>
+    <div class="content-board">
+        <div class="card mb-4">
+            <div class="card-header" th:text="'No.' + ${bdetail.boardnum}"></div>
+            <div class="card-body">
+                <div class="info-row">
+                    <div class="info-label">제목</div>
+                    <div class="info-value" th:text="${bdetail.boardtitle}"></div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">작성자</div>
+                    <th:block th:if="${bdetail.gname} == null">
+                        <div class="info-value" th:text="${bdetail.mnickname}"></div>
+                    </th:block>
+                    <th:block th:unless="${bdetail.gname} == null">
+                        <div class="info-value" th:text="${bdetail.gname}"></div>
+                    </th:block>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">작성일</div>
+                    <div class="info-value" th:text="${#dates.format(bdetail.boarddate, 'yyyy-MM-dd')}"></div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">조회수</div>
+                    <div class="info-value" th:text="${bdetail.boardcount}"></div>
+                </div>
+                <div class="mb-1">내용</div>
+                <div class="textarea" th:text="${bdetail.boardcontents}"></div>
+
+                <div class="btn-area">
+                    <button class="btn-write w-3" id="backbtn">뒤로가기</button>
+                </div>
+
+                <hr class="line">
+                <div class="mb-2">Comments</div>
+                <br>
+                <div class="reply">
+                    <th:block th:each="ritem:${rList}">
+                        <div class="replyarea">
+                            <th:block th:if="${session.gym} == null">
+                                <li class="rtitle na" th:text="${ritem.mnickname}"></li>
+                            </th:block>
+                            <th:block th:unless="${session.gym} == null">
+                                <li class="rtitle na" th:text="${ritem.gname}"></li>
+                            </th:block>
+                            <li class="rtitle day" th:text="${#dates.format(ritem.rdate, 'yyyy-MM-dd')}"></li>
+                        </div>
+                        <li class="rtext" th:text="${ritem.rcontent}"></li>
+
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <th:block th:insert="~{footer.html}"></th:block>
+</footer>
+</body>
+<script th:inline="javascript">
+
+    $("#backbtn").click(function () {
+        console.log("#backbtn");
+        location.href = "board";
+    });
+</script>

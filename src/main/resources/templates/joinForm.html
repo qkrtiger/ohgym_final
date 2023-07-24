@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>오짐 - 일반 회원가입</title>
+    <link rel="shortcut icon" href="/images/header/lgo_face.ico">
+    <link rel="stylesheet" th:href="@{css/join.css}">
+    <th:block th:insert="~{header.html}"></th:block>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script th:inline="javascript">
+        $(function (){
+            let m = [[${msg}]]; //msg가 없으면 null.
+            if (m != null){
+                alert(m);
+            }
+        });
+    </script>
+</head>
+<body class="renewal">
+
+<div class="wrap">
+    <form th:action="joinProc" method="post" class="login-form" name="jForm" onsubmit="return check()">
+        <h2 class="login-header">일반회원 가입</h2>
+        <input type="text" class="login-input" id="mid" name="mid" title="아이디" autofocus placeholder="아이디" >
+        <div class="effectiveness">* 4~12자의 영문 대소문자와 숫자로만 입력바랍니다.</div>
+        <input type="button" class="idcheck-btn" value="중복확인" onclick="idcheck()" style="margin-bottom: 2px;">
+        <input type="password" class="login-input" name="mpass" title="비밀번호" placeholder="비밀번호" style="margin-bottom: 10px;" >
+        <div class="effectiveness">* 4~12자의 영문 대소문자와 숫자로만 입력바랍니다.</div>
+        <input type="text" class="login-input" id="mmail" name="mmail" title="이메일" placeholder="이메일" >
+        <div class="effectiveness">* 이메일 형식으로 입력바랍니다.</div>
+        <input type="button" class="mailcheck-btn" value="중복확인" onclick="mailcheck()" style="margin-bottom: 2px;">
+        <input type="button" class="emailsend-btn" id="msend" value="인증받기">
+        <input type="text" class="login-input" id="checknum" title="인증번호" autofocus placeholder="인증번호" >
+        <input type="button" class="emailcheck-btn" id="mcheck" value="인증">
+        <input type="text" class="login-input" name="mname" title="이름" placeholder="이름" >
+        <div class="effectiveness">* 한글만 입력바랍니다.</div>
+        <input type="text" class="login-input" name="mbirth" title="생년월일" placeholder="생년월일" >
+        <div class="effectiveness">* yy-mm-dd 형식으로 입력바랍니다.</div>
+        <input type="text" class="login-input" name="mgender" title="성별" placeholder="성별" >
+        <div class="effectiveness">* 한글만 입력바랍니다.</div>
+        <input type="text" class="login-input" name="mphone" title="연락처" placeholder="연락처" >
+        <div class="effectiveness">* (-)을 포함하여 입력바랍니다.</div>
+        <input type="text" class="login-input" id="mnickname" name="mnickname" title="닉네임" placeholder="닉네임" >
+        <input type="button" class="nicknamecheck-btn" value="중복확인" onclick="nicknamecheck()">
+        <input type="submit" class="login-btn" value="회원가입">
+    </form>
+</div>
+</body>
+<footer class="footer">
+    <th:block th:insert="~{footer.html}"></th:block>
+</footer>
+<script  th:inline="javascript">
+
+    ////////////////////////////////////////////유효성 검사/////////////////////////////////////////////////////////
+
+    let ckID = RegExp(/^[a-zA-Z0-9]{4,12}$/); //4~12자의 영문 대소문자와 숫자로만 입력
+    let ckPASS = RegExp(/^[a-zA-Z0-9]{4,12}$/); //4~12자의 영문 대소문자와 숫자로만 입력
+    let ckMAil = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/) ; //이메일 형식
+    let ckNAME = RegExp(/^[가-힣]+$/) ; //한글만
+    let ckBIRTH = RegExp(/^\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/); //yy-mm-dd
+    let ckGENDER = RegExp(/^[가-힣]+$/) ; //한글만
+    let ckPHONE = RegExp(/^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/) ; //(010-1111-2222)
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////////////////이메일//////////////////////////////////////////////////
+
+    let realres = "";
+
+    //이메일 중복확인
+    function mailcheck(){
+        let mmail = $("#mmail").val();
+
+
+        //이메일 값을 입력했는지 검사
+        if (mmail == ""){ //입력을 안했을 경우
+            alert("이메일을 입력하세요.");
+            $("#mmail").focus();
+            return;
+        }
+
+        //이메일 유효성 검사
+        if (!ckMAil.test(mmail)){
+            alert("이메일 형식에 맞게 입력해주세요.");
+            $("#mmail").focus();
+            return;
+        }
+
+        //전송할 데이터 작성
+        let sendMail = {"mmail": mmail};
+        console.log(sendMail);
+
+        //서버로 이메일 전송
+        $.ajax({
+            url: "mailDoubleCheck",
+            type: "get",
+            data: sendMail,
+            success: function (res){
+                if (res == "ok"){
+                    alert("사용가능한 이메일입니다.")
+                    realres = res;
+                } else {
+                    alert("중복된 이메일 입니다.");
+                    $("#mmail").val("");
+                    $("#mmail").focus();
+                    realres = res;
+                }
+            },
+            error: function (err){
+                console.log(err);
+
+            }
+        });
+    }//mailcheck end
+
+    let ek = false; //false일 경우 중복체크를 안했거나 중복된 아이디를 입력한 경우
+    let authcode = "";
+    $("#msend").click(function (){
+        let mmail = $("#mmail").val();
+
+        //이메일 값을 입력했는지 검사
+        if (mmail == ""){ //입력을 안했을 경우
+            alert("이메일을 입력하세요.");
+            $("#mmail").focus();
+            return;
+        }
+
+        let sendMail = {"email": mmail};
+        console.log(sendMail);
+
+        $.ajax({
+            type: "POST",
+            url: "mailCheck",
+            data: sendMail,
+            success: function (data){
+                alert("인증번호가 발송되었습니다.")
+                console.log(data);
+                authcode = data;
+            },
+            error: function (err){
+                alert("인증번호 발송을 실패했습니다.")
+                console.log(err);
+            }
+        });
+
+    });
+
+    //이메일 인증번호 대조
+    $("#mcheck").click(function (){
+        let num = $("#checknum").val();
+        if (num == authcode && realres == "ok") {
+            $("#checknum").attr("disabled", true);
+            alert("인증되었습니다");
+            ek = true;
+        } else if (num == authcode || realres !== "ok"){
+            alert("이메일 중복확인 해주세요.");
+            $("#checknum").attr("disabled", true);
+            ek = false;
+        } else {
+            $("#checknum").attr("autofocus", true);
+            alert("인증번호가 일치하지 않습니다.");
+            ek = false;
+        }
+    })
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+    /////////////////////////////////////////////아이디////////////////////////////////////////////////////
+
+    //아이디 중복 체크
+    let ck = false; //false일 경우 중복체크를 안했거나 중복된 아이디를 입력한 경우
+
+    function idcheck(){
+        let id = $("#mid").val();
+
+        //id 값을 입력했는지 검사
+        if (id == ""){ //입력을 안했을 경우
+            alert("아이디를 입력하세요.");
+            $("#mid").focus();
+            return;
+        }
+
+        //아이디 유효성 검사
+        if (!ckID.test(id)){
+            alert("아이디 형식에 맞게 입력해주세요.");
+            $("#mid").focus();
+            return;
+        }
+
+        //전송할 데이터 작성
+        let sendId = {"mid": id};
+        console.log(sendId);
+
+        //서버로 id 전송
+        $.ajax({
+            url: "idCheck",
+            type: "get",
+            data: sendId,
+            success: function (res){
+                if (res == "ok"){
+                    alert("사용가능한 아이디입니다.")
+                    ck = true;
+                } else {
+                    alert("중복된 아이디 입니다.");
+                    $("#mid").val("");
+                    $("#mid").focus();
+                    ck = false;
+                }
+            },
+            error: function (err){
+                console.log(err);
+                ck = false;
+            }
+        });
+    }//idcheck end
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    /////////////////////////////////////////////닉네임/////////////////////////////////////////////////////////
+
+
+    let nk = false; //false일 경우 중복체크를 안했거나 중복된 닉네임을 입력한 경우
+
+    function nicknamecheck(){
+        let nickname = $("#mnickname").val();
+
+        //id 값을 입력했는지 검사
+        if (nickname == ""){ //입력을 안했을 경우
+            alert("아이디를 입력하세요.");
+            $("#mnickname").focus();
+            return;
+        }
+
+        //전송할 데이터 작성
+        let sendNickname = {"mnickname": nickname};
+        console.log(sendNickname);
+
+        //서버로 id 전송
+        $.ajax({
+            url: "nicknameCheck",
+            type: "get",
+            data: sendNickname,
+            success: function (res){
+                if (res == "ok"){
+                    alert("사용가능한 닉네임입니다.")
+                    nk = true;
+                } else {
+                    alert("중복된 닉네임 입니다.");
+                    $("#mnickname").val("");
+                    $("#mnickname").focus();
+                    nk = false;
+                }
+            },
+            error: function (err){
+                console.log(err);
+                nk = false;
+            }
+        });
+    }//cnicknamecheck end
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    ///////////////////////////////////////////////최종확인//////////////////////////////////////////////////////
+
+
+    //중복확인이 되었고, 모든 입력이 된 다음에 전송하도록 하는 함수 check() (+ onsubmit 속성)
+    function check(){
+        //아이디가 중복확인이 되었는가?
+        if(ck == false){
+            alert("아이디 중복 확인을 해주세요.");
+            return false;//submit 중지!(전송 안됨)
+        }
+
+        //닉네임이 중복확인이 되었는가?
+        if(nk == false){
+            alert("닉네임 중복 확인을 해주세요.");
+            return false;//submit 중지!(전송 안됨)
+        }
+
+        // 이메일이 인증이 되었는가?
+        if(ek == false){
+            alert("이메일 중복 확인 또는 인증을 해주세요.");
+            return false;//submit 중지!(전송 안됨)
+        }
+
+        //비밀번호 유효성 검사
+        if (!ckPASS.test($("[name=mpass]").val())){
+            alert("비밀번호 형식에 맞게 입력해주세요");
+            //$("[name=mpass]").focus();
+            return false;
+        }
+
+        //이름 유효성 검사
+        if (!ckNAME.test($("[name=mname]").val())){
+            alert("이름 형식에 맞게 입력해주세요");
+            //$("[name=mname]]").focus();
+            return false;
+        }
+
+        //생년월일 유효성 검사
+        if (!ckBIRTH.test($("[name=mbirth]").val())){
+            alert("생년월일 형식에 맞게 입력해주세요");
+            //$("[name=mbirth]").focus();
+            return false;
+        }
+
+        //성별 유효성 검사
+        if (!ckGENDER.test($("[name=mgender]").val())){
+            alert("성별 형식에 맞게 입력해주세요");
+            //$("[name=mbirth]").focus();
+            return false;
+        }
+
+        //전화번호 유효성 검사
+        if (!ckPHONE.test($("[name=mphone]").val())){
+            alert("잔화번호 형식에 맞게 입력해주세요");
+            //$("[name=mphone]").focus();
+            return false;
+        }
+
+
+
+        const jfrm = $("input [name=jForm]");
+
+        console.log(jfrm);
+
+        let length = jfrm.length - 1; //submit 제외
+
+        for (let i = 0; i <length; i++){
+            if (jfrm[i].value == "" | jfrm[i].value == null){
+                alert(jfrm[i].title + "입력!");
+                jfrm[i].focus();
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+</script>
+</html>

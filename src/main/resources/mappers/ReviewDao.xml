@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.ohgym.dao.ReviewDao">
+
+    <insert id="insertreview" parameterType="reviewDto">
+        INSERT INTO review
+        VALUES (null, #{membernum}, #{gymnum}, #{mnickname}, #{reviewcontents}, #{reviewstar}, DEFAULT, #{mpaynum})
+    </insert>
+    <select id="selectPass" resultType="java.lang.String" parameterType="String">
+        SELECT mpass FROM member WHERE mid=#{mid}
+    </select>
+    <select id="selectMember" resultType="MemberDto" parameterType="String">
+        SELECT * FROM member WHERE mid=#{mid}
+    </select>
+    <select id="rvList" resultType="ReviewDto" parameterType="Integer">
+        SELECT * FROM relist WHERE gymnum=#{gymnum}
+            LIMIT #{pageNum}, #{listCnt}
+    </select>
+    <select id="selectReviewCnt" resultType="Integer" parameterType="SearchDto">
+        SELECT count(*) FROM review WHERE gymnum=#{gymnum}
+    </select>
+
+</mapper>

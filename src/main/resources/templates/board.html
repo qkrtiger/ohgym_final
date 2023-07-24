@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="js/jquery-3.7.0.min.js"></script>
+
+    <script th:inline="javascript">
+        $(function () {
+            let m = [[${msg}]]; // msg가 없으면 null
+            if (m != null) {
+                alert(m);
+            }
+        });
+
+        function check() {
+            let mem = [[${session.member}]];
+            let gym = [[${session.gym}]]
+            if (mem != null || gym != null) {
+                location.href = "boardWrite";
+            } else {
+                alert("회원만 이용 가능한 기능입니다.");
+                return;
+            }
+        }
+
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Poppins", Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.8;
+            font-weight: normal;
+            background: #f8f9fd;
+            color: gray;
+        }
+
+        #sel {
+            width: 80px;
+            padding: .6em .5em;
+            border: 1px solid #999;
+            font-family: inherit;
+            background: url('../images/arrow.jpg') no-repeat 95% 50%;
+            border-radius: 10px;
+            appearance: none;
+            margin-bottom: 10px;
+        }
+
+        #keyword {
+            width: 200px;
+            padding: .6em .5em;
+            border: 1px solid #999;
+            border-radius: 10px;
+        }
+
+        #searchinfo {
+            width: 50px;
+            padding: .6em .5em;
+            border: 1px solid #999;
+            background-color: #1089ff;
+            color: #f8f9fd;
+            font-weight: bold;
+            border-radius: 10px;
+            appearance: none;
+        }
+
+        .ftco-section {
+            padding: 7em 0;
+        }
+
+        .container {
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        .justify-content-center {
+            -webkit-box-pack: center !important;
+            -ms-flex-pack: center !important;
+            justify-content: center !important;
+        }
+
+        .text-center {
+            text-align: center !important;
+        }
+
+        .mb-5,
+        .my-5 {
+            margin-bottom: 3rem !important;
+        }
+
+        .col-md-6 {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 50%;
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+
+        .heading-section {
+            font-size: 28px;
+            color: #000;
+        }
+
+        .row {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+            justify-content: center !important;
+        }
+
+        .col-md-12 {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 100%;
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        .table {
+            min-width: 1000px !important;
+            width: 100%;
+            background: #fff;
+            margin-bottom: 1rem;
+            color: #212529;
+            border-collapse: collapse;
+        }
+
+        .thead-primary {
+            background: #1089ff;
+            box-sizing: border-box;
+            font-size: large;
+            color: #212529;
+        }
+
+        .table thead th {
+            display: table-cell;
+            vertical-align: bottom;
+            padding: 20px 30px;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .table tbody tr {
+            margin-bottom: 10px;
+        }
+
+        .table tbody th {
+            border: none;
+            padding: 20px 30px;
+            border-bottom: 3px solid #f8f9fd;
+            font-size: 14px;
+        }
+
+        .table tbody td {
+            border: none;
+            padding: 20px 30px;
+            border-bottom: 3px solid #f8f9fd;
+            font-size: 14px;
+        }
+
+        .paging-area {
+            text-align: center;
+        }
+
+        .paging .pno {
+            background-color: #efefef;
+            border: 1px solid #6c6c6c;
+            border-radius: 3px;
+            line-height: 1.5;
+            font-size: 15px;
+            height: 20px;
+            width: 20px;
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        .pno {
+            margin-left: 3px;
+        }
+
+        .tr-1 {
+            width: 100px;
+            text-align: center;
+        }
+
+        .tr-2 {
+            width: 500px;
+        }
+
+        .tr-3 {
+            width: 150px;
+            text-align: center;
+        }
+
+        .tr-4 {
+            width: 140px;
+            text-align: center;
+        }
+
+        .paging > a {
+            text-decoration: none;
+        }
+
+        .paging > a:visited {
+            color: #575757;
+        }
+
+        .wr-btn {
+            display: block;
+            width: 200px;
+            padding: 10px 16px;
+            font-size: 16px;
+            line-height: 1.5;
+            border-radius: 6px;
+            color: #fff;
+            background-color: #1089ff;
+            border-color: #2c7fdf;
+            margin-top: 10px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+    </style>
+    <meta charset="UTF-8">
+    <title>board</title>
+
+</head>
+<body>
+<header>
+    <th:block th:if="${session.gym} == null">
+        <th:block th:insert="~{header.html}"></th:block>
+    </th:block>
+    <th:block th:unless="${session.gym} == null">
+        <th:block th:insert="~{headerGym.html}"></th:block>
+    </th:block>
+</header>
+<section>
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
+                    <h2 class="heading-section">커뮤니티</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="search-area">
+                    <select id="sel">
+                        <option value="boardtitle" selected>제목</option>
+                        <option value="boardcontents">내용</option>
+                        <option value="mnickname">작성자</option>
+                    </select>
+                    <input type="text" id="keyword">
+                    <button id="searchinfo">검색</button>
+                    <div class="col-md-12">
+                    </div>
+                    <div class="table-wrap">
+                        <table class="table">
+                            <thead class="thead-primary">
+                            <tr>
+                                <th class="tr-1">글번호</th>
+                                <th class="tr-2">제목</th>
+                                <th class="tr-3">작성자</th>
+                                <th class="tr-4">작성일</th>
+                                <th class="tr-1">조회수</th>
+                            </tr>
+                            </thead>
+                            <th:block th:if="${#lists.isEmpty(bList)}">
+                            </th:block>
+                            <th:block th:unless="${#lists.isEmpty(bList)}">
+                                <th:block th:each="bitem:${bList}">
+                                    <tbody>
+                                    <tr>
+                                        <th class="tr-1" th:text="${bitem.boardnum}"></th>
+                                        <td class="tr-2">
+                                            <th:block th:if="${session.member == null && session.gym == null}">
+                                                <a th:href="@{boardDetailM(boardnum=${bitem.boardnum})}"
+                                                   th:text="${bitem.boardtitle}"></a>
+                                            </th:block>
+                                            <th:block th:unless="${session.member == null && session.gym == null}">
+                                                <a th:href="@{boardDetail(boardnum=${bitem.boardnum})}"
+                                                   th:text="${bitem.boardtitle}"></a>
+                                            </th:block>
+                                        </td>
+                                        <th:block th:if="${bitem.gname == null}">
+                                            <td class="tr-3" th:text="${bitem.mnickname}"></td>
+                                        </th:block>
+                                        <th:block th:unless="${bitem.gname == null}">
+                                            <td class="tr-3" th:text="${bitem.gname}"></td>
+                                        </th:block>
+                                        <td class="tr-4" th:text="${#dates.format(bitem.boarddate, 'yyyy.MM.dd')}"></td>
+                                        <td class="tr-1" th:text="${bitem.boardcount}"></td>
+                                    </tr>
+                                    </tbody>
+                                </th:block>
+                            </th:block>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="paging-area">
+            <p class="paging" th:utext="${paging}"></p>
+        </div>
+        <button class="wr-btn" onclick="check()">글쓰기</button>
+    </section>
+    <footer>
+        <th:block th:insert="~{footer.html}"></th:block>
+    </footer>
+</body>
+<script th:inline="javascript">
+
+    $("#searchinfo").click(function () {
+        let keyword = $("#keyword").val();
+        if (keyword == "") {
+            alert("검색어를 입력하세요.")
+            return;
+        }
+        let select = $("#sel").val();
+        console.log(select, keyword);
+        location.href = "/board?colname=" + select + "&keyword=" + keyword + "&pageNum=1";
+    });
+</script>
+</html>

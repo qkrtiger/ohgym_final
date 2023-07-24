@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{css/homeStyle.css}">
+  <!--  <script src="js/jquery-3.7.0.min.js"></script>-->
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+  <meta charset="UTF-8">
+  <title>오짐 - 모든 헬스장 다 있짐</title>
+  <link rel="shortcut icon" href="/images/header/lgo_face.ico">
+  <script th:inline="javascript">
+    $(function(){
+      //bxSlider 설정용 스크립트
+      $(".slider").bxSlider({
+        auto: true,
+        slideWidth: 800,
+        controls: false
+      })
+    });
+
+    $(function(){
+      let m = [[${msg}]];
+      if(m != null){
+        alert(m);
+      }
+    });
+
+    function check(){
+      let mem = [[${session.member}]];
+      if(mem != null){
+        location.href = "likelist?=" ;
+      } else {
+        alert("회원만 이용 가능한 기능입니다.");
+        return;
+      }
+    }
+
+  </script>
+</head>
+<body class="renewal">
+<header class="header">
+  <th:block th:if="${session.gym} == null">
+    <th:block th:insert="~{header.html}"></th:block>
+  </th:block>
+  <th:block th:unless="${session.gym} == null">
+    <th:block th:insert="~{headerGym.html}"></th:block>
+  </th:block>
+</header>
+<!-- content -->
+<main class="main">
+  <div class="main-wrap">
+    <div class="main-top">
+      <div class="main-top-left main-top-box">
+        <div class="title-box">
+          <p class="title-l">어디에서<br>운동하실 건가요?</p>
+        </div>
+        <section>
+          <div class="center">
+            <div class="sub-title">오짐과 함께 오늘도 오운완!</div>
+            <div class="selectmap">
+              <h2 class="selectbox" id="name1">지역검색</h2>
+              <select name="city" onchange="change(this.selectedIndex);" class="select" id="city">
+                <option value='전체'>전체</option>
+                <option value='서울'>서울특별시</option>
+                <option value='부산'>부산광역시</option>
+                <option value='대구'>대구광역시</option>
+                <option value='인천'>인천광역시</option>
+                <option value='광주'>광주광역시</option>
+                <option value='대전'>대전광역시</option>
+                <option value='울산'>울산광역시</option>
+                <option value='경기'>경기도</option>
+                <option value='강원'>강원도</option>
+                <option value='충북'>충청북도</option>
+                <option value='충남'>충청남도</option>
+                <option value='전북'>전라북도</option>
+                <option value='전남'>전라남도</option>
+                <option value='경북'>경상북도</option>
+                <option value='경남'>경상남도</option>
+                <option value='제주'>제주도</option>
+              </select>
+              <!--구/군:-->
+              <select name="county" class="select" id="county" onchange="chcnt()">
+                <option value=''>전체</option>
+              </select>
+              <div class="searchbox">
+                <li id="name2"><h2>헬스장검색</h2></li>
+                <li>
+                  <div class="search">
+                    <input type="text" placeholder="검색어 입력" id="keyword">
+                    <button onclick="searchinfo()" class="seachimg"></button>
+                  </div>
+                </li>
+              </div>
+            </div>
+          </div><!--center-->
+        </section>
+      </div><!--main-top-left main-top-box-->
+      <div class="main-top-right main-top-box">
+        <div class="imgbox">
+          <li class="imgitem"><img th:src="@{images/main/goods.png}"
+                                   th:onclick="|location.href='@{onelist}'|"class="mainimg">
+            <div class="item-title">일일권</div>
+          </li>
+          <li class="imgitem"><img th:src="@{images/main/mainmap.png}" class="mainimg"
+                                   th:onclick="|location.href='@{kakao}'|">
+            <div class="item-title">지도</div>
+          </li>
+          <li class="imgitem"><img th:src="@{images/main/like.png}"
+                                   onclick=check() class="mainimg">
+            <div class="item-title">찜 목록</div>
+          </li>
+          <li class="imgitem"><img th:src="@{images/main/woman.png}"
+                                   th:onclick="|location.href='@{womanlist}'|" class="mainimg">
+            <div class="item-title">여자<br>트레이너</div>
+          </li>
+          <li class="imgitem"><img th:src="@{images/main/man.png}"
+                                   th:onclick="|location.href='@{manlist}'|" class="mainimg">
+            <div class="item-title">남자<br>트레이너</div>
+          </li>
+          <li class="imgitem"><img th:src="@{images/main/FAQ.png}"
+                                   class="mainimg" th:onclick="|location.href='@{faq}'|">
+            <div class="item-title">FAQ</div>
+          </li>
+        </div>
+      </div>
+    </div><!--main-top-->
+  </div><!--main-wrap-->
+  <section>
+    <h2 id="section2">new 입점!</h2>
+    <div class="content-home">
+      <th:block th:if="${#lists.isEmpty(gList)}">
+        등록된 내용이 없습니다.
+      </th:block>
+      <th:block th:unless="${#lists.isEmpty(gList)}">
+        <div class="slider">
+          <th:block th:each="gitem:${gList}">
+            <div style="height: 500px;">
+              <img th:src="@{upload/gym/}+${gitem.gsysname}" style="width: 100%; height: 100%;">
+            </div>
+          </th:block>
+        </div>
+      </th:block>
+    </div>
+  </section>
+  <section id="third">
+    <h2 id="section3">BEST 게시글</h2>
+    <div class="col">
+      <th:block th:if="${#lists.isEmpty(best)}">
+        등록된 내용이 없습니다.
+      </th:block>
+      <th:block th:each="bitem:${best}">
+        <div class="card">
+          <div class="card-header">
+            <div class="blog-profile">
+              <th:block th:if="${bitem?.msysname} == null">
+                <img class="blog-profile_image" th:src="@{images/no_image.jpg}">
+              </th:block>
+              <th:block th:unless="${bitem?.msysname} == null">
+                <img class="blog-profile_image" th:src="@{'upload/'bitem.msysname}">
+              </th:block>
+              <div class="profilebox">
+                <li th:text="${bitem.mnickname}"></li>
+                <li th:text="${#dates.format(bitem.boarddate, 'yyyy.MM.dd')}"></li>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">
+              <a th:href="@{board(boardDetail=${bitem.boardnum})}" th:text="${bitem.boardtitle}"
+                 class="cardtag"></a>
+            </div>
+            <p class="card-text"><a th:href="@{board(boardDetail=${bitem.boardnum})}" th:text="${bitem.boardcontents}" class="cardtag"></a></p>
+          </div>
+          <div>
+            <li><img th:src="@{images/view.png}" class="view"></li>
+            <li class="viewcont" th:text="${bitem.boardcount}"></li>
+          </div>
+        </div>
+      </th:block>
+    </div>
+    <div class="boardlink">
+      <a class="btn" th:onclick="|location.href='@{bShowList}'|" readonly>더 보기</a>
+    </div>
+  </section>
+    <section id="last">
+      <h2 id="section4">오짐 사용 가이드</h2>
+      <div class="box">
+        <img class="guide" src="/images/main/guide.png" th:onclick="|location.href='@{guide}'|">
+      </div>
+    </section>
+</main>
+  <footer class="footer">
+    <th:block th:insert="~{footer.html}"></th:block>
+  </footer>
+
+</body>
+<script th:inline="javascript">
+  // 채팅
+  (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
+  ChannelIO('boot', {
+    "pluginKey": "f069de55-9d72-49b8-bcaa-458a85b28544"
+  });
+
+  // 시군구 기준 select 생성
+  var cnt = new Array();
+  cnt[0] = new Array('전체');
+  cnt[1] = new Array('전체', '강남구', '강동구', '강북구', '강서구', '관악구', '광진구', '구로구', '금천구', '노원구', '도봉구', '동대문구', '동작구', '마포구', '서대문구', '서초구', '성동구', '성북구', '송파구', '양천구', '영등포구', '용산구', '은평구', '종로구', '중구', '중랑구');
+  cnt[2] = new Array('전체', '강서구', '금정구', '남구', '동구', '동래구', '부산진구', '북구', '사상구', '사하구', '서구', '수영구', '연제구', '영도구', '중구', '해운대구', '기장군');
+  cnt[3] = new Array('전체', '남구', '달서구', '동구', '북구', '서구', '수성구', '중구', '달성군');
+  cnt[4] = new Array('전체', '계양구', '미추홀구', '남동구', '동구', '부평구', '서구', '연수구', '중구', '강화군', '옹진군');
+  cnt[5] = new Array('전체', '광산구', '남구', '동구', '북구', '서구');
+  cnt[6] = new Array('전체', '대덕구', '동구', '서구', '유성구', '중구');
+  cnt[7] = new Array('전체', '남구', '동구', '북구', '중구', '울주군');
+  cnt[8] = new Array('전체', '고양시', '과천시', '광명시', '구리시', '군포시', '남양주시', '동두천시', '부천시', '성남시', '수원시', '시흥시', '안산시', '안양시', '오산시', '의왕시', '의정부시', '평택시', '하남시', '가평군', '광주시', '김포시', '안성시', '양주군', '양평군', '여주군', '연천군', '용인시', '이천군', '파주시', '포천시', '화성시');
+  cnt[9] = new Array('전체', '강릉시', '동해시', '삼척시', '속초시', '원주시', '춘천시', '태백시', '고성군', '양구군', '양양군', '영월군', '인제군', '정선군', '철원군', '평창군', '홍천군', '화천군', '황성군');
+  cnt[10] = new Array('전체', '제천시', '청주시', '충주시', '괴산군', '단양군', '보은군', '영동군', '옥천군', '음성군', '진천군', '청원군');
+  cnt[11] = new Array('전체', '공주시', '보령시', '서산시', '아산시', '천안시', '금산군', '논산군', '당진군', '부여군', '서천군', '연기군', '예산군', '청양군', '태안군', '홍성군');
+  cnt[12] = new Array('전체', '군산시', '김제시', '남원시', '익산시', '전주시', '정읍시', '고창군', '무주군', '부안군', '순창군', '완주군', '임실군', '장수군', '진안군');
+  cnt[13] = new Array('전체', '광양시', '나주시', '목포시', '순천시', '여수시', '여천시', '강진군', '고흥군', '곡성군', '구례군', '담양군', '무안군', '보성군', '신안군', '여천군', '영광군', '영암군', '완도군', '장성군', '장흥군', '진도군', '함평군', '해남군', '화순군');
+  cnt[14] = new Array('전체', '경산시', '경주시', '구미시', '김천시', '문겅시', '상주시', '안동시', '영주시', '영천시', '포항시', '고령군', '군위군', '봉화군', '성주군', '영덕군', '영양군', '예천군', '울릉군', '울진군', '의성군', '청도군', '청송군', '칠곡군');
+  cnt[15] = new Array('전체', '거제시', '김해시', '마산시', '밀양시', '사천시', '울산시', '진주시', '진해시', '창원시', '통영시', '거창군', '고성군', '남해군', '산청군', '양산시', '의령군', '창녕군', '하동군', '함안군', '함양군', '합천군');
+  cnt[16] = new Array('전체', '서귀포시', '제주시', '남제주군', '북제주군');
+
+  function change(add) {
+    sel = $(".select")[1];
+    console.log(sel)
+    /* 옵션메뉴삭제 */
+    for (i = sel.length - 1; i >= 0; i--) {
+      sel.options[i] = null
+    }
+    /* 옵션박스추가 */
+    for (i = 0; i < cnt[add].length; i++) {
+      sel.options[i] = new Option(cnt[add][i], cnt[add][i]);
+    }
+  }
+
+  // 셀렉트 박스 지역 검색
+  function chcnt() {
+    let a = $("#county").val();
+    console.log(a);
+    location.href = "gymPlaceList?glocation=" + a;
+  };
+
+  // 키워드 검색
+  function searchinfo() {
+    let k = $("#keyword").val();
+    if (k == "") {
+      alert("검색어를 입력하세요.")
+      return;
+    } else {
+      location.href = "SeachGymOutput?gname=" + k;
+    }
+  };
+
+  // (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
+  // ChannelIO('boot', {
+  //   "pluginKey": "f069de55-9d72-49b8-bcaa-458a85b28544"
+  // });
+</script>
+</html>

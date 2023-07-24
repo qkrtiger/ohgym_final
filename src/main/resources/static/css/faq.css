@@ -1,0 +1,50 @@
+/** 목록 스타일 초기화 및 중앙 배치, 가로 폭 지정 */
+.faqul {
+    padding: 0;
+    margin: 50px auto;
+    list-style: none;
+    width: 500px;
+}
+
+/* .title:hover{
+    background-color: #ccc;
+} */
+
+/** 제목 영역의 초기화 처리 */
+.title {
+    padding: 0;
+    margin: 0;
+    /* border: 1px solid #000; */
+}
+
+/** 링크의 클릭 영역 확대 및 배경 및 폰트 처리 */
+.title > a {
+    display: block;
+    padding: 2px;
+    font-size: 14px;
+    font-weight: bold;
+    text-indent: 12px;
+    text-decoration: none;
+    color: #444;
+    height: 32px;
+    line-height: 32px;
+    background-color: #eee;
+    /* border-radius: 5px; */
+}
+
+/** 현재 활성화된 요소에 적용할 배경이미지 지정 */
+.selected {
+    background: #ccc;
+    /* color: #fff !important; */
+}
+
+/** 내용 영역 */
+.content {
+    margin: 0;
+    background-color: white;
+    padding: 10px;
+    /* height: 200px; */
+    overflow-y: auto;
+    /* border-radius: 5px;
+    -webkit-border-radius: 5px; */
+}

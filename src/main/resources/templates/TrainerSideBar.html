@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <style>
+        * {margin: 0; padding: 0;}
+
+        aside {
+            width: 17%;
+            min-width: 250px;
+            height: 900px;
+            float: left;
+            background-color: #f8f8f8;
+            padding: 2%;
+            box-sizing: border-box;
+            transition: width 0.3s;
+        }
+
+        aside:hover {
+            width: 18%;
+        }
+
+
+        .sidebar-menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .user-image {
+            margin-top: 2%;
+            text-align: center;
+        }
+
+        .image {
+            height: 150px;
+            width: 150px;
+        }
+
+        .menu-item {
+            padding: 11% 5%; /* 이 부분을 수정해주세요 (상하 패딩을 조절합니다) */
+            color: #333;
+            text-decoration: none;
+            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .menu-item:hover {
+            background-color: #efefef;
+        }
+    </style>
+</head>
+<body>
+<aside>
+    <div id="sidebar" class="sidebar">
+        <div class="user-image">
+            <th:block th:if="${trainer.msysname} == null">
+                <img th:onclick="|openPopup(membernum=${trainer.membernum})|"
+                     th:src="@{images/bbbbb.jpg}" class="image">
+            </th:block>
+            <th:block th:unless="${trainer.msysname} == null">
+                <img th:onclick="|openPopup(membernum=${trainer.membernum})|"
+                     th:src="@{upload/} + ${trainer.msysname}" class="image">
+            </th:block>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="" class="menu-item">내 정보</a></li>
+            <li><a th:href="@{tAdditionInfo(membernum=${trainer.membernum})}" class="menu-item">추가정보</a></li>
+            <li><a href="" class="menu-item">결제내역</a></li>
+            <li><a href="" class="menu-item">상품관리</a></li>
+            <li><a href="" class="menu-item">FAQ</a></li>
+        </ul>
+    </div>
+</aside>
+</body>
+</html>

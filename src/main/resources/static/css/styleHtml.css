@@ -1,0 +1,177 @@
+/*폰트*/
+@font-face {
+    font-family: "SpoqaHanSansNeo";
+    src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.eot?#iefix") format("embedded-opentype");
+    unicode-range: U+000-5FF,U+AC00-D7AF;
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: "SpoqaHanSansNeo";
+    src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.eot?#iefix") format("embedded-opentype");
+    unicode-range: U+000-5FF,U+AC00-D7AF;
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: "SpoqaHanSansNeo";
+    src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.eot?#iefix") format("embedded-opentype");
+    unicode-range: U+000-5FF,U+AC00-D7AF;
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: "SpoqaHanSansNeo";
+    src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.eot?#iefix") format("embedded-opentype");
+    unicode-range: U+000-5FF,U+AC00-D7AF;
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: "SpoqaHanSansNeo";
+    src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.eot?#iefix") format("embedded-opentype");
+    unicode-range: U+000-5FF,U+AC00-D7AF;
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap
+}
+
+/*전체*/
+
+
+.renewal * {
+    font-family: "Inter", "SpoqaHanSansNeo", "notokr", "Malgun Gothic", Dotum, Helvetica, "Apple SD Gothic Neo", Sans-serif;
+}
+* {
+    margin: 0px;
+    border: 0px;
+    /*font-size:20px;*/
+
+}
+
+body{background-color: #f7f7f7;}
+
+ul>li{list-style: none}
+
+.terms_title{
+    font-size: 25px;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+/*a{text-decoration: none;}*/
+
+.clearfix::after{content: "";display: block;clear: both;}
+
+.header {
+    border-top:1px solid #acacac;
+    border-bottom:1px solid #acacac;
+    background-color: white;
+    height: 40px;
+}
+
+.headLoc {
+    margin: 0 auto;
+    width: 460px;
+    background-color: white;
+}
+
+.btn-back {
+    height: 39px;
+    background-color: white;
+    font-size: 29px;
+}
+
+#terms{
+    width: 460px;
+    margin: 200px auto;
+    box-sizing: border-box;
+    border-radius: 10px;
+
+}
+
+ul.terms_box{
+    border: 1px solid #ddd;
+    padding: 0;
+    background-color: white;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+}
+
+.clearfix{
+    padding-left: 20px;
+}
+
+.checkBox,.checkBox>ul{
+    position: relative;
+}
+
+.checkBox>ul>li{
+    float: left;
+}
+
+.checkBox>ul>li:nth-child(2){
+    width: 85%;
+    padding: 10px;
+    font-weight: 600;
+    color: #888;
+}
+
+.checkBox>ul>li:first-child{
+    position: absolute;
+    top: 60%;
+    left: 15px;
+    margin-top: -12px;
+}
+
+.checkBox textarea{
+    width: 96%;
+    height: 90px;
+    margin: 0 2%;
+    background-color: #f7f7f7;
+    color: #888;
+    border: none;
+}
+
+.footBtwrap{
+    margin-top: 15px;
+    padding: 0;
+}
+
+.footBtwrap>li{
+    /*float: left;*/
+    width: 100%;
+    height: 60px;
+}
+
+.footBtwrap>li>button{
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    text-align: center;
+    line-height: 60px;
+    border-radius: 10px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.btn1{background-color: #219dd2;color: white}
+.btn2{background-color: #2c7fdf;color: white}
+
+/*id찾음*/
+.wrap {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+

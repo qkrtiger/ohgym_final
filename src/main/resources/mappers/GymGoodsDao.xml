@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.ohgym.dao.GymGoodsDao">
+
+    <select id="selectGym" resultType="GymDto" parameterType="Integer">
+        select * from gym where gymnum=#{gymnum}
+    </select>
+    <select id="selectGymGoods" resultType="GymGoodsDto" parameterType="Integer">
+        select * from gymgoods where gymnum=#{gymnum} AND ggoodsname != '일일권' and ggoodsaction=1
+    </select>
+    <select id="selectDailyGymGoods" resultType="GymGoodsDto" parameterType="Integer">
+        select * from gymgoods where gymnum=#{gymnum} AND ggoodsname = '일일권'
+    </select>
+
+</mapper>

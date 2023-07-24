@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Introduce</title>
+    <link rel="stylesheet" th:href="@{css/introduce.css}">
+</head>
+<body>
+</head>
+<body>
+<header class="header">
+    <th:block th:if="${gym} == null">
+        <th:block th:insert="~{header.html}"></th:block>
+    </th:block>
+    <th:block th:unless="${gym} == null">
+        <th:block th:insert="~{headerGym.html}"></th:block>
+    </th:block>
+
+</header>
+
+<section style="margin-top: 200px">
+
+    <div class="content_1">
+      <img src="images/introduce.jpg">
+        <div class="content_11">
+            <h2>쉽고 빠른 헬스장 OH!GYM</h2>
+            <p>번거로운 헬스장 방문을 줄이고 손쉬운 결제를 위해</p>
+            <p>지금 시작합시다!</p>
+        </div>
+    </div>
+    <div class="content_2">
+        <p>내 주위 헬스장을 <span style="color: #2fcb2f">지도</span>로 한눈에!</p>
+        <p>내가 원하는 <span style="color: blue">트레이너</span>를 선택!</p>
+        <p>헬스장 <span style="color: orange">후기</span>를 비교해 나에게 맞는 헬스장 <span style="color: red">pick</span>!</p>
+    </div>
+    <div class="content_3">
+        <img src="images/introducemap.jpg">
+        <img src="images/introducedumbbell.jpg">
+    </div>
+    <div class="content_4">
+        <p>[회사 연혁]</p>
+        <p>회사명 : (주)오짐</p>
+        <p>대표이사 : 벌크업</p>
+        <p>서비스 : 헬스장 상품 결제</p>
+        <p>직원수 : 생각한만큼</p>
+        <p>주소 : 인천 미추홀구 매소홀로488번길 6-32 태승빌딩</p>
+    </div>
+
+</section>
+
+<footer class="footer" style="margin-top: 200px">
+    <th:block th:insert="~{footer.html}"></th:block>
+</footer>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+</html>

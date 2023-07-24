@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>tAddInfoModify</title>
+    <link rel="stylesheet" th:href="@{css/addition.css}">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <style>
+        #file{
+            display: none;
+        }
+        #preview{
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <th:block th:if="${gym} == null">
+        <th:block th:insert="~{header.html}"></th:block>
+    </th:block>
+    <th:block th:unless="${gym} == null">
+        <th:block th:insert="~{headerGym.html}"></th:block>
+    </th:block>
+</header>
+<div style="margin-top: 200px">
+    <form th:action="@{tAddInfoMo}" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="membernum" th:value="${trainer.membernum}">
+        <div>
+            <div id="content" class="content">
+                <h2 class="info-title">추가 정보</h2>
+                <div class="info-row">
+                    <span class="info-label">트레이너 이름:</span>
+                    <input type="text" th:value="${trainer.mname}" readonly>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">헬스장 이름:</span>
+                    <input type="text" th:value="${trainer.gname}" readonly>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">성별:</span>
+                    <input type="text" name="mgender" th:value="${trainer.mgender}">
+                </div>
+                <div class="info-row">
+                    <span class="info-label">경력:</span>
+                    <input type="text" name="tcareer" th:value="${trainer.tcareer}">
+                </div>
+                <div class="info-row">
+                    <span class="info-label">자격증:</span>
+                    <input type="text" name="tlicence" th:value="${trainer.tlicence}">
+                </div>
+                <div class="info-row">
+                    <span class="info-label">설명:</span>
+                    <input type="text" name="tpr" th:value="${trainer.tpr}">
+                </div>
+            </div>
+            <div>
+                <h2>사진 등록</h2>
+                <label for="file">파일 추가</label>
+                <input type="file" name="files" id="file" onchange="readURL(this);">
+                <div>
+                    <div th:if="${trainer.tsysname} == null">
+                        <h3 id="noImage">등록된 이미지가 없습니다</h3>
+                        <img id="preview" />
+                    </div>
+                    <div th:unless="${trainer.tsysname} == null">
+                        <img th:src="@{upload/} + ${trainer.tsysname}" class="image">
+                        <input type="hidden" name="tsysname" th:value="${trainer.tsysname}">
+                        <input type="hidden" name="toriname" th:value="${trainer.toriname}">
+                    </div>
+                </div>
+            </div>
+            <div>
+                <input type="button" value="이전으로" th:onclick ="|back(membernum=${trainer.membernum})|">
+                <input type="submit" value="저장하기">
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+<script th:inline="javascript">
+    $(function () {
+        let m = [[${msg}]];//msg가 없으면 null
+        if(m != null){
+            alert(m);
+        }
+    });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview').src = e.target.result;
+                document.getElementById('noImage').hidden = true;
+            };
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            document.getElementById('preview').src = "";
+        }
+    }
+
+    function back(membernum) {
+        location.href = '/tAdditionInfo?membernum=' + membernum;
+    }
+
+</script>
+</html>

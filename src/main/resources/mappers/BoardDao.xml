@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.ohgym.dao.BoardDao">
+
+    <insert id="bWrite" parameterType="BoardDto" useGeneratedKeys="true" keyProperty="boardnum">
+        <selectKey keyProperty="boardnum" resultType="integer" order="AFTER">
+            SELECT LAST_INSERT_ID()</selectKey>
+        INSERT INTO board
+        VALUES (NULL, #{membernum}, #{boardtitle}, #{boardcontents}, DEFAULT, DEFAULT, #{mnickname}, null, null)
+    </insert>
+    <insert id="bGWrite" parameterType="BoardDto" useGeneratedKeys="true" keyProperty="boardnum">
+        <selectKey keyProperty="boardnum" resultType="integer" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into board
+        values(null, null, #{boardtitle}, #{boardcontents}, DEFAULT, DEFAULT, null, #{gymnum}, #{gname})
+    </insert>
+    <insert id="replyInsert" parameterType="replyDto" useGeneratedKeys="true" keyProperty="rnum">
+        <selectKey keyProperty="rnum" resultType="Integer" order="AFTER">
+            SELECT LAST_INSERT_ID()</selectKey>
+        INSERT INTO reply
+        VALUES (NULL, #{boardnum}, #{mnickname}, null, #{rcontent}, DEFAULT)
+    </insert>
+    <insert id="replyGymInsert" parameterType="replyDto" useGeneratedKeys="true" keyProperty="rnum">
+        <selectKey keyProperty="rnum" resultType="Integer" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into reply
+        values (null, #{boardnum}, null, #{gname}, #{rcontent}, default)
+    </insert>
+
+    <update id="bUpdate" parameterType="BoardDto">
+        UPDATE board
+        SET boardtitle=#{boardtitle}, boardcontents=#{boardcontents}
+        WHERE boardnum=#{boardnum}
+    </update>
+    <update id="updateView" parameterType="BoardDto">
+        UPDATE board
+        SET boardcount = boardcount + 1 WHERE boardnum=#{boardnum}
+    </update>
+    <delete id="bDelete" parameterType="Integer">
+        DELETE FROM board WHERE boardnum=#{boardnum}
+    </delete>
+    <delete id="deleteReply" parameterType="Integer">
+        DELETE FROM reply WHERE boardnum=#{boardnum}
+    </delete>
+    <select id="bShowList" resultType="BoardDto" parameterType="SearchDto">
+        SELECT * FROM board
+        <if test="colname != null and colname != ''">
+            WHERE ${colname} LIKE CONCAT('%',#{keyword},'%')
+        </if>
+        ORDER BY boarddate DESC
+        LIMIT #{pageNum}, #{listCnt}
+    </select>
+    <select id="bContent" resultType="BoardDto" parameterType="Integer">
+        SELECT * FROM board WHERE boardnum=#{boardnum}
+    </select>
+    <select id="selectReply" resultType="ReplyDto" parameterType="Integer">
+        SELECT * FROM rlist WHERE boardnum=#{boardnum}
+    </select>
+    <select id="selectLastReply" resultType="ReplyDto" parameterType="Integer">
+        SELECT * FROM rlist WHERE rnum=#{rnum}
+    </select>
+    <select id="selectBoardCnt" resultType="Integer" parameterType="SearchDto">
+        SELECT count(*) FROM blist
+        <if test="colname != null and colname != ''">
+            WHERE ${colname} LIKE concat('%', #{keyword},'%')
+        </if>
+    </select>
+    <select id="bestBoard" resultType="BoardDto">
+        SELECT * FROM mainboard ORDER BY boardcount DESC LIMIT 3;
+    </select>
+
+</mapper>

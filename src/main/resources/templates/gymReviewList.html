@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+
+    <script src="js/jquery-3.7.0.min.js"></script>
+    <title>ReviewList</title>
+    <style>
+
+
+        .container {
+            width: 800px;
+            height: 200px;
+        }
+
+        .blog-left {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            width: 80%;
+            height: 100%;
+        }
+
+        .blog-profile {
+            height: 20%;
+        }
+
+        .blog-profile_image {
+            float: left;
+            width: 10%;
+            border-radius: 100%;
+        }
+
+        .blog-profile_text {
+            float: left;
+            margin-left: 10px;
+            line-height: 0%;
+        }
+
+        .blog-nickname {
+            float: left;
+            margin-top: 25px;
+            margin-bottom: 30px;
+        }
+
+        .blog-pay {
+            float: left;
+            width: 45%;
+            margin-top: 12px;
+            margin-left: 10px;
+        }
+
+        .time {
+            margin-left: 90px;
+        }
+
+        .blog-content {
+            border: 1px;
+            margin-left: 10px;
+        }
+
+        .star-ratings-fill {
+            color: rgba(250, 208, 0, 0.99);
+            margin-top: 60px;
+            font-size: 100%
+        }
+
+    </style>
+</head>
+<body>
+<h2>이용 후기</h2>
+<th:block th:if="${#lists.isEmpty(reList)}">
+    등록된 후기가 없습니다.
+</th:block>
+<th:block th:unless="${#lists.isEmpty(reList)}">
+    <th:block th:each="ritem:${reList}">
+        <div class="container">
+            <div class="blog-left">
+                <div class="blog-profile">
+                    <th:block th:if="${ritem.msysname} == null">
+                        <img class="blog-profile_image" th:src="@{images/review-icon.png}">
+                    </th:block>
+                    <th:block th:unless="${ritem.msysname} == null">
+                        <img class="star-ratings-fill space-x-2 text-lg" th:src="@{'upload/'ritem.gsysname}">
+                    </th:block>
+                    <div class="blog-profile_text">
+                        <h4 class="blog-nickname" th:text="${ritem.mnickname}"></h4>
+                        <img class="blog-pay" th:src="@{images/pay.png}">
+                        <div class="star-ratings-fill" th:text="${ritem.ratingOptions}"></div>
+                        <div class="time" th:text="${#dates.format(ritem.reviewdate, 'yyyy.MM.dd')}"></div>
+                    </div>
+                </div>
+                <br>
+                <div class="blog-content">
+                    <div th:text="${ritem.reviewcontents}"></div>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</th:block>
+<div class="paging-area">
+    <div class="paging" th:utext="${paging}"></div>
+</div>
+</body>
+</html>

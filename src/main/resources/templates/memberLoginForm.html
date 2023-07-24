@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>일반로그인</title>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" th:href="@{css/join.css}">
+
+  <script th:inline="javascript">
+    $(function () {
+      let m = [[${msg}]];//msg가 없으면 null.
+      if(m != null){
+        alert(m);
+      }
+    });
+  </script>
+
+</head>
+<body>
+<div class="wrap">
+  <form th:action="@{meberLoginProc}" method="post" class="login-form" name="jForm" onsubmit="return check()">
+    <h2 class="login-header">일반 로그인</h2>
+    <input type="text" class="login-input" id="mid" name="mid" title="아이디" autofocus placeholder="아이디">
+    <input type="password" class="login-input" name="mpass" title="비밀번호" placeholder="비밀번호">
+    <input type="submit" class="login-btn" value="일반login">
+  </form>
+
+  <div class="login-form">
+    <a th:href="@{loginfind}" class="linkfindid">ID 찾기</a>
+  </div>
+</div>
+</body>
+<script th:inline="javascript">
+
+ function check(){
+   const jfrm = $("[name=jForm]");
+
+   console.log(jfrm);
+
+   let length = jfrm.length - 1; //submit 제외
+
+   for (let i = 0; i <length; i++){
+     if (jfrm[i].value == "" | jfrm[i].value == null){
+       alert(jfrm[i].title + "입력!");
+       jfrm[i].focus();
+       return false;
+     }
+   }
+
+   return true;
+ }
+</script>
+</html>

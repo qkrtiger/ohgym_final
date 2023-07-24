@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>헬스장 이용 결제</title>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+  <link rel="stylesheet" th:href="@{css/style.css}">
+  <link rel="stylesheet" th:href="@{css/reset.css}">
+
+  <script th:inline="javascript">
+    $( function() {
+      var today = new Date();
+      var maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 14);
+
+      $( "#datepicker" ).datepicker({
+        dateFormat: "yy-mm-dd",
+        dayNamesMin: ['월','화','수','목','금','토','일'],
+        minDate:0,
+        maxDate: maxDate
+      });
+    } );
+  </script>
+
+</head>
+<body>
+<div class="wrap">
+  <div class="prod_info">
+    <div class="title">
+      상품정보
+    </div>
+    <div class="prod_info_con">
+      <div class="img" style="background: url(/images/1.png) no-repeat center; background-size: cover;"></div>
+      <div class="info">
+        <div class="tit" th:text="${gym.gname}">
+        </div>
+        <div class="addr" th:text="${gym.glocation}">
+        </div>
+        <div class="tit">
+          운동시작날짜
+        </div>
+        <p style="color: #d4d4d4">운동 시작일 선택은 오늘부터 2주까지만 가능합니다!</p><br>
+        <input type="text" class="date" id="datepicker" placeholder="날짜를 선택해 주세요." readonly>
+      </div>
+    </div>
+  </div>
+  <div class="ticket">
+    <div class="title">
+      회원권
+    </div>
+    <ul class="ticket_list">
+      <li th:if="${#lists.isEmpty(gGList)}">
+          <p>등록된 상품이 없습니다.</p>
+      </li>
+        <li th:onclick="toggleOn(this)" th:unless="${#lists.isEmpty(gGList)}" th:each="gGitem:${gGList}"
+            th:data-goodsname="${gGitem.ggoodsname}" th:data-goodsprice="${gGitem.ggoodsprice}" th:data-goodsnum="${gGitem.ggoodsnum}">
+          <div>
+            <h5 th:text="${gGitem.ggoodsname}"></h5>
+            <p th:text="${#numbers.formatInteger(gGitem.ggoodsprice, 3, 'COMMA') + ' 원'}"></p>
+          </div>
+      </li>
+    </ul>
+    <div class="title">
+      일일권
+    </div>
+    <ul class="ticket_list">
+      <li>
+        <a th:href="@{dailyPay(gymnum=${gym.gymnum})}">
+          <h5>일일권</h5>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="total">
+    <div class="product" id="selectedProduct">
+      <span></span>
+    </div>
+    <div class="price" id="selectedPrice">
+      <span></span>
+    </div>
+  </div>
+  <div class="kg_pay_btn">
+    <button type="button" th:onclick="kg_request_pay()">결제하기</button>
+  </div>
+  <div class="ka_pay_btn">
+    <button type="button" th:onclick="ka_request_pay()">카카오페이</button>
+  </div>
+</div>
+
+</body>
+
+<script th:inline="javascript">
+
+  // selectedGoodsName이 없을 경우 알림창을 먼저 표시하는 함수
+  function showSelectedGoodsNameAlert() {
+    alert("상품을 먼저 선택해 주세요.");
+  }
+
+  function kg_request_pay() {
+    //전달할 데이터
+    var selectedDate = document.getElementById("datepicker").value;
+    var selectedGoodsName = document.querySelector(".kg_pay_btn").getAttribute("data-name");
+    var selectedGoodsPrice = document.querySelector(".kg_pay_btn").getAttribute("data-price");
+    var selectedGoodsNum = document.querySelector(".kg_pay_btn").getAttribute("data-goodsnum");
+
+    // datepicker가 선택되지 않은 경우 알림창 띄움
+    if (selectedDate == "") {
+      alert("운동 시작일을 선택해 주세요.");
+      return;
+    }
+
+    //상품이 선택되지 않은 경우 알림창 띄움
+    if(selectedGoodsName == null){
+      alert("상품을 먼저 선택해 주세요.");
+      return;
+    }
+
+    //kg이니시스 결제 API
+    var IMP = window.IMP; // 생략가능
+    IMP.init('imp02008762');  // 가맹점 식별코드
+
+    // IMP.request_pay(param, callback) 결제창 호출
+    IMP.request_pay({
+      pg: "html5_inicis",
+      pay_method: "card",
+      merchant_uid: "gpay_" + new Date().getTime(),   // 주문번호
+      name: [[${gym.gname}]] +" "+ selectedGoodsName,
+      amount: selectedGoodsPrice,                         // 숫자 타입
+      buyer_email: [[${member.mmail}]],
+      buyer_name: [[${member.mname}]],
+      buyer_tel: [[${member.mphone}]]
+    }, function (rsp) { // callback
+      console.log(rsp);
+      if ( rsp.success ) { //결제 성공시
+        var msg = '결제가 완료되었습니다.';
+        var result = {
+          "mpaynum" : rsp.merchant_uid,
+          "membernum" :[[${member.membernum}]],
+          "mpaymethod":rsp.pay_method,
+          "mpayproduct":rsp.name,
+          "mpayprice":rsp.paid_amount,
+          "mpaydate" : new Date().toISOString().slice(0, 10),
+          "mpaygym" : [[${gym.gname}]],
+          "mpayperiod" : selectedDate,
+          "mpaytime" : "",
+          "trainername":"",
+          "ggoodsnum": selectedGoodsNum,
+          "tgoodsint" : null,
+          "gymnum" : [[${gym.gymnum}]]
+        }
+        console.log(result);
+
+        $.ajax({
+          url:'insertMPay',
+          type:'POST',
+          contentType: 'application/json',
+          data:JSON.stringify(result),
+          success: function (res) {
+            console.log(res);
+            location.href=res;
+          },
+          error: function (err) {
+            console.log(err);
+          }
+        }); //ajax
+      } else {
+          var msg = '결제 실패';
+          msg += '\n에러내용 : ' + rsp.error_msg;
+        }
+      alert(msg);
+    });
+  }
+
+  function ka_request_pay(){
+    //전달할 데이터
+    var selectedDate = document.getElementById("datepicker").value;
+    var selectedGoodsName = document.querySelector(".ka_pay_btn").getAttribute("data-name");
+    var selectedGoodsPrice = document.querySelector(".ka_pay_btn").getAttribute("data-price");
+    var selectedGoodsNum = document.querySelector(".ka_pay_btn").getAttribute("data-goodsnum");
+
+    // datepicker가 선택되지 않은 경우 알림창 띄움
+    if (selectedDate === "") {
+      alert("운동 시작일을 선택해 주세요.");
+      return;
+    }
+
+    //상품이 선택되지 않은 경우 알림창 띄움
+    if(selectedGoodsName == null){
+      alert("상품을 먼저 선택해 주세요.");
+      return;
+    }
+
+    //카카오 결제 API
+    var IMP = window.IMP; // 생략가능
+    IMP.init('imp02008762');  // 가맹점 식별코드
+    // IMP.request_pay(param, callback) 결제창 호출
+
+    IMP.request_pay({
+      pg : 'kakaopay',
+      pay_method: "kakaopay",
+      merchant_uid: "gpay_" + new Date().getTime(), // 주문번호
+      name : [[${gym.gname}]] +" "+ selectedGoodsName,
+      amount : selectedGoodsPrice,
+      buyer_email : [[${member.mmail}]],
+      buyer_name : [[${member.mname}]],
+      buyer_tel : [[${member.mphone}]]
+    }, function(rsp) {
+      if ( rsp.success ) {//결제 성공시
+        var msg = '결제가 완료되었습니다.';
+        var result = {
+          "mpaynum" : rsp.merchant_uid,
+          "membernum" :[[${member.membernum}]],
+          "mpaymethod":"kakaopay",
+          "mpayproduct":rsp.name,
+          "mpayprice":rsp.paid_amount,
+          "mpaydate" : new Date().toISOString().slice(0, 10),
+          "mpaygym" : [[${gym.gname}]],
+          "mpayperiod" : selectedDate,
+          "mpaytime" : "",
+          "trainername":"",
+          "ggoodsnum": selectedGoodsNum,
+          "tgoodsint" : null,
+          "gymnum" : [[${gym.gymnum}]]
+        }
+        console.log(result);
+
+        $.ajax({
+          url:'insertMPay',
+          type:'POST',
+          contentType: 'application/json',
+          data:JSON.stringify(result),
+          success: function (res) {
+            console.log(res);
+            location.href=res;
+          },
+          error: function (err) {
+            console.log(err);
+          }
+        }); //ajax
+      } else {
+        var msg = '결제 실패';
+        msg += '\n에러내용 : ' + rsp.error_msg;
+      }
+      alert(msg);
+    });
+  }
+
+  // 상품 선택 이벤트
+  function toggleOn(element) {
+    var ticketDivs = document.querySelectorAll('.ticket_list .on');
+    for (var i = 0; i < ticketDivs.length; i++) {
+      ticketDivs[i].classList.remove('on');
+    }
+    element.classList.add('on');
+
+    //결제 데이터 전달
+    var selectedPrice = element.querySelector("p").innerText;
+    var priceElement = document.getElementById("selectedPrice").querySelector("span");
+    priceElement.innerText = selectedPrice;
+
+    var selectedProduct = element.querySelector("h5").innerText;
+    var productElement = document.getElementById("selectedProduct").querySelector("span");
+    productElement.innerText = selectedProduct;
+
+    // 선택된 상품 정보 가져오기(상품명, 금액)
+    var selectedGoodsName = element.getAttribute("data-goodsname");
+    var selectedGoodsPrice = element.getAttribute("data-goodsprice");
+    var selectedGoodsNum = element.getAttribute("data-goodsnum");
+
+    //kg 이니시스
+    var nameElement = document.querySelector(".kg_pay_btn");
+    nameElement.setAttribute("data-name", selectedGoodsName);
+    nameElement.setAttribute("data-price", selectedGoodsPrice);
+    nameElement.setAttribute("data-goodsnum", selectedGoodsNum);
+
+    //kakaopay
+    var nameElement = document.querySelector(".ka_pay_btn");
+    nameElement.setAttribute("data-name", selectedGoodsName);
+    nameElement.setAttribute("data-price", selectedGoodsPrice);
+    nameElement.setAttribute("data-goodsnum", selectedGoodsNum);
+
+  }
+</script>
+</html>

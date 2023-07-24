@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>헬스장 비밀번호 변경</title>
+    <link rel="stylesheet" th:href="@{css/join.css}">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<div class="wrap">
+    <form th:action="passGymProc" method="post" class="login-form" name="jForm" onsubmit="return check()">
+        <h2 class="login-header">비밀번호 재설정</h2>
+        <input type="text" class="login-input" id="gid" name="gid" title="헬스장 아이디" autofocus placeholder="헬스장 아이디" >
+        <input type="button" class="idcheck-btn" value="id확인" onclick="idcheck()" style="margin-bottom: 2px;">
+        <p>비밀번호를 재설정합니다.</p>
+        <input type="password" class="login-input" id="gpass" name="gpass" title="비밀번호" placeholder="비밀번호">
+        <div class="effectiveness">* 4~12자의 영문 대소문자와 숫자로만 입력바랍니다.</div>
+        <input type="password" class="login-input" id="gpasscheck" title="비밀번호 재입력" placeholder="비밀번호 재입력">
+        <div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
+        <div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
+        <input type="submit" class="login-btn" value="비밀번호 재설정">
+    </form>
+</div>
+
+</body>
+
+<script th:inline="javascript">
+
+    let ckPASS = RegExp(/^[a-zA-Z0-9]{4,12}$/); //4~12자의 영문 대소문자와 숫자로만 입력
+
+    let ck = false;
+
+    //아이디 확인
+    function idcheck(){
+        let gid = $("#gid").val();
+        let realid = [[${session.id}]];
+        console.log(realid);
+
+        if (gid == ""){
+            alert("아이디를 입력하세요.")
+            $("#gid").focus();
+            return;
+        } else if (gid == realid){
+            alert("확인 되었습니다.")
+            ck = true;
+        } else {
+            alert("아이디가 다릅니다.")
+            $("#gid").val("");
+            $("#gid").focus();
+            return;
+        }
+
+    }
+
+    let pk = false;
+    //비밀번호 재확인
+    $("#alert-success").hide();
+    $("#alert-danger").hide();
+    $("#gpasscheck").keyup(function (){
+        let pass1 = $("#gpass").val();
+        let pass2 = $("#gpasscheck").val();
+        if (pass1 != "" || pass2 != ""){
+            if (pass1 == pass2){
+                $("#alert-success").show();
+                $("#alert-danger").hide();
+                pk = true;
+            } else {
+                $("#alert-success").hide();
+                $("#alert-danger").show();
+                pk = false;
+            }
+        }
+    });
+
+    //중복확인이 되었고, 모든 입력이 된 다음에 전송하도록 하는 함수 check() (+ onsubmit 속성)
+    function check(){
+        //아이디 확인이 되었는가?
+        if (ck == false){
+            alert('아이디 확인을 해주세요.');
+            return false;
+        }
+
+        //비밀번호 재입력이 되었는가?
+        if (pk == false){
+            alert("비밀번호 재입력을 해주세요.")
+            return false;
+        }
+
+        //비밀번호 유효성 검사
+        if (!ckPASS.test($("[name=gpass]").val())){
+            alert("비밀번호 형식에 맞게 입력해주세요");
+            //$("[name=mpass]").focus();
+            return false;
+        }
+
+        const jfrm = $("[name=jForm]");
+
+        console.log(jfrm);
+
+        let length = jfrm.length - 1; //submit 제외
+
+        for (let i = 0; i <length; i++){
+            if (jfrm[i].value == "" | jfrm[i].value == null){
+                alert(jfrm[i].title + "입력!");
+                jfrm[i].focus();
+                return false;
+            }
+        }
+
+        return true;
+    }
+</script>
+
+</html>

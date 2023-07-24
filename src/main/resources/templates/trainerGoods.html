@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>트레이너 상품관리</title>
+  <link rel="stylesheet" th:href="@{css/mypage.css}">
+  <script th:src="@{js/popup.js}" defer></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <style>
+    .toggleSwitch {
+      width: 60px;
+      margin: 30px;
+      height: 30px;
+      display: block;
+      position: relative;
+      border-radius: 30px;
+      background-color: #2c7fdf;
+      box-shadow: 0 0 16px 3px rgba(0 0 0 / 15%);
+      cursor: pointer;
+    }
+
+    .toggleSwitch .toggleButton {
+      width: 23px;
+      height: 23px;
+      position: absolute;
+      top: 50%;
+      left: 4px;
+      transform: translateY(-50%);
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    .toggleSwitch.active {
+      background: #727272;
+    }
+
+    .toggleSwitch.active .toggleButton {
+      left: calc(100% - 28px);
+      background: #fff !important;
+    }
+
+    .toggleSwitch, .toggleButton {
+      transition: all 0.2s ease-in;
+    }
+
+  </style>
+</head>
+<body>
+<div id="content" class="content">
+  <h2 class="info-title">트레이너 상품 관리</h2>
+  <button type="button" th:onclick = "del()">삭제</button>
+  <tbody>
+  <table style="width: 100%", id="mtable">
+  <thead>
+  <tr>
+    <th><input type="checkbox" name="_selected_all_">No.</th>
+    <th>상품명</th>
+    <th>횟수</th>
+    <th>가격(회당)</th>
+    <th>결제금액</th>
+    <th>추가사항</th>
+    <th>활성화</th>
+  </tr>
+  </thead>
+  <tbody id="tb">
+    <div th:unless="${#lists.isEmpty(tGList)}">
+      <tr th:each="tGitem, iterstat: ${tGList}">
+        <td>
+          <input type="checkbox" name="_selected_">
+          <input type="hidden" th:value="${tGitem.tgoodsint}">
+        </td>
+        <td th:text="${iterstat.count}"></td>
+        <td th:text="${tGitem.tgoodsname}"></td>
+        <td th:text="${tGitem.tgoodsnum} + '회'"></td>
+        <td th:text="${#numbers.formatInteger(tGitem.tgoodsprice div tGitem.tgoodsnum, 3, 'COMMA') + '원'}"></td>
+        <td th:text="${#numbers.formatInteger(tGitem.tgoodsprice, 3, 'COMMA') + '원'}"></td>
+        <td th:text="${tGitem.tgoodscontents}"></td>
+        <td>
+          <input type="checkbox" class="tgl" th:id="'toggle'+${iterstat.count}" th:checked="${tGitem.tgoodsturn}" hidden th:data-ts="${tGitem.tgoodsint}">
+          <label th:for="'toggle'+${iterstat.count}" class="toggleSwitch" th:classappend="${tGitem.tgoodsturn == false} ? 'active'">
+            <span class="toggleButton"></span>
+          </label>
+          </label>
+        </td>
+      </tr>
+    </div>
+    <div th:if="${#lists.isEmpty(tGList)}">
+      <td colspan="5">등록된 상품이 없습니다.</td>
+</div>
+  </tbody>
+  </table>
+  <button th:onclick="|location.href='@{tGoodsForm}'|">상품 등록</button>
+</div>
+</body>
+<script th:inline="javascript">
+  //전체선택 및 해제
+  $('input[name=_selected_all_]').on('change', function () {
+    $('input[name=_selected_]').prop('checked', $(this).is(':checked'));
+  });
+
+  // 삭제 버튼 클릭시 선택된 데이터를 삭제
+  function del() {
+    var selected = $('input[name=_selected_]:checked').next();
+    let selValue = new Array();
+    for (let a = 0; a < selected.length; a++) {
+      console.log(selected[a]);
+      selValue.push(selected[a].value);
+    }
+    console.log(selValue);
+    // $('input[name=_selected_]:checked').each(function() {
+    //   selected.push(this.value);
+    // });
+    //
+    // console.log(selected);
+    if (selValue.length > 0) {
+      let conf = confirm("선택한 상품을 삭제하시겠습니까?");
+      if (conf == true) {
+        //상품 목록을 다시 불러오기 위해 멤버넘버 추가
+
+        let so = {selected: selValue};
+        console.log(so);
+
+        $.ajax({
+          url: "delGoods",
+          type: "post",
+          data: so,
+          success: function (res) {
+            console.log(res);
+            if (res != "") {
+              alert("삭제 완료");
+              location.href = "trainerGoods?membernum=" + res;
+            }
+            //location.replace("trainerGoods");
+          },
+          error: function (error) {
+            alert("삭제 실패");
+          }
+        });
+      }
+    } else {
+      alert("선택된 상품이 없습니다.");
+    }
+  }
+
+  // 상품 활성화/비활성화 스위치 버튼
+  const toggleList = document.querySelectorAll(".toggleSwitch");
+
+  toggleList.forEach(($toggle) => {
+    $toggle.onclick = () => {
+      $toggle.classList.toggle('active');
+    }
+  });
+
+  $(document).on("change", ".tgl", function (){
+    let v = $(this).is(":checked");
+    console.log(v);
+    let d = $(this).data("ts");
+    console.log(d);
+
+    let mem = [[${session.member}]];
+    let mnum = mem.membernum;
+
+    sendObj = {
+      "tgoodsint" : d,
+      "tgoodsturn":v
+    };
+
+    console.log(sendObj);
+
+    //controller에 전공(ajax)
+    $.ajax({
+      url:"tMGoodsOnOff",
+      type:"post",
+      data: JSON.stringify(sendObj),
+      contentType : "application/json",
+      success: function (res) {
+        console.log(res);
+        if (res == "ok"){
+          alert("변경 완료");
+          location.href="trainerGoods?membernum=" + mnum;
+        }
+      },
+      error : function (error) {
+        alert("변경 실패");
+      }
+    });
+  });
+
+</script>
+</html>
+

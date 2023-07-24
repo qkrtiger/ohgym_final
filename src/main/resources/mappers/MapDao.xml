@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.ohgym.dao.MapDao">
+
+    <select id="selectGymList" resultType="GymDto">
+        select gymnum, gname, glocation from gym
+        <if test="glocation != null and glocation != ''">
+            where glocation
+        </if>
+    </select>
+
+    <select id="selectSearchNameList" resultType="GymDto" parameterType="String">
+        select gymnum, gname, glocation from gym
+        where glocation IS NOT NULL
+          and gname like concat('%',#{gname},'%')
+    </select>
+    <select id="selectTrainList" resultType="MaptrainDto">
+        select * from maptrain
+        <if test="glocation != null and glocation != ''">
+            where glocation
+        </if>
+    </select>
+
+</mapper>

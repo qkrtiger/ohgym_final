@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>filler</title>
+
+    <style>
+        .filler_style {
+            margin: auto;
+            width: 600px;
+            background-color: lightgrey;
+            border-radius: 10px;
+            margin-top: 200px;
+        }
+
+        form {
+            margin: auto;
+            padding: 20px;
+        }
+
+        .checkdiv {
+            width: 500px;
+            margin: auto;
+            padding: 10px;
+            border-radius: 15px;
+            background-color: ghostwhite;
+        }
+
+        .checkdiv1 {
+            width: 500px;
+            margin: auto;
+        }
+
+        input[type="radio"] {
+            display: none;
+        }
+
+        input[type="radio"] + label {
+            padding: 3px;
+            background-color: #ffffff;
+            border: 1px solid #5467F5;
+            border-radius: 10px;
+            color: #5467F5;
+        }
+
+        input[type="radio"]:checked + label {
+            padding: 3px;
+            background-color: #5467F5;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        input[type="checkbox"] + label {
+            padding: 3px;
+            background-color: #ffffff;
+            border: 1px solid #5467F5;
+            border-radius: 10px;
+            color: #5467F5;
+        }
+
+        input[type="checkbox"]:checked + label {
+            padding: 3px;
+            background-color: #5467F5;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+        }
+
+        input[type="submit"] {
+            display: block;
+            width: 70%;
+            margin: auto;
+            padding: 10px 16px;
+            font-size: 18px;
+            line-height: 1.5;
+            border-radius: 6px;
+            color: #fff;
+            background-color: #ff2f34;
+            border-color: #ff0000;
+        }
+
+        /*.filler_style {*/
+        /*    padding: 20px;*/
+        /*}*/
+
+        /*.checkdiv1,*/
+        /*.checkdiv {*/
+        /*    display: flex;*/
+        /*    flex-direction: row;*/
+        /*    justify-content: center;*/
+        /*    align-items: center;*/
+        /*    margin-bottom: 10px;*/
+        /*}*/
+
+        /*.checkdiv1 label,*/
+        /*.checkdiv label {*/
+        /*    margin-left: 5px;*/
+        /*}*/
+
+        /*input[type="radio"],*/
+        /*input[type="checkbox"] {*/
+        /*    margin-right: 5px;*/
+        /*}*/
+
+        /*input[type="submit"] {*/
+        /*    background-color: #4CAF50;*/
+        /*    border: none;*/
+        /*    color: white;*/
+        /*    padding: 8px 16px;*/
+        /*    text-align: center;*/
+        /*    text-decoration: none;*/
+        /*    display: inline-block;*/
+        /*    font-size: 16px;*/
+        /*    margin-top: 10px;*/
+        /*    cursor: pointer;*/
+        /*}*/
+
+        /*input[type="submit"]:hover {*/
+        /*    background-color: #3e8e41;*/
+        /*}*/
+
+        /*!* Styling for the form headings *!*/
+        /*h3 {*/
+        /*    font-size: 18px;*/
+        /*    margin-bottom: 5px;*/
+        /*    text-align: center;*/
+        /*}*/
+
+        /*!* Styling for the checkboxes *!*/
+        /*input[type="checkbox"] + label:before {*/
+        /*    content: "";*/
+        /*    display: inline-block;*/
+        /*    width: 14px;*/
+        /*    height: 14px;*/
+        /*    margin-right: 5px;*/
+        /*    border: 1px solid #aaa;*/
+        /*    border-radius: 2px;*/
+        /*}*/
+
+        /*input[type="checkbox"]:checked + label:before {*/
+        /*    content: "\2713";*/
+        /*    color: white;*/
+        /*    background-color: #4CAF50;*/
+        /*    text-align: center;*/
+        /*    line-height: 14px;*/
+        /*    font-size: 14px;*/
+        /*    border: none;*/
+        /*}*/
+
+        /*!* Styling for the radio buttons *!*/
+        /*input[type="radio"] + label:before {*/
+        /*    content: "";*/
+        /*    display: inline-block;*/
+        /*    width: 14px;*/
+        /*    height: 14px;*/
+        /*    margin-right: 5px;*/
+        /*    border: 1px solid #aaa;*/
+        /*    border-radius: 50%;*/
+        /*}*/
+
+        /*input[type="radio"]:checked + label:before {*/
+        /*    content: "";*/
+        /*    display: inline-block;*/
+        /*    width: 14px;*/
+        /*    height: 14px;*/
+        /*    margin-right: 5px;*/
+        /*    background-color: #4CAF50;*/
+        /*    border: none;*/
+        /*    border-radius: 50%;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<header>
+    <th:block th:insert="~{header.html}"></th:block>
+</header>
+<section class="filler_style">
+    <form th:action="@{hGymFilterList}" method="post">
+        <br>
+        <h3>종류</h3><br>
+        <div class="checkdiv1">
+            <input type="radio" id="pay-type1" name="ggoodsname" value="일일권">
+            <label for="pay-type1">일일권</label>
+            <input type="radio" id="pay-type2" name="ggoodsname" value="회원권">
+            <label for="pay-type2">회원권</label>
+        </div>
+        <br><br>
+        <h3>트레이너</h3><br>
+        <div class="checkdiv1">
+            <input type="radio" id="gender-type1" name="mgender" value="남">
+            <label for="gender-type1">남자</label>
+            <input type="radio" id="gender-type2" name="mgender" value="여">
+            <label for="gender-type2">여자</label>
+        </div>
+        <br><br>
+        <h3>시설 및 기구</h3>
+        <div class="checkdiv">
+            <h3>편의시설</h3>
+            <input type="checkbox" name="used" value="0" th:checked="true" style="display: none">
+            <input type="checkbox" id="gc_cloths" name="used" value="1" th:checked="false">
+            <label for="gc_cloths">운동복</label>
+            <input type="checkbox" id="gc_towel" name="used" value="2" th:checked="false">
+            <label for="gc_towel">수건</label>
+            <input type="checkbox" id="gc_wifi" name="used" value="3" th:checked="false">
+            <label for="gc_wifi">와이파이</label>
+            <input type="checkbox" id="gc_parking" name="used" value="4" th:checked="false">
+            <label for="gc_parking">주차장</label>
+            <input type="checkbox" id="gc_inbody" name="used" value="5" th:checked="false">
+            <label for="gc_inbody">체형분석</label>
+            <input type="checkbox" id="gc_sauna" name="used" value="6" th:checked="false">
+            <label for="gc_sauna">사우나</label><br><br>
+        </div>
+        <br>
+        <div class="checkdiv">
+            <h3>기구</h3>
+            <input type="checkbox" id="gm_latpull" name="used" value="7" th:checked="false">
+            <label for="gm_latpull">렛풀다운</label>
+            <input type="checkbox" id="gm_shoulderpress" name="used" value="8" th:checked="false">
+            <label for="gm_shoulderpress">숄더프레스</label>
+            <input type="checkbox" id="gm_citydraw" name="used" value="9" th:checked="false">
+            <label for="gm_citydraw">시티드로우</label>
+            <input type="checkbox" id="gm_legpress" name="used" value="10" th:checked="false">
+            <label for="gm_legpress">레그프레스</label>
+            <br><br>
+            <input type="checkbox" id="gm_smithmachine" name="used" value="11" th:checked="false">
+            <label for="gm_smithmachine">스미스머신</label>
+            <input type="checkbox" id="gm_lyinglegcurl" name="used" value="12" th:checked="false">
+            <label for="gm_lyinglegcurl">라잉레그컬</label>
+            <input type="checkbox" id="gm_chestfly" name="used" value="13" th:checked="false">
+            <label for="gm_chestfly">체스트플라이</label>
+            <input type="checkbox" id="gm_hyperextension" name="used" value="14" th:checked="false">
+            <label for="gm_hyperextension">하이퍼익스텐션</label><br><br>
+        </div>
+        <br><br>
+        <input type="submit" value="적용하기">
+    </form>
+
+</section>
+<footer>
+    <th:block th:insert="~{footer.html}"></th:block>
+</footer>
+</body>
+<script th:inline="javascript">
+    var checklist = [];
+    $("used:checked").each(function (){
+        checklist.push($(this).val())
+    });
+
+    $("inused:checked").each(function(index, value){
+        checklist.push(value);
+    });
+    console.log(checklist);
+</script>
+</html>

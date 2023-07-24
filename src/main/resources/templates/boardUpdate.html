@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="js/jquery-3.7.0.min.js"></script>
+    <script th:inline="javascript">
+        $(function () {
+            let m = [[${msg}]]; // msg가 없으면 null
+            if (m != null) {
+                alert(m);
+            }
+        });
+    </script>
+    <style>
+        .content-board{
+            margin-top: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 70px;
+            min-width: 1000px !important;
+            width: 60%;
+            padding: 20px 30px;
+        }
+
+        .card {
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-header {
+            border-radius: 5px 5px 0 0;
+            color: #0061F2;
+            font-weight: 500;
+            border: 1px solid #2c7fdf;
+            padding: 20px 30px;
+        }
+
+        .card-body {
+            border-right: 1px solid #c5ccd6;
+            border-left: 1px solid #c5ccd6;
+            border-bottom: 1px solid #c5ccd6;
+            border-radius: 0 0 5px 5px;
+            font-weight: 500;
+            padding: 20px 30px;
+        }
+
+        .mb-3 {
+            width: 100%;
+            margin-bottom: 5px;
+            color: #505152;
+
+        }
+
+        .write-input{
+            margin-top: 10px;
+            box-sizing: border-box;
+            width: 100%;
+            padding: 0.875rem 1.125rem;
+            border: 1px solid #c5ccd6;
+            border-radius: 0.35rem;
+            font-weight: 400;
+            color: #69707a;
+        }
+
+        .btn-write{
+            display: inline-flex;
+            text-align: center;
+            justify-content: center;
+            width: 85px;
+            padding: 10px 16px;
+            font-size: 16px;
+            line-height: 1.5;
+            border-radius: 6px;
+            color: #fff;
+            background-color: #0061F2;
+            border-color: #2c7fdf;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>boardDetail</title>
+</head>
+<body>
+<header>
+    <th:block th:if="${session.gym} == null">
+        <th:block th:insert="~{header.html}"></th:block>
+    </th:block>
+    <th:block th:unless="${session.gym} == null">
+        <th:block th:insert="~{headerGym.html}"></th:block>
+    </th:block>
+</header>
+<section>
+    <div class="content-board">
+        <div class="card">
+            <div class="card-header">글수정</div>
+            <div class="card-body">
+                <form th:action="@{bUpdate}" method="post" class="write-form" th:object="${bdetail}">
+                    <div class="mb-3">
+                        <input type="hidden" name="boardnum" th:value="*{boardnum}">
+                        <label class="small mb-1" for="title">제목</label>
+                        <input type="text" class="write-input" name="boardtitle" id="title" autofocus
+                               th:value="*{boardtitle}" placeholder="제목 입력" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="small mb-1" for="contents">내용</label>
+                        <textarea rows="13" class="write-input ta" name="boardcontents" id="contents"
+                                  th:text="*{boardcontents}" placeholder="내용 입력"></textarea>
+                    </div>
+                    <div class="btn-area">
+                        <input type="submit" class="btn-write" value="글수정">
+                        <input type="reset" class="btn-write" value="초기화">
+                        <input type="button" class="btn-write" value="뒤로가기" id="backbtn">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<footer>
+    <th:block th:insert="~{footer.html}"></th:block>
+</footer>
+<script th:inline="javascript">
+    $("#backbtn").click(function () {
+        console.log("#backbtn");
+        location.href = "boardDetail?boardnum=" + [[${bdetail.boardnum}]];
+    });
+</script>
+</body>
+</html>

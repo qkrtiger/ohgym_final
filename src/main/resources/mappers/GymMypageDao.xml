@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.ohgym.dao.GymMypageDao">
+
+
+    <insert id="insertgGoodsSave" parameterType="GymGoodsDto" useGeneratedKeys="true" keyProperty="ggoodsnum">
+<!--        <selectKey keyProperty="ggoodsnum" resultType="Integer" order="AFTER">-->
+<!--            select last_insert_id()-->
+<!--        </selectKey>-->
+        insert into gymgoods (ggoodsnum, ggoodsname, ggoodsprice, ggoodsaction, ggoodsadd, ggoodsperiod, gymnum)
+        values (null, #{ggoodsname}, #{ggoodsprice}, 1, #{ggoodsadd}, #{ggoodsperiod}, #{gymnum})
+    </insert>
+
+
+    <update id="gImage" parameterType="GymDto">
+        update gym
+        set goriname=#{goriname}, gsysname=#{gsysname}
+        where gymnum=1;
+    </update>
+    <update id="updateAddData" parameterType="trainerDto">
+        update gym
+        set gphone=#{gphone}, glocation=#{glocation}, gdescription=#{gdescription}, gnotice=#{gnotice},
+            gaddservfree=#{gaddservfree}, gaddservpay=#{gaddservpay}, goperation=#{goperation}, gsysname=#{gsysname}, goriname=#{goriname}
+        where gymnum=#{gymnum}
+    </update>
+
+    <update id="deleteGymTrainer" parameterType="Integer">
+        update member
+        set gymnum=null
+        where membernum=#{membernum}
+    </update>
+    <update id="updateGymMachine" parameterType="GymMachineDto">
+        update gymmachine
+        set gm_latpull=#{gm_latpull}, gm_shoulderpress=#{gm_shoulderpress}, gm_citydraw=#{gm_citydraw}, gm_legpress=#{gm_legpress},
+            gm_smithmachine=#{gm_smithmachine},gm_lyinglegcurl=#{gm_lyinglegcurl},gm_chestfly=#{gm_chestfly}, gm_hyperextension=#{gm_hyperextension}
+        where gymnum=#{gymnum}
+    </update>
+    <update id="updateGymConvenient" parameterType="GymConvenientDto">
+        update GymConvenient
+        set gc_cloths=#{gc_cloths}, gc_towel=#{gc_towel},gc_wifi=#{gc_wifi}, gc_parking=#{gc_parking}, gc_inbody=#{gc_inbody}, gc_sauna=#{gc_sauna}
+        where gymnum=#{gymnum}
+    </update>
+    <update id="gGoodsOnOff" parameterType="GymGoodsDto">
+        UPDATE gymgoods
+        SET ggoodsaction = CASE
+                               WHEN ggoodsaction = 0 THEN 1
+                               ELSE 0
+            END
+        WHERE ggoodsnum = #{ggoodsnum};
+    </update>
+
+
+    <delete id="gMGoodsDelete" parameterType="Integer">
+        delete from gymgoods where ggoodsnum in (#{ggoodsnum});
+    </delete>
+
+
+    <select id="selectGym" resultType="GymDto" parameterType="integer">
+        select * from gym where gymnum=#{gymnum}
+    </select>
+    <select id="numCheck" resultType="int" parameterType="int">
+        SELECT count(*) FROM gym WHERE gymnum=#{gymnum}
+    </select>
+    <select id="selectGymnumCk" resultType="int" parameterType="integer">
+        select gymnum from gym where gymnum=#{gymnum};
+    </select>
+    <select id="selectPass" resultType="java.lang.String" parameterType="String">
+        select gpass from gym where gid=#{gid}
+    </select>
+
+    <select id="gymGoods" resultType="gymGoodsDto" parameterType="integer">
+        select * from gymgoods where gymnum=#{gymnum}
+    </select>
+    <select id="gmcCheck" resultType="GymCmDto" parameterType="integer">
+        select * from gymcm where  gymnum=#{gymnum}
+    </select>
+    <select id="selectTraomer" resultType="GymMemberDto" parameterType="integer">
+        select * from gymmember where gymnum=#{gymnum}
+    </select>
+    <select id="selectGmList" resultType="GymMemberDto" parameterType="integer">
+        select * from gymmember where gymnum=#{gymnum}
+    </select>
+    <select id="GetgMypayList" resultType="MPayDto" parameterType="SearchDto">
+        SELECT mpay.*, member.mname
+        FROM mpay
+                 INNER JOIN member ON member.membernum = mpay.membernum
+        WHERE mpay.gymnum = #{gymnum}
+            LIMIT #{pageNum}, #{listCnt}
+    </select>
+    <select id="selectedgMpay" resultType="MPayDto" parameterType="SearchDto">
+        SELECT mpay.*, member.mname
+        FROM mpay
+                 INNER JOIN member ON member.membernum = mpay.membernum
+        WHERE mpay.gymnum = #{gymnum} and mpaynum like concat(#{mpayType},'%')
+            LIMIT #{pageNum}, #{listCnt}
+    </select>
+    <select id="selectgPay" resultType="GymDto" parameterType="SearchDto">
+        select * from gym where gymnum=#{gymnum}
+    </select>
+    <select id="selectgMPayCnt" resultType="Integer">
+        select count(*) from mpay
+        where gymnum = #{gymnum}
+    </select>
+    <select id="selectgMpayCount" resultType="Integer">
+        select count(*) from mpay
+        where gymnum = #{gymnum} and mpaynum like concat(#{mpayType},'%')
+    </select>
+    <select id="GetgymGoods" resultType="GymGoodsDto" parameterType="Integer">
+        select * from gymgoods where gymnum=#{gymnum}
+    </select>
+    <select id="selectGGoods" resultType="GymGoodsDto">
+        select * from gymgoods where ggoodsnum = #{ggoodsnum}
+    </select>
+</mapper>

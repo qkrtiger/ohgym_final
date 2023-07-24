@@ -1,0 +1,84 @@
+/* content_1 스타일링 */
+.content_1 {
+    position: relative;
+    align-items: center;
+    padding: 20px;
+    margin: 20px;
+}
+
+.content_1 img {
+    width: 100%;
+    height: 700px;
+    vertical-align: middle;
+    align-items: center;
+}
+
+.content_11{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.content_1 h2 {
+    margin-top: 20px;
+    font-size: 36px;
+    font-weight: bold;
+    color: white;
+}
+
+.content_1 p {
+    margin-top: 10px;
+    font-size: 24px;
+    color: white;
+}
+
+/* content_2 스타일링 */
+.content_2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 300px auto;
+}
+
+.content_2 p {
+    margin-top: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+/* content_3 스타일링 */
+.content_3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.content_3 img {
+    margin: 0px;
+    padding: 0px;
+    width: 50%;
+    height: 500px;
+}
+
+/* content_4 스타일링 */
+.content_4 {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin: 200px 50px 0 50px;
+}
+
+.content_4 p {
+    text-align: right;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #666;
+}

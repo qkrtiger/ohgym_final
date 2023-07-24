@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>memberMypage</title>
+  <link rel="stylesheet" th:href="@{css/mypage.css}">
+  <script th:src="@{js/popup.js}" defer></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="sidebar" class="sidebar">
+  <div class="user-image">
+    <th:block th:if="${member.msysname} == null">
+      <img th:onclick="|openPopup(2)|"
+           th:src="@{images/bbbbb.jpg}" height="100" width="100">
+    </th:block>
+    <th:block th:unless="${member.msysname} == null">
+      <img th:onclick="|openPopup(2)|"
+           th:src="@{upload/} + ${member.msysname}" height="100" width="100">
+    </th:block>
+  </div>
+  <ul class="sidebar-menu">
+    <li><a th:href="@{memberMypage(membernum=${member.membernum})}" class="menu-item">내 정보</a></li>
+    <li><a th:href="@{wishList(membernum=${member.membernum})}" class="menu-item">찜목록</a></li>
+    <li><a th:href="@{myPayList(membernum=${member.membernum},pageNum=1)}" class="menu-item">결제내역</a></li>
+    <li><a th:href="@{faq}" class="menu-item">FAQ</a></li>
+    <li><a th:onclick="openTrainer(2)" class="menu-item">트레이너 등록</a></li>
+  </ul>
+  <button th:onclick="openInfo(2)" class="edit-info-button">정보수정</button>
+</div>
+<div id="content" class="content">
+  <h2 class="info-title">결제내역</h2>
+  <p style="display: none" th:text="${payType}"></p>
+  <select id="sel">
+    <th:block th:if="${payType == null}">
+      <option value="all" selected>전체</option>
+      <option value="membership">회원권</option>
+      <option value="daily">일일권</option>
+      <option value="pt">PT</option>
+    </th:block>
+    <th:block th:unless="${payType == null}">
+      <th:block th:switch="${payType}">
+        <th:block th:case="gpay">
+          <option value="all">전체</option>
+          <option value="membership" selected>회원권</option>
+          <option value="daily">일일권</option>
+          <option value="pt">PT</option>
+        </th:block>
+        <th:block th:case="dgpay">
+          <option value="all">전체</option>
+          <option value="membership">회원권</option>
+          <option value="daily" selected>일일권</option>
+          <option value="pt">PT</option>
+        </th:block>
+        <th:block th:case="tpay">
+          <option value="all">전체</option>
+          <option value="membership">회원권</option>
+          <option value="daily">일일권</option>
+          <option value="pt" selected>PT</option>
+        </th:block>
+      </th:block>
+    </th:block>
+  </select>
+  <table style="width: 100%", id="mtable">
+  <tbody>
+  <thead>
+  <tr>
+    <th>결제일</th>
+    <th>헬스장</th>
+    <th>이용기간</th>
+    <th>가격</th>
+    <th>후기</th>
+  </tr>
+  </thead>
+  <tbody id="tb">
+    <div th:unless="${#lists.isEmpty(mPList)}">
+      <tr th:each=" MPitem: ${mPList}">
+        <td th:text="${MPitem.mpaydate}"></td>
+        <td th:text="${MPitem.mpaygym}"></td>
+        <td th:text="${MPitem.mpayperiod}"></td>
+        <td th:text="${#numbers.formatInteger(MPitem.mpayprice, 3, 'COMMA') + '원'}"></td>
+        <td><a th:href="@{gymReview(mpaynum=${MPitem.mpaynum})}">후기등록</a></td>
+      </tr>
+    </div>
+    <div th:if="${#lists.isEmpty(mPList)}">
+      <td colspan="5">결제 내역이 없습니다.</td>
+    </div>
+  </tbody>
+  </table>
+</div>
+<div class="paging-area">
+  <div class="paging" th:utext="${paging}"></div>
+</div>
+</body>
+<script th:inline="javascript">
+  //검색기능
+  $("#sel").change(function () {
+    let select = $("#sel").val();
+    console.log(select); //daily, membership, pt
+
+    let mpayType = "";
+    if (select === "daily") {
+      mpayType = "dgpay";
+    } else if (select === "membership") {
+      mpayType = "gpay";
+    } else if (select === "pt") {
+      mpayType = "tpay";
+    }
+
+    sendObj = { "mpayType": mpayType,
+      "membernum": [[${member.membernum}]],
+      "pageNum": 1
+    };
+    console.log(sendObj);
+
+    //controller에 전송(ajax)
+    $.ajax({
+      url: "myPayList",
+      type: "post",
+      data: JSON.stringify(sendObj),
+      contentType: "application/json",
+      success: function (res) {
+        let mPList = res.mPList;
+        console.log(mPList);
+        let paging = res.paging;
+        console.log(paging);
+        $(".paging").html(paging);
+
+        if (res != null && mPList.length != 0) {
+          // 서버에서 받은 데이터를 처리하고 출력하는 로직을 여기에 작성
+          // 예시: 테이블의 tbody에 결과 데이터를 추가하는 방식으로 출력
+          var tbody = $("#tb");
+          console.log(tbody);
+          tbody.empty(); // 기존 데이터 삭제
+          for (var i = 0; i < mPList.length; i++) {
+            var mpayItem = mPList[i];
+            var mpaynum = mpayItem.mpaynum;
+            var row = "<tr>" +
+                    "<td>" + mpayItem.mpaydate + "</td>" +
+                    "<td>" + mpayItem.mpaygym + "</td>" +
+                    "<td>" + mpayItem.mpayperiod + "</td>" +
+                    "<td>" + mpayItem.mpayprice.toLocaleString('ko-KR') + '원' + "</td>" +
+                    "<td><a href='gymReview?mpaynum="+ mpaynum +"'>후기등록</a></td>" +
+                    "</tr>";
+            tbody.append(row);
+          }
+        } else {
+          var tbody = $("#tb");
+          tbody.empty(); // 기존 데이터 삭제
+          var row = "<tr>" +
+                  "<td>" + "결제 내역이 없습니다." + "</td>" +
+                  "</tr>";
+          tbody.append(row);
+        }
+
+      },
+      error: function (err) {
+        console.log(err);
+        alert("오류가 발생했습니다.");
+      }
+    });
+  });
+</script>
+</html>
+

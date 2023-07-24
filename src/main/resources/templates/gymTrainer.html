@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>gymTrainer</title>
+  <link rel="stylesheet" th:href="@{css/mypage.css}">
+  <script th:src="@{js/popup.js}" defer></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+</head>
+<body>
+<header class="header">
+  <th:block th:if="${gym} == null">
+    <th:block th:insert="~{header.html}"></th:block>
+  </th:block>
+  <th:block th:unless="${gym} == null">
+    <th:block th:insert="~{headerGym.html}"></th:block>
+  </th:block>
+</header>
+<div>
+  <div id="sidebar" class="sidebar">
+    <div class="user-image">
+      <th:block th:if="${gym.gsysname} == null">
+        <img th:onclick="|openGymPopup(gymnum=${gym.gymnum})|"
+             th:src="@{images/bbbbb.jpg}" height="100" width="100">
+      </th:block>
+      <th:block th:unless="${gym.gsysname} == null">
+        <img th:onclick="|openGymPopup(gymnum=${gym.gymnum})|"
+             th:src="@{upload/} + ${gym.gsysname}" height="100" width="100">
+      </th:block>
+    </div>
+    <ul class="sidebar-menu">
+      <li><a th:href="@{gymMypage(gymnum=${gym.gymnum})}" class="menu-item">헬스장 정보</a></li>
+      <li><a th:href="@{gAdditionInfo(gymnum=${gym.gymnum})}" class="menu-item">추가 정보</a></li>
+      <li><a th:href="@{gymTrainer(gymnum=${gym.gymnum})}" class="menu-item">트레이너 관리</a></li>
+      <li><a th:href="@{gMypayList(gymnum=${gym.gymnum},pageNum=1)}" class="menu-item">결제 내역</a></li>
+      <li><a th:href="@{gymGoods(gymnum=${gym.gymnum})}" class="menu-item">상품 관리</a></li>
+      <li><a th:href="@{faq}" class="menu-item">FAQ</a></li>
+    </ul>
+  </div>
+  <div id="content" class="content" style="margin-top: 200px">
+    <h2 class="info-title">트레이너 관리</h2>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>이름</th>
+            <th>아이디</th>
+            <th>생년월일</th>
+            <th>휴대전화</th>
+            <th>성별</th>
+            <th>삭제</th>
+          </tr>
+        </thead>
+        <tbody>
+          <div th:unless="${#lists.isEmpty(trains)}">
+            <tr th:each="trainer: ${trains}">
+              <td th:text="${trainer.membernum}">No.</td>
+              <td th:text="${trainer.mname}">이름</td>
+              <td th:text="${trainer.mid}">아이디</td>
+              <td th:text="${trainer.mbirth}">생년월일</td>
+              <td th:text="${trainer.mphone}">휴대전화</td>
+              <td th:text="${trainer.mgender}">성별</td>
+              <td><input type="button" value="삭제" th:onclick="|delCheck(${trainer.membernum})|"></td>
+            </tr>
+          </div>
+          <div th:if="${#lists.isEmpty(trains)}">
+            <td colspan="6">트레이너 내역이 없습니다.</td>
+          </div>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+<script th:inline="javascript">
+    $(function () {
+    let m = [[${msg}]];//msg가 없으면 null.
+    if(m != null){
+    alert(m);
+  }
+  });
+
+  $(function() {
+    var count = 0; // 파일이 추가된 횟수
+    $('input[type=file]').change(function() {
+      count++; // 파일 추가 횟수 증가
+      var table = $('#myTable');
+      // 새로운 행 추가
+      var newRow = $('<tr>').appendTo(table);
+      $('<td>').appendTo(newRow).text();
+      $('<td>').appendTo(newRow).text();
+      $('<td>').appendTo(newRow).text();
+      $('<td>').appendTo(newRow).text();
+      $('<td>').appendTo(newRow).text();
+      $('<td>').appendTo(newRow).text();
+    });
+  });
+
+  function delCheck(membernum){
+    let conf = confirm("삭제하겠습니까?")
+    if(conf == true){
+      location.href = "/delete?membernum=" + membernum + "&gymnum=" + [[${gym.gymnum}]];
+    }
+  }
+</script>
+</html>

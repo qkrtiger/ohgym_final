@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>헬스장 아이디 찾기</title>
+    <link rel="stylesheet" th:href="@{css/join.css}">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script th:inline="javascript">
+      $(function (){
+        let m = [[${msg}]]; //msg가 없으면 null.
+        if (m != null){
+          alert(m);
+        }
+      });
+    </script>
+</head>
+<body>
+
+<div class="wrap">
+    <form th:action="findGymProc" method="post" class="login-form" name="jForm" onsubmit="return check()">
+      <h2 class="login-header">내 계정 찾기</h2>
+      <p style="text-align: center">헬스장정보에 등록한 사업자등록번호로 인증</p>
+      <input type="text" class="login-input" id="gname" name="gname" title="헬스장 이름" placeholder="헬스장 이름"  autofocus>
+      <input type="text" class="login-input" id="gregistnum" name="gregistnum" title="사업자 등록번호" placeholder="사업자 등록번호">
+      <input type="submit" class="login-btn" value="다음">
+    </form>
+</div>
+
+</body>
+
+<script th:inline="javascript">
+    let nkNAME = RegExp(/^[가-힣]+$/) ; //한글만
+    let gkREG = RegExp(/^[0-9]*$/); //숫자만
+
+    //중복확인이 되었고, 모든 입력이 된 다음에 전송하도록 하는 함수 check() (+ onsubmit 속성)
+    function check(){
+
+        let gname = $("#gname").val();
+
+        //이름 확인 and 유효성 검사
+        if (gname == ""){
+            alert("헬스장 이름을 입력하세요.")
+            return false;
+        } else if (!nkNAME.test(gname)){
+            alert("이름 형식에 맞게 입력해주세요");
+            return false;
+        }
+
+        let gregistnum = $("#gregistnum").val();
+
+        //사업자등록번호 확인 and 유효성 검사
+        if (gregistnum == ""){
+            alert("사업자 등록번호를 입력하세요.")
+            return false;
+        } else if(!gkREG.test(gregistnum)){
+            alert("사업자 등록번호 형식에 맞게 입력해주세요.")
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+</html>

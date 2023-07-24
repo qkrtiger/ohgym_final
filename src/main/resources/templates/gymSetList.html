@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="js/jquery-3.7.0.min.js"></script>
+    <meta charset="UTF-8">
+    <title>gymList</title>
+    <style>
+
+        .nav-bar, hr {
+            width: 70%;
+            margin: auto;
+        }
+
+        .first-bar {
+            display: flex;
+            width: 100%;
+            justify-content: flex-start;
+        }
+
+        #mapimg {
+            width: 35px;
+            height: 35px;
+            margin-top: 19px;
+            margin-left: auto;
+            padding-right: 10px;;
+        }
+
+        button {
+            width: 10%;
+            height: 35px;
+            margin-top: 19px;
+            padding: 5px;
+            background-color: #ffffff;
+            border: 1px solid #5467F5;
+            border-radius: 10px;
+            color: #5467F5;
+        }
+
+        #searchimg {
+            width: 25px;
+            /*top: 30px;*/
+            /*right: 1px;*/
+            /*margin: 0;*/
+        }
+
+
+        .card-img-top {
+         width: 20px;
+        }
+
+        input {
+            width: 30%;
+            border: 1px solid #bbb;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+<header>
+    <th:block th:insert="~{header.html}"></th:block>
+</header>
+<section style="margin-top: 200px">
+    <div class="nav-bar">
+    <h1>맞춤검색결과</h1>
+    <div id="result">
+        <th:block th:if="${#lists.isEmpty(fList)}">
+            등록된 헬스장이 없습니다.
+        </th:block>
+        <th:block th:unless="${#lists.isEmpty(fList)}">
+            <th:block th:each="fitem:${fList}">
+                <div class="card" style="width: 18rem;">
+                    <th:block th:if="${fitem.gsysname} == null">
+                        <img th:src="@{images/no_image.jpg}" class="card-img-top" alt="...">
+                    </th:block>
+                    <th:block th:unless="${fitem.gsysname} == null">
+                        <img th:src="@{upload/}+${fitem.gsysname}" class="card-img-top" alt="...">
+                    </th:block>
+                    <div class="card-body">
+                        <a th:href="@{gymPage(gymnum=${fitem.gymnum})}" th:text="${fitem.gname}"></a>
+                        <p th:text="${fitem.glocation}"></p>
+                    </div>
+                </div>
+            </th:block>
+        </th:block>
+    </div>
+</section>
+<footer>
+    <th:block th:insert="~{footer.html}"></th:block>
+</footer>
+</body>
+
+<script th:inline="javascript">
+
+</script>
+</html>

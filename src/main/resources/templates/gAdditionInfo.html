@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>tAdditionInfo</title>
+  <script th:src="@{js/popup.js}" defer></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+</head>
+<style>
+  /*폰트*/
+  @font-face {
+    font-family: "SpoqaHanSansNeo";
+    src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.woff2") format('woff2'), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.woff") format("woff"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.eot") format("embedded-opentype"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.eot?#iefix") format("embedded-opentype");
+    unicode-range: U+000-5FF, U+AC00-D7AF;
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap
+  }
+
+  @font-face {
+    font-family: "SpoqaHanSansNeo";
+    src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.woff2") format('woff2'), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.woff") format("woff"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.eot") format("embedded-opentype"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.eot?#iefix") format("embedded-opentype");
+    unicode-range: U+000-5FF, U+AC00-D7AF;
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap
+  }
+
+  @font-face {
+    font-family: "SpoqaHanSansNeo";
+    src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.woff2") format('woff2'), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.woff") format("woff"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.eot") format("embedded-opentype"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.eot?#iefix") format("embedded-opentype");
+    unicode-range: U+000-5FF, U+AC00-D7AF;
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap
+  }
+
+  @font-face {
+    font-family: "SpoqaHanSansNeo";
+    src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.woff2") format('woff2'), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.woff") format("woff"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.eot") format("embedded-opentype"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.eot?#iefix") format("embedded-opentype");
+    unicode-range: U+000-5FF, U+AC00-D7AF;
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap
+  }
+
+  @font-face {
+    font-family: "SpoqaHanSansNeo";
+    src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.woff2") format('woff2'), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.woff") format("woff"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.eot") format("embedded-opentype"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.eot?#iefix") format("embedded-opentype");
+    unicode-range: U+000-5FF, U+AC00-D7AF;
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    /*box-sizing: border-box;*/
+  }
+
+  .renewal * {
+    font-family: "Inter", "SpoqaHanSansNeo", "notokr", "Malgun Gothic", Dotum, Helvetica, "Apple SD Gothic Neo", Sans-serif;
+  }
+
+  .entire {
+    margin: 0 auto;
+    margin-top: 200px;
+    width: 80%;
+    min-width: 600px;
+  }
+
+  .content-b {
+    display: flex;
+    min-width: 600px;
+  }
+
+  .content-t {
+    margin: 35px 0;
+    margin-bottom: 50px;
+    width: 80%;
+    max-resolution: 40px 0;
+  }
+
+  h2.info-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .info-row {
+    margin: 30px 0;
+    border-bottom: 1.5px solid grey;
+    width: 85%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .info-label {
+    font-weight: bold;
+    font-size: 20px;
+    width: 150px;
+    display: inline-block;
+  }
+
+  .intext {
+    font-size: 1.2rem;
+    border: none;
+    width: 70%;
+  }
+
+  .imgbox {
+    margin: 30px 0;
+    /*border: 1px solid grey;*/
+  }
+
+  .img-title {
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+
+  .image {
+    max-width: 300px;
+    margin: 20px;
+  }
+
+  .noimg {
+    width: 300px;
+    height: 350px;
+  }
+
+  .imgdiv {
+    width: 350px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  table {
+    margin-top: 40px;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th,
+  td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  tr:hover {
+    background-color: #f5f5f5;
+  }
+
+  input[type=submit], input[type=button] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  input[type=submit]:hover,
+  input[type=button]:hover {
+    background-color: #45a049;
+  }
+
+  .btn {
+    margin: 50px 20px;
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  .check.active {
+    background-color: #e8e8e8;
+  }
+
+  .check {
+    background-color: #50C878;
+  }
+
+  .check-title1 {
+    font-size: 1.5rem;
+    margin-left: 20px;
+  }
+
+
+  .check-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    margin-left: 20px;
+  }
+
+  .check-entire {
+    margin: 20px;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .checkdiv {
+    margin-bottom: 30px;
+    border: 1px solid;
+  }
+
+  .checkdiv label {
+    margin-right: 10px;
+  }
+
+  /* 편의시설 부분 통으로 묶기 */
+  .checkdiv:first-of-type {
+    margin-bottom: 50px;
+  }
+
+  .checkdiv input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .checkdiv label {
+    display: inline-block;
+    /*background-color: #e8e8e8;*/
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+</style>
+</head>
+<body class="renewal">
+<header class="header">
+  <th:block th:insert="~{headerGym.html}"></th:block>
+</header>
+<div class="entire">
+  <form th:action="gAddInfoMo" method="get" enctype="multipart/form-data">
+    <input type="hidden" name="gymnum" th:value="${gym.gymnum}">
+    <div>
+      <div id="content" class="content">
+        <h2 class="info-title">추가 정보</h2>
+        <div class="content-b">
+          <div class="imgbox">
+            <div th:if="${gym.gsysname} == null">
+              <h3 class="noimg">등록된 이미지가 없습니다</h3>
+            </div>
+            <div th:unless="${gym.gsysname} == null" class="imgdiv">
+              <img th:src="@{upload/} + ${gym.gsysname}" class="image">
+            </div>
+          </div>
+          <div class="content-t">
+            <div class="info-row">
+              <span class="info-label">헬스장 이름:</span>
+              <input type="text" class="intext" th:value="${gym.gname}" readonly>
+            </div>
+            <div class="info-row">
+              <span class="info-label">사업자등록번호:</span>
+              <input type="text" class="intext" th:value="${gym.gregistnum}" readonly>
+            </div>
+            <div class="info-row">
+              <span class="info-label">담당자 아룸:</span>
+              <input type="text" class="intext" th:value="${gym.gid}" readonly>
+            </div>
+            <div class="info-row">
+              <span class="info-label">담당자 전화번호:</span>
+              <input type="text" class="intext" th:value="${gym.gphone}" readonly>
+            </div>
+            <div class="info-row">
+              <span class="info-label">위치:</span>
+              <input type="text" class="intext" th:value="${gym.glocation}" readonly>
+            </div>
+            <div class="info-row">
+              <span class="info-label">내용:</span>
+              <input type="text" class="intext" th:value="${gym.gdescription}" readonly>
+            </div>
+            <div class="info-row">
+              <span class="info-label">공지사항:</span>
+              <input type="text" class="intext" th:value="${gym.gnotice}" readonly>
+            </div>
+            <div class="info-row">
+              <span class="info-label">부가서비스 무료:</span>
+              <input type="text" class="intext" th:value="${gym.gaddservfree}" readonly>
+            </div>
+            <div class="info-row">
+              <span class="info-label">부가서비스 유료:</span>
+              <input type="text" class="intext" th:value="${gym.gaddservpay}" readonly>
+            </div>
+            <div class="info-row">
+              <span class="info-label">운영시간:</span>
+              <input type="text" class="intext" th:value="${gym.goperation}" readonly>
+            </div>
+          </div>
+        </div>
+        <h3 class="check-title1">시설 및 기구</h3>
+        <h3 class="check-title">편의시설</h3>
+        <div class="checkdiv">
+          <div class="check-entire">
+            <input type="checkbox" id="gc_cloths" name="used" th:value="${gmc.gc_cloths}" disabled>
+            <label for="gc_cloths" class="check" th:classappend="${gmc.gc_cloths == false} ? 'active'">운동복</label>
+            <input type="checkbox" id="gc_towel" name="used" th:value="${gmc.gc_towel}" disabled>
+            <label for="gc_towel" class="check" th:classappend="${gmc.gc_towel == false} ? 'active'">수건</label>
+            <input type="checkbox" id="gc_wifi" name="used" th:value="${gmc.gc_wifi}" disabled>
+            <label for="gc_wifi" class="check" th:classappend="${gmc.gc_wifi == false} ? 'active'">와이파이</label>
+            <input type="checkbox" id="gc_parking" name="used" th:value="${gmc.gc_parking}" disabled>
+            <label for="gc_parking" class="check" th:classappend="${gmc.gc_parking == false} ? 'active'">주차장</label>
+            <input type="checkbox" id="gc_inbody" name="used" th:value="${gmc.gc_inbody}" disabled>
+            <label for="gc_inbody" class="check" th:classappend="${gmc.gc_inbody == false} ? 'active'">체형분석</label>
+            <input type="checkbox" id="gc_sauna" name="used" th:value="${gmc.gc_sauna}" disabled>
+            <label for="gc_sauna" class="check" th:classappend="${gmc.gc_sauna == false} ? 'active'">사우나</label>
+          </div>
+        </div>
+        <br>
+        <h3 class="check-title">기구</h3>
+        <div class="checkdiv">
+          <div class="check-entire">
+            <input type="checkbox" id="gm_latpull" name="used" th:value="${gmc.gm_latpull}" disabled>
+            <label for="gm_latpull" class="check" th:classappend="${gmc.gm_latpull == false} ? 'active'">렛풀다운</label>
+            <input type="checkbox" id="gm_shoulderpress" class="check" name="used" th:value="${gmc.gm_shoulderpress}" disabled>
+            <label for="gm_shoulderpress" class="check" th:classappend="${gmc.gm_shoulderpress == false} ? 'active'">숄더프레스</label>
+            <input type="checkbox" id="gm_citydraw" name="used" th:value="${gmc.gm_citydraw}" disabled>
+            <label for="gm_citydraw" class="check" th:classappend="${gmc.gm_citydraw == false} ? 'active'">시티드로우</label>
+            <input type="checkbox" id="gm_legpress" name="used" th:value="${gmc.gm_legpress}" disabled>
+            <label for="gm_legpress" class="check" th:classappend="${gmc.gm_legpress == false} ? 'active'">레그프레스</label>
+            <input type="checkbox" id="gm_smithmachine" name="used" th:value="${gmc.gm_smithmachine}" disabled>
+            <label for="gm_smithmachine" class="check" th:classappend="${gmc.gm_smithmachine == false} ? 'active'">스미스머신</label>
+            <input type="checkbox" id="gm_lyinglegcurl" name="used" th:value="${gmc.gm_lyinglegcurl}" disabled>
+            <label for="gm_lyinglegcurl" class="check" th:classappend="${gmc.gm_lyinglegcurl == false} ? 'active'">라잉레그컬</label>
+            <input type="checkbox" id="gm_chestfly" name="used" th:value="${gmc.gm_chestfly}" disabled>
+            <label for="gm_chestfly" class="check" th:classappend="${gmc.gm_chestfly == false} ? 'active'">체스트플라이</label>
+            <input type="checkbox" id="gm_hyperextension" name="used" th:value="${gmc.gm_hyperextension}" disabled>
+            <label for="gm_hyperextension" class="check" th:classappend="${gmc.gm_hyperextension == false} ? 'active'">하이퍼익스텐션</label><br><br>
+          </div>
+        </div>
+        <div>
+          <table id="myTable">
+            <thead>
+            <tr>
+              <th>No.</th>
+              <th>상품명</th>
+              <th>결제금액</th>
+              <th>추가사항</th>
+              <th>기간</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${ggList}">
+              <td th:text="${item.ggoodsnum}">No.</td>
+              <td th:text="${item.ggoodsname}">상품명</td>
+              <td th:text="${item.ggoodsprice}">가격</td>
+              <td th:text="${item.ggoodsadd}">추가사항</td>
+              <td th:text="${item.ggoodsperiod}">기간</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="btn">
+          <input type="submit" value="수정하기">
+          <input type="button" value="이전으로" th:onclick="|back(gymnum=${gym.gymnum})|">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<footer class="footer">
+  <th:block th:insert="~{footer.html}"></th:block>
+</footer>
+</body>
+<script th:inline="javascript">
+  $(function () {
+    let m = [[${ msg }]];//msg가 없으면 null
+    if (m != null) {
+      alert(m);
+    }
+  });
+
+  function back(gymnum) {
+    location.href = '/gymMypage?gymnum=' + gymnum;
+  }
+</script>
+</html>

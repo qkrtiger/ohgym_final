@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Main</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script th:inline="javascript">
+        $(function (){
+            let m = [[${msg}]]; //msg가 없으면 null.
+            if (m != null){
+                alert(m);
+            }
+        });
+    </script>
+</head>
+<body>
+
+<a th:href="@{kakao}">[지도]</a><br>
+<a th:href="@{terms}">[이용약관]</a><br>
+<a th:href="@{faq}">[FAQ]</a><br>
+<a th:href="@{introduce}">[회사소개]</a><br>
+<a th:href="@{guide}">[오짐 가이드]</a><br>
+<a th:href="@{joinForm}">[일반 회원가입]</a><br>
+<a th:href="@{joinGymForm}">[헬스장 회원가입]</a><br>
+<a th:href="@{loginfind}">[id찾기]</a><br>
+<a th:href="@{idComplete}">[id 찾음]</a><br>
+<a th:href="@{loginGymFind}">[헬스장 id 찾기]</a><br>
+<a th:href="@{idGymComplete}">[헬스장 id 찾음]</a><br>
+<a th:href="@{login}">[로그인]</a></br>
+<a th:href="@{memberLoginForm}">[일반로그인]</a>
+
+<hr>
+<div th:if="${member == null}">
+    <p>멤버 정보 없음</p>
+</div>
+<div th:unless="${member == null}">
+    <a th:href="@{memberMypage(membernum=${member.membernum})}">회원 마이페이지</a>
+    <a th:href="@{trainerMypage(membernum=${member.membernum})}">트레이너 마이페이지</a>
+</div>
+<hr>
+<h1>헬스장</h1>
+<div th:unless="${gym == null}">
+<a th:href="@{gymMypage(gymnum=${gym.gymnum})}">헬스장 마이페이지</a>
+</div>
+
+<h2>게시글 목록</h2>
+<div>
+    <br>
+    <a th:href="@{gymPay(gymnum=1)}">헬스장 상품 결제</a>
+    <a th:href="@{dailyPay(gymnum=1)}">헬스장 일일권 결제</a>
+    <a th:href="@{trainerPage(membernum=2)}">1:1 pt(트레이너) 결제</a>
+
+</div>
+</body>
+<script th:inline="javascript">
+    let member = [[${member}]];
+    let mn;
+
+    if (member != null){
+        mn = member.membernum;
+    } else {
+        mn = 1;
+    }
+
+    let gym = [[${gym}]];
+    let g;
+
+    if (gym != null){
+        g = gym.gymnum;
+    } else {
+        g = 1;
+    }
+</script>
+</html>

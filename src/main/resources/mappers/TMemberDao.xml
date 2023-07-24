@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.ohgym.dao.TMemberDao">
+
+    <select id="selectTrainDetail" resultType="TrainDto" parameterType="Integer">
+        select * from train where membernum=#{membernum}
+    </select>
+    <select id="selectGymDetail" resultType="GymDto" parameterType="Integer">
+        SELECT *
+        FROM gym
+        WHERE gymnum IN (
+            SELECT gymnum
+            FROM traingoods
+            WHERE membernum = #{membernum}
+        );
+    </select>
+    <select id="selectTrainGoods" resultType="TrainGoodsDto" parameterType="Integer">
+        select * from traingoods where membernum=#{membernum}
+    </select>
+    <select id="selectTrainGoodsDetail" resultType="TrainGoodsDto" parameterType="Integer">
+        select * from traingoods where tgoodsint=#{tgoodsint}
+    </select>
+    <select id="selectGymName" resultType="GymDto" parameterType="Integer">
+        SELECT *
+        FROM gym
+        WHERE gymnum IN (
+            SELECT gymnum
+            FROM traingoods
+            WHERE tgoodsint=#{tgoodsint}
+        )
+    </select>
+
+</mapper>

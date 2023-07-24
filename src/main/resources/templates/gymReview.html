@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="js/jquery-3.7.0.min.js"></script>
+    <title>Review</title>
+    <script th:inline="javascript">
+        $(function () {
+            let m = [[${msg}]]; // msg가 없으면 null
+            if (m != null) {
+                alert(m);
+            }
+        });
+    </script>
+    <style>
+        #myform fieldset {
+            display: inline-block;
+            direction: rtl;
+            border: 0;
+        }
+
+        #myform fieldset legend {
+            text-align: right;
+        }
+
+        #myform input[type=radio] {
+            display: none;
+        }
+
+        #myform label {
+            font-size: 3em;
+            color: transparent;
+            text-shadow: 0 0 0 #f0f0f0;
+        }
+
+        #myform label:hover {
+            text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+        }
+
+        #myform label:hover ~ label {
+            text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+        }
+
+        #myform input[type=radio]:checked ~ label {
+            text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+        }
+
+        #reviewContents {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: solid 1.5px #D3D3D3;
+            border-radius: 5px;
+            font-size: 16px;
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+<form th:action="@{reviewInput}" class="mb-3" name="myform" id="myform" method="post" th:object="${session.member}">
+    <input type="hidden" class="" name="mnickname" th:value="*{mnickname}">
+    <input type="hidden" class="" name="membernum" th:value="*{membernum}">
+    <input type="hidden" class="" name="gymnum" th:value="${mpay.gymnum}">
+    <input type="hidden" class="" name="mpaynum" th:value="${mpay.mpaynum}">
+    <fieldset>
+        <span class="text-bold">별점을 선택해주세요</span>
+        <input type="radio" name="reviewstar" th:value="5" id="rate1"><label
+            for="rate1">★</label>
+        <input type="radio" name="reviewstar" th:value="4" id="rate2"><label
+            for="rate2">★</label>
+        <input type="radio" name="reviewstar" th:value="3" id="rate3"><label
+            for="rate3">★</label>
+        <input type="radio" name="reviewstar" th:value="2" id="rate4"><label
+            for="rate4">★</label>
+        <input type="radio" name="reviewstar" th:value="1" id="rate5"><label
+            for="rate5">★</label>
+    </fieldset>
+    <div>
+		<textarea class="col-auto form-control" type="text" id="reviewContents" name="reviewcontents"
+                  placeholder="헬스장 이용 후기를 남겨주세요~"></textarea>
+    </div>
+    <input type="submit" value="등록">
+</form>
+</body>
+<script th:inline="javascript">
+
+</script>
+</html>

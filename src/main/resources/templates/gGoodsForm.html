@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>헬스장 상품 등록</title>
+  <link rel="stylesheet" th:href="@{css/addition.css}">
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <style>
+    #file{
+      display: none;
+    }
+    #preview{
+      height: 500px;
+    }
+  </style>
+</head>
+<body>
+<div>
+  <form th:action="@{gMGoodsSave}" method="post" enctype="multipart/form-data">
+    <div>
+      <div id="content" class="content">
+        <h2 class="info-title">상품 등록</h2>
+        <div class="info-row">
+          <span class="info-label">상품명:</span>
+          <input type="text" name="ggoodsname" autofocus>
+        </div>
+        <div class="info-row">
+          <span class="info-label">이용기간:</span>
+          <select name="ggoodsperiod">
+            <option value="1">1개월</option>
+            <option value="3">3개월</option>
+            <option value="6">6개월</option>
+            <option value="12">12개월</option>
+            <option value="1">일일권</option>
+          </select>
+        </div>
+        <div class="info-row">
+          <span class="info-label">총 가격:</span>
+          <input type="text" name="ggoodsprice">
+        </div>
+        <div class="info-row">
+          <span class="info-label">추가사항:</span>
+          <input type="text" name="ggoodsadd">
+          <input type="hidden" name="gymnum" th:value="${session.gym.gymnum}">
+        </div>
+      </div>
+      <div>
+        <input type="button" value="이전으로" th:onclick ="|back(${session.gym.gymnum})|">
+        <input type="submit" value="저장하기">
+      </div>
+    </div>
+  </form>
+</div>
+</body>
+<script th:inline="javascript">
+  $(function () {
+    let m = [[${msg}]];//msg가 없으면 null
+    if(m != null){
+      alert(m);
+    }
+  });
+
+  function back(gymnum) {
+    location.href = '/gymGoods?gymnum=' + gymnum;
+  }
+
+</script>
+</html>

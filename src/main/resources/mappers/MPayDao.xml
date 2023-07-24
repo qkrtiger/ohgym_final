@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.ohgym.dao.MPayDao">
+
+    <insert id="insertMPay" parameterType="mPayDto">
+        insert into mpay
+        values (#{mpaynum},#{membernum}, #{mpaymethod}, #{mpayproduct}, #{mpayprice}, #{mpaydate},
+                #{mpaygym}, #{mpayperiod}, #{mpaytime},#{trainername}, #{ggoodsnum}, null, #{gymnum})
+    </insert>
+    <insert id="insertTMPay" parameterType="MPayDto">
+        insert into mpay
+        values (#{mpaynum},#{membernum}, #{mpaymethod}, #{mpayproduct}, #{mpayprice}, #{mpaydate},
+                #{mpaygym}, #{mpayperiod}, #{mpaytime},#{trainername}, null, #{tgoodsint}, #{gymnum})
+    </insert>
+
+    <select id="selectPayment" resultType="MPayDto" parameterType="String">
+        select * from mpay where mpaynum=#{mpaynum}
+    </select>
+
+</mapper>
