@@ -7,6 +7,15 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 </head>
 <body>
+<header class="header">
+    <th:block th:if="${gym} == null">
+        <th:block th:insert="~{header.html}"></th:block>
+    </th:block>
+    <th:block th:unless="${gym} == null">
+        <th:block th:insert="~{headerGym.html}"></th:block>
+    </th:block>
+</header>
+<section style="margin-top: 200px">
     <h1>찜 목록</h1>
 
 
@@ -25,12 +34,13 @@
                         <img th:src="@{upload/}+${gitem.gsysname}" class="card-img-top" alt="...">
                     </th:block>
                     <div class="card-body">
-                        <a th:href="@{detail(gcode=${gitem.gymnum})}" th:text="${gitem.gname}"></a>
+                        <a th:href="@{gymPage(gymnum=${gitem.gymnum})}" th:text="${gitem.gname}"></a>
                         <p th:text="${gitem.glocation}"></p>
                     </div>
                 </div>
             </th:block>
         </th:block>
     </div>
+</section>
 </body>
 </html>

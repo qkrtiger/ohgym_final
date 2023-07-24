@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>gImage</title>
+  <link rel="stylesheet" th:href="@{css/image.css}">
+  <script th:src="@{js/popup.js}" defer></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+</head>
+<script th:inline="javascript">
+  $(function () {
+    let m = [[${msg}]];//msg가 없으면 null
+    if(m != null){
+      alert(m);
+    }
+  });
+
+  const closePopup = function () {
+    window.close(); // 팝업 창 종료
+    window.opener.location.reload(); // 부모 창 새로고침
+  };
+</script>
+<body>
+<div id="popup">
+  <div class="popup-content">
+    <form th:action="@{gImage}" method="POST" enctype="multipart/form-data">
+      <div class="popup-top">
+        <th:block th:if="${gym.gsysname} == null">
+          <img th:src="@{images/bbbbb.jpg}" height="100" width="100">
+        </th:block>
+        <th:block th:unless="${gym.gsysname} == null">
+          <img  th:src="@{upload/} + ${gym.gsysname}" height="100" width="100">
+        </th:block>
+        <p th:text="${gym.gname}"></p>
+      </div>
+      <div class="popup-middle">
+        <input type="file" name="files" id="change-profile-btn">
+      </div>
+      <div class="popup-btns">
+        <input type="button" value="닫기" onclick="closePopup()">
+        <input type="submit" value="등록">
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>

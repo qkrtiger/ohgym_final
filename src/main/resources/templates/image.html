@@ -24,19 +24,20 @@
 <div id="popup" class="popup-hidden">
     <div class="popup-content">
         <form th:action="@{mImage}" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="membernum" th:value="${member.membernum}">
             <div class="popup-top">
                 <th:block th:if="${member.msysname} == null">
-                    <img th:onclick="|openPopup(1)|"
-                         th:src="@{images/bbbbb.jpg}" height="100" width="100">
+                    <img th:src="@{images/bbbbb.jpg}" height="100" width="100">
                 </th:block>
                 <th:block th:unless="${member.msysname} == null">
-                    <img th:onclick="|openPopup(1)|"
-                         th:src="@{upload/} + ${member.msysname}" height="100" width="100">
+                    <img th:src="@{upload/} + ${member.msysname}" height="100" width="100">
                 </th:block>
                 <p th:text="${member.mname}"></p>
             </div>
             <div class="popup-middle">
                 <input type="file" name="files" id="change-profile-btn">
+                <input type="hidden" th:value="${member.moriname}" name="moriname">
+                <input type="hidden" th:value="${member.msysname}" name="msysname">
             </div>
             <div class="popup-btns">
                 <input type="button" value="닫기" onclick="closePopup()">

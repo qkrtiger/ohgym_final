@@ -39,7 +39,7 @@ body {
     background-color: #fff;
     border-radius: 6px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    width: 400px;
+    width: 500px;
     padding: 20px;
     text-align: center;
 }
@@ -83,6 +83,7 @@ body {
 
 .popup-lmidde label {
     margin-right: 10px;
+    width: 150px;
 }
 
 .popup-lmidde span {
@@ -151,3 +152,7 @@ body {
         font-size: 20px;
     }
 }
+
+/*.member_info, .trainer_info {*/
+/*    display: none;*/
+/*}*/

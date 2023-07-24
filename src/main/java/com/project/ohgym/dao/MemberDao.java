@@ -5,16 +5,28 @@ import com.project.ohgym.dto.MemberDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface MemberDao {
-    //회원정보 가져오는 메소드
-    MemberDto selectMember(Integer membernum);
+    int idCheck(String mId);
 
-    //찜목록 메소드
+    int nicknameCheck(String mnickname);
+
+    int mailDoubleCheck(String mmail);
+
+    void memberInsert(MemberDto member);
+
+    String idFind(String mmail);
+
+    String loginFind(MemberDto member);
+
+    void passChange(MemberDto member);
+
+    //회원의 비밀번호 검색 메소드
+    String selectPass(String mid);
+
+    //회원 정보를 가져오는 메소드(form memeber 테이블
+    MemberDto selectMember(String mid);
+
     List<GmListDto> selectMarkedGyms(Integer membernum);
-
-    //회원 프로필 가져오는 메소드
-    void mImage(MemberDto image);
 }

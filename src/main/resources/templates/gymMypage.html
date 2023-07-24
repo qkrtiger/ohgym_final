@@ -4,77 +4,74 @@
   <meta charset="UTF-8">
   <title>gymMypage</title>
   <link rel="stylesheet" th:href="@{css/mypage.css}">
+  <script th:src="@{js/popup.js}" defer></script>
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 </head>
 <body>
-<div id="sidebar">
-  <img src="images/bbbbb.jpg" alt="프로필 이미지" style="height: 300px; width: 300px;">
-  <ul>
-    <li><a href="gymMypage">내 정보</a></li>
-    <li><a href="wishList">찜목록</a></li>
-    <li><a href="">결제내역</a></li>
-    <li><a href="">FAQ</a></li>
-    <li><a href="">트레이너 등록</a></li>
+<div id="sidebar" class="sidebar">
+  <div class="user-image">
+    <th:block th:if="${gym.gsysname} == null">
+      <img th:onclick="|opengImage(1)|" th:src="@{images/bbbbb.jpg}" height="100" width="100">
+    </th:block>
+    <th:block th:unless="${gym.gsysname} == null">
+      <img th:onclick="|opengImage(1)|" th:src="@{upload/} + ${gym.gsysname}" height="100" width="100">
+    </th:block>
+  </div>
+  <ul class="sidebar-menu">
+    <li><a th:href="@{gymMypage(gymnum=${gym.gymnum})}" class="menu-item">헬스장 정보</a></li>
+    <li><a th:href="@{gAdditionInfo(gymnum=${gym.gymnum})}" class="menu-item">추가 정보</a></li>
+    <li><a th:href="@{gymTrainer(gymnum=${gym.gymnum})}" class="menu-item">트레이너 관리</a></li>
+    <li><a th:href="@{gMypayList(gymnum=${gym.gymnum},pageNum=1)}" class="menu-item">결제 내역</a></li>
+    <li><a th:href="@{gymGoods(gymnum=${gym.gymnum})}" class="menu-item">상품 관리</a></li>
+    <li><a th:href="@{faq}" class="menu-item">FAQ</a></li>
   </ul>
 </div>
-<div id="content" >
-  <h2>환영합니다! 마이페이지</h2>
-  <h2>내 정보</h2>
-  <div>
-    <label>회원번호:</label>
-    <span th:text="${gym.gymnum}"></span>
+<div id="content" class="content">
+  <h2 class="info-title">헬스장 마이페이지</h2>
+  <h3 class="info-title">내 정보</h3>
+  <div class="info-row">
+    <label class="info-label">이름:</label>
+    <span class="info-value" th:text="${gym.gname}"></span>
   </div>
-  <div>
-    <label>이름:</label>
-    <span th:text="${gym.gname}"></span>
+  <div class="info-row">
+    <label class="info-label">사업자등록번호:</label>
+    <span class="info-value" th:text="${gym.gregistnum}"></span>
   </div>
-  <div>
-    <label>등록번호:</label>
-    <span th:text="${gym.gregistnum}"></span>
+  <div class="info-row">
+    <label class="info-label">ID:</label>
+    <span class="info-value" th:text="${gym.gid}"></span>
   </div>
-  <div>
-    <label>ID:</label>
-    <span th:text="${gym.gid}"></span>
+  <div class="info-row">
+    <label class="info-label">비밀번호:</label>
+    <span class="info-value" th:text="${gym.gpass}"></span>
   </div>
-  <div>
-    <label>비밀번호:</label>
-    <span th:text="${gym.gpass}"></span>
+  <div class="info-row">
+    <label class="info-label">전화번호:</label>
+    <span class="info-value" th:text="${gym.gphone}"></span>
   </div>
-  <div>
-    <label>전화번호:</label>
-    <span th:text="${gym.gphone}"></span>
+  <div class="info-row">
+    <label class="info-label">헬스장 위치:</label>
+    <span class="info-value" th:text="${gym.glocation}"></span>
   </div>
-  <div>
-    <label>위치:</label>
-    <span th:text="${gym.glocation}"></span>
+  <div class="info-row">
+    <label class="info-label">헬스장 소개:</label>
+    <span class="info-value" th:text="${gym.gdescription}"></span>
   </div>
-  <div>
-    <label>설명:</label>
-    <span th:text="${gym.gdescription}"></span>
+  <div class="info-row">
+    <label class="info-label">공지사항:</label>
+    <span class="info-value" th:text="${gym.gnotice}"></span>
   </div>
-  <div>
-    <label>공지사항:</label>
-    <span th:text="${gym.gnotice}"></span>
+  <div class="info-row">
+    <label class="info-label">부가서비스(무료):</label>
+    <span class="info-value" th:text="${gym.gaddservfree}"></span>
   </div>
-  <div>
-    <label>추가서비스(무료):</label>
-    <span th:text="${gym.gaddservfree}"></span>
+  <div class="info-row">
+    <label class="info-label">부가서비스(유료):</label>
+    <span class="info-value" th:text="${gym.gaddservpay}"></span>
   </div>
-  <div>
-    <label>추가서비스(유료):</label>
-    <span th:text="${gym.gaddservpay}"></span>
-  </div>
-  <div>
-    <label>운영시간:</label>
-    <span th:text="${gym.goperation}"></span>
-  </div>
-  <div>
-    <label>대표자명:</label>
-    <span th:text="${gym.goriname}"></span>
-  </div>
-  <div>
-    <label>시스템명:</label>
-    <span th:text="${gym.gsysname}"></span>
+  <div class="info-row">
+    <label class="info-label">운영시간:</label>
+    <span class="info-value" th:text="${gym.goperation}"></span>
   </div>
 </div>
 </body>

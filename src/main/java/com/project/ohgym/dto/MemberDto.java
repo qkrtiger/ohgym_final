@@ -11,7 +11,7 @@ public class MemberDto {
     private String mpass;
     private String mmail;
     private String mname;
-    private Date mbirth;
+    private String mbirth;
     private String mgender;
     private String mphone;
     private String mnickname;
@@ -19,9 +19,7 @@ public class MemberDto {
     private String msysname;
     private String mresolution;
     private String mregion;
-    private Date mdate;
-    private int gymnum;
-    private int trainnum;
+    private Integer gymnum;
     private String tcareer;
     private String tlicence;
     private String tpr;

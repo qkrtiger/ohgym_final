@@ -1,15 +1,115 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.project.ohgym.dao.GymDao">
-    <update id="gImage" parameterType="GymDto">
-        update gym
-        set goriname=#{goriname}, gsysname=#{gsysname}
-        where gymnum=1;
-    </update>
-    <select id="selectGym" resultType="GymDto" parameterType="integer">
-        select * from gym where gymnum=#{gymnum}
+
+    <insert id="insertMark">
+        INSERT INTO gymmark
+        VALUES (#{membernum}, #{gymnum})
+    </insert>
+    <delete id="deleteMark">
+        DELETE FROM gymmark WHERE membernum=#{membernum} and gymnum=#{gymnum}
+    </delete>
+    <select id="newGym" resultType="GymDto">
+        SELECT *
+        FROM gym
+        ORDER BY gymnum DESC
+            LIMIT 3;
     </select>
-    <select id="numCheck" resultType="int" parameterType="int">
-        SELECT count(*) FROM gym WHERE gymnum=#{gymnum}
+    <select id="hGymList" resultType="GymDto" parameterType="Integer">
+        select g.*, gm.membernum
+        from gym g left join
+             (
+                 select *
+                 from gymmark
+                 where membernum = #{membernum}
+             ) gm
+             on g.gymnum = gm.gymnum
     </select>
+    <select id="hGymPlaceList" resultType="GymDto" parameterType="String">
+        SELECT * FROM gym WHERE glocation LIKE concat('%',#{glocation},'%')
+    </select>
+    <select id="hSeachGymOutput" resultType="GymDto" parameterType="String">
+        SELECT * FROM gym WHERE glocation LIKE concat('%',#{gcity},'%')
+    </select>
+    <select id="hGymFilteraList" resultType="FilterViewDto" parameterType="HashMap">
+        SELECT * FROM fillter_fin
+        WHERE gymnum is not null
+        <if test="ggoodsname != null">
+            AND ggoodsname=#{ggoodsname}
+        </if>
+        <if test="mgender != null">
+            AND mgender=#{mgender}
+        </if>
+        <if test="andQuery != null">
+            ${andQuery}
+        </if>
+        <if test="andQuery != null">
+            ${andQuery}
+        </if>
+        <if test="andQuery != null">
+            ${andQuery}
+        </if>
+        <if test="andQuery != null">
+            ${andQuery}
+        </if>
+        <if test="andQuery != null">
+            ${andQuery}
+        </if>
+        <if test="andQuery != null">
+            ${andQuery}
+        </if>
+        <if test="andQuery != null">
+            ${andQuery}
+        </if>
+    </select>
+    <select id="hGymFilterbList" resultType="FilterViewDto" parameterType="string">
+        SELECT * FROM fillter WHERE mgender=#{mgender}
+    </select>
+    <select id="getGymPage" resultType="GymDetailDto" parameterType="Integer">
+        SELECT * FROM gym WHERE gymnum=#{gymnum}
+    </select>
+    <select id="getTimg" resultType="GymDetailDto" parameterType="Integer">
+        SELECT * FROM member WHERE gymnum=#{gymnum}
+    </select>
+    <select id="getGoods" resultType="GymDetailDto" parameterType="Integer">
+        SELECT * FROM gymgoods WHERE gymnum=#{gymnum} and ggoodsaction=1
+    </select>
+    <select id="getGymMark" resultType="Integer" parameterType="Integer">
+        SELECT count(*) FROM gymmark WHERE gymnum=#{gymnum} and membernum=#{membernum}
+    </select>
+    <select id="getGymConven" resultType="GymDetailDto" parameterType="Integer">
+        SELECT * FROM gymconvenient WHERE gymnum=#{gymnum}
+    </select>
+    <select id="getGymMechin" resultType="GymDetailDto" parameterType="Integer">
+        SELECT * FROM gymmachine WHERE gymnum=#{gymnum}
+    </select>
+    <select id="getlen" resultType="Integer" parameterType="Integer">
+        SELECT count(*) FROM relist WHERE gymnum=#{gymnum}
+    </select>
+    <select id="getavg" resultType="Float">
+        SELECT ifnull(AVG(reviewstar), 0)  FROM review where gymnum=#{gymnum}
+    </select>
+
+    <select id="nonMbGymList" resultType="com.project.ohgym.dto.GymDto">
+        select * from gym
+    </select>
+    <select id="GymPlaceList" resultType="GymDto" parameterType="String">
+        SELECT * FROM gym WHERE glocation LIKE concat('%',#{glocation},'%')
+    </select>
+    <select id="searchList" resultType="GymDto" parameterType="String">
+        SELECT * FROM gym WHERE gname LIKE concat('%',#{gname},'%')
+    </select>
+    <select id="getoneList" resultType="GymDto" parameterType="String">
+        SELECT * FROM ready2 WHERE ggoodsname='일일권'
+    </select>
+    <select id="getWomanList" resultType="GymDto" parameterType="String">
+        SELECT * FROM gymmember WHERE mgender='여'
+    </select>
+    <select id="getManList" resultType="GymDto" parameterType="String">
+        SELECT * FROM gymmember WHERE mgender='남'
+    </select>
+    <select id="hSearch" resultType="GymDto" parameterType="String">
+        SELECT * FROM gym WHERE gname LIKE concat('%',#{gname},'%')
+    </select>
+
 </mapper>

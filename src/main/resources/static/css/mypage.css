@@ -1,0 +1,128 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.sidebar {
+    width: 17%;
+    min-width: 250px;
+    height: 1000px;
+    float: left;
+    background-color: #f8f8f8;
+    padding: 2%;
+    box-sizing: border-box;
+    transition: width 0.3s;
+    margin-top: 150px;
+}
+
+.sidebar:hover {
+    width: 18%;
+}
+
+.user-image {
+    margin-top: 2%;
+    text-align: center;
+}
+
+.sidebar-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-item {
+    padding: 11% 5%; /* 이 부분을 수정해주세요 (상하 패딩을 조절합니다) */
+    color: #333;
+    text-decoration: none;
+    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+
+.menu-item:hover {
+    background-color: #efefef;
+}
+
+.edit-info-button {
+    margin-top: 3%;
+    width: 100%;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    padding: 3%;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.edit-info-button:hover {
+    background-color: #0056b3;
+}
+
+.content {
+    width: 73%;
+    float: right;
+    padding: 2%;
+    box-sizing: border-box;
+}
+/**/
+/*.content {*/
+/*    width: 70%;*/
+/*    padding: 2%;*/
+/*    box-sizing: border-box;*/
+/*    margin: 0 auto;*/
+/*    margin-top: 150px;*/
+/*    margin-left: 450px;*/
+/*    margin-bottom: 160px;*/
+/*}*/
+
+/*.info-title {*/
+/*    font-size: 1.5em;*/
+/*    font-weight: bold;*/
+/*    margin-top: 2%;*/
+/*}*/
+
+/*.info-row {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    margin: 1%;*/
+/*    background-color: #f8f8f8;*/
+/*    border-radius: 4px;*/
+/*    padding: 1%;*/
+/*    height: auto;*/
+/*}*/
+
+
+/**/
+.info-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 2%;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    margin: 1%;
+    background-color: #f8f8f8;
+    border-radius: 4px;
+    padding: 1%;
+}
+
+.info-label {
+    font-weight: bold;
+    min-width: 25%;
+    display: inline-block;
+}
+
+.info-value {
+    margin-left: 1%;
+}

@@ -1,10 +1,176 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+  <meta charset="UTF-8">
+  <title>트레이너 - 마이페이지</title>
+  <link rel="shortcut icon" href="/images/header/lgo_face.ico">
+  <script th:src="@{js/popup.js}" defer></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+          integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous">
+  </script>
+  <style>
 
+
+    /*폰트*/
+    @font-face {
+      font-family: "SpoqaHanSansNeo";
+      src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.woff2") format('woff2'), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.woff") format("woff"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.eot") format("embedded-opentype"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.eot?#iefix") format("embedded-opentype");
+      unicode-range: U+000-5FF, U+AC00-D7AF;
+      font-weight: 100;
+      font-style: normal;
+      font-display: swap
+    }
+
+    @font-face {
+      font-family: "SpoqaHanSansNeo";
+      src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.woff2") format('woff2'), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.woff") format("woff"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.eot") format("embedded-opentype"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.eot?#iefix") format("embedded-opentype");
+      unicode-range: U+000-5FF, U+AC00-D7AF;
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap
+    }
+
+    @font-face {
+      font-family: "SpoqaHanSansNeo";
+      src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.woff2") format('woff2'), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.woff") format("woff"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.eot") format("embedded-opentype"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.eot?#iefix") format("embedded-opentype");
+      unicode-range: U+000-5FF, U+AC00-D7AF;
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap
+    }
+
+    @font-face {
+      font-family: "SpoqaHanSansNeo";
+      src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.woff2") format('woff2'), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.woff") format("woff"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.eot") format("embedded-opentype"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.eot?#iefix") format("embedded-opentype");
+      unicode-range: U+000-5FF, U+AC00-D7AF;
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap
+    }
+
+    @font-face {
+      font-family: "SpoqaHanSansNeo";
+      src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.woff2") format('woff2'), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.woff") format("woff"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.eot") format("embedded-opentype"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.eot?#iefix") format("embedded-opentype");
+      unicode-range: U+000-5FF, U+AC00-D7AF;
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      /*box-sizing: border-box;*/
+    }
+
+    .renewal * {
+      font-family: "Inter", "SpoqaHanSansNeo", "notokr", "Malgun Gothic", Dotum, Helvetica, "Apple SD Gothic Neo", Sans-serif;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .content {
+      width: 70%;
+      box-sizing: border-box;
+      margin: 0 auto;
+      margin-top: 30px;
+      margin-left: clamp(300px, 25%, 25%);
+      margin-bottom: clamp(200px, 0%, 0%);
+      border: 1px solid;
+    }
+
+    .info-all{
+      margin: 30px;
+    }
+    .info-title {
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-top: 150px;
+      margin-bottom: 10px;
+      margin-left: clamp(300px, 25%, 25%);
+      padding-top: 50px;
+    }
+
+    .info-row {
+      display: flex;
+      align-items: center;
+      margin: 1%;
+      border-radius: 4px;
+      border-bottom: 1px solid grey;
+      padding: 1%;
+      height: auto;
+    }
+
+    .info-label {
+      font-weight: bold;
+      min-width: 140px;
+      display: inline-block;
+    }
+
+    .info-value {
+      margin-left: 1%;
+    }
+  </style>
+</head>
+<body class="renewal">
+<header class="header">
+  <th:block th:if="${gym} == null">
+    <th:block th:insert="~{header.html}"></th:block>
+  </th:block>
+  <th:block th:unless="${gym} == null">
+    <th:block th:insert="~{headerGym.html}"></th:block>
+  </th:block>
+</header>
+<th:block th:insert="~{TrainerSideBar.html}"></th:block>
+<h2 class="info-title">내 정보</h2>
+
+<div id="content" class="content">
+  <div class="info-all">
+    <div class="info-row">
+      <span class="info-label">이름:</span>
+      <span class="info-value" th:text="${trainer.mname}"></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">닉네임:</span>
+      <span class="info-value" th:text="${trainer.mnickname}"></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">소속 헬스장:</span>
+      <span class="info-value" th:text="${trainer.gname}"></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">아이디:</span>
+      <span class="info-value" th:text="${trainer.mid}"></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">생년월일:</span>
+      <span class="info-value" th:text="${trainer.mbirth}"></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">성별:</span>
+      <span class="info-value" th:text="${trainer.mgender}"></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">전화번호:</span>
+      <span class="info-value" th:text="${trainer.mphone}"></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">자격증:</span>
+      <span class="info-value" th:text="${trainer.tlicence}"></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">경력:</span>
+      <span class="info-value" th:text="${trainer.tcareer}"></span>
+    </div>
+  </div><!--info-all-->
+</div>
+<footer>
+  <th:block th:insert="~{footer.html}"></th:block>
+</footer>
 </body>
 </html>
