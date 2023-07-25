@@ -43,3 +43,14 @@
     font-style: normal;
     font-display: swap
 }
+
+/*전체*/
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.renewal * {
+    font-family: "Inter", "SpoqaHanSansNeo", "notokr", "Malgun Gothic", Dotum, Helvetica, "Apple SD Gothic Neo", Sans-serif;
+}
