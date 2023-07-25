@@ -13,6 +13,10 @@
             $("#backbtn").on("click", function (){
                 location.href = "board";
             });
+
+            $("#backbtnG").on("click", function (){
+                location.href = "board";
+            });
         });
     </script>
     <style>
@@ -131,18 +135,18 @@
                             <input type="hidden" name="gname" th:value="*{gname}">
                             <input type="hidden" name="gymnum" th:value="*{gymnum}">
                             <label class="small mb-1" for="title">제목</label>
-                            <input type="text" class="write-input" name="boardtitle" id="title" autofocus
+                            <input type="text" class="write-input" name="boardtitle" id="titleG" autofocus
                                    placeholder="제목 입력" required>
                         </div>
                         <div class="mb-3">
                             <label class="small mb-1" for="contents">내용</label>
-                            <textarea rows="13" class="write-input ta" name="boardcontents" id="contents"
+                            <textarea rows="13" class="write-input ta" name="boardcontents" id="contentsG"
                                       placeholder="내용 입력"></textarea>
                         </div>
                         <div class="btn-area">
                             <input type="submit" class="btn-write" value="글쓰기">
                             <input type="reset" class="btn-write" value="초기화">
-                            <input type="button" class="btn-write" value="뒤로가기" id="backbtn">
+                            <input type="button" class="btn-write" value="뒤로가기" id="backbtnG">
                         </div>
                     </form>
                 </th:block>
@@ -154,9 +158,9 @@
     <th:block th:insert="~{footer.html}"></th:block>
 </footer>
 </body>
-<script th:inline="javascript">
-    $("#backbtn").click(function (){
-        location.href="/board";
-    })
-</script>
+<!--<script th:inline="javascript">-->
+<!--    $("#backbtn").click(function (){-->
+<!--        location.href="/board";-->
+<!--    })-->
+<!--</script>-->
 </html>
