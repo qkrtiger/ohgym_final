@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>오짐- 상세보기</title>
+    <link rel="shortcut icon" href="/images/header/lgo_face.ico">
     <script src="js/jquery-3.7.0.min.js"></script>
+    <th:block th:insert="~{header.html}"></th:block>
     <script th:inline="javascript">
         $(function () {
             let m = [[${msg}]]; // msg가 없으면 null
@@ -76,6 +79,7 @@
             overflow: auto;
             margin-bottom: 10px;
             padding: 10px 5px;
+            white-space: pre-line;
         }
 
         .mb-1 {
@@ -162,14 +166,13 @@
         }
     </style>
     <meta charset="UTF-8">
-    <title>boardDetail</title>
 </head>
 <body>
 <header>
-    <th:block th:if="${session.gym} == null">
+    <th:block th:if="${session.gym == null}">
         <th:block th:insert="~{header.html}"></th:block>
     </th:block>
-    <th:block th:unless="${session.gym} == null">
+    <th:block th:unless="${session.gym == null}">
         <th:block th:insert="~{headerGym.html}"></th:block>
     </th:block>
 </header>
@@ -201,7 +204,7 @@
                     <div class="info-value" th:text="${bdetail.boardcount}"></div>
                 </div>
                 <div class="mb-1">내용</div>
-                <div class="textarea" th:text="${bdetail.boardcontents}"></div>
+                <div class="textarea" th:text="${bdetail.boardcontents}" id="textln"></div>
 
                 <div class="btn-area">
                     <button class="btn-write" id="upbtn">수정</button>
@@ -212,7 +215,7 @@
                 <hr class="line">
                 <div class="mb-2">Comments</div>
                 <br>
-                <th:block th:if="${session.gym} == null">
+                <th:block th:if="${session.gym == null}">
                     <form id="rform" th:object="${session.member}">
                         <input type="hidden" name="boardnum" th:value="${bdetail.boardnum}">
                         <textarea rows="3" name="rcontent" class="write-input" id="comment"
@@ -221,22 +224,22 @@
                         <input type="button" id="recomment" class="btn-write" value="댓글 전송" onclick="replyInsert()" }>
                     </form>
                 </th:block>
-                <th:block th:unless="${session.gym} == null">
+                <th:block th:unless="${session.gym == null}">
                     <form id="rgform" th:object="${session.gym}">
                         <input type="hidden" name="boardnum" th:value="${bdetail.boardnum}">
-                        <textarea rows="3" name="rcontent" class="write-input" id="comment"
+                        <textarea rows="3" name="rcontent" class="write-input" id="commentG"
                                   placeholder="댓글을 적어주세요."></textarea>
                         <input type="hidden" name="gname"  th:value="*{gname}">
-                        <input type="button" id="recomment" class="btn-write" value="댓글 전송" onclick="replyGymInsert()" }>
+                        <input type="button" id="recommentG" class="btn-write" value="댓글 전송" onclick="replyGymInsert()" }>
                     </form>
                 </th:block>
                 <div class="reply">
                     <th:block th:each="ritem:${rList}">
                         <div class="replyarea">
-                            <th:block th:if="${ritem.gname == null}">
+                            <th:block th:if="${session.gym == null}">
                                 <li class="rtitle na" th:text="${ritem.mnickname}"></li>
                             </th:block>
-                            <th:block th:unless="${ritem.gname == null}">
+                            <th:block th:unless="${session.gym == null}">
                                 <li class="rtitle na" th:text="${ritem.gname}"></li>
                             </th:block>
                             <li class="rtitle day" th:text="${#dates.format(ritem.rdate, 'yyyy-MM-dd')}"></li>
@@ -254,10 +257,14 @@
     <th:block th:insert="~{footer.html}"></th:block>
 </footer>
 </body>
+<footer class="footer">
+    <th:block th:insert="~{footer.html}"></th:block>
+</footer>
 <script th:inline="javascript">
     $("#upbtn").hide();
     $("#delbtn").hide();
     $("#recomment").hide();
+    $("#recommentG").hide();
 
     let id = [[${session.member}]];
     let bnick = [[${bdetail.mnickname}]];
@@ -279,7 +286,7 @@
             $("#upbtn").show();
             $("#delbtn").show();
         }
-        $("#recomment").show();
+        $("#recommentG").show();
     }
 
 
@@ -349,11 +356,11 @@
                         + '<li class="rtitle day">' + res.rdate + '</li></div>'
                         + '<li class="rtext">' + res.rcontent + '</li>';
                     $(".reply").prepend(str);
-                    $("#comment").val("");
+                    $("#commentG").val("");
                 } else {
                     alert("댓글 저장 실패");
-                    $("#comment").val("");
-                    $("#comment").focus();
+                    $("#commentG").val("");
+                    $("#commentG").focus();
                 }
             },
             error: function (err) {

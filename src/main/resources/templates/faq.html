@@ -6,7 +6,9 @@
   <link rel="stylesheet" th:href="@{css/faq.css}">
 </head>
 <body>
-
+<th:block>
+  <th:block th:insert="~{header.html}"></th:block>
+</th:block>
 <ul>
   <li>
     <h2>FAQ</h2>
@@ -72,7 +74,9 @@
     <p class="content">A. 오짐은 회원님을 포기하지 않습니다. 한번 회원은 평생 회원 탈퇴란 없습니다. 나라사랑, 회원사랑^^</p>
   </li>
 </ul>
-
+<th:block>
+  <th:block th:insert="~{footer.html}"></th:block>
+</th:block>
 </body>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 <script  th:inline="javascript">

@@ -1,10 +1,132 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>일반로그인</title>
+  <title>오짐- 회원 로그인</title>
+  <link rel="shortcut icon" href="/images/header/lgo_face.ico">
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-  <link rel="stylesheet" th:href="@{css/join.css}">
+  <th:block th:insert="~{header.html}"></th:block>
+  <style>
+    /*폰트*/
+    @font-face {
+      font-family: "SpoqaHanSansNeo";
+      src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.eot?#iefix") format("embedded-opentype");
+      unicode-range: U+000-5FF,U+AC00-D7AF;
+      font-weight: 100;
+      font-style: normal;
+      font-display: swap
+    }
 
+    @font-face {
+      font-family: "SpoqaHanSansNeo";
+      src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.eot?#iefix") format("embedded-opentype");
+      unicode-range: U+000-5FF,U+AC00-D7AF;
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap
+    }
+
+    @font-face {
+      font-family: "SpoqaHanSansNeo";
+      src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.eot?#iefix") format("embedded-opentype");
+      unicode-range: U+000-5FF,U+AC00-D7AF;
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap
+    }
+
+    @font-face {
+      font-family: "SpoqaHanSansNeo";
+      src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.eot?#iefix") format("embedded-opentype");
+      unicode-range: U+000-5FF,U+AC00-D7AF;
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap
+    }
+
+    @font-face {
+      font-family: "SpoqaHanSansNeo";
+      src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.eot?#iefix") format("embedded-opentype");
+      unicode-range: U+000-5FF,U+AC00-D7AF;
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap
+    }
+
+    /*전체*/
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .renewal * {
+      font-family: "Inter", "SpoqaHanSansNeo", "notokr", "Malgun Gothic", Dotum, Helvetica, "Apple SD Gothic Neo", Sans-serif;
+    }
+
+    /*바디*/
+    .wrap {
+      max-width: 400px;
+      margin: 0 auto;
+      margin-bottom: 50px;
+      padding: 20px;
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+    }
+
+
+    .login-input {
+      margin-bottom: 2px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 2px solid #ccc;
+    }
+
+
+    .login-btn {
+      background-color: #2c7fdf;
+      color: white;
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .login-btn:hover {
+      opacity: 0.8;
+    }
+
+    ul>li{list-style: none}
+
+    .login-form {
+      margin-top: 200px;
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+
+    }
+
+    .footBtwrap a{
+      cursor: pointer;
+    }
+
+    .linkfindid{
+      color: black;
+      margin-top: 10px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .linkfindid:hover{
+      color: #2c7fdf;
+    }
+  </style>
   <script th:inline="javascript">
     $(function () {
       let m = [[${msg}]];//msg가 없으면 null.
@@ -15,7 +137,7 @@
   </script>
 
 </head>
-<body>
+<body class="renewal">
 <div class="wrap">
   <form th:action="@{meberLoginProc}" method="post" class="login-form" name="jForm" onsubmit="return check()">
     <h2 class="login-header">일반 로그인</h2>
@@ -23,12 +145,12 @@
     <input type="password" class="login-input" name="mpass" title="비밀번호" placeholder="비밀번호">
     <input type="submit" class="login-btn" value="일반login">
   </form>
-
-  <div class="login-form">
     <a th:href="@{loginfind}" class="linkfindid">ID 찾기</a>
-  </div>
 </div>
 </body>
+<footer class="footer">
+  <th:block th:insert="~{footer.html}"></th:block>
+</footer>
 <script th:inline="javascript">
 
  function check(){
