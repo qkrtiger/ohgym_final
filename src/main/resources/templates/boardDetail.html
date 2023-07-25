@@ -233,10 +233,10 @@
                 <div class="reply">
                     <th:block th:each="ritem:${rList}">
                         <div class="replyarea">
-                            <th:block th:if="${session.gym} == null">
+                            <th:block th:if="${ritem.gname == null}">
                                 <li class="rtitle na" th:text="${ritem.mnickname}"></li>
                             </th:block>
-                            <th:block th:unless="${session.gym} == null">
+                            <th:block th:unless="${ritem.gname == null}">
                                 <li class="rtitle na" th:text="${ritem.gname}"></li>
                             </th:block>
                             <li class="rtitle day" th:text="${#dates.format(ritem.rdate, 'yyyy-MM-dd')}"></li>
