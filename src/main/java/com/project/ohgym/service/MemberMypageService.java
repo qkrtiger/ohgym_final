@@ -59,8 +59,10 @@ public class MemberMypageService {
         mv = new ModelAndView();
 
         List<GmListDto> gList = mDao.selectMarkedGyms(membernum);
+        MemberDto member = mDao.selectMember(membernum);
 
         mv.addObject("gList", gList);
+        mv.addObject("member", member);
         mv.setViewName("wishList");
 
         return mv;

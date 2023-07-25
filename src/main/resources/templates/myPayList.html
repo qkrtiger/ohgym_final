@@ -3,33 +3,159 @@
 <head>
   <meta charset="UTF-8">
   <title>memberMypage</title>
-  <link rel="stylesheet" th:href="@{css/mypage.css}">
   <script th:src="@{js/popup.js}" defer></script>
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <style>
+    /*폰트*/
+    @font-face {
+      font-family: "SpoqaHanSansNeo";
+      src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.woff2") format('woff2'), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.woff") format("woff"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.eot") format("embedded-opentype"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.eot?#iefix") format("embedded-opentype");
+      unicode-range: U+000-5FF, U+AC00-D7AF;
+      font-weight: 100;
+      font-style: normal;
+      font-display: swap
+    }
+
+    @font-face {
+      font-family: "SpoqaHanSansNeo";
+      src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.woff2") format('woff2'), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.woff") format("woff"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.eot") format("embedded-opentype"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.eot?#iefix") format("embedded-opentype");
+      unicode-range: U+000-5FF, U+AC00-D7AF;
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap
+    }
+
+    @font-face {
+      font-family: "SpoqaHanSansNeo";
+      src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.woff2") format('woff2'), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.woff") format("woff"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.eot") format("embedded-opentype"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.eot?#iefix") format("embedded-opentype");
+      unicode-range: U+000-5FF, U+AC00-D7AF;
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap
+    }
+
+    @font-face {
+      font-family: "SpoqaHanSansNeo";
+      src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.woff2") format('woff2'), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.woff") format("woff"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.eot") format("embedded-opentype"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.eot?#iefix") format("embedded-opentype");
+      unicode-range: U+000-5FF, U+AC00-D7AF;
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap
+    }
+
+    @font-face {
+      font-family: "SpoqaHanSansNeo";
+      src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.woff2") format('woff2'), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.woff") format("woff"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.eot") format("embedded-opentype"), url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.eot?#iefix") format("embedded-opentype");
+      unicode-range: U+000-5FF, U+AC00-D7AF;
+      font-weight: 600;
+      font-style: normal;
+      font-display: sw
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      /*box-sizing: border-box;*/
+    }
+
+    .renewal * {
+      font-family: "Inter", "SpoqaHanSansNeo", "notokr", "Malgun Gothic", Dotum, Helvetica, "Apple SD Gothic Neo", Sans-serif;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .content-t{
+      margin-left: clamp(300px, 25%, 25%);
+      margin-bottom: 600px
+    }
+
+    .content {
+      width: 90%;
+      box-sizing: border-box;
+      margin-top: 30px;
+      border: 1px solid;
+    }
+
+
+    .info-title {
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-top: 150px;
+      margin-bottom: 10px;
+      margin-left: clamp(300px, 25%, 25%);
+      padding-top: 50px;
+    }
+
+    #sel{
+      font-size: 1.1em;
+      font-weight: bold;
+      margin: 10px 0;
+      /*margin-left: clamp(100px, 1%, 1%);*/
+    }
+
+    .content-all{
+      margin: 50px;
+      margin-top: 20px;
+    }
+
+    table {
+      margin-top: 40px;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      text-align: center;
+      padding: 8px;
+      /*text-align: left;*/
+      border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+
+    .paging .pno {
+      background-color: #efefef;
+      border: 1px solid #6c6c6c;
+      border-radius: 3px;
+      line-height: 1.5;
+      font-size: 15px;
+      height: 20px;
+      width: 100%;
+      margin: 0px auto;
+      margin: 5px;
+      opacity: 0.8;
+      text-align: center;
+    }
+
+    .paging>a {
+      text-decoration: none;
+    }
+
+    .paging>a:visited {
+      color: #575757;
+    }
+
+    .paging-area {
+      margin-left: clamp(150px, 44%, 44%);
+      margin-top: 30px;
+    }
+  </style>
 </head>
-<body>
-<div id="sidebar" class="sidebar">
-  <div class="user-image">
-    <th:block th:if="${member.msysname} == null">
-      <img th:onclick="|openPopup(2)|"
-           th:src="@{images/bbbbb.jpg}" height="100" width="100">
-    </th:block>
-    <th:block th:unless="${member.msysname} == null">
-      <img th:onclick="|openPopup(2)|"
-           th:src="@{upload/} + ${member.msysname}" height="100" width="100">
-    </th:block>
-  </div>
-  <ul class="sidebar-menu">
-    <li><a th:href="@{memberMypage(membernum=${member.membernum})}" class="menu-item">내 정보</a></li>
-    <li><a th:href="@{wishList(membernum=${member.membernum})}" class="menu-item">찜목록</a></li>
-    <li><a th:href="@{myPayList(membernum=${member.membernum},pageNum=1)}" class="menu-item">결제내역</a></li>
-    <li><a th:href="@{faq}" class="menu-item">FAQ</a></li>
-    <li><a th:onclick="openTrainer(2)" class="menu-item">트레이너 등록</a></li>
-  </ul>
-  <button th:onclick="openInfo(2)" class="edit-info-button">정보수정</button>
-</div>
-<div id="content" class="content">
-  <h2 class="info-title">결제내역</h2>
+<body class="renewal">
+<header class="header">
+  <th:block th:insert="~{header.html}"></th:block>
+</header>
+<th:block th:insert="~{MemberSideBar.html}"></th:block>
+
+<h2 class="info-title">결제내역</h2>
+<div class="content-t">
   <p style="display: none" th:text="${payType}"></p>
   <select id="sel">
     <th:block th:if="${payType == null}">
@@ -61,36 +187,43 @@
       </th:block>
     </th:block>
   </select>
-  <table style="width: 100%", id="mtable">
-  <tbody>
-  <thead>
-  <tr>
-    <th>결제일</th>
-    <th>헬스장</th>
-    <th>이용기간</th>
-    <th>가격</th>
-    <th>후기</th>
-  </tr>
-  </thead>
-  <tbody id="tb">
-    <div th:unless="${#lists.isEmpty(mPList)}">
-      <tr th:each=" MPitem: ${mPList}">
-        <td th:text="${MPitem.mpaydate}"></td>
-        <td th:text="${MPitem.mpaygym}"></td>
-        <td th:text="${MPitem.mpayperiod}"></td>
-        <td th:text="${#numbers.formatInteger(MPitem.mpayprice, 3, 'COMMA') + '원'}"></td>
-        <td><a th:href="@{gymReview(mpaynum=${MPitem.mpaynum})}">후기등록</a></td>
-      </tr>
+  <div id="content" class="content">
+    <div class="content-all">
+      <table style="width: 100%", id="mtable">
+        <tbody>
+        <thead>
+        <tr>
+          <th>결제일</th>
+          <th>헬스장</th>
+          <th>이용기간</th>
+          <th>가격</th>
+          <th>후기</th>
+        </tr>
+        </thead>
+        <tbody id="tb">
+        <div th:unless="${#lists.isEmpty(mPList)}">
+          <tr th:each=" MPitem: ${mPList}">
+            <td th:text="${MPitem.mpaydate}"></td>
+            <td th:text="${MPitem.mpaygym}"></td>
+            <td th:text="${MPitem.mpayperiod}"></td>
+            <td th:text="${#numbers.formatInteger(MPitem.mpayprice, 3, 'COMMA') + '원'}"></td>
+            <td><a th:href="@{gymReview(mpaynum=${MPitem.mpaynum})}">후기등록</a></td>
+          </tr>
+        </div>
+        <div th:if="${#lists.isEmpty(mPList)}">
+          <td colspan="5">결제 내역이 없습니다.</td>
+        </div>
+        </tbody>
+      </table>
     </div>
-    <div th:if="${#lists.isEmpty(mPList)}">
-      <td colspan="5">결제 내역이 없습니다.</td>
-    </div>
-  </tbody>
-  </table>
+  </div>
+  <div class="paging-area">
+    <div class="paging" th:utext="${paging}"></div>
+  </div>
 </div>
-<div class="paging-area">
-  <div class="paging" th:utext="${paging}"></div>
-</div>
+<footer>
+  <th:block th:insert="~{footer.html}"></th:block>
+</footer>
 </body>
 <script th:inline="javascript">
   //검색기능
