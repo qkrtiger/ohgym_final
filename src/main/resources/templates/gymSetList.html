@@ -5,86 +5,99 @@
     <meta charset="UTF-8">
     <title>gymList</title>
     <style>
-
-        .nav-bar, hr {
-            width: 70%;
-            margin: auto;
+        #result {
+            margin-top: 200px;
         }
-
-        .first-bar {
-            display: flex;
-            width: 100%;
-            justify-content: flex-start;
-        }
-
-        #mapimg {
-            width: 35px;
-            height: 35px;
-            margin-top: 19px;
+        .row {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(288px, auto));
+            width: 1000px;
             margin-left: auto;
-            padding-right: 10px;;
+            margin-right: auto;
+            margin-bottom: 30px;
+            justify-content: space-evenly;
+            row-gap: 40px;
         }
 
-        button {
-            width: 10%;
-            height: 35px;
-            margin-top: 19px;
-            padding: 5px;
-            background-color: #ffffff;
-            border: 1px solid #5467F5;
+        .card {
+            width: 288px;
+            height: 286px;
+            overflow: hidden;
+            border: 1px solid #ccc;
             border-radius: 10px;
-            color: #5467F5;
         }
 
-        #searchimg {
-            width: 25px;
-            /*top: 30px;*/
-            /*right: 1px;*/
-            /*margin: 0;*/
+        .col {
+            width: 288px;
+            height: 200px;
         }
-
 
         .card-img-top {
-         width: 20px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        input {
-            width: 30%;
-            border: 1px solid #bbb;
-            border-radius: 8px;
-            padding: 10px 12px;
-            font-size: 14px;
+        .card-body {
+            box-sizing: border-box;
+            padding: 16PX;
+            width: 288px;
+            border-top: 1px solid #ccc;
         }
 
+        .card-title,
+        .card-title a {
+            padding: 0;
+            margin: 0;
+            width: 254px;
+        }
+
+        .card-subtitle {
+            width: 254px;
+        }
+        .null {
+            text-align: center;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
     </style>
 </head>
 <body>
 <header>
     <th:block th:insert="~{header.html}"></th:block>
 </header>
-<section style="margin-top: 200px">
+<section>
     <div class="nav-bar">
-    <h1>맞춤검색결과</h1>
-    <div id="result">
-        <th:block th:if="${#lists.isEmpty(fList)}">
-            등록된 헬스장이 없습니다.
-        </th:block>
-        <th:block th:unless="${#lists.isEmpty(fList)}">
-            <th:block th:each="fitem:${fList}">
-                <div class="card" style="width: 18rem;">
-                    <th:block th:if="${fitem.gsysname} == null">
-                        <img th:src="@{images/no_image.jpg}" class="card-img-top" alt="...">
+        <div id="result">
+            <h1>맞춤검색결과</h1>
+            <div class="row">
+                <th:block th:if="${#lists.isEmpty(gList)}">
+                    <div class="null">등록된 헬스장이 없습니다.</div>
+                </th:block>
+                <th:block th:unless="${#lists.isEmpty(gList)}">
+                    <th:block th:each="gitem:${gList}">
+                        <div class="card">
+                            <div class="col">
+                                <th:block th:if="${gitem.gsysname} == null">
+                                    <img th:src="@{images/no_image.jpg}" class="card-img-top">
+                                </th:block>
+                                <th:block th:unless="${gitem.gsysname} == null">
+                                    <img th:src="@{'upload/'gitem.gsysname}" class="card-img-top">
+                                </th:block>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">
+                                    <a th:href="@{gymPage(gymnum=${gitem.gymnum})}" th:text="${gitem.gname}"></a>
+                                </h3>
+                                <h5 class="card-subtitle" th:text="${gitem.glocation}"></h5>
+                            </div>
+                        </div>
                     </th:block>
-                    <th:block th:unless="${fitem.gsysname} == null">
-                        <img th:src="@{upload/}+${fitem.gsysname}" class="card-img-top" alt="...">
-                    </th:block>
-                    <div class="card-body">
-                        <a th:href="@{gymPage(gymnum=${fitem.gymnum})}" th:text="${fitem.gname}"></a>
-                        <p th:text="${fitem.glocation}"></p>
-                    </div>
-                </div>
-            </th:block>
-        </th:block>
+                </th:block>
+            </div>
+        </div>
     </div>
 </section>
 <footer>

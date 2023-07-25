@@ -47,7 +47,7 @@ public class GymController {
         return "gymSetting";
     }
 
-    // 헬스장 목록 받아오기
+    // 헬스장 셀렉트 검색 첫번째 목록 받아오기
     @PostMapping("gymList")
     @ResponseBody
     public List<GymDto> hGymPlaceList(String glocation){
@@ -56,7 +56,7 @@ public class GymController {
         return addrList;
     }
 
-    // 헬스장 목록 받아오기
+    // 헬스장 셀렉트 검색 두번째 목록 받아오기
     @GetMapping("gymList")
     @ResponseBody
     public List<GymDto> hSeachGymOutput(String gcity){
@@ -86,8 +86,6 @@ public class GymController {
     @GetMapping("gymPage")
     public ModelAndView gymPage(Integer gymnum, HttpSession session){
         log.info("gymPage()");
-
-
         if (session.getAttribute("member") == null){
             mv = gServ.getNotGymPage(gymnum);
             mv.setViewName("gymPageNM");
@@ -97,11 +95,10 @@ public class GymController {
             mv = gServ.getGymPage(gymnum, membernum);
             mv.setViewName("gymPage");
         }
-
         return mv;
     }
 
-    // 찜
+    // 찜 등록
     @PostMapping("inputMark")
     @ResponseBody
     public String inputMark(Integer membernum, Integer gymnum){
@@ -109,7 +106,7 @@ public class GymController {
         String res = gServ.inputMark(membernum, gymnum);
         return res;
     }
-    // 찜
+    // 찜 삭제
     @PostMapping("delMark")
     @ResponseBody
     public String delMark(Integer membernum, Integer gymnum){

@@ -125,7 +125,7 @@ public class GymService {
         List<FilterViewDto> aList = gDao.hGymFilteraList(fMap);
         List<FilterViewDto> fList = DeduplicationUtils.deduplication(aList, FilterViewDto::getGname);
 
-        mv.addObject("fList", fList);
+        mv.addObject("gList", fList);
         mv.setViewName("gymSetList");
         return mv;
     }
