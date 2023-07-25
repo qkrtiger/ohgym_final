@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>헬스장 상품관리</title>
-  <link rel="stylesheet" th:href="@{css/mypage.css}">
   <script th:src="@{js/popup.js}" defer></script>
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   <style>
     .toggleSwitch {
       width: 60px;
-      margin: 30px;
+      margin: 30px auto;
       height: 30px;
       display: block;
       position: relative;
@@ -17,6 +16,7 @@
       background-color: #2c7fdf;
       box-shadow: 0 0 16px 3px rgba(0 0 0 / 15%);
       cursor: pointer;
+      /*vertical-align: middle*/
     }
 
     .toggleSwitch .toggleButton {
@@ -43,52 +43,129 @@
       transition: all 0.2s ease-in;
     }
 
+    table {
+      margin-top: 40px;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+
+    .content{
+      border: 1px solid;
+      width: 85%;
+      margin: 0 auto;
+      margin-bottom: 200px;
+    }
+
+    .content-in {
+      margin: 30px;
+    }
+
+    .goodsbtn{
+      margin-top: 30px;
+      margin-right: 30px;
+      float: right;
+      padding: 10px 20px;
+      background-color: #0099ff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      /* 호버 효과 넣기 */
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .goodsbtn:hover {
+      background-color: #007acc;
+    }
+
+    .info-title{
+      margin-top: 200px;
+      margin-left: 150px;
+      margin-bottom: 30px;
+    }
+
+    .deletebtn{
+      margin-left: 150px;
+      margin-bottom: 30px;
+      padding: 10px 20px;
+      background-color: #0099ff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      /* 호버 효과 넣기 */
+      transition: background-color 0.3s ease-in-out;
+    }
+    .deletebtn:hover {
+      background-color: #007acc;
+    }
   </style>
 </head>
 <body>
+<header class="header">
+  <th:block th:insert="~{headerGym.html}"></th:block>
+</header>
+<h2 class="info-title">헬스장 상품 관리</h2>
+<button class="deletebtn" type="button" th:onclick = "del()">삭제</button>
 <div id="content" class="content">
-  <h2 class="info-title">헬스장 상품 관리</h2>
-  <button type="button" th:onclick = "del()">삭제</button>
-  <tbody>
-  <table style="width: 100%", id="mtable">
-    <thead>
-    <tr>
-      <th><input type="checkbox" name="_selected_all_">No.</th>
-      <th>상품명</th>
-      <th>가격(월)</th>
-      <th>결제금액</th>
-      <th>추가사항</th>
-      <th>활성화</th>
-    </tr>
-    </thead>
-    <tbody id="tb">
-    <div th:unless="${#lists.isEmpty(gGList)}">
-      <tr th:each="gGitem, iterstat: ${gGList}">
-        <td>
-          <input type="checkbox" name="_selected_">
-          <input type="hidden" th:value="${gGitem.ggoodsnum}">
-        </td>
-        <td th:text="${iterstat.count}"></td>
-        <td th:text="${gGitem.ggoodsname}"></td>
-        <td th:text="${#numbers.formatInteger(gGitem.ggoodsprice div gGitem.ggoodsperiod, 3, 'COMMA') + '원'}"></td>
-        <td th:text="${#numbers.formatInteger(gGitem.ggoodsprice, 3, 'COMMA') + '원'}"></td>
-        <td th:text="${gGitem.ggoodsadd}"></td>
-        <td>
-          <input type="checkbox" class="tgl" th:id="'toggle'+${iterstat.count}" th:checked="${gGitem.ggoodsaction}" hidden th:data-gn="${gGitem.ggoodsnum}">
-          <label th:for="'toggle'+${iterstat.count}" class="toggleSwitch" th:classappend="${gGitem.ggoodsaction == false} ? 'active'">
-            <span class="toggleButton"></span>
-          </label>
-          </label>
-        </td>
+  <div class="content-in">
+    <table style="width: 100%", id="mtable">
+      <thead>
+      <tr>
+        <th><input type="checkbox" name="_selected_all_"></th>
+        <th>No.</th>
+        <th>상품명</th>
+        <th>가격(월)</th>
+        <th>결제금액</th>
+        <th>추가사항</th>
+        <th>활성화</th>
       </tr>
-    </div>
-    <div th:if="${#lists.isEmpty(gGList)}">
-      <td colspan="6">등록된 상품이 없습니다.</td>
-    </div>
-    </tbody>
-  </table>
-  <button th:onclick="|location.href='@{gGoodsForm}'|">상품 등록</button>
+      </thead>
+      <tbody id="tb">
+      <div th:unless="${#lists.isEmpty(gGList)}">
+        <tr th:each="gGitem, iterstat: ${gGList}">
+          <td>
+            <input type="checkbox" name="_selected_">
+            <input type="hidden" th:value="${gGitem.ggoodsnum}">
+          </td>
+          <td th:text="${iterstat.count}"></td>
+          <td th:text="${gGitem.ggoodsname}"></td>
+          <td th:text="${#numbers.formatInteger(gGitem.ggoodsprice div gGitem.ggoodsperiod, 3, 'COMMA') + '원'}"></td>
+          <td th:text="${#numbers.formatInteger(gGitem.ggoodsprice, 3, 'COMMA') + '원'}"></td>
+          <td th:text="${gGitem.ggoodsadd}"></td>
+          <td>
+            <input type="checkbox" class="tgl" th:id="'toggle'+${iterstat.count}" th:checked="${gGitem.ggoodsaction}" hidden th:data-gn="${gGitem.ggoodsnum}">
+            <label th:for="'toggle'+${iterstat.count}" class="toggleSwitch" th:classappend="${gGitem.ggoodsaction == false} ? 'active'">
+              <span class="toggleButton"></span>
+            </label>
+            </label>
+          </td>
+        </tr>
+      </div>
+      <div th:if="${#lists.isEmpty(gGList)}">
+        <td colspan="6">등록된 상품이 없습니다.</td>
+      </div>
+      </tbody>
+    </table>
+  </div>
+  <button class="goodsbtn" th:onclick="|location.href='@{gGoodsForm}'|">상품 등록</button>
 </div>
+<footer class="footer">
+  <th:block th:insert="~{footer.html}"></th:block>
+</footer>
 </body>
 <script th:inline="javascript">
   //전체선택 및 해제
