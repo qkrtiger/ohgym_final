@@ -80,7 +80,7 @@
     </th:block>
     <th:block th:unless="${gym == null}">
       <div id="imageContainer">
-        <th:block th:if="${gym.gsysname} == null">
+        <th:block th:if="${gym.gsysname == null}">
           <img th:src="@{images/logo_main.png}"
                alt="이미지_설명" id="gymimg" >
         </th:block>
