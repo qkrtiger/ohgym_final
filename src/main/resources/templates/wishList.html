@@ -74,6 +74,10 @@
             padding-top: 50px;
             margin-bottom: 30px;
         }
+
+        .gymname{
+            color: black;
+        }
     </style>
 </head>
 <body>
@@ -103,7 +107,7 @@
                             </th:block>
                         </div>
                         <div class="card-body">
-                            <a th:href="@{gymPage(gymnum=${gitem.gymnum})}" th:text="${gitem.gname}"></a>
+                            <a class="gymname" th:href="@{gymPage(gymnum=${gitem.gymnum})}" th:text="${gitem.gname}"></a>
                             <p th:text="${gitem.glocation}"></p>
                         </div>
                     </div>
