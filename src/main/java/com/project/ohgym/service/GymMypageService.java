@@ -216,7 +216,7 @@ public class GymMypageService {
         gConv.setGc_parking(gcd.isGc_parking());
 
         gMach.setGymnum(gymnum);
-        gMach.setGm_shoulderpress(gcd.isGm_latpull());
+        gMach.setGm_latpull(gcd.isGm_latpull());
         gMach.setGm_shoulderpress(gcd.isGm_shoulderpress());
         gMach.setGm_citydraw(gcd.isGm_citydraw());
         gMach.setGm_legpress(gcd.isGm_legpress());
