@@ -289,10 +289,10 @@
 </head>
 <body class="renewal">
 <header>
-    <th:block th:if="${session.gym} == null">
+    <th:block th:if="${session.gym == null}">
         <th:block th:insert="~{header.html}"></th:block>
     </th:block>
-    <th:block th:unless="${session.gym} == null">
+    <th:block th:unless="${session.gym == null}">
         <th:block th:insert="~{headerGym.html}"></th:block>
     </th:block>
 </header>

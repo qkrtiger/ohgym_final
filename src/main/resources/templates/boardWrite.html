@@ -96,10 +96,10 @@
 </head>
 <body>
 <header>
-    <th:block th:if="${session.gym} == null">
+    <th:block th:if="${session.gym == null}">
         <th:block th:insert="~{header.html}"></th:block>
     </th:block>
-    <th:block th:unless="${session.gym} == null">
+    <th:block th:unless="${session.gym == null}">
         <th:block th:insert="~{headerGym.html}"></th:block>
     </th:block>
 </header>
@@ -108,7 +108,7 @@
         <div class="card">
             <div class="card-header">글쓰기</div>
             <div class="card-body">
-                <th:block th:if="${session.gym} == null">
+                <th:block th:if="${session.gym == null}">
                     <form th:action="@{bWrite}" method="post" class="write-form" th:object="${session.member}">
                         <div class="mb-3">
                             <input type="hidden" name="mnickname" th:value="*{mnickname}">
@@ -129,7 +129,7 @@
                         </div>
                     </form>
                 </th:block>
-                <th:block th:unless="${session.gym} == null">
+                <th:block th:unless="${session.gym == null}">
                     <form th:action="@{bGWrite}" method="post" class="write-form" th:object="${session.gym}">
                         <div class="mb-3">
                             <input type="hidden" name="gname" th:value="*{gname}">
