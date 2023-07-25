@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>일반로그인</title>
+  <title>오짐- 헬스장 로그인</title>
+  <link rel="shortcut icon" href="/images/header/lgo_face.ico">
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   <link rel="stylesheet" th:href="@{css/join.css}">
-
+  <th:block th:insert="~{header.html}"></th:block>
   <script th:inline="javascript">
     $(function () {
       let m = [[${msg}]];//msg가 없으면 null.
@@ -15,7 +16,7 @@
   </script>
 
 </head>
-<body>
+<body class="renewal">
 <div class="wrap">
   <form th:action="@{meberLoginProc}" method="post" class="login-form" name="jForm" onsubmit="return check()">
     <h2 class="login-header">일반 로그인</h2>
@@ -24,11 +25,14 @@
     <input type="submit" class="login-btn" value="일반login">
   </form>
 
-  <div class="login-form">
+  <div class="login-find">
     <a th:href="@{loginfind}" class="linkfindid">ID 찾기</a>
   </div>
 </div>
 </body>
+<footer class="footer">
+  <th:block th:insert="~{footer.html}"></th:block>
+</footer>
 <script th:inline="javascript">
 
  function check(){

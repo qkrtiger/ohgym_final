@@ -47,7 +47,7 @@ public class MainController {
     public ModelAndView onelist(String goods) {
         log.info("onelist()");
         mv = miServ.oneList(goods);
-        mv.setViewName("gymList.html_bakup");
+        mv.setViewName("gymList.html");
         return mv;
     }
 
@@ -56,7 +56,7 @@ public class MainController {
     public ModelAndView womanList(String wgender) {
         log.info("womanList()");
         mv = miServ.womanList(wgender);
-        mv.setViewName("gymList.html_bakup");
+        mv.setViewName("gymList");
         return mv;
     }
 
@@ -65,7 +65,7 @@ public class MainController {
     public ModelAndView manList(String mgender) {
         log.info("manList()");
         mv = miServ.manList(mgender);
-        mv.setViewName("gymList.html_bakup");
+        mv.setViewName("gymList");
         return mv;
     }
 

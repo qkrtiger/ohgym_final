@@ -2,6 +2,8 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <script src="js/jquery-3.7.0.min.js"></script>
+    <title>오짐 - 상세보기</title>
+    <link rel="shortcut icon" href="/images/header/lgo_face.ico">
     <script th:inline="javascript">
         $(function () {
             let m = [[${msg}]]; // msg가 없으면 null
@@ -11,6 +13,61 @@
         });
     </script>
     <style>
+        /*폰트*/
+        @font-face {
+            font-family: "SpoqaHanSansNeo";
+            src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.eot?#iefix") format("embedded-opentype");
+            unicode-range: U+000-5FF,U+AC00-D7AF;
+            font-weight: 100;
+            font-style: normal;
+            font-display: swap
+        }
+
+        @font-face {
+            font-family: "SpoqaHanSansNeo";
+            src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.eot?#iefix") format("embedded-opentype");
+            unicode-range: U+000-5FF,U+AC00-D7AF;
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap
+        }
+
+        @font-face {
+            font-family: "SpoqaHanSansNeo";
+            src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.eot?#iefix") format("embedded-opentype");
+            unicode-range: U+000-5FF,U+AC00-D7AF;
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap
+        }
+
+        @font-face {
+            font-family: "SpoqaHanSansNeo";
+            src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.eot?#iefix") format("embedded-opentype");
+            unicode-range: U+000-5FF,U+AC00-D7AF;
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap
+        }
+
+        @font-face {
+            font-family: "SpoqaHanSansNeo";
+            src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.eot?#iefix") format("embedded-opentype");
+            unicode-range: U+000-5FF,U+AC00-D7AF;
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap
+        }
+        /*전체*/
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .renewal * {
+            font-family: "Inter", "SpoqaHanSansNeo", "notokr", "Malgun Gothic", Dotum, Helvetica, "Apple SD Gothic Neo", Sans-serif;
+        }
+
         .content-board {
             margin-top: 200px;
             margin-left: auto;
@@ -162,7 +219,6 @@
         }
     </style>
     <meta charset="UTF-8">
-    <title>boardDetail</title>
 </head>
 <body>
 <header>
@@ -233,10 +289,10 @@
                 <div class="reply">
                     <th:block th:each="ritem:${rList}">
                         <div class="replyarea">
-                            <th:block th:if="${ritem.gname == null}">
+                            <th:block th:if="${ritem.gname} == null">
                                 <li class="rtitle na" th:text="${ritem.mnickname}"></li>
                             </th:block>
-                            <th:block th:unless="${ritem.gname == null}">
+                            <th:block th:unless="${ritem.gname} == null">
                                 <li class="rtitle na" th:text="${ritem.gname}"></li>
                             </th:block>
                             <li class="rtitle day" th:text="${#dates.format(ritem.rdate, 'yyyy-MM-dd')}"></li>
