@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>tAddInfoModify</title>
+    <title>gAddInfoModify</title>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <style>
         /*폰트*/
@@ -211,7 +211,6 @@
 
         .checkdiv label {
             display: inline-block;
-            /*background-color: #e8e8e8;*/
             padding: 10px 20px;
             border-radius: 20px;
             font-size: 16px;
@@ -229,16 +228,8 @@
             display: none;
         }
 
-        .checkdiv input[type="checkbox"] +label {
-            background-color: #50C878;
-        }
-
         .checkdiv label:hover {
             background-color: #A6FEAA;
-        }
-
-        .checkdiv input[type="checkbox"]:checked + label:hover {
-            background-color: #50C878;
         }
 
         #preview{
@@ -407,13 +398,14 @@
     //각 체크박스에 클릭 이벤트 추가
     checkboxes.forEach(function(checkbox) {
         checkbox.onclick = function() {
+            //console.log($(this).next().next());
             //체크박스 상태 확인
             if (checkbox.checked) {
                 //체크된 경우 녹색으로 변경
-                checkbox.nextElementSibling.classList.remove("active");
+                $(this).next().next().removeClass("active");
             } else {
                 //체크 해제된 경우 회색으로 변경
-                checkbox.nextElementSibling.classList.add("active");
+                $(this).next().next().addClass("active");
             }
         }
     });
