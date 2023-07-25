@@ -238,7 +238,7 @@
                 </th:block>
 
                 <th:block th:unless="${gym.gsysname == null}">
-                    <img th:src="@{'images/' + logo_main.png}" class="gymimg">
+                    <img th:src="@{images/} + ${logo_main.png}" class="gymimg">
 
                     <div>
                         <th:block th:if="${gymMark == 1}">

@@ -33,11 +33,11 @@
         <form th:action="@{mtInfo}" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="membernum" th:value="${member.membernum}">
             <div class="user-image">
-                <th:block th:if="${member.msysname} == null">
+                <th:block th:if="${member.msysname == null}">
                     <img th:src="@{images/bbbbb.jpg}" height="100" width="100">
                 </th:block>
-                <th:block th:unless="${member.msysname} == null">
-                    <img th:src="@{upload/member/} + ${member.msysname}" height="100" width="100">
+                <th:block th:unless="${member.msysname == null}">
+                    <img th:src="@{upload/member/}+ ${member.msysname}" height="100" width="100">
                 </th:block>
                 <p th:text="${member.mname}"></p>
             </div>

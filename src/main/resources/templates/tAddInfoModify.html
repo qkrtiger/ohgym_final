@@ -177,10 +177,10 @@
 </head>
 <body class="renewal">
 <header class="header">
-    <th:block th:if="${gym} == null">
+    <th:block th:if="${gym == null}">
         <th:block th:insert="~{header.html}"></th:block>
     </th:block>
-    <th:block th:unless="${gym} == null">
+    <th:block th:unless="${gym == null}">
         <th:block th:insert="~{headerGym.html}"></th:block>
     </th:block>
 </header>
@@ -226,10 +226,10 @@
                     <input type="file" name="files" id="file" onchange="readURL(this);">
                 </div>
                 <div class="img-entire">
-                    <div th:if="${trainer.tsysname} == null">
+                    <div th:if="${trainer.tsysname == null}">
                         <h3 id="noImage">등록된 이미지가 없습니다</h3>
                     </div>
-                    <div th:unless="${trainer.tsysname} == null">
+                    <div th:unless="${trainer.tsysname == null}">
                         <img th:src="@{upload/trainer/} + ${trainer.tsysname}" class="image">
                         <input type="hidden" name="tsysname" th:value="${trainer.tsysname}">
                         <input type="hidden" name="toriname" th:value="${trainer.toriname}">

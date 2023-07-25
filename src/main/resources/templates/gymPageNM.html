@@ -86,8 +86,8 @@
         </th:block>
       </div>
       <th:block th:unless="${gym.gsysname} == null">
-        <img th:src="@{'images/' + logo_main.png}" class="card-img-top" alt="...">
-        <th:block th:if="${gymMark} == 1">
+        <img th:src="@{images/} + ${logo_main.png}" class="card-img-top" alt="...">
+        <th:block th:if="${gymMark == 1">
           <div><img th:src="@{/images/heart2.png}" id="like" class="gymmake"></div>
         </th:block>
         <th:block th:unless="${gymMark} == 1">

@@ -119,10 +119,10 @@
 </head>
 <body class="renewal">
 <header class="header">
-  <th:block th:if="${gym} == null">
+  <th:block th:if="${gym == null}">
     <th:block th:insert="~{header.html}"></th:block>
   </th:block>
-  <th:block th:unless="${gym} == null">
+  <th:block th:unless="${gym == null}">
     <th:block th:insert="~{headerGym.html}"></th:block>
   </th:block>
 </header>

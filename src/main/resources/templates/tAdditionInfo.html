@@ -175,10 +175,10 @@
         <h2 class="info-title">추가 정보</h2>
         <div class="content-b">
           <div class="imgbox">
-            <div th:if="${trainer.tsysname} == null">
+            <div th:if="${trainer.tsysname == null}">
               <h3 class="noimg">등록된 이미지가 없습니다</h3>
             </div>
-            <div th:unless="${trainer.tsysname} == null" class="imgdiv">
+            <div th:unless="${trainer.tsysname == null}" class="imgdiv">
               <img th:src="@{upload/trainer/} + ${trainer.tsysname}" class="image">
             </div>
           </div>

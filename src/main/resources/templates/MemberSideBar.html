@@ -80,11 +80,11 @@
 <aside>
     <div id="sidebar" class="sidebar">
         <div class="user-image">
-            <th:block th:if="${member.msysname} == null">
+            <th:block th:if="${member.msysname == null}">
                 <img th:onclick="|openPopup(membernum=${member.membernum})|"
                      th:src="@{images/bbbbb.jpg}" class="image">
             </th:block>
-            <th:block th:unless="${member.msysname} == null">
+            <th:block th:unless="${member.msysname == null}">
                 <img th:onclick="|openPopup(membernum=${member.membernum})|"
                      th:src="@{upload/member/} + ${member.msysname}" class="image">
             </th:block>

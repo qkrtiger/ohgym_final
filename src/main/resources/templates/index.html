@@ -40,10 +40,10 @@
 </head>
 <body class="renewal">
 <header class="header">
-  <th:block th:if="${session.gym} == null">
+  <th:block th:if="${session.gym == null}">
     <th:block th:insert="~{header.html}"></th:block>
   </th:block>
-  <th:block th:unless="${session.gym} == null">
+  <th:block th:unless="${session.gym == null}">
     <th:block th:insert="~{headerGym.html}"></th:block>
   </th:block>
 </header>
@@ -136,7 +136,7 @@
         <div class="slider">
           <th:block th:each="gitem:${gList}">
             <div style="height: 500px;">
-              <img th:src="@{upload/gym/}+${gitem.gsysname}" style="width: 100%; height: 100%;">
+              <img th:src="@{upload/gym/} + ${gitem.gsysname}" style="width: 100%; height: 100%;">
             </div>
           </th:block>
         </div>
@@ -153,11 +153,11 @@
         <div class="card">
           <div class="card-header">
             <div class="blog-profile">
-              <th:block th:if="${bitem?.msysname} == null">
+              <th:block th:if="${bitem?.msysname == null}">
                 <img class="blog-profile_image" th:src="@{images/no_image.jpg}">
               </th:block>
-              <th:block th:unless="${bitem?.msysname} == null">
-                <img class="blog-profile_image" th:src="@{'upload/'bitem.msysname}">
+              <th:block th:unless="${bitem?.msysname == null}">
+                <img class="blog-profile_image" th:src="@{upload/}+${bitem.msysname}">
               </th:block>
               <div class="profilebox">
                 <li th:text="${bitem.mnickname}"></li>

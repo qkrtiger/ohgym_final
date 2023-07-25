@@ -82,7 +82,7 @@
                         <img class="blog-profile_image" th:src="@{images/review-icon.png}">
                     </th:block>
                     <th:block th:unless="${ritem.msysname == null}">
-                        <img class="star-ratings-fill space-x-2 text-lg" th:src="@{'upload/'+ ritem.gsysname}">
+                        <img class="star-ratings-fill space-x-2 text-lg" th:src="@{upload/}+${ritem.gsysname}">
                     </th:block>
                     <div class="blog-profile_text">
                         <h4 class="blog-nickname" th:text="${ritem.mnickname}"></h4>

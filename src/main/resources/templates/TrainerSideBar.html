@@ -59,11 +59,11 @@
 <aside>
     <div id="sidebar" class="sidebar">
         <div class="user-image">
-            <th:block th:if="${trainer.msysname} == null">
+            <th:block th:if="${trainer.msysname == null}">
                 <img th:onclick="|openPopup(membernum=${trainer.membernum})|"
                      th:src="@{images/bbbbb.jpg}" class="image">
             </th:block>
-            <th:block th:unless="${trainer.msysname} == null">
+            <th:block th:unless="${trainer.msysname == null}">
                 <img th:onclick="|openPopup(membernum=${trainer.membernum})|"
                      th:src="@{upload/member/} + ${trainer.msysname}" class="image">
             </th:block>
