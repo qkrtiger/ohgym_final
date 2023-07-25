@@ -234,20 +234,10 @@
           </ul>
         </li>
         <li>
-          <th:block th:if="${session.gym == null}">
             <a th:href="@{hGymList}">운동하기</a>
-          </th:block>
-          <th:block th:unless="${session.gym == null}">
-            <a th:href="@{hGymMList}">운동하기</a>
-          </th:block>
           <ul class="submenu sub2">
             <li>
-              <th:block th:if="${session.gym == null}">
                 <a th:href="@{hGymList}">검색</a>
-              </th:block>
-              <th:block th:unless="${session.gym == null}">
-                <a th:href="@{hGymMList}">검색</a>
-              </th:block>
             </li>
             <li><a th:href="@{kakao}">지도</a></li>
           </ul>

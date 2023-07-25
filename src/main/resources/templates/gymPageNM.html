@@ -219,7 +219,12 @@
 
 <body>
 <header>
-  <th:block th:insert="~{header.html}"></th:block>
+  <th:block th:if="${session.gym == null}">
+    <th:block th:insert="~{header.html}"></th:block>
+  </th:block>
+  <th:block th:unless="${session.gym == null}">
+    <th:block th:insert="~{headerGym.html}"></th:block>
+  </th:block>
 </header>
 <section>
   <div id="result">
@@ -393,7 +398,7 @@
         </th:block>
         <th:block th:unless="${titem?.tsysname == null}">
           <a th:href="@{trainerPage(membernum=${tm})}">
-            <img th:src="@{'upload/'+ gymitem.tsysname}" class="card-t" id="memberOnlyt">
+            <img th:src="@{upload/trainer/} + ${gymitem.tsysname}" class="card-t" id="memberOnlyt">
           </a>
         </th:block>
       </th:block>
@@ -471,7 +476,7 @@
 
 
   $('.gymmake').click(function (){
-    alert("로그인 후 이용가능한 기능입니다.");
+    alert("회원만 이용 가능한 기능입니다.");
     return;
   });
 

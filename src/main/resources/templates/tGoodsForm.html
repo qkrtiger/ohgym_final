@@ -3,49 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <title>트레이너 상품 등록</title>
-  <link rel="stylesheet" th:href="@{css/addition.css}">
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   <style>
-    #file{
-      display: none;
+    * {
+      margin: 0;
+      padding: 0;
     }
-    #preview{
-      height: 500px;
+
+    .content-top{
+      margin-top: 150px;
+    }
+
+    .info-title{
+      margin-top: 180px;
+      margin-left: 185px;
+      margin-bottom: 30px;
+      font-size: 1.5rem;
+    }
+
+    .content-all{
+      border: 1px solid;
+      margin: 0 auto;
+      width: 80%;
+      margin-bottom: 50px;
+      min-width: 850px;
+    }
+
+    .content{
+      margin: 30px;
+    }
+
+
+    .btn{
+      display: flex;
+      flex-direction: row-reverse;
+      margin-right: 135px;
+      margin-bottom: 300px;
+    }
+
+    .btn-back {
+      margin-right: 20px;
+      margin-bottom: 30px;
+      padding: 10px 20px;
+      background-color: #0099ff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      /* 호버 효과 넣기 */
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .btn-sub{
+      margin-right: 20px;
+      margin-bottom: 30px;
+      padding: 10px 20px;
+      background-color: #0099ff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      /* 호버 효과 넣기 */
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .info-row{
+      font-size: 1.2rem;
+      border-bottom: 1px solid;
+      margin-bottom: 15px;
+      height: 40px;
+      min-width: 600px;
+    }
+
+    .input-t{
+      width: 80%;
+      border: 0 solid;
+      font-size: 20px;
+      margin-left: 10px;
     }
   </style>
 </head>
 <body>
-<div>
+<header class="header">
+  <th:block th:insert="~{header.html}"></th:block>
+</header>
+<div class="content-top">
   <form th:action="@{tMGoodsSave}" method="post" enctype="multipart/form-data">
-    <div>
+    <h2 class="info-title">상품 등록</h2>
+    <div class="content-all">
       <div id="content" class="content">
-        <h2 class="info-title">상품 등록</h2>
         <div class="info-row">
           <span class="info-label">상품명:</span>
-          <input type="text" name="tgoodsname" autofocus>
+          <input class="input-t" type="text" name="tgoodsname" autofocus>
         </div>
         <div class="info-row">
           <span class="info-label">횟수:</span>
-          <input type="text" name="tgoodsnum">
+          <input class="input-t" type="text" name="tgoodsnum">
         </div>
         <div class="info-row">
           <span class="info-label">총 가격:</span>
-          <input type="text" name="tgoodsprice">
+          <input class="input-t" type="text" name="tgoodsprice">
         </div>
         <div class="info-row">
           <span class="info-label">추가사항:</span>
-          <input type="text" name="tgoodscontents">
+          <input class="input-t" type="text" name="tgoodscontents">
           <input type="hidden" name="membernum" th:value="${member.membernum}">
           <input type="hidden" name="gymnum" th:value="${member.gymnum}">
         </div>
       </div>
-      <div>
-        <input type="button" value="이전으로" th:onclick ="|back(${member.membernum})|">
-        <input type="submit" value="저장하기">
-      </div>
+    </div>
+    <div class="btn">
+      <input class="btn-sub" type="submit" value="저장하기">
+      <input class="btn-back" type="button" value="이전으로" th:onclick ="|back(${member.membernum})|">
     </div>
   </form>
 </div>
+<footer class="footer">
+  <th:block th:insert="~{footer.html}"></th:block>
+</footer>
 </body>
 <script th:inline="javascript">
   $(function () {
