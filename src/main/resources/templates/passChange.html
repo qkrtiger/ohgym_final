@@ -2,13 +2,13 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>오짐- 비밀번호 재설정</title>
+    <link rel="shortcut icon" href="/images/header/lgo_face.ico">
     <link rel="stylesheet" th:href="@{css/join.css}">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-
+    <th:block th:insert="~{header.html}"></th:block>
 </head>
-<body>
-
+<body class="renewal">
 <div class="wrap">
     <form th:action="passProc" method="post" class="login-form" name="jForm" onsubmit="return check()">
         <h2 class="login-header">비밀번호 재설정</h2>
@@ -23,9 +23,10 @@
         <input type="submit" class="login-btn" value="비밀번호 재설정">
     </form>
 </div>
-
 </body>
-
+<footer class="footer">
+    <th:block th:insert="~{footer.html}"></th:block>
+</footer>
 <script th:inline="javascript">
 
     let ckPASS = RegExp(/^[a-zA-Z0-9]{4,12}$/); //4~12자의 영문 대소문자와 숫자로만 입력
