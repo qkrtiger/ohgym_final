@@ -169,10 +169,10 @@
 </head>
 <body>
 <header>
-    <th:block th:if="${session.gym} == null">
+    <th:block th:if="${session.gym == null}">
         <th:block th:insert="~{header.html}"></th:block>
     </th:block>
-    <th:block th:unless="${session.gym} == null">
+    <th:block th:unless="${session.gym == null}">
         <th:block th:insert="~{headerGym.html}"></th:block>
     </th:block>
 </header>
@@ -215,7 +215,7 @@
                 <hr class="line">
                 <div class="mb-2">Comments</div>
                 <br>
-                <th:block th:if="${session.gym} == null">
+                <th:block th:if="${session.gym == null}">
                     <form id="rform" th:object="${session.member}">
                         <input type="hidden" name="boardnum" th:value="${bdetail.boardnum}">
                         <textarea rows="3" name="rcontent" class="write-input" id="comment"
@@ -224,7 +224,7 @@
                         <input type="button" id="recomment" class="btn-write" value="댓글 전송" onclick="replyInsert()" }>
                     </form>
                 </th:block>
-                <th:block th:unless="${session.gym} == null">
+                <th:block th:unless="${session.gym == null}">
                     <form id="rgform" th:object="${session.gym}">
                         <input type="hidden" name="boardnum" th:value="${bdetail.boardnum}">
                         <textarea rows="3" name="rcontent" class="write-input" id="commentG"
@@ -236,10 +236,10 @@
                 <div class="reply">
                     <th:block th:each="ritem:${rList}">
                         <div class="replyarea">
-                            <th:block th:if="${session.gym} == null">
+                            <th:block th:if="${session.gym == null}">
                                 <li class="rtitle na" th:text="${ritem.mnickname}"></li>
                             </th:block>
-                            <th:block th:unless="${session.gym} == null">
+                            <th:block th:unless="${session.gym == null}">
                                 <li class="rtitle na" th:text="${ritem.gname}"></li>
                             </th:block>
                             <li class="rtitle day" th:text="${#dates.format(ritem.rdate, 'yyyy-MM-dd')}"></li>

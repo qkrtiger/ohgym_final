@@ -167,10 +167,10 @@
 </head>
 <body>
 <header>
-    <th:block th:if="${session.gym} == null">
+    <th:block th:if="${session.gym == null}">
         <th:block th:insert="~{header.html}"></th:block>
     </th:block>
-    <th:block th:unless="${session.gym} == null">
+    <th:block th:unless="${session.gym == null}">
         <th:block th:insert="~{headerGym.html}"></th:block>
     </th:block>
 </header>
@@ -186,10 +186,10 @@
                 </div>
                 <div class="info-row">
                     <div class="info-label">작성자</div>
-                    <th:block th:if="${bdetail.gname} == null">
+                    <th:block th:if="${bdetail.gname == null}">
                         <div class="info-value" th:text="${bdetail.mnickname}"></div>
                     </th:block>
-                    <th:block th:unless="${bdetail.gname} == null">
+                    <th:block th:unless="${bdetail.gname == null}">
                         <div class="info-value" th:text="${bdetail.gname}"></div>
                     </th:block>
                 </div>
