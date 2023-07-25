@@ -86,7 +86,7 @@
             </th:block>
             <th:block th:unless="${member.msysname} == null">
                 <img th:onclick="|openPopup(membernum=${member.membernum})|"
-                     th:src="@{upload/} + ${member.msysname}" class="image">
+                     th:src="@{upload/member/} + ${member.msysname}" class="image">
             </th:block>
         </div>
         <ul class="sidebar-menu">

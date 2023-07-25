@@ -65,15 +65,15 @@
             </th:block>
             <th:block th:unless="${trainer.msysname} == null">
                 <img th:onclick="|openPopup(membernum=${trainer.membernum})|"
-                     th:src="@{upload/} + ${trainer.msysname}" class="image">
+                     th:src="@{upload/member/} + ${trainer.msysname}" class="image">
             </th:block>
         </div>
         <ul class="sidebar-menu">
-            <li><a href="" class="menu-item">내 정보</a></li>
+            <li><a th:href="@{trainerMypage(membernum=${trainer.membernum})}" class="menu-item">내 정보</a></li>
             <li><a th:href="@{tAdditionInfo(membernum=${trainer.membernum})}" class="menu-item">추가정보</a></li>
-            <li><a href="" class="menu-item">결제내역</a></li>
-            <li><a href="" class="menu-item">상품관리</a></li>
-            <li><a href="" class="menu-item">FAQ</a></li>
+            <li><a th:href="@{tMypayList(membernum=${trainer.membernum})}" class="menu-item">결제내역</a></li>
+            <li><a th:href="@{trainerGoods(membernum=${trainer.membernum})}" class="menu-item">상품관리</a></li>
+            <li><a th:href="@{faq}" class="menu-item">FAQ</a></li>
         </ul>
     </div>
 </aside>
