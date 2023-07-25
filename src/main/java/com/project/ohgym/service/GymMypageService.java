@@ -34,10 +34,6 @@ public class GymMypageService {
 
         mv = new ModelAndView();
 
-        //if(gymnum == null){
-        //    gymnum = 1;
-        //}
-
         GymDto gym = gDao.selectGym(gymnum);
 
         mv.addObject("gym", gym);
@@ -49,10 +45,6 @@ public class GymMypageService {
     public ModelAndView getProfileGym(Integer gymnum) {
         log.info("getProfile()");
         mv = new ModelAndView();
-
-        //if (gymnum == null) {
-        //    gymnum = 1;
-        //}
 
         GymDto gym = gDao.selectGym(gymnum);
         mv.addObject("gym", gym);

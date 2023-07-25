@@ -3,23 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <title>헬스장 상품 등록</title>
-  <link rel="stylesheet" th:href="@{css/addition.css}">
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   <style>
-    #file{
-      display: none;
+    * {
+      margin: 0;
+      padding: 0;
     }
-    #preview{
-      height: 500px;
+
+    .content-top{
+      margin-top: 150px;
     }
+
+    .info-title{
+      margin-top: 180px;
+      margin-left: 185px;
+      margin-bottom: 30px;
+    }
+
+    .content-all{
+      border: 1px solid;
+      margin: 0 auto;
+      width: 80%;
+      margin-bottom: 300px;
+    }
+
+    .content{
+      margin: 30px;
+    }
+
+
+    .btn{
+      display: flex;
+      flex-direction: row-reverse;
+      margin-right: 100px;
+    }
+
+    .btn-back {
+      margin-right: 20px;
+      margin-bottom: 30px;
+      padding: 10px 20px;
+      background-color: #0099ff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      /* 호버 효과 넣기 */
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .btn-sub{
+      margin-right: 20px;
+      margin-bottom: 30px;
+      padding: 10px 20px;
+      background-color: #0099ff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      /* 호버 효과 넣기 */
+      transition: background-color 0.3s ease-in-out;
+    }
+
+
   </style>
 </head>
 <body>
-<div>
+<header class="header">
+  <th:block th:insert="~{headerGym.html}"></th:block>
+</header>
+<div class="content-top">
   <form th:action="@{gMGoodsSave}" method="post" enctype="multipart/form-data">
-    <div>
+    <h2 class="info-title">상품 등록</h2>
+    <div class="content-all">
       <div id="content" class="content">
-        <h2 class="info-title">상품 등록</h2>
         <div class="info-row">
           <span class="info-label">상품명:</span>
           <input type="text" name="ggoodsname" autofocus>
@@ -44,13 +102,16 @@
           <input type="hidden" name="gymnum" th:value="${session.gym.gymnum}">
         </div>
       </div>
-      <div>
-        <input type="button" value="이전으로" th:onclick ="|back(${session.gym.gymnum})|">
-        <input type="submit" value="저장하기">
+      <div class="btn">
+        <input class="btn-sub" type="submit" value="저장하기">
+        <input class="btn-back" type="button" value="이전으로" th:onclick ="|back(${session.gym.gymnum})|">
       </div>
     </div>
   </form>
 </div>
+<footer class="footer">
+  <th:block th:insert="~{footer.html}"></th:block>
+</footer>
 </body>
 <script th:inline="javascript">
   $(function () {
