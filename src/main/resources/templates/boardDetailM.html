@@ -76,6 +76,7 @@
             overflow: auto;
             margin-bottom: 10px;
             padding: 10px 5px;
+            white-space: pre-line;
         }
 
         .mb-1 {
@@ -201,7 +202,7 @@
                     <div class="info-value" th:text="${bdetail.boardcount}"></div>
                 </div>
                 <div class="mb-1">내용</div>
-                <div class="textarea" th:text="${bdetail.boardcontents}"></div>
+                <div class="textarea" th:text="${bdetail.boardcontents}" id="textln"></div>
 
                 <div class="btn-area">
                     <button class="btn-write w-3" id="backbtn">뒤로가기</button>

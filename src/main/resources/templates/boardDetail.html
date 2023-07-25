@@ -76,6 +76,7 @@
             overflow: auto;
             margin-bottom: 10px;
             padding: 10px 5px;
+            white-space: pre-line;
         }
 
         .mb-1 {
@@ -201,7 +202,7 @@
                     <div class="info-value" th:text="${bdetail.boardcount}"></div>
                 </div>
                 <div class="mb-1">내용</div>
-                <div class="textarea" th:text="${bdetail.boardcontents}"></div>
+                <div class="textarea" th:text="${bdetail.boardcontents}" id="textln"></div>
 
                 <div class="btn-area">
                     <button class="btn-write" id="upbtn">수정</button>
@@ -224,10 +225,10 @@
                 <th:block th:unless="${session.gym} == null">
                     <form id="rgform" th:object="${session.gym}">
                         <input type="hidden" name="boardnum" th:value="${bdetail.boardnum}">
-                        <textarea rows="3" name="rcontent" class="write-input" id="comment"
+                        <textarea rows="3" name="rcontent" class="write-input" id="commentG"
                                   placeholder="댓글을 적어주세요."></textarea>
                         <input type="hidden" name="gname"  th:value="*{gname}">
-                        <input type="button" id="recomment" class="btn-write" value="댓글 전송" onclick="replyGymInsert()" }>
+                        <input type="button" id="recommentG" class="btn-write" value="댓글 전송" onclick="replyGymInsert()" }>
                     </form>
                 </th:block>
                 <div class="reply">
@@ -258,6 +259,7 @@
     $("#upbtn").hide();
     $("#delbtn").hide();
     $("#recomment").hide();
+    $("#recommentG").hide();
 
     let id = [[${session.member}]];
     let bnick = [[${bdetail.mnickname}]];
@@ -279,7 +281,7 @@
             $("#upbtn").show();
             $("#delbtn").show();
         }
-        $("#recomment").show();
+        $("#recommentG").show();
     }
 
 
@@ -349,11 +351,11 @@
                         + '<li class="rtitle day">' + res.rdate + '</li></div>'
                         + '<li class="rtext">' + res.rcontent + '</li>';
                     $(".reply").prepend(str);
-                    $("#comment").val("");
+                    $("#commentG").val("");
                 } else {
                     alert("댓글 저장 실패");
-                    $("#comment").val("");
-                    $("#comment").focus();
+                    $("#commentG").val("");
+                    $("#commentG").focus();
                 }
             },
             error: function (err) {
