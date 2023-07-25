@@ -10,11 +10,11 @@
 <body>
 <div id="sidebar" class="sidebar">
   <div class="user-image">
-    <th:block th:if="${gym.gsysname} == null">
+    <th:block th:if="${gym.gsysname == null}">
       <img th:onclick="|opengImage(1)|" th:src="@{images/bbbbb.jpg}" height="100" width="100">
     </th:block>
-    <th:block th:unless="${gym.gsysname} == null">
-      <img th:onclick="|opengImage(1)|" th:src="@{upload/} + ${gym.gsysname}" height="100" width="100">
+    <th:block th:unless="${gym.gsysname == null}">
+      <img th:onclick="|opengImage(1)|" th:src="@{'upload/'gym.gsysname}" height="100" width="100">
     </th:block>
   </div>
   <ul class="sidebar-menu">

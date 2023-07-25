@@ -209,11 +209,11 @@
             <div id="imageContainer">
                 <input type="button" class="back" value="" onclick="back()">
 
-                <th:block th:if="${gym.gsysname} == null">
+                <th:block th:if="${gym.gsysname == null}">
                     <img th:src="@{images/no_image.png}" class="gymimg">
                 </th:block>
 
-                <th:block th:unless="${gym.gsysname} == null">
+                <th:block th:unless="${gym.gsysname == null}">
                     <img th:src="@{'images/' + logo_main.png}" class="gymimg">
 
                     <div>

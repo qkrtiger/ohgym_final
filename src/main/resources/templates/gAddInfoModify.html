@@ -356,11 +356,11 @@
                     <input type="file" name="files" id="file" onchange="readURL(this);">
                 </div>
                 <div class="img-entire">
-                    <div th:if="${gym.gsysname} == null">
+                    <div th:if="${gym.gsysname == null}">
                         <h3 id="noImage">등록된 이미지가 없습니다</h3>
                     </div>
-                    <div th:unless="${gym.gsysname} == null">
-                        <img th:src="@{upload/} + ${gym.gsysname}" class="image">
+                    <div th:unless="${gym.gsysname == null}">
+                        <img th:src="@{'upload/' + gym.gsysname}" class="image">
                         <input type="hidden" name="gsysname" th:value="${gym.gsysname}">
                         <input type="hidden" name="goriname" th:value="${gym.goriname}">
                     </div>
