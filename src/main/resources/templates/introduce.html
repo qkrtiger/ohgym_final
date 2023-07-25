@@ -2,24 +2,20 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Introduce</title>
+    <title>오짐 - 회사 소개</title>
     <link rel="stylesheet" th:href="@{css/introduce.css}">
+    <link rel="shortcut icon" href="/images/header/lgo_face.ico">
 </head>
-<body>
-</head>
-<body>
-<header class="header">
-    <th:block th:if="${gym == null}">
+<body class="renewal">
+<header>
+    <th:block th:if="${session.gym == null}">
         <th:block th:insert="~{header.html}"></th:block>
     </th:block>
-    <th:block th:unless="${gym == null}">
+    <th:block th:unless="${session.gym == null}">
         <th:block th:insert="~{headerGym.html}"></th:block>
     </th:block>
-
 </header>
-
-<section style="margin-top: 200px">
-
+<section>
     <div class="content_1">
       <img src="images/introduce.jpg">
         <div class="content_11">
@@ -29,9 +25,9 @@
         </div>
     </div>
     <div class="content_2">
-        <p>내 주위 헬스장을 <span style="color: #2fcb2f">지도</span>로 한눈에!</p>
-        <p>내가 원하는 <span style="color: blue">트레이너</span>를 선택!</p>
-        <p>헬스장 <span style="color: orange">후기</span>를 비교해 나에게 맞는 헬스장 <span style="color: red">pick</span>!</p>
+        <p>내 주위 헬스장을 <span style="color: #2c7fdf">지도</span>로 한눈에!</p>
+        <p>내가 원하는 <span style="color: #76b2ec">트레이너</span>를 선택!</p>
+        <p>헬스장 <span style="color: skyblue">후기</span>를 비교해 나에게 맞는 헬스장 <span style="color: red">pick</span>!</p>
     </div>
     <div class="content_3">
         <img src="images/introducemap.jpg">
@@ -48,10 +44,9 @@
 
 </section>
 
-<footer class="footer" style="margin-top: 200px">
+<footer class="footer">
     <th:block th:insert="~{footer.html}"></th:block>
 </footer>
 
 </body>
-<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 </html>
