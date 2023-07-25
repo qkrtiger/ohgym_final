@@ -1,3 +1,18 @@
+
+/*전체*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.renewal * {
+    font-family: "Inter", "SpoqaHanSansNeo", "notokr", "Malgun Gothic", Dotum, Helvetica, "Apple SD Gothic Neo", Sans-serif;
+}
+
+section{
+    margin-top: 300px;
+}
+
 /* content_1 스타일링 */
 .content_1 {
     position: relative;
