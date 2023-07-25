@@ -47,7 +47,7 @@ public class MainController {
     public ModelAndView onelist(String goods) {
         log.info("onelist()");
         mv = miServ.oneList(goods);
-        mv.setViewName("gymList.html");
+        mv.setViewName("gymList");
         return mv;
     }
 
