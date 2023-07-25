@@ -60,13 +60,13 @@
 <aside>
     <div id="sidebar" class="sidebar">
         <div class="user-image">
-            <th:block th:if="${gym.gsysname} == null">
+            <th:block th:if="${gym.gsysname == null}">
                 <img th:onclick="|openGymPopup(gymnum=${gym.gymnum})|"
                      th:src="@{images/no_image.jpg}" class="image">
             </th:block>
-            <th:block th:unless="${gym.gsysname} == null">
+            <th:block th:unless="${gym.gsysname == null}">
                 <img th:onclick="|openGymPopup(gymnum=${gym.gymnum})|"
-                     th:src="@{upload/gym/} + ${gym.gsysname}" class="image">
+                     th:src="@{'upload/gym/' + gym.gsysname}" class="image">
             </th:block>
         </div>
         <ul class="sidebar-menu">

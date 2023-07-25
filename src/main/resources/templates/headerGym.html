@@ -208,15 +208,15 @@
   <div class="base-header-wrap">
     <div class="login-header">
       <ul class="login-nav">
-        <th:block th:if="${session.gym} == null">
+        <th:block th:if="${session.gym == null}">
           <li class="bef"><a th:href="@{login}" class="login">로그인</a></li>
           <li class="bef"><a th:href="@{terms}" class="join">회원가입</a></li>
         </th:block>
-        <th:block th:unless="${session.gym} == null">
+        <th:block th:unless="${session.gym == null}">
           <li class="suc" id="gname" th:text="${session.gym.gid}"></li>
           <li class="suc">
 
-            <th:block th:unless="${session.gym.gid} == null">
+            <th:block th:unless="${session.gym.gid == null}">
               <a th:href="@{gymMypage(gymnum=${session.gym.gymnum})}" class="whiteA">마이페이지</a>
             </th:block>
           </li>
@@ -234,18 +234,18 @@
           </ul>
         </li>
         <li>
-          <th:block th:if="${session.gym} == null">
+          <th:block th:if="${session.gym == null}">
             <a th:href="@{hGymList}">운동하기</a>
           </th:block>
-          <th:block th:unless="${session.gym} == null">
+          <th:block th:unless="${session.gym == null}">
             <a th:href="@{hGymMList}">운동하기</a>
           </th:block>
           <ul class="submenu sub2">
             <li>
-              <th:block th:if="${session.gym} == null">
+              <th:block th:if="${session.gym == null}">
                 <a th:href="@{hGymList}">검색</a>
               </th:block>
-              <th:block th:unless="${session.gym} == null">
+              <th:block th:unless="${session.gym == null}">
                 <a th:href="@{hGymMList}">검색</a>
               </th:block>
             </li>
