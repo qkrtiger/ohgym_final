@@ -234,19 +234,13 @@
 
         <th:block th:if="${gym.gsysname == null}">
           <img th:src="@{images/no_image.png}" class="gymimg">
-          <img th:src="@{/images/heart1.png}"  id="nliek" class="gymmake">
         </th:block>
 
         <th:block th:unless="${gym.gsysname == null}">
           <img th:src="@{upload/gym/} + ${gym.gsysname}" class="gymimg">
 
           <div>
-            <th:block th:if="${gymMark == 1}">
-              <img th:src="@{/images/heart2.png}" id="like" class="gymmake">
-            </th:block>
-            <th:block th:unless="${gymMark == 1}">
               <img th:src="@{/images/heart1.png}" id="unlike" class="gymmake">
-            </th:block>
           </div>
         </th:block>
       </div>
@@ -474,6 +468,13 @@
 
   let member = [[${session.member}]];
   let gym = [[${session.gym}]];
+
+
+  $('.gymmake').click(function (){
+    alert("로그인 후 이용가능한 기능입니다.");
+    return;
+  });
+
   $(".memberOnly").click(function (){
     if (member == null && gym == null) {
       alert("로그인이 필요한 서비스 입니다.");
