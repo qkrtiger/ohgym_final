@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>오짐- 상세보기</title>
+    <link rel="shortcut icon" href="/images/header/lgo_face.ico">
     <script src="js/jquery-3.7.0.min.js"></script>
+    <th:block th:insert="~{header.html}"></th:block>
     <script th:inline="javascript">
         $(function () {
             let m = [[${msg}]]; // msg가 없으면 null
@@ -162,7 +165,6 @@
         }
     </style>
     <meta charset="UTF-8">
-    <title>boardDetail</title>
 </head>
 <body>
 <header>
@@ -254,6 +256,9 @@
     <th:block th:insert="~{footer.html}"></th:block>
 </footer>
 </body>
+<footer class="footer">
+    <th:block th:insert="~{footer.html}"></th:block>
+</footer>
 <script th:inline="javascript">
     $("#upbtn").hide();
     $("#delbtn").hide();
