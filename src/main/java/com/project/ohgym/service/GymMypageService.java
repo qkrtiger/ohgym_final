@@ -171,7 +171,7 @@ public class GymMypageService {
         log.info("gFileUpdate()");
         //파일 저장 위치
         String realPath = session.getServletContext().getRealPath("/");
-        realPath += "upload/";//업로드용 폴더 : upload
+        realPath += "upload/gym/";//업로드용 폴더 : upload
         File folber = new File(realPath);
         if (folber.isDirectory() == false) {
             folber.mkdir();//폴더 생성.
