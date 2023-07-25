@@ -226,6 +226,9 @@
             margin-right: auto;
         }
 
+        #title {
+            color: #212529;
+        }
     </style>
     <meta charset="UTF-8">
     <title>board</title>
@@ -280,7 +283,7 @@
                                         <td class="tr-2">
                                             <th:block th:if="${session.member == null && session.gym == null}">
                                                 <a th:href="@{boardDetailM(boardnum=${bitem.boardnum})}"
-                                                   th:text="${bitem.boardtitle}"></a>
+                                                   th:text="${bitem.boardtitle}" id="title"></a>
                                             </th:block>
                                             <th:block th:unless="${session.member == null && session.gym == null}">
                                                 <a th:href="@{boardDetail(boardnum=${bitem.boardnum})}"
