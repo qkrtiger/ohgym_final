@@ -3,19 +3,131 @@
 <head>
     <title>오짐 - 로그인</title>
     <link rel="shortcut icon" href="/images/header/lgo_face.ico">
-  <link rel="stylesheet" th:href="@{css/join.css}">
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <th:block th:insert="~{header.html}"></th:block>
+    <style>
+        /*폰트*/
+        @font-face {
+            font-family: "SpoqaHanSansNeo";
+            src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.eot?#iefix") format("embedded-opentype");
+            unicode-range: U+000-5FF,U+AC00-D7AF;
+            font-weight: 100;
+            font-style: normal;
+            font-display: swap
+        }
+
+        @font-face {
+            font-family: "SpoqaHanSansNeo";
+            src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.eot?#iefix") format("embedded-opentype");
+            unicode-range: U+000-5FF,U+AC00-D7AF;
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap
+        }
+
+        @font-face {
+            font-family: "SpoqaHanSansNeo";
+            src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.eot?#iefix") format("embedded-opentype");
+            unicode-range: U+000-5FF,U+AC00-D7AF;
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap
+        }
+
+        @font-face {
+            font-family: "SpoqaHanSansNeo";
+            src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.eot?#iefix") format("embedded-opentype");
+            unicode-range: U+000-5FF,U+AC00-D7AF;
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap
+        }
+
+        @font-face {
+            font-family: "SpoqaHanSansNeo";
+            src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.eot?#iefix") format("embedded-opentype");
+            unicode-range: U+000-5FF,U+AC00-D7AF;
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap
+        }
+
+        /*전체*/
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .renewal * {
+            font-family: "Inter", "SpoqaHanSansNeo", "notokr", "Malgun Gothic", Dotum, Helvetica, "Apple SD Gothic Neo", Sans-serif;
+        }
+
+        /*바디*/
+        .wrap {
+            max-width: 400px;
+            margin: 0 auto;
+            margin-top: 200px;
+            padding: 20px;
+        }
+
+
+        ul>li{list-style: none}
+
+
+        .footBtwrap a{
+            cursor: pointer;
+        }
+
+        .idid{
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .idtext{
+            float: left;
+            width: 200px;
+            text-align: right;
+            font-size: 20px;
+            margin-top: 5px;
+
+        }
+        .idres{
+            margin-left: 10px;
+            display: inline-block;
+            /*float: right;*/
+            width: 190px;
+            height: 30px;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .btn {
+            color: white;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            font-weight: bold;
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+
+    </style>
 </head>
 <body>
-
 <div class="wrap">
     <div class="idid">요청하신 아이디는 다음과 같습니다.</div>
     <div class="idtext">아이디 : </div>
     <div class="idres" th:text="${session.id}"></div>
     <div class="footBtwrap">
-        <a th:href="@{loginIdOut}" class="btn" style="margin-top:20px;">login</a>
-        <a th:href="@{passChange}" class="btn" style="background-color:#01a401;">비밀번호 재설정</a>
+        <a th:href="@{loginIdOut}" class="btn" style="margin-top:20px; background-color: #219dd2">로그인</a>
+        <a th:href="@{passChange}" class="btn" style="background-color: #394f77;">비밀번호 재설정</a>
     </div>
 </div>
 
