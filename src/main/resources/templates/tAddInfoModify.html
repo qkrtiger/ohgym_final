@@ -173,6 +173,12 @@
             margin-top: 20px;
             margin-left: 20px;
         }
+        textarea {
+            width: 100%;
+            height: 6.25em;
+            border: none;
+            resize: none;
+        }
     </style>
 </head>
 <body class="renewal">
@@ -213,7 +219,7 @@
                     </div>
                     <div class="info-row">
                         <span class="info-label">설명:</span>
-                        <input type="text" class="intext" name="tpr" th:value="${trainer.tpr}">
+                        <textarea rows="3" cols=20 wrap="hard" name="tpr" class="intext">[[${trainer.tpr}]]</textarea>
                     </div>
                 </div>
             </div>
