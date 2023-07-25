@@ -37,7 +37,7 @@
                     <img th:src="@{images/bbbbb.jpg}" height="100" width="100">
                 </th:block>
                 <th:block th:unless="${member.msysname} == null">
-                    <img th:src="@{upload/} + ${member.msysname}" height="100" width="100">
+                    <img th:src="@{upload/member/} + ${member.msysname}" height="100" width="100">
                 </th:block>
                 <p th:text="${member.mname}"></p>
             </div>
