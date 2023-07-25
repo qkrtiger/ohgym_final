@@ -100,13 +100,14 @@
             font-weight: bold;
             font-size: 20px;
             width: 150px;
-            display: inline-block;
+            display: table-cell;
+            vertical-align: middle;
         }
 
         .intext {
             font-size: 1.2rem;
             border: none;
-            width: 70%;
+            width: 100%;
         }
 
         .imgbox {
@@ -236,6 +237,13 @@
             width: 300px;
             margin: 20px;
         }
+
+        textarea {
+            width: 100%;
+            height: 6.25em;
+            border: none;
+            resize: none;
+        }
     </style>
 </head>
 <body class="renewal">
@@ -271,11 +279,11 @@
                     </div>
                     <div class="info-row">
                         <span class="info-label">내용:</span>
-                        <input class="intext" type="text" name="gdescription" th:value="${gym.gdescription}">
+                        <textarea rows="3" cols=20 wrap="hard" name="gdescription" class="intext">[[${gym.gdescription}]]</textarea>
                     </div>
                     <div class="info-row">
                         <span class="info-label">공지사항:</span>
-                        <input class="intext" type="text" name="gnotice" th:value="${gym.gnotice}">
+                        <textarea rows="3" cols=20 wrap="hard" name="gnotice" class="intext">[[${gym.gnotice}]]</textarea>
                     </div>
                     <div class="info-row">
                         <span class="info-label">부가서비스 무료:</span>
