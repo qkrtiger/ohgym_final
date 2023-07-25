@@ -233,12 +233,11 @@
                 <input type="button" class="back" value="" onclick="back()">
 
                 <th:block th:if="${gym.gsysname == null}">
-                    <img th:src="@{images/no_image.png}" class="gymimg">
-                    <img th:src="@{/images/heart1.png}"  id="nliek" class="gymmake">
+                    <img th:src="@{/images/no_image.png}" class="gymimg">
                 </th:block>
 
                 <th:block th:unless="${gym.gsysname == null}">
-                    <img th:src="@{images/} + ${logo_main.png}" class="gymimg">
+                    <img th:src="@{upload/gym/}+${gym.gsysname}" class="gymimg">
 
                     <div>
                         <th:block th:if="${gymMark == 1}">
@@ -399,7 +398,7 @@
                 </th:block>
                 <th:block th:unless="${titem?.tsysname == null}">
                     <a th:href="@{trainerPage(membernum=${tm})}">
-                        <img th:src="@{'upload/'+ gymitem.tsysname}" class="card-t" id="memberOnlyt">
+                        <img th:src="@{upload/trainer/} + ${gymitem.tsysname}" class="card-t" id="memberOnlyt">
                     </a>
                 </th:block>
             </th:block>
@@ -541,20 +540,6 @@
 
     ChannelIO('boot', {
         "pluginKey": "f069de55-9d72-49b8-bcaa-458a85b28544"
-    });
-
-    let member = [[${session.member}]];
-    let gym = [[${session.gym}]];
-    $(".memberOnly").click(function (){
-        if (member == null && gym == null) {
-            alert("로그인이 필요한 서비스 입니다.");
-        }
-    });
-
-    $("#memberOnlyt").click(function (){
-        if (member == null && gym == null) {
-            alert("로그인이 필요한 서비스 입니다.");
-        }
     });
 </script>
 </html>

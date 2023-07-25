@@ -1,12 +1,207 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-  <link rel="stylesheet" th:href="@{css/footer.css}">
   <script src="js/jquery-3.7.0.min.js"></script>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fccffff3c4ca6d5819e942ec3721ebc3&libraries=services"></script>
-
-  <link rel="stylesheet" th:href="@{css/style.css}">
   <meta charset="UTF-8">
+  <script th:inline="javascript">
+    $(function () {
+      let m = [[${msg}]]; // msg가 없으면 null
+      if (m != null) {
+        alert(m);
+      }
+    })
+    function back() {
+      location.href = "hGymList";
+    }
+
+  </script>
+  <title>오짐 - 헬스장 상세페이지</title>
+  <link rel="shortcut icon" href="/images/header/lgo_face.ico">
+  <style>
+    #result {
+      margin: 150px auto 20px auto;
+      width: 100%;
+      max-width: 1000px;
+      background-color: #f8f7f7;
+    }
+
+    #imageContainer {
+      position: relative;
+      display: inline-block;
+
+    }
+
+    .back {
+      margin-top: 5px;
+      position: absolute;
+      width: 35px;
+      height: 35px;
+      background: url('images/back.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      border: none;
+    }
+
+    .gymimg {
+      width: 1000px;
+      height: 750px;
+    }
+
+    .gymmake {
+      position: absolute;
+      bottom: 20px;
+      right: 15px;
+      padding: 5px;
+      cursor: pointer;
+      width: 5%;
+    }
+
+    hr {
+      background: #ddd;
+      height: 1px;
+      border: 0;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
+    .intro {
+      display: flex;
+      flex-direction: column;
+      max-width: 1000px;
+      gap: 5px;
+      padding: 30px 22px 0px;
+    }
+
+    .intro-name {
+      font-size: 24px;
+      line-height: 115%;
+      font-weight: 700;
+      text-align: left;
+      letter-spacing: -0.2px;
+      color: rgb(88, 89, 91);
+      white-space: pre-line;
+      word-break: keep-all;
+    }
+
+    .intro-addr {
+      margin-top: 10px;
+    }
+
+    .intro-star {
+      width: 100%;
+      margin-bottom: 50px;
+      margin-top: 10px;
+    }
+
+    .star-ratings-fill {
+      color: rgba(250, 208, 0, 0.99);
+      font-size: 100%
+    }
+
+    .body-title {
+      font-size: 17px;
+      margin: 3px 0;
+    }
+
+    .tmemo {
+      line-height: 115%;
+      font-weight: 700;
+      text-align: left;
+      letter-spacing: -0.2px;
+      color: rgb(88, 89, 91);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .memo {
+      font-size: 15px;
+      line-height: 115%;
+      font-weight: 400;
+      text-align: left;
+      letter-spacing: -0.2px;
+      color: rgb(88, 89, 91);
+      word-break: keep-all;
+    }
+
+    .memo-1 {
+      white-space: pre-line;
+    }
+
+    .memo-2 {
+      font-size: 14px;
+    }
+
+    .body-i {
+      line-height: 150%;
+      background: rgb(251, 251, 251);
+      border: 1px solid rgb(238, 238, 238);
+      border-radius: 10px;
+      box-sizing: border-box;
+      padding: 30px 15px;
+    }
+
+    .body-p {
+      width: 100%;
+      margin: 0 auto;
+      background: rgb(255, 255, 255);
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      padding-bottom: 80px;
+    }
+
+    .sp {
+      margin-top: 10px;
+    }
+
+    .card-t {
+      width: 170px;
+      height: 230px;
+      border-radius: 10px;
+
+    }
+
+    .body-g {
+      width: 100%;
+      line-height: 150%;
+      background: rgb(251, 251, 251);
+      border: 1px solid rgb(238, 238, 238);
+      border-radius: 10px;
+      box-sizing: border-box;
+      padding: 30px 15px;
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    .goods {
+      position: absolute;
+      top: 10px;
+      font-size: large;
+    }
+
+    .price {
+      position: absolute;
+      right: 10px;
+    }
+
+    .body-r {
+      line-height: 150%;
+      background: rgb(251, 251, 251);
+      border: 1px solid rgb(238, 238, 238);
+      border-radius: 10px;
+      box-sizing: border-box;
+      padding: 30px 15px;
+      text-align: center;
+    }
+
+    #map {
+      width: 956px;
+      height: 500px;
+    }
+
+  </style>
   <script th:inline="javascript">
     $(function () {
       let m = [[${msg}]]; // msg가 없으면 null
@@ -18,230 +213,219 @@
     function back() {
       location.href = "hGymList";
     }
-
-    // // 로그인한 회원 정보 및 로그아웃 출력
-    // let loginName = "${mb.mid}";
-    // console.log(loginName);
-    // $("#mid").html(loginName + "님");
-    // $(".suc").css("display", "block");
-    // $(".bef").css("display", "none");
-
   </script>
   <title>gymPage</title>
-  <style>
-    #imageContainer {
-      position: relative;
-      display: inline-block;
-    }
-
-    #gymimg {
-      width: 768px; /* 이미지의 크기를 원하는 값으로 조정 */
-      height: auto; /* 가로 너비에 맞게 이미지의 세로 비율 조정 */
-    }
-
-    #like {
-      position: absolute;
-      bottom: 20px;
-      right: 15px;
-      padding: 5px;
-      cursor: pointer;
-      width: 5%;
-    }
-
-    #unlike {
-      position: absolute;
-      bottom: 20px;
-      right: 15px;
-      padding: 5px;
-      cursor: pointer;
-      width: 5%;
-    }
-
-    .star-ratings-fill {
-      color: rgba(250, 208, 0, 0.99);
-      font-size: 100%
-    }
-
-  </style>
-
 </head>
 
 <body>
 <header>
   <th:block th:insert="~{header.html}"></th:block>
 </header>
-<section style="margin-top: 200px;">
-  <input type="button" value="뒤로가기" th:onclick="back()">
+<section>
   <div id="result">
     <th:block th:if="${gym == null}">
       등록된 정보가 없습니다.
-      <img th:src="@{images/logo_main.png}"
-           alt="이미지_설명" id="gym">
     </th:block>
+
     <th:block th:unless="${gym == null}">
+
       <div id="imageContainer">
+        <input type="button" class="back" value="" onclick="back()">
+
         <th:block th:if="${gym.gsysname == null}">
-          <img th:src="@{images/logo_main.png}"
-               alt="이미지_설명" id="gymimg" >
+          <img th:src="@{images/no_image.png}" class="gymimg">
+          <img th:src="@{/images/heart1.png}"  id="nliek" class="gymmake">
+        </th:block>
+
+        <th:block th:unless="${gym.gsysname == null}">
+          <img th:src="@{upload/gym/} + ${gym.gsysname}" class="gymimg">
+
+          <div>
+            <th:block th:if="${gymMark == 1}">
+              <img th:src="@{/images/heart2.png}" id="like" class="gymmake">
+            </th:block>
+            <th:block th:unless="${gymMark == 1}">
+              <img th:src="@{/images/heart1.png}" id="unlike" class="gymmake">
+            </th:block>
+          </div>
         </th:block>
       </div>
-      <th:block th:unless="${gym.gsysname} == null">
-        <img th:src="@{images/} + ${logo_main.png}" class="card-img-top" alt="...">
-        <th:block th:if="${gymMark == 1">
-          <div><img th:src="@{/images/heart2.png}" id="like" class="gymmake"></div>
+
+      <div class="intro">
+        <div class="intro-name" th:text="${gym.gname}"></div>
+        <div class="intro-addr tmemo" th:text="${gym.glocation}"></div>
+        <div class="intro-star memo">
+          <th:block th:if="${avg == 0}">
+            등록된 별점이 없습니다.
+          </th:block>
+          <th:block th:unless="${avg == 0}">
+            <div class="star-ratings-fill" th:text="'★' + ${avg}"></div>
+          </th:block>
+        </div>
+
+        <hr>
+        <div class="body-i memo memo-1">
+          <div th:text="${gym.gdescription}"></div>
+        </div>
+
+
+        <hr>
+        <div class="body-p">
+          <div class="body-title tmemo">공지사항</div>
+          <div th:text="${gym.gnotice}"></div>
+        </div>
+
+        <hr>
+        <div>
+          <div class="body-title tmemo">운영시간</div>
+          <div class="memo memo-1" th:text="${gym.goperation}"></div>
+        </div>
+
+        <hr>
+        <div>
+          <div class="body-title tmemo">부가서비스</div>
+          <div class="tmemo memo-2 sp">유료</div>
+          <div class="memo memo-1" th:text="${gym.gaddservpay}"></div>
+          <div class="tmemo memo-2 sp">무료</div>
+          <div class="memo memo-1" th:text="${gym.gaddservfree}"></div>
+        </div>
+
+        <hr>
+        <div>
+          <div class="body-title tmemo">편의시설</div>
+          <th:block th:if="${gymC?.gc_cloths == true}">
+            <img th:src="@{/images/gc_cloths.webp}" class="card-img-top">
+          </th:block>
+          <th:block th:unless="${gymC?.gc_cloths == true}"></th:block>
+
+          <th:block th:if="${gymC?.gc_towel == true}">
+            <img th:src="@{/images/gc_towel.webp}" class="card-img-top">
+          </th:block>
+          <th:block th:unless="${gymC?.gc_towel == true}"></th:block>
+
+          <th:block th:if="${gymC?.gc_wifi == true}">
+            <img th:src="@{/images/gc_wifi.webp}" class="card-img-top">
+          </th:block>
+          <th:block th:unless="${gymC?.gc_wifi == true}"></th:block>
+
+          <th:block th:if="${gymC?.gc_parking == true}">
+            <img th:src="@{/images/gc_parking.webp}" class="card-img-top">
+          </th:block>
+          <th:block th:unless="${gymC?.gc_parking == true}"></th:block>
+
+          <th:block th:if="${gymC?.gc_inbody == true}">
+            <img th:src="@{/images/gc_inbody.webp}" class="card-img-top">
+          </th:block>
+          <th:block th:unless="${gymC?.gc_inbody == true}"></th:block>
+
+          <th:block th:if="${gymC?.gc_sauna == true}">
+            <img th:src="@{/images/gc_sauna.webp}" class="card-img-top">
+          </th:block>
+          <th:block th:unless="${gymC?.gc_sauna == true}"></th:block>
+        </div>
+
+        <hr>
+        <div>
+          <div class="body-title tmemo">기구</div>
+          <th:block th:if="${gymM?.gm_latpull == true}">
+            <img th:src="@{/images/gm_latpull.png}" class="card-img-top">
+          </th:block>
+          <th:block th:unless="${gymM?.gm_latpull == true}"></th:block>
+
+          <th:block th:if="${gymM?.gm_shoulderpress == true}">
+            <img th:src="@{images/gm_shoulderpress.png}" class="card-img-top">
+          </th:block>
+          <th:block th:unless="${gymM?.gm_shoulderpress == true}"></th:block>
+
+          <th:block th:if="${gymM?.gm_citydraw == true}">
+            <img th:src="@{images/gm_citydraw.png}" class="card-img-top">
+          </th:block>
+          <th:block th:unless="${gymM?.gm_citydraw == true}"></th:block>
+
+          <th:block th:if="${gymM?.gm_legpress == true}">
+            <img th:src="@{images/gm_legpress.png}" class="card-img-top">
+          </th:block>
+          <th:block th:unless="${gymM?.gm_legpress == true}"></th:block>
+
+          <th:block th:if="${gymM?.gm_smithmachine == true}">
+            <img th:src="@{images/gm_smithmachine.png}" class="card-img-top">
+          </th:block>
+          <th:block th:unless="${gymM?.gm_smithmachine == true}"></th:block>
+
+          <th:block th:if="${gymM?.gm_lyinglegcurl == true}">
+            <img th:src="@{images/gm_lyinglegcurl.png}" class="card-img-top">
+          </th:block>
+          <th:block th:unless="${gymM?.gm_lyinglegcurl == true}"></th:block>
+
+          <th:block th:if="${gymM?.gm_chestfly == true}">
+            <img th:src="@{images/gm_chestfly.png}" class="card-img-top">
+          </th:block>
+          <th:block th:unless="${gymM?.gm_chestfly == true}"></th:block>
+
+          <th:block th:if="${gymM?.gm_hyperextension == true}">
+            <img th:src="@{images/gm_hyperextension.png}" class="card-img-top">
+          </th:block>
+          <th:block th:unless="${gymM?.gm_hyperextension == true}"></th:block>
+        </div>
+    </th:block>
+
+
+    <hr>
+    <div>
+      <div class="body-title tmemo">상품안내</div>
+      <div th:if="${#lists.isEmpty(gGList)}">
+        등록된 상품이 없습니다.
+      </div>
+      <div class="body-g"
+           th:unless="${#lists.isEmpty(gGList)}"
+           th:each="gGitem:${gGList}"
+           th:data-goodsname="${gGitem?.ggoodsname}"
+           th:data-goodsprice="${gGitem?.ggoodsprice}">
+        <div>
+          <h5>
+            <a th:href="@{gymPay(gymnum=${gGitem?.gymnum})}" th:text="${gGitem?.ggoodsname}" id="memberOnly"></a>
+          </h5>
+          <p th:text="${#numbers.formatInteger(gGitem.ggoodsprice, 3, 'COMMA') + ' 원'}"></p>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    <div>
+      <div class="body-title tmemo">트레이너</div>
+      <th:block th:each="titem:${tList}">
+        <th:block th:if="${titem?.tsysname == null}">
+          <img th:src="@{images/logo_main.png}" class="card-t">
         </th:block>
-        <th:block th:unless="${gymMark} == 1">
-          <div><img th:src="@{/images/heart1.png}" id="unlike" class="gymmake"></div>
+        <th:block th:unless="${titem?.tsysname == null}">
+          <a th:href="@{trainerPage(membernum=${tm})}">
+            <img th:src="@{'upload/'+ gymitem.tsysname}" class="card-t" id="memberOnlyt">
+          </a>
         </th:block>
       </th:block>
-  </div>
-  <div th:text="${gym.gname}"></div>
-  <div th:text="${gym.glocation}"></div>
-  <div>
-    <th:block th:if="${avg} == 0">
-      등록된 별점이 없습니다.
-    </th:block>
-    <th:block th:unless="${avg} == 0">
-      <div class="star-ratings-fill" th:text="'★' + ${avg}"></div>
-    </th:block>
-  </div>
-  <div>
-    <p>헬스장 소개</p>
-    <div th:text="${gym.gdescription}"></div>
-  </div>
-  <div>
-    <p>공지사항</p>
-    <div th:text="${gym.gnotice}"></div>
-  </div>
-  <div>
-    <p>운영시간</p>
-    <div th:text="${gym.goperation}"></div>
-  </div>
-  <div>
-    <p>부가서비스</p>
-    <p>유료</p>
-    <div th:text="${gym.gaddservpay}"></div>
-    <p>무료</p>
-    <div th:text="${gym.gaddservfree}"></div>
-  </div>
 
-  <div class="">
-    <p>편의시설</p>
-    <th:block th:if="${gymC?.gc_cloths} == true">
-      <img th:src="@{/images/gc_cloths.webp}" class="card-img-top" alt="...">
-    </th:block>
-    <th:block th:unless="${gymC?.gc_cloths} == true"></th:block>
+      <hr>
+      <div class="body-btn">
+        <div class="body-title tmemo">이용후기</div>
 
-    <th:block th:if="${gymC?.gc_towel} == true">
-      <img th:src="@{/images/gc_towel.webp}" class="card-img-top" alt="...">
-    </th:block>
-    <th:block th:unless="${gymC?.gc_towel} == true"></th:block>
-
-    <th:block th:if="${gymC?.gc_wifi} == true">
-      <img th:src="@{/images/gc_wifi.webp}" class="card-img-top" alt="...">
-    </th:block>
-    <th:block th:unless="${gymC?.gc_wifi} == true"></th:block>
-
-    <th:block th:if="${gymC?.gc_parking} == true">
-      <img th:src="@{/images/gc_parking.webp}" class="card-img-top" alt="...">
-    </th:block>
-    <th:block th:unless="${gymC?.gc_parking} == true"></th:block>
-
-    <th:block th:if="${gymC?.gc_inbody} == true">
-      <img th:src="@{/images/gc_inbody.webp}" class="card-img-top" alt="...">
-    </th:block>
-    <th:block th:unless="${gymC?.gc_inbody} == true"></th:block>
-
-    <th:block th:if="${gymC?.gc_sauna} == true">
-      <img th:src="@{/images/gc_sauna.webp}" class="card-img-top" alt="...">
-    </th:block>
-    <th:block th:unless="${gymC?.gc_sauna} == true"></th:block>
-
-  </div>
-  <div class="">
-    <p>기구</p>
-    <th:block th:if="${gymM?.gm_latpull} == true">
-      <img th:src="@{/images/gm_latpull.png}" class="card-img-top" alt="...">
-    </th:block>
-    <th:block th:unless="${gymM?.gm_latpull} == true"></th:block>
-
-    <th:block th:if="${gymM?.gm_shoulderpress} == true">
-      <img th:src="@{images/gm_shoulderpress.png}" class="card-img-top" alt="...">
-    </th:block>
-    <th:block th:unless="${gymM?.gm_shoulderpress} == true"></th:block>
-
-    <th:block th:if="${gymM?.gm_citydraw} == true">
-      <img th:src="@{images/gm_citydraw.png}" class="card-img-top" alt="...">
-    </th:block>
-    <th:block th:unless="${gymM?.gm_citydraw} == true"></th:block>
-
-    <th:block th:if="${gymM?.gm_legpress} == true">
-      <img th:src="@{images/gm_legpress.png}" class="card-img-top" alt="...">
-    </th:block>
-    <th:block th:unless="${gymM?.gm_legpress} == true"></th:block>
-
-    <th:block th:if="${gymM?.gm_smithmachine} == true">
-      <img th:src="@{images/gm_smithmachine.png}" class="card-img-top" alt="...">
-    </th:block>
-    <th:block th:unless="${gymM?.gm_smithmachine} == true"></th:block>
-
-    <th:block th:if="${gymM?.gm_lyinglegcurl} == true">
-      <img th:src="@{images/gm_lyinglegcurl.png}" class="card-img-top" alt="...">
-    </th:block>
-    <th:block th:unless="${gymM?.gm_lyinglegcurl} == true"></th:block>
-
-    <th:block th:if="${gymM?.gm_chestfly} == true">
-      <img th:src="@{images/gm_chestfly.png}" class="card-img-top" alt="...">
-    </th:block>
-    <th:block th:unless="${gymM?.gm_chestfly} == true"></th:block>
-
-    <th:block th:if="${gymM?.gm_hyperextension} == true">
-      <img th:src="@{images/gm_hyperextension.png}" class="card-img-top" alt="...">
-    </th:block>
-    <th:block th:unless="${gymM?.gm_hyperextension} == true"></th:block>
-  </div>
-  </th:block>
-  </th:block>
-  <p>상품안내</p>
-  <ul class="ticket_list">
-    <li th:if="${#lists.isEmpty(gGList)}">
-      <p>등록된 상품이 없습니다.</p>
-    </li>
-    <li th:onclick="toggleOn(this)" th:unless="${#lists.isEmpty(gGList)}" th:each="gGitem:${gGList}"
-        th:data-goodsname="${gGitem?.ggoodsname}" th:data-goodsprice="${gGitem?.ggoodsprice}">
-      <div>
-        <h5>
-          <a th:text="${gGitem?.ggoodsname}" class="memberOnly"></a>
-        </h5>
-        <p th:text="${#numbers.formatInteger(gGitem.ggoodsprice, 3, 'COMMA') + ' 원'}"></p>
+        <th:block th:if="${relen == 0}" class="body-r">
+          등록된 이용후기가 없습니다.
+        </th:block>
+        <th:block th:unless="${relen == 0}">
+          <a th:href="@{gymReviewList(gymnum=${gym.gymnum},pageNum=1)}"
+             th:text="'이용후기 ' + ${relen} + '개 전체보기'"></a>
+        </th:block>
+        <hr>
+        <div class="body-title tmemo">위치</div>
+        <div id="map"></div>
+        <br>
+        <div class="memo">
+          오짐은 통신판매의 중개자이며, 통신판매의 당사자가 아닙니다.<br>
+          따라서 상품의 구매, 이용 및 환불 등과 관련된 의무와 책임은 각 판매자에게 있습니다.
+        </div>
       </div>
-    </li>
-  </ul>
+    </div>
   </div>
-  </th:block>
-  <p>트레이너</p>
-  <th:block th:each="titem:${tList}">
-    <th:block th:if="${titem?.tsysname} == null">
-      <img th:src="@{images/6v2gbTC49P+3n1LaNA92BHGzv72rvpf9.webp}" class="card-img-top">
-    </th:block>
-    <th:block th:unless="${titem?.tsysname} == null">
-      <img th:src="@{'upload/'gymitem.tsysname}" class="card-img-top" id="memberOnlyt">
-    </th:block>
-  </th:block>
-  <p>이용후기</p>
-
-  <th:block th:if="${relen} == 0">
-    등록된 이용후기가 없습니다.
-  </th:block>
-  <th:block th:unless="${relen} == 0">
-    <a th:href="@{gymReviewList(gymnum=${gym.gymnum},pageNum=1)}" th:text="'이용후기 ' + ${relen} + '개 전체보기'"></a>
-  </th:block>
-
-  <p>위치</p>
-  <div id="map" style="width:500px;height:400px;"></div>
-
-  </div>
-
 
 </section>
 <footer>
@@ -250,9 +434,6 @@
 </body>
 
 <script th:inline="javascript">
-
-
-  // 지도
   var mapContainer = document.getElementById('map'), // 지도를 표시할 div
           mapOption = {
             center: new kakao.maps.LatLng(37.4389216594543, 126.671947966691), // 지도의 중심좌표
@@ -280,16 +461,9 @@
         clickable: true  // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
       });
       marker.setMap(map);
-
     }
     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
     map.setCenter(coords);
-  });
-
-
-  $('#unlike').click(function (){
-    alert("로그인 후 이용가능한 기능입니다.");
-    return;
   });
 
   (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
