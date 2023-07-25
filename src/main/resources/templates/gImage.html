@@ -25,11 +25,11 @@
   <div class="popup-content">
     <form th:action="@{gImage}" method="POST" enctype="multipart/form-data">
       <div class="popup-top">
-        <th:block th:if="${gym.gsysname} == null">
+        <th:block th:if="${gym.gsysname == null}">
           <img th:src="@{images/bbbbb.jpg}" height="100" width="100">
         </th:block>
-        <th:block th:unless="${gym.gsysname} == null">
-          <img  th:src="@{upload/gym/} + ${gym.gsysname}" height="100" width="100">
+        <th:block th:unless="${gym.gsysname == null}">
+          <img  th:src="@{'upload/gym/'+ gym.gsysname}" height="100" width="100">
         </th:block>
         <p th:text="${gym.gname}"></p>
       </div>

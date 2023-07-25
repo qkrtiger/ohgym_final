@@ -11,7 +11,6 @@
                 alert(m);
             }
         })
-
         function back() {
             location.href = "hGymList";
         }
@@ -23,7 +22,7 @@
         #result {
             margin: 150px auto 20px auto;
             width: 100%;
-            max-width: 768px;
+            max-width: 1000px;
             background-color: #f8f7f7;
         }
 
@@ -45,8 +44,8 @@
         }
 
         .gymimg {
-            width: 768px;
-            height: 450px;
+            width: 1000px;
+            height: 750px;
         }
 
         .gymmake {
@@ -69,7 +68,7 @@
         .intro {
             display: flex;
             flex-direction: column;
-            max-width: 768px;
+            max-width: 1000px;
             gap: 5px;
             padding: 30px 22px 0px;
         }
@@ -165,16 +164,40 @@
         }
 
         .body-g {
+            width: 100%;
             line-height: 150%;
             background: rgb(251, 251, 251);
             border: 1px solid rgb(238, 238, 238);
             border-radius: 10px;
             box-sizing: border-box;
             padding: 30px 15px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .goods {
+            position: absolute;
+            top: 10px;
+            font-size: large;
+        }
+
+        .price {
+            position: absolute;
+            right: 10px;
+        }
+
+        .body-r {
+            line-height: 150%;
+            background: rgb(251, 251, 251);
+            border: 1px solid rgb(238, 238, 238);
+            border-radius: 10px;
+            box-sizing: border-box;
+            padding: 30px 15px;
+            text-align: center;
         }
 
         #map {
-            width: 724px;
+            width: 956px;
             height: 500px;
         }
 
@@ -209,18 +232,19 @@
             <div id="imageContainer">
                 <input type="button" class="back" value="" onclick="back()">
 
-                <th:block th:if="${gym.gsysname} == null">
+                <th:block th:if="${gym.gsysname == null}">
                     <img th:src="@{images/no_image.png}" class="gymimg">
+                    <img th:src="@{/images/heart1.png}"  id="nliek" class="gymmake">
                 </th:block>
 
-                <th:block th:unless="${gym.gsysname} == null">
+                <th:block th:unless="${gym.gsysname == null}">
                     <img th:src="@{'images/' + logo_main.png}" class="gymimg">
 
                     <div>
-                        <th:block th:if="${gymMark} == 1">
+                        <th:block th:if="${gymMark == 1}">
                             <img th:src="@{/images/heart2.png}" id="like" class="gymmake">
                         </th:block>
-                        <th:block th:unless="${gymMark} == 1">
+                        <th:block th:unless="${gymMark == 1}">
                             <img th:src="@{/images/heart1.png}" id="unlike" class="gymmake">
                         </th:block>
                     </div>
@@ -231,10 +255,10 @@
                 <div class="intro-name" th:text="${gym.gname}"></div>
                 <div class="intro-addr tmemo" th:text="${gym.glocation}"></div>
                 <div class="intro-star memo">
-                    <th:block th:if="${avg} == 0">
+                    <th:block th:if="${avg == 0}">
                         등록된 별점이 없습니다.
                     </th:block>
-                    <th:block th:unless="${avg} == 0">
+                    <th:block th:unless="${avg == 0}">
                         <div class="star-ratings-fill" th:text="'★' + ${avg}"></div>
                     </th:block>
                 </div>
@@ -269,79 +293,79 @@
                 <hr>
                 <div>
                     <div class="body-title tmemo">편의시설</div>
-                    <th:block th:if="${gymC?.gc_cloths} == true">
+                    <th:block th:if="${gymC?.gc_cloths == true}">
                         <img th:src="@{/images/gc_cloths.webp}" class="card-img-top">
                     </th:block>
-                    <th:block th:unless="${gymC?.gc_cloths} == true"></th:block>
+                    <th:block th:unless="${gymC?.gc_cloths == true}"></th:block>
 
-                    <th:block th:if="${gymC?.gc_towel} == true">
+                    <th:block th:if="${gymC?.gc_towel == true}">
                         <img th:src="@{/images/gc_towel.webp}" class="card-img-top">
                     </th:block>
-                    <th:block th:unless="${gymC?.gc_towel} == true"></th:block>
+                    <th:block th:unless="${gymC?.gc_towel == true}"></th:block>
 
-                    <th:block th:if="${gymC?.gc_wifi} == true">
+                    <th:block th:if="${gymC?.gc_wifi == true}">
                         <img th:src="@{/images/gc_wifi.webp}" class="card-img-top">
                     </th:block>
-                    <th:block th:unless="${gymC?.gc_wifi} == true"></th:block>
+                    <th:block th:unless="${gymC?.gc_wifi == true}"></th:block>
 
-                    <th:block th:if="${gymC?.gc_parking} == true">
+                    <th:block th:if="${gymC?.gc_parking == true}">
                         <img th:src="@{/images/gc_parking.webp}" class="card-img-top">
                     </th:block>
-                    <th:block th:unless="${gymC?.gc_parking} == true"></th:block>
+                    <th:block th:unless="${gymC?.gc_parking == true}"></th:block>
 
-                    <th:block th:if="${gymC?.gc_inbody} == true">
+                    <th:block th:if="${gymC?.gc_inbody == true}">
                         <img th:src="@{/images/gc_inbody.webp}" class="card-img-top">
                     </th:block>
-                    <th:block th:unless="${gymC?.gc_inbody} == true"></th:block>
+                    <th:block th:unless="${gymC?.gc_inbody == true}"></th:block>
 
-                    <th:block th:if="${gymC?.gc_sauna} == true">
+                    <th:block th:if="${gymC?.gc_sauna == true}">
                         <img th:src="@{/images/gc_sauna.webp}" class="card-img-top">
                     </th:block>
-                    <th:block th:unless="${gymC?.gc_sauna} == true"></th:block>
+                    <th:block th:unless="${gymC?.gc_sauna == true}"></th:block>
                 </div>
 
                 <hr>
                 <div>
                     <div class="body-title tmemo">기구</div>
-                    <th:block th:if="${gymM?.gm_latpull} == true">
+                    <th:block th:if="${gymM?.gm_latpull == true}">
                         <img th:src="@{/images/gm_latpull.png}" class="card-img-top">
                     </th:block>
-                    <th:block th:unless="${gymM?.gm_latpull} == true"></th:block>
+                    <th:block th:unless="${gymM?.gm_latpull == true}"></th:block>
 
-                    <th:block th:if="${gymM?.gm_shoulderpress} == true">
+                    <th:block th:if="${gymM?.gm_shoulderpress == true}">
                         <img th:src="@{images/gm_shoulderpress.png}" class="card-img-top">
                     </th:block>
-                    <th:block th:unless="${gymM?.gm_shoulderpress} == true"></th:block>
+                    <th:block th:unless="${gymM?.gm_shoulderpress == true}"></th:block>
 
-                    <th:block th:if="${gymM?.gm_citydraw} == true">
+                    <th:block th:if="${gymM?.gm_citydraw == true}">
                         <img th:src="@{images/gm_citydraw.png}" class="card-img-top">
                     </th:block>
-                    <th:block th:unless="${gymM?.gm_citydraw} == true"></th:block>
+                    <th:block th:unless="${gymM?.gm_citydraw == true}"></th:block>
 
-                    <th:block th:if="${gymM?.gm_legpress} == true">
+                    <th:block th:if="${gymM?.gm_legpress == true}">
                         <img th:src="@{images/gm_legpress.png}" class="card-img-top">
                     </th:block>
-                    <th:block th:unless="${gymM?.gm_legpress} == true"></th:block>
+                    <th:block th:unless="${gymM?.gm_legpress == true}"></th:block>
 
-                    <th:block th:if="${gymM?.gm_smithmachine} == true">
+                    <th:block th:if="${gymM?.gm_smithmachine == true}">
                         <img th:src="@{images/gm_smithmachine.png}" class="card-img-top">
                     </th:block>
-                    <th:block th:unless="${gymM?.gm_smithmachine} == true"></th:block>
+                    <th:block th:unless="${gymM?.gm_smithmachine == true}"></th:block>
 
-                    <th:block th:if="${gymM?.gm_lyinglegcurl} == true">
+                    <th:block th:if="${gymM?.gm_lyinglegcurl == true}">
                         <img th:src="@{images/gm_lyinglegcurl.png}" class="card-img-top">
                     </th:block>
-                    <th:block th:unless="${gymM?.gm_lyinglegcurl} == true"></th:block>
+                    <th:block th:unless="${gymM?.gm_lyinglegcurl == true}"></th:block>
 
-                    <th:block th:if="${gymM?.gm_chestfly} == true">
+                    <th:block th:if="${gymM?.gm_chestfly == true}">
                         <img th:src="@{images/gm_chestfly.png}" class="card-img-top">
                     </th:block>
-                    <th:block th:unless="${gymM?.gm_chestfly} == true"></th:block>
+                    <th:block th:unless="${gymM?.gm_chestfly == true}"></th:block>
 
-                    <th:block th:if="${gymM?.gm_hyperextension} == true">
+                    <th:block th:if="${gymM?.gm_hyperextension == true}">
                         <img th:src="@{images/gm_hyperextension.png}" class="card-img-top">
                     </th:block>
-                    <th:block th:unless="${gymM?.gm_hyperextension} == true"></th:block>
+                    <th:block th:unless="${gymM?.gm_hyperextension == true}"></th:block>
                 </div>
             </th:block>
 
@@ -370,12 +394,12 @@
         <div>
             <div class="body-title tmemo">트레이너</div>
             <th:block th:each="titem:${tList}">
-                <th:block th:if="${titem?.tsysname} == null">
+                <th:block th:if="${titem?.tsysname == null}">
                     <img th:src="@{images/logo_main.png}" class="card-t">
                 </th:block>
-                <th:block th:unless="${titem?.tsysname} == null">
+                <th:block th:unless="${titem?.tsysname == null}">
                     <a th:href="@{trainerPage(membernum=${tm})}">
-                        <img th:src="@{'upload/'gymitem.tsysname}" class="card-t" id="memberOnlyt">
+                        <img th:src="@{'upload/'+ gymitem.tsysname}" class="card-t" id="memberOnlyt">
                     </a>
                 </th:block>
             </th:block>
@@ -384,14 +408,14 @@
             <div class="body-btn">
                 <div class="body-title tmemo">이용후기</div>
 
-                <th:block th:if="${relen} == 0" >
+                <th:block th:if="${relen == 0}" class="body-r">
                     등록된 이용후기가 없습니다.
                 </th:block>
-                <th:block th:unless="${relen} == 0">
+                <th:block th:unless="${relen == 0}">
                     <a th:href="@{gymReviewList(gymnum=${gym.gymnum},pageNum=1)}"
                        th:text="'이용후기 ' + ${relen} + '개 전체보기'"></a>
                 </th:block>
-
+                <hr>
                 <div class="body-title tmemo">위치</div>
                 <div id="map"></div>
 <br>
@@ -517,6 +541,14 @@
 
     ChannelIO('boot', {
         "pluginKey": "f069de55-9d72-49b8-bcaa-458a85b28544"
+    });
+
+    let member = [[${session.member}]];
+    let gym = [[${session.gym}]];
+    $(".memberOnly").click(function (){
+        if (member == null && gym == null) {
+            alert("로그인이 필요한 서비스 입니다.");
+        }
     });
 
     $("#memberOnlyt").click(function (){

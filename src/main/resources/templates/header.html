@@ -208,17 +208,17 @@
         <div class="base-header-wrap">
             <div class="login-header">
                 <ul class="login-nav">
-                    <th:block th:if="${session.member} == null">
+                    <th:block th:if="${session.member == null}">
                         <li class="bef"><a th:href="@{login}" class="login">로그인</a></li>
                         <li class="bef"><a th:href="@{terms}" class="join">회원가입</a></li>
                     </th:block>
-                    <th:block th:unless="${session.member} == null">
+                    <th:block th:unless="${session.member == null}">
                         <li class="suc" id="mname" th:text="${session.member.mid}"></li>
                         <li class="suc">
-                            <th:block th:if="${session.member.gymnum} == null">
+                            <th:block th:if="${session.member.gymnum == null}">
                                 <a th:href="@{memberMypage(membernum=${session.member.membernum})}" class="mypage">마이페이지</a>
                             </th:block>
-                            <th:block th:unless="${session.member.gymnum} == null">
+                            <th:block th:unless="${session.member.gymnum == null}">
                                 <a th:href="@{trainerMypage(membernum=${session.member.membernum})}" class="whiteA">마이페이지</a>
                             </th:block>
                         </li>

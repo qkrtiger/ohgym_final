@@ -245,11 +245,11 @@
         <h2 class="info-title">추가 정보</h2>
         <div class="content-b">
           <div class="imgbox">
-            <div th:if="${gym.gsysname} == null">
+            <div th:if="${gym.gsysname == null}">
               <h3 class="noimg">등록된 이미지가 없습니다</h3>
             </div>
-            <div th:unless="${gym.gsysname} == null" class="imgdiv">
-              <img th:src="@{upload/gym/} + ${gym.gsysname}" class="image">
+            <div th:unless="${gym.gsysname == null}" class="imgdiv">
+              <img th:src="@{'upload/' + gym.gsysname}" class="image">
             </div>
           </div>
           <div class="content-t">
