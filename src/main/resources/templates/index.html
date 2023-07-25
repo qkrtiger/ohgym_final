@@ -157,7 +157,7 @@
                 <img class="blog-profile_image" th:src="@{images/no_image.jpg}">
               </th:block>
               <th:block th:unless="${bitem?.msysname == null}">
-                <img class="blog-profile_image" th:src="@{upload/}+${bitem.msysname}">
+                <img class="blog-profile_image" th:src="@{upload/member/}+${bitem.msysname}">
               </th:block>
               <div class="profilebox">
                 <li th:text="${bitem.mnickname}"></li>

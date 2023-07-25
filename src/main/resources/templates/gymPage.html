@@ -398,7 +398,7 @@
                 </th:block>
                 <th:block th:unless="${titem?.tsysname == null}">
                     <a th:href="@{trainerPage(membernum=${tm})}">
-                        <img th:src="@{upload/trainer/} + ${gymitem.tsysname}" class="card-t" id="memberOnlyt">
+                        <img th:src="@{upload/trainer/} + ${titem.tsysname}" class="card-t" id="memberOnlyt">
                     </a>
                 </th:block>
             </th:block>
@@ -540,6 +540,22 @@
 
     ChannelIO('boot', {
         "pluginKey": "f069de55-9d72-49b8-bcaa-458a85b28544"
+    });
+
+    let member = [[${session.member}]];
+
+    $("#memberOnly").click(function (){
+        if (member == null) {
+            alert("회원만 이용 가능합니다.");
+            location.href = "gymPage?gymnum=" + [[${gym.gymnum}]];
+        }
+    });
+
+    $("#memberOnlyt").click(function (){
+        if (member == null) {
+            alert("회원만 이용 가능합니다.");
+            location.href = "gymPage?gymnum=" + [[${gym.gymnum}]];
+        }
     });
 </script>
 </html>

@@ -382,7 +382,8 @@
            th:data-goodsprice="${gGitem?.ggoodsprice}">
         <div>
           <h5>
-            <a th:href="@{gymPay(gymnum=${gGitem?.gymnum})}" th:text="${gGitem?.ggoodsname}" id="memberOnly"></a>
+            <a href="#"  onclick="return false"
+               th:text="${gGitem?.ggoodsname}" id="memberOnly"></a>
           </h5>
           <p th:text="${#numbers.formatInteger(gGitem.ggoodsprice, 3, 'COMMA') + ' 원'}"></p>
         </div>
@@ -394,12 +395,10 @@
       <div class="body-title tmemo">트레이너</div>
       <th:block th:each="titem:${tList}">
         <th:block th:if="${titem?.tsysname == null}">
-          <img th:src="@{images/logo_main.png}" class="card-t">
+          <img th:src="@{images/logo_main.png}" class="card-t" id="memberOnlyt-1" >
         </th:block>
         <th:block th:unless="${titem?.tsysname == null}">
-          <a th:href="@{trainerPage(membernum=${tm})}">
-            <img th:src="@{upload/trainer/} + ${gymitem.tsysname}" class="card-t" id="memberOnlyt">
-          </a>
+            <img th:src="@{upload/trainer/} + ${titem.tsysname}" class="card-t" id="memberOnlyt">
         </th:block>
       </th:block>
 
@@ -480,15 +479,23 @@
     return;
   });
 
-  $(".memberOnly").click(function (){
-    if (member == null && gym == null) {
+  $("#memberOnly").click(function (){
+    if (member == null) {
       alert("로그인이 필요한 서비스 입니다.");
+      return;
     }
   });
 
   $("#memberOnlyt").click(function (){
-    if (member == null && gym == null) {
+    if (member == null) {
       alert("로그인이 필요한 서비스 입니다.");
+      return;
+    }
+  });
+  $("#memberOnlyt-1").click(function (){
+    if (member == null) {
+      alert("로그인이 필요한 서비스 입니다.");
+      return;
     }
   });
 </script>
