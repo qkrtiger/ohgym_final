@@ -90,7 +90,7 @@ public class GymMypageService {
     private void fileDelete(String image, HttpSession session) throws Exception {
         log.info("fileDelete()");
         String realPath = session.getServletContext().getRealPath("/");
-        realPath += "upload/" + image;
+        realPath += "upload/gym/" + image;
         File file = new File(realPath);
         if(file.exists()){
             file.delete();
