@@ -249,7 +249,7 @@
               <h3 class="noimg">등록된 이미지가 없습니다</h3>
             </div>
             <div th:unless="${gym.gsysname == null}" class="imgdiv">
-              <img th:src="@{upload/gym/} + @{gym.gsysname}" class="image">
+              <img th:src="@{upload/gym/} + ${gym.gsysname}" class="image">
             </div>
           </div>
           <div class="content-t">
