@@ -2,9 +2,11 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>아이디 찾기</title>
+    <title>오짐 - 아이디 찾기</title>
+    <link rel="shortcut icon" href="/images/header/lgo_face.ico">
     <link rel="stylesheet" th:href="@{css/join.css}">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <th:block th:insert="~{header.html}"></th:block>
     <script th:inline="javascript">
       $(function (){
         let m = [[${msg}]]; //msg가 없으면 null.
@@ -14,13 +16,13 @@
       });
     </script>
 </head>
-<body>
+<body class="renewal">
 
 <div class="wrap">
     <form th:action="findProc" method="post" class="login-form" name="jForm" onsubmit="return check()">
-      <h2 class="login-header">내 계정 찾기</h2>
-      <p style="text-align: center">회원정보에 등록한 이메일로 인증</p>
-      <p>회원정보에 등록한 이메일주소와 현재 입력하신 이메일 주소가 일치해야, 인증번호를 받을 수 있습니다.</p>
+      <h2 style="text-align: center">내 계정 찾기</h2><br>
+      <p style="text-align: center">회원정보에 등록한 이메일로 인증</p><br>
+      <p style="text-align: center; color: #2c7fdf">회원정보에 등록한 이메일주소와 현재 입력하신 이메일 주소가 일치해야 인증번호를 받을 수 있습니다.</p><br>
       <input type="text" class="login-input" id="mname" name="mname" title="이름" placeholder="이름" required autofocus>
       <input type="text" class="login-input" id="mmail" name="mmail" title="이메일" placeholder="이메일" required>
       <input type="button" class="emailsend-btn" id="msend" value="인증받기">
@@ -29,9 +31,10 @@
       <input type="submit" class="login-btn" value="다음">
     </form>
 </div>
-
 </body>
-
+<footer class="footer">
+    <th:block th:insert="~{footer.html}"></th:block>
+</footer>
 <script th:inline="javascript">
     let ek = false; //false일 경우 중복체크를 안했거나 중복된 아이디를 입력한 경우
     let authcode = "";
@@ -82,14 +85,14 @@
                         }
                     });
                 } else {
-                    alert("너 우리 회원 아님 ㅅㄱ");
+                    alert("회원에 등록된 이메일이 아닙니다.");
                     $("#mname").val("");
                     $("#mname").focus();
                     $("#mmail").val("");
                 }
             },
             error: function (err){
-                alert("너 우리 회원 아님 ㅅㄱ");
+                alert("회원에 등록된 이메일이 아닙니다.");
                 console.log(err);
             }
         })
