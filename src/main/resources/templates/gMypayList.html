@@ -79,7 +79,7 @@
       margin-top: 30px;
       border: 1px solid;
       margin-left: clamp(300px, 25%, 25%);
-      margin-bottom: 600px
+      margin-bottom: 50px
     }
 
 
@@ -123,7 +123,6 @@
       font-size: 15px;
       height: 20px;
       width: 100%;
-      margin: 0px auto;
       margin: 5px;
       opacity: 0.8;
       text-align: center;
@@ -138,8 +137,13 @@
     }
 
     .paging-area {
-      margin-left: clamp(150px, 44%, 44%);
+      margin-left: clamp(300px, 58%, 58%);
       margin-top: 30px;
+    }
+
+    #sel{
+      margin-top: 20px;
+      margin-left: 150px;
     }
   </style>
 </head>
@@ -154,14 +158,14 @@
 </header>
 <th:block th:insert="~{GymSideBar.html}"></th:block>
 <h2 class="info-title">결제내역</h2>
+<select id="sel">
+  <option value="all" selected>전체</option>
+  <option value="membership">회원권</option>
+  <option value="daily">일일권</option>
+  <option value="pt">PT</option>
+</select>
+<tbody>
 <div id="content" class="content">
-  <select id="sel">
-    <option value="all" selected>전체</option>
-    <option value="membership">회원권</option>
-    <option value="daily">일일권</option>
-    <option value="pt">PT</option>
-  </select>
-  <tbody>
   <table style="width: 100%", id="mtable">
     <thead>
     <tr>
@@ -189,10 +193,13 @@
     </div>
     </tbody>
   </table>
-  <div class="paging-area">
-    <div class="paging" th:utext="${paging}"></div>
-  </div>
 </div>
+<div class="paging-area">
+  <div class="paging" th:utext="${paging}"></div>
+</div>
+<footer>
+  <th:block th:insert="~{footer.html}"></th:block>
+</footer>
 </body>
 <script th:inline="javascript">
   //검색기능
