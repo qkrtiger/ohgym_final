@@ -27,7 +27,7 @@ public class GymController {
     // 헬스장 목록
     @GetMapping("hGymMList")
     public ModelAndView hGymMList(HttpSession session) {
-        log.info("hGymList()");
+        log.info("hGymMList()");
         mv = gServ.hGymMList(session);
         return mv;
     }
