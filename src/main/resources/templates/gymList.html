@@ -4,66 +4,10 @@
     <meta charset="UTF-8">
     <title>오짐 - 헬스장 검색</title>
     <link rel="shortcut icon" href="/images/header/lgo_face.ico">
+    <link rel="stylesheet" th:href="@{css/font.css}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="js/jquery-3.7.0.min.js"></script>
     <style>
-        /*폰트*/
-        @font-face {
-            font-family: "SpoqaHanSansNeo";
-            src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Thin.eot?#iefix") format("embedded-opentype");
-            unicode-range: U+000-5FF,U+AC00-D7AF;
-            font-weight: 100;
-            font-style: normal;
-            font-display: swap
-        }
-
-        @font-face {
-            font-family: "SpoqaHanSansNeo";
-            src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Light.eot?#iefix") format("embedded-opentype");
-            unicode-range: U+000-5FF,U+AC00-D7AF;
-            font-weight: 300;
-            font-style: normal;
-            font-display: swap
-        }
-
-        @font-face {
-            font-family: "SpoqaHanSansNeo";
-            src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Regular.eot?#iefix") format("embedded-opentype");
-            unicode-range: U+000-5FF,U+AC00-D7AF;
-            font-weight: 400;
-            font-style: normal;
-            font-display: swap
-        }
-
-        @font-face {
-            font-family: "SpoqaHanSansNeo";
-            src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Medium.eot?#iefix") format("embedded-opentype");
-            unicode-range: U+000-5FF,U+AC00-D7AF;
-            font-weight: 500;
-            font-style: normal;
-            font-display: swap
-        }
-
-        @font-face {
-            font-family: "SpoqaHanSansNeo";
-            src: url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.woff2") format('woff2'),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.woff") format("woff"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.eot") format("embedded-opentype"),url("../font/SpoqaHanSans/SpoqaHanSansNeo-Bold.eot?#iefix") format("embedded-opentype");
-            unicode-range: U+000-5FF,U+AC00-D7AF;
-            font-weight: 600;
-            font-style: normal;
-            font-display: swap
-        }
-
-        /*전체*/
-
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        .renewal * {
-            font-family: "Inter", "SpoqaHanSansNeo", "notokr", "Malgun Gothic", Dotum, Helvetica, "Apple SD Gothic Neo", Sans-serif;
-        }
-
         /*바디*/
         .nav-bar {
             margin-top: 200px;
@@ -79,7 +23,7 @@
         .first-bar {
             display: flex;
             justify-content: right;
-            margin-right: 460px;
+            margin-right: 350px;
         }
 
         #mapimg {
