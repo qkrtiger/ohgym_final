@@ -119,6 +119,11 @@
     border: none;
     resize: none;
   }
+
+  .textarea{
+    display: flex;
+
+  }
 </style>
 <body class="renewal">
 <header class="header">
@@ -160,7 +165,7 @@
               <span class="info-label">자격증:</span>
               <input type="text" class="intext" th:value="${trainer.tlicence}" readonly>
             </div>
-            <div class="info-row">
+            <div class="info-row textarea">
               <span class="info-label">설명:</span>
               <textarea rows="3" cols=20 wrap="hard" name="tpr" class="intext" readonly>[[${trainer.tpr}]]</textarea>
             </div>

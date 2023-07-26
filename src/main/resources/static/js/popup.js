@@ -1,11 +1,11 @@
 //회원,트레이너 프로필 변경
 function openPopup(membernum) {
-    var popupWindow = window.open("image?membernum="+membernum, "Image editing", "width=800,height=800");
+    var popupWindow = window.open("image?membernum="+membernum, "Image editing", "width=800,height=500");
 }
 
 //헬스장 프로필 변경
 function openGymPopup(membernum) {
-    var popupWindow = window.open("gImage?gymnum="+gymnum, "Image editing", "width=800,height=800");
+    var popupWindow = window.open("gImage?gymnum="+gymnum, "Image editing", "width=800,height=500");
 }
 
 //트레이너 변경
