@@ -139,7 +139,7 @@ public class GymService {
         GymDetailDto gymMchin = gDao.getGymMechin(gymnum);
         List<GymDetailDto> gGList = gDao.getGoods(gymnum);
         List<GymDetailDto> timg = gDao.getTimg(gymnum);
-        //int tm = tDao.getGoods(gymnum);
+        int tm = tDao.getGoods(gymnum);
         int gymMark = gDao.getGymMark(gymnum, membernum);
         int relen = gDao.getlen(gymnum);
         float avg = gDao.getavg(gymnum);
@@ -148,7 +148,7 @@ public class GymService {
         mv.addObject("gymM", gymMchin);
         mv.addObject("gGList", gGList);
         mv.addObject("tList", timg);
-        //mv.addObject("tm", tm);
+        mv.addObject("tm", tm);
         mv.addObject("gymMark", gymMark);
         mv.addObject("relen", relen);
         mv.addObject("avg", avg);
