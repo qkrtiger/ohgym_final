@@ -394,7 +394,9 @@
             <div class="body-title tmemo">트레이너</div>
             <th:block th:each="titem:${tList}">
                 <th:block th:if="${titem?.tsysname == null}">
+                    <a th:href="@{trainerPage(membernum=${tm})}">
                     <img th:src="@{images/logo_main.png}" class="card-t">
+                    </a>
                 </th:block>
                 <th:block th:unless="${titem?.tsysname == null}">
                     <a th:href="@{trainerPage(membernum=${tm})}">
