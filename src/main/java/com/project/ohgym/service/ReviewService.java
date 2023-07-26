@@ -36,7 +36,7 @@ public class ReviewService {
             msg = "후기 작성 성공";
         }catch (Exception e){
             e.printStackTrace();
-            view = "redirect:gymReview";
+            view = "redirect:myPayList?membernum=" + review.getMembernum();
             msg = "후기 작성 실패";
         }
         rttr.addFlashAttribute("msg", msg);

@@ -14,7 +14,9 @@
     margin-bottom: 30px;
 }
 
-
+img {
+    cursor: pointer;
+}
 
 .hidden{
     display: none;
@@ -24,8 +26,9 @@
 }
 .prod_info .prod_info_con{
     display: flex;
-    margin-top: 200px;
+    margin-top: 50px;
 }
+
 .prod_info .prod_info_con > div{
     width: 50%;
 }
@@ -48,6 +51,15 @@
     margin-bottom: 20px;
     margin-top: 2px;
 }
+
+.prod_info .prod_info_con .info .tit_price{
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+
 .prod_info .prod_info_con .info .addr{
     margin-bottom: 10px;
     font-weight: 600;
@@ -102,20 +114,28 @@
     cursor: pointer;
     box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.1);
 }
+
+.ticket ul.ticket_list li:hover{
+    border: 2px solid #2c7fdf;
+}
+
 .ticket ul.ticket_list li.on{
     border: 5px solid #2c7fdf;
 }
 
 
-.ticket ul.ticket_list li.on{
-
-}
 .ticket ul.ticket_list li:nth-child(n + 2){
     margin-top: 20px;
 }
 .ticket ul.ticket_list li h5{
     font-size: 22px;
     font-weight: 700;
+}
+
+.ticket ul.ticket_list li h5 a{
+    font-size: 22px;
+    font-weight: 700;
+    color: #000;
 }
 .ticket ul.ticket_list li p{
     text-align: right;
