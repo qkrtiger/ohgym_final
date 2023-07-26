@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <script src="js/jquery-3.7.0.min.js"></script>
     <title>Review</title>
+    <link rel="stylesheet" th:href="@{css/font.css}">
     <script th:inline="javascript">
         $(function () {
             let m = [[${msg}]]; // msg가 없으면 null
@@ -57,7 +58,7 @@
         }
     </style>
 </head>
-<body>
+<body class="renewal">
 <form th:action="@{reviewInput}" class="mb-3" name="myform" id="myform" method="post" th:object="${session.member}">
     <input type="hidden" class="" name="mnickname" th:value="*{mnickname}">
     <input type="hidden" class="" name="membernum" th:value="*{membernum}">

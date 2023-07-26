@@ -2,6 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <script src="js/jquery-3.7.0.min.js"></script>
+    <link rel="stylesheet" th:href="@{css/font.css}">
     <script th:inline="javascript">
         $(function () {
             let m = [[${msg}]]; // msg가 없으면 null
@@ -79,7 +80,7 @@
     <meta charset="UTF-8">
     <title>boardDetail</title>
 </head>
-<body>
+<body class="renewal">
 <header>
     <th:block th:if="${session.gym == null}">
         <th:block th:insert="~{header.html}"></th:block>

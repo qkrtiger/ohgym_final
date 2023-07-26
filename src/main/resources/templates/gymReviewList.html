@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <meta charset="UTF-8">
-
     <script src="js/jquery-3.7.0.min.js"></script>
     <title>ReviewList</title>
+    <link rel="stylesheet" th:href="@{css/font.css}">
     <style>
-
-
         .container {
             width: 800px;
             height: 200px;
@@ -68,7 +65,7 @@
 
     </style>
 </head>
-<body>
+<body class="renewal">
 <h2>이용 후기</h2>
 <th:block th:if="${#lists.isEmpty(reList)}">
     등록된 후기가 없습니다.

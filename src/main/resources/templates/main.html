@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Main</title>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{css/font.css}">
     <script th:inline="javascript">
         $(function (){
             let m = [[${msg}]]; //msg가 없으면 null.
@@ -13,7 +14,7 @@
         });
     </script>
 </head>
-<body>
+<body class="renewal">
 
 <a th:href="@{kakao}">[지도]</a><br>
 <a th:href="@{terms}">[이용약관]</a><br>
