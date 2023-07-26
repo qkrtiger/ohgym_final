@@ -2,13 +2,14 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>filler</title>
+    <title>오짐 - 필터링</title>
+    <link rel="shortcut icon" href="/images/header/lgo_face.ico">
     <link rel="stylesheet" th:href="@{css/font.css}">
     <style>
         .filler_style {
             margin: auto;
             width: 600px;
-            background-color: lightsteelblue;
+            background-color: #ddd;
             border-radius: 10px;
             margin-top: 200px;
             margin-bottom: 20px;
@@ -19,6 +20,7 @@
             flex-direction: column;
             flex-wrap: wrap;
             padding: 20px;
+            margin-bottom: 100px;
         }
 
         .checkdiv {
@@ -53,14 +55,15 @@
         input[type="radio"] + label {
             padding: 3px;
             background-color: #ffffff;
-            border: 1px solid #5467F5;
+            border: 1px solid #2c7fdf;
             border-radius: 10px;
-            color: #5467F5;
+            color: #2c7fdf;
+            cursor: pointer;
         }
 
         input[type="radio"]:checked + label {
             padding: 3px;
-            background-color: #5467F5;
+            background-color: #2c7fdf;
             color: #fff;
             border: none;
             border-radius: 10px;
@@ -73,14 +76,15 @@
         input[type="checkbox"] + label {
             padding: 3px;
             background-color: #ffffff;
-            border: 1px solid #5467F5;
+            border: 1px solid #2c7fdf;
             border-radius: 10px;
-            color: #5467F5;
+            color: #2c7fdf;
+            cursor: pointer;
         }
 
         input[type="checkbox"]:checked + label {
             padding: 3px;
-            background-color: #5467F5;
+            background-color: #2c7fdf;
             color: #fff;
             border: none;
             border-radius: 10px;
@@ -95,8 +99,9 @@
             line-height: 1.5;
             border-radius: 6px;
             color: #fff;
-            background-color: #5467F5;
-            border-color: #5467F5;
+            background-color: #2c7fdf;
+            border-color: #2c7fdf;
+            cursor: pointer;
         }
 
     </style>
