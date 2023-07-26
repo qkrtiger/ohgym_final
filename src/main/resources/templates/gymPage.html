@@ -369,9 +369,6 @@
                     </th:block>
                     <th:block th:unless="${gymM?.gm_hyperextension == true}"></th:block>
                 </div>
-        </th:block>
-
-
         <hr>
         <div>
             <div class="body-title tmemo">상품안내</div>
@@ -402,7 +399,7 @@
                 </th:block>
                 <th:block th:unless="${titem?.tsysname == null}">
                     <a th:href="@{trainerPage(membernum=${titem.membernum})}">
-                        <img th:src="@{upload/trainer/} + ${titem.tsysname}" class="card-t" id="memberOnlyt">
+                        <img th:src="@{upload/trainer/} + ${titem.tsysname}" class="card-t" id="memberOnlyt" style="cursor: pointer">
                     </a>
                 </th:block>
             </th:block>
