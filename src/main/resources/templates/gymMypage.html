@@ -26,7 +26,7 @@
       margin: 0 auto;
       margin-top: 30px;
       margin-left: clamp(300px, 25%, 25%);
-      margin-bottom: clamp(200px, 0%, 0%);
+      margin-bottom: 100px;
       border: 1px solid;
     }
 
@@ -61,6 +61,9 @@
     .info-value {
       margin-left: 1%;
     }
+    .top-div{
+      min-height: 900px;
+    }
   </style>
 </head>
 <body class="renewal">
@@ -68,47 +71,50 @@
   <th:block th:insert="~{headerGym.html}"></th:block>
 </header>
 <th:block th:insert="~{GymSideBar.html}"></th:block>
-<h3 class="info-title">내 정보</h3>
-<div id="content" class="content">
-  <div class="info-row">
-    <label class="info-label">이름:</label>
-    <span class="info-value" th:text="${gym.gname}"></span>
-  </div>
-  <div class="info-row">
-    <label class="info-label">사업자등록번호:</label>
-    <span class="info-value" th:text="${gym.gregistnum}"></span>
-  </div>
-  <div class="info-row">
-    <label class="info-label">ID:</label>
-    <span class="info-value" th:text="${gym.gid}"></span>
-  </div>
-  <div class="info-row">
-    <label class="info-label">전화번호:</label>
-    <span class="info-value" th:text="${gym.gphone}"></span>
-  </div>
-  <div class="info-row">
-    <label class="info-label">헬스장 위치:</label>
-    <span class="info-value" th:text="${gym.glocation}"></span>
-  </div>
-  <div class="info-row">
-    <label class="info-label">헬스장 소개:</label>
-    <span class="info-value" th:text="${gym.gdescription}"></span>
-  </div>
-  <div class="info-row">
-    <label class="info-label">공지사항:</label>
-    <span class="info-value" th:text="${gym.gnotice}"></span>
-  </div>
-  <div class="info-row">
-    <label class="info-label">부가서비스(무료):</label>
-    <span class="info-value" th:text="${gym.gaddservfree}"></span>
-  </div>
-  <div class="info-row">
-    <label class="info-label">부가서비스(유료):</label>
-    <span class="info-value" th:text="${gym.gaddservpay}"></span>
-  </div>
-  <div class="info-row">
-    <label class="info-label">운영시간:</label>
-    <span class="info-value" th:text="${gym.goperation}"></span>
+<div class="top-div">
+
+  <h3 class="info-title">내 정보</h3>
+  <div id="content" class="content">
+    <div class="info-row">
+      <label class="info-label">이름:</label>
+      <span class="info-value" th:text="${gym.gname}"></span>
+    </div>
+    <div class="info-row">
+      <label class="info-label">사업자등록번호:</label>
+      <span class="info-value" th:text="${gym.gregistnum}"></span>
+    </div>
+    <div class="info-row">
+      <label class="info-label">ID:</label>
+      <span class="info-value" th:text="${gym.gid}"></span>
+    </div>
+    <div class="info-row">
+      <label class="info-label">전화번호:</label>
+      <span class="info-value" th:text="${gym.gphone}"></span>
+    </div>
+    <div class="info-row">
+      <label class="info-label">헬스장 위치:</label>
+      <span class="info-value" th:text="${gym.glocation}"></span>
+    </div>
+    <div class="info-row">
+      <label class="info-label">헬스장 소개:</label>
+      <span class="info-value" th:text="${gym.gdescription}"></span>
+    </div>
+    <div class="info-row">
+      <label class="info-label">공지사항:</label>
+      <span class="info-value" th:text="${gym.gnotice}"></span>
+    </div>
+    <div class="info-row">
+      <label class="info-label">부가서비스(무료):</label>
+      <span class="info-value" th:text="${gym.gaddservfree}"></span>
+    </div>
+    <div class="info-row">
+      <label class="info-label">부가서비스(유료):</label>
+      <span class="info-value" th:text="${gym.gaddservpay}"></span>
+    </div>
+    <div class="info-row">
+      <label class="info-label">운영시간:</label>
+      <span class="info-value" th:text="${gym.goperation}"></span>
+    </div>
   </div>
 </div>
 <footer>

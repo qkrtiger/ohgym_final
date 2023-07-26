@@ -144,6 +144,19 @@
     }
   });
 
+  $(".btn-sub").click(function(event) {
+    let emptyCount = 0;
+    $(".input-t").each(function() {
+      if (!$(this).val()) {
+        emptyCount++;
+      }
+    });
+    if (emptyCount > 0) {
+      event.preventDefault();
+      alert("값을 입력해주세요");
+    }
+  });
+
   function back(gymnum) {
     location.href = '/gymGoods?gymnum=' + gymnum;
   }
