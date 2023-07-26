@@ -29,7 +29,7 @@ public class PagingUtil {
                 sb.append("<a class='pno' href='/" + listName + "pageNum=" + i + "'>");
                 sb.append("&nbsp;" + i + "&nbsp;</a>");
             } else {
-                sb.append("<font class ='pno' style='color:blue;'>");
+                sb.append("<font class ='pno' style='color:#2c7fdf;'>");
                 sb.append("&nbsp" + i + "&nbsp;</font>");
             }
         }
