@@ -1,4 +1,16 @@
 /** 목록 스타일 초기화 및 중앙 배치, 가로 폭 지정 */
+.ulwidth {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+}
+
+.faqtitle{
+    margin-top: 180px;
+}
+
+
 .faqul {
     padding: 0;
     margin: 50px auto;
@@ -14,6 +26,7 @@
 .title {
     padding: 0;
     margin: 0;
+    cursor: pointer;
     /* border: 1px solid #000; */
 }
 
@@ -49,6 +62,3 @@
     -webkit-border-radius: 5px; */
 }
 
-.faqtitle{
-    margin-top: 150px;
-}
