@@ -53,4 +53,6 @@ public interface GymDao {
 
     //헬스장 키워드로 검색
     List<GymDto> hSearch(String gname);
+
+
 }

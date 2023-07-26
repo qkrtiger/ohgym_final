@@ -29,7 +29,7 @@
       margin: 0 auto;
       margin-top: 30px;
       margin-left: clamp(300px, 25%, 25%);
-      margin-bottom: clamp(200px, 0%, 0%);
+      margin-bottom: 100px;
       border: 1px solid;
     }
 
@@ -64,6 +64,10 @@
     .info-value {
       margin-left: 1%;
     }
+
+    .top-div{
+      min-height: 900px;
+    }
   </style>
 </head>
 <body class="renewal">
@@ -76,47 +80,48 @@
   </th:block>
 </header>
 <th:block th:insert="~{TrainerSideBar.html}"></th:block>
-<h2 class="info-title">내 정보</h2>
-
-<div id="content" class="content">
-  <div class="info-all">
-    <div class="info-row">
-      <span class="info-label">이름:</span>
-      <span class="info-value" th:text="${trainer.mname}"></span>
-    </div>
-    <div class="info-row">
-      <span class="info-label">닉네임:</span>
-      <span class="info-value" th:text="${trainer.mnickname}"></span>
-    </div>
-    <div class="info-row">
-      <span class="info-label">소속 헬스장:</span>
-      <span class="info-value" th:text="${trainer.gname}"></span>
-    </div>
-    <div class="info-row">
-      <span class="info-label">아이디:</span>
-      <span class="info-value" th:text="${trainer.mid}"></span>
-    </div>
-    <div class="info-row">
-      <span class="info-label">생년월일:</span>
-      <span class="info-value" th:text="${trainer.mbirth}"></span>
-    </div>
-    <div class="info-row">
-      <span class="info-label">성별:</span>
-      <span class="info-value" th:text="${trainer.mgender}"></span>
-    </div>
-    <div class="info-row">
-      <span class="info-label">전화번호:</span>
-      <span class="info-value" th:text="${trainer.mphone}"></span>
-    </div>
-    <div class="info-row">
-      <span class="info-label">자격증:</span>
-      <span class="info-value" th:text="${trainer.tlicence}"></span>
-    </div>
-    <div class="info-row">
-      <span class="info-label">경력:</span>
-      <span class="info-value" th:text="${trainer.tcareer}"></span>
-    </div>
-  </div><!--info-all-->
+<div class="top-div">
+  <h2 class="info-title">내 정보</h2>
+  <div id="content" class="content">
+    <div class="info-all">
+      <div class="info-row">
+        <span class="info-label">이름:</span>
+        <span class="info-value" th:text="${trainer.mname}"></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">닉네임:</span>
+        <span class="info-value" th:text="${trainer.mnickname}"></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">소속 헬스장:</span>
+        <span class="info-value" th:text="${trainer.gname}"></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">아이디:</span>
+        <span class="info-value" th:text="${trainer.mid}"></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">생년월일:</span>
+        <span class="info-value" th:text="${trainer.mbirth}"></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">성별:</span>
+        <span class="info-value" th:text="${trainer.mgender}"></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">전화번호:</span>
+        <span class="info-value" th:text="${trainer.mphone}"></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">자격증:</span>
+        <span class="info-value" th:text="${trainer.tlicence}"></span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">경력:</span>
+        <span class="info-value" th:text="${trainer.tcareer}"></span>
+      </div>
+    </div><!--info-all-->
+  </div>
 </div>
 <footer>
   <th:block th:insert="~{footer.html}"></th:block>

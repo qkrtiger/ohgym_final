@@ -79,6 +79,10 @@
         .gymname{
             color: black;
         }
+
+        .top-div{
+            min-height: 900px;
+        }
     </style>
 </head>
 <body class="renewal">
@@ -86,37 +90,39 @@
     <th:block th:insert="~{header.html}"></th:block>
 </header>
 <th:block th:insert="~{MemberSideBar.html}"></th:block>
-<section class="sec">
-    <div class="title">
-        <h1>찜 목록</h1>
-        <h1>검색결과출력</h1>
-    </div>
-    <div id="result">
-        <div class="row">
-            <th:block th:if="${#lists.isEmpty(gList)}">
-                등록된 헬스장이 없습니다.
-            </th:block>
-            <th:block th:unless="${#lists.isEmpty(gList)}">
-                <th:block th:each="gitem:${gList}">
-                    <div class="card">
-                        <div class="col">
-                            <th:block th:if="${gitem.gsysname == null}">
-                                <img th:src="@{images/no_image.jpg}" class="card-img-top" alt="...">
-                            </th:block>
-                            <th:block th:unless="${gitem.gsysname == null}">
-                                <img th:src="@{upload/gym/}+${gitem.gsysname}" class="card-img-top" alt="...">
-                            </th:block>
-                        </div>
-                        <div class="card-body">
-                            <a class="gymname" th:href="@{gymPage(gymnum=${gitem.gymnum})}" th:text="${gitem.gname}"></a>
-                            <p th:text="${gitem.glocation}"></p>
-                        </div>
-                    </div>
-                </th:block>
-            </th:block>
+<div class="top-div">
+    <section class="sec">
+        <div class="title">
+            <h1>찜 목록</h1>
+            <h1>검색결과출력</h1>
         </div>
-    </div>
-</section>
+        <div id="result">
+            <div class="row">
+                <th:block th:if="${#lists.isEmpty(gList)}">
+                    등록된 헬스장이 없습니다.
+                </th:block>
+                <th:block th:unless="${#lists.isEmpty(gList)}">
+                    <th:block th:each="gitem:${gList}">
+                        <div class="card">
+                            <div class="col">
+                                <th:block th:if="${gitem.gsysname == null}">
+                                    <img th:src="@{images/no_image.jpg}" class="card-img-top" alt="...">
+                                </th:block>
+                                <th:block th:unless="${gitem.gsysname == null}">
+                                    <img th:src="@{upload/gym/}+${gitem.gsysname}" class="card-img-top" alt="...">
+                                </th:block>
+                            </div>
+                            <div class="card-body">
+                                <a class="gymname" th:href="@{gymPage(gymnum=${gitem.gymnum})}" th:text="${gitem.gname}"></a>
+                                <p th:text="${gitem.glocation}"></p>
+                            </div>
+                        </div>
+                    </th:block>
+                </th:block>
+            </div>
+        </div>
+    </section>
+</div>
 <footer>
     <th:block th:insert="~{footer.html}"></th:block>
 </footer>

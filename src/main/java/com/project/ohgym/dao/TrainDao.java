@@ -28,7 +28,8 @@ public interface TrainDao {
 
     TrainGoodsDto selectTGoods(int tgoodsint);
 
-    String getGoods(Integer gymnum);
+    // 헬스장 상세페이지
+    List<TrainDto> getGoods(Integer gymnum);
 
     List<TrainGoodsDto> trainGoods(Integer membernum);
 
