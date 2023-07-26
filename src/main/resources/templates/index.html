@@ -175,7 +175,9 @@
               <a th:href="@{board(boardDetail=${bitem.boardnum})}" th:text="${bitem.boardtitle}"
                  class="cardtag"></a>
             </div>
-            <p class="card-text"><a th:href="@{board(boardDetail=${bitem.boardnum})}" th:text="${bitem.boardcontents}" class="cardtag"></a></p>
+            <p class="card-text" th:text="${bitem.boardcontents}">
+              <a th:href="@{board(boardDetail=${bitem.boardnum})}"  class="cardtag">
+              </a></p>
           </div>
           <div>
             <li><img th:src="@{images/view.png}" class="view"></li>
