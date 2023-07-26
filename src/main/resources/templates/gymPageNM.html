@@ -21,7 +21,7 @@
   <link rel="shortcut icon" href="/images/header/lgo_face.ico">
   <style>
     #result {
-      margin: 150px auto 20px auto;
+      margin: 150px auto 100px auto;
       width: 100%;
       max-width: 1000px;
       background-color: #f8f7f7;
@@ -31,6 +31,9 @@
       position: relative;
       display: inline-block;
 
+    }
+    .body-g div{
+      box-sizing: border-box;
     }
 
     .back {
@@ -114,6 +117,7 @@
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+      margin: 10px 0;
     }
 
     .memo {
@@ -132,6 +136,12 @@
 
     .memo-2 {
       font-size: 14px;
+    }
+
+    .body-g a{
+      font-size: 20px;
+      font-weight: 600;
+      color: #000;
     }
 
     .body-i {
@@ -174,6 +184,15 @@
       padding: 30px 15px;
       position: relative;
       margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    .body-g:hover{
+      border: 2px solid #2c7fdf;
+    }
+
+    .card-t:hover{
+      border: 2px solid #2c7fdf;
     }
 
     .goods {
@@ -215,7 +234,6 @@
       location.href = "hGymList";
     }
   </script>
-  <title>gymPage</title>
 </head>
 
 <body class="renewal">
@@ -381,7 +399,7 @@
            th:each="gGitem:${gGList}"
            th:data-goodsname="${gGitem?.ggoodsname}"
            th:data-goodsprice="${gGitem?.ggoodsprice}">
-        <div>ㅋ
+        <div>
           <h5>
             <a href="#"  onclick="return false"
                th:text="${gGitem?.ggoodsname}" id="memberOnly"></a>
