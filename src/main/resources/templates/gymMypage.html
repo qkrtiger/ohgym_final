@@ -61,6 +61,7 @@
     .info-value {
       margin-left: 1%;
     }
+
     .top-div{
       min-height: 900px;
     }
@@ -72,7 +73,6 @@
 </header>
 <th:block th:insert="~{GymSideBar.html}"></th:block>
 <div class="top-div">
-
   <h3 class="info-title">내 정보</h3>
   <div id="content" class="content">
     <div class="info-row">
@@ -121,4 +121,28 @@
   <th:block th:insert="~{footer.html}"></th:block>
 </footer>
 </body>
+<script th:inline="javascript">
+  function setSidebarHeight() {
+    const sidebar = document.querySelector('.aside');
+    const mainContent = document.querySelector('.top-div');
+    const mainContentStyles = window.getComputedStyle(mainContent);
+    const mainContentHeight = parseFloat(mainContentStyles.height);
+    const marginTop = parseFloat(mainContentStyles.marginTop);
+    const marginBottom = parseFloat(mainContentStyles.marginBottom);
+
+    let sidebarHeight = mainContentHeight + marginTop + marginBottom;
+
+    if (mainContentStyles <= 901) {
+      sidebarHeight += 100;
+    }else {
+      sidebarHeight += 100;
+    }
+
+    sidebar.style.height = sidebarHeight + 'px';
+  }
+
+  window.addEventListener('load', setSidebarHeight);
+  window.addEventListener('resize', setSidebarHeight);
+
+</script>
 </html>

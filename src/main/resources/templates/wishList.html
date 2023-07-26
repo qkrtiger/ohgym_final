@@ -83,6 +83,8 @@
         .top-div{
             min-height: 900px;
         }
+
+
     </style>
 </head>
 <body class="renewal">
@@ -127,4 +129,28 @@
     <th:block th:insert="~{footer.html}"></th:block>
 </footer>
 </body>
+<script th:inline="javascript">
+    function setSidebarHeight() {
+        const sidebar = document.querySelector('.aside');
+        const mainContent = document.querySelector('.top-div');
+        const mainContentStyles = window.getComputedStyle(mainContent);
+        const mainContentHeight = parseFloat(mainContentStyles.height);
+        const marginTop = parseFloat(mainContentStyles.marginTop);
+        const marginBottom = parseFloat(mainContentStyles.marginBottom);
+
+        let sidebarHeight = mainContentHeight + marginTop + marginBottom;
+
+        if (mainContentStyles <= 901) {
+            sidebarHeight += 30;
+        }else {
+            sidebarHeight += 30;
+        }
+
+        sidebar.style.height = sidebarHeight + 'px';
+    }
+
+    window.addEventListener('load', setSidebarHeight);
+    window.addEventListener('resize', setSidebarHeight);
+
+</script>
 </html>
