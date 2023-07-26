@@ -154,7 +154,9 @@
           <div class="card-header">
             <div class="blog-profile">
               <th:block th:if="${bitem?.msysname == null}">
+                <div class="profileimg">
                 <img class="blog-profile_image" th:src="@{images/no_image.jpg}">
+                </div>
               </th:block>
               <th:block th:unless="${bitem?.msysname == null}">
                 <div class="profileimg">
