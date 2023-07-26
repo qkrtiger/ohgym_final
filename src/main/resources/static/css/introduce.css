@@ -7,11 +7,16 @@
 
 .renewal * {
     font-family: "Inter", "SpoqaHanSansNeo", "notokr", "Malgun Gothic", Dotum, Helvetica, "Apple SD Gothic Neo", Sans-serif;
+
 }
 
 section{
     margin-top: 300px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
+
 
 /* content_1 스타일링 */
 .content_1 {
