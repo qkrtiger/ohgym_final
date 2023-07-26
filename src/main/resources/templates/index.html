@@ -172,11 +172,11 @@
           </div>
           <div class="card-body">
             <div class="card-title">
-              <a th:href="@{board(boardDetail=${bitem.boardnum})}" th:text="${bitem.boardtitle}"
+              <a th:href="@{boardDetailM(boardnum=${bitem.boardnum})}" th:text="${bitem.boardtitle}"
                  class="cardtag"></a>
             </div>
             <p class="card-text" th:text="${bitem.boardcontents}">
-              <a th:href="@{board(boardDetail=${bitem.boardnum})}"  class="cardtag">
+              <a th:href="@{boardDetailM(boardnum=${bitem.boardnum})}"  class="cardtag">
               </a></p>
           </div>
           <div>
