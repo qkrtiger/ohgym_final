@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>mTrainer</title>
+    <link rel="stylesheet" th:href="@{css/font.css}">
     <link rel="stylesheet" th:href="@{css/mTrainer.css}">
     <script th:src="@{js/popup.js}" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"
             integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="renewal">
 <div id="popup" class="popup-hidden">
     <div class="popup-content">
         <form th:action="@{Change}" method="POST" target="_blank" onsubmit="return check()">
