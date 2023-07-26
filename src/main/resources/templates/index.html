@@ -30,7 +30,8 @@
     function check(){
       let mem = [[${session.member}]];
       if(mem != null){
-        location.href = "likelist?=" ;
+        let mnum = mem.membernum;
+        location.href = "wishList?membernum=" + mnum;
       } else {
         alert("회원만 이용 가능한 기능입니다.");
         return;
@@ -175,8 +176,8 @@
               <a th:href="@{boardDetailM(boardnum=${bitem.boardnum})}" th:text="${bitem.boardtitle}"
                  class="cardtag"></a>
             </div>
-            <p class="card-text" th:text="${bitem.boardcontents}">
-              <a th:href="@{boardDetailM(boardnum=${bitem.boardnum})}"  class="cardtag">
+            <p class="card-text">
+              <a th:href="@{boardDetailM(boardnum=${bitem.boardnum})}" th:text="${bitem.boardcontents}" class="cardtag">
               </a></p>
           </div>
           <div>
