@@ -39,6 +39,7 @@
     margin-right: 50px;
     margin-top: 20px;
     margin-bottom: 100px;
+    width: 400px;
     box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.1);
 }
 .prod_info .prod_info_con .info .tit{
