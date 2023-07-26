@@ -123,15 +123,15 @@
 
           console.log(l);
           console.log(g);
-          if ([[${session.member} == null]]){
-            var iwContent = '<div class="placeinfo">' + '<a class="title" href="gymPageNM?gymnum='+ n +'">' + g +'</a>'
-                            + '<p>' + l + '</p></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-                    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-          } else {
+          // if ([[${session.member == null}]]){
+          //   var iwContent = '<div class="placeinfo">' + '<a class="title" href="gymPageNM?gymnum='+ n +'">' + g +'</a>'
+          //                   + '<p>' + l + '</p></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+          //           iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+          // } else {
             var iwContent = '<div class="placeinfo">' + '<a class="title" href="gymPage?gymnum='+ n +'">' + g +'</a>'
                             + '<p>' + l + '</p></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
                     iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-          }
+          //}
 
           // 인포윈도우를 생성합니다
           var infowindow = new kakao.maps.InfoWindow({
@@ -217,17 +217,17 @@
 
           console.log(tloc);
 
-          if ([[${session.member} == null]]){
-            var iwContent = '<div class="placeinfo"><a class="title" href="gymPageNM?gymnum='+ tn +'">'+ tg +'</a>'
-                            + '<p>' + tl + '</p>'
-                            + '<p>'+ tloc+'</p></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-                    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-          } else {
+          // if ([[${session.member == null}]]){
+          //   var iwContent = '<div class="placeinfo"><a class="title" href="gymPageNM?gymnum='+ tn +'">'+ tg +'</a>'
+          //                   + '<p>' + tl + '</p>'
+          //                   + '<p>'+ tloc+'</p></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+          //           iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+          // } else {
             var iwContent = '<div class="placeinfo"><a class="title" href="gymPage?gymnum=' + tn + '">' + tg + '</a>'
                             + '<p>' + tl + '</p>'
                             + '<p>' + tloc + '</p></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
                     iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-          }
+          //}
 
           // 인포윈도우를 생성합니다
           var infowindow = new kakao.maps.InfoWindow({
@@ -370,15 +370,15 @@
 
         marker.setMap(map);
 
-        if ([[${session.member} == null]]) {
-          var iwContent = '<div class="placeinfo"><a class="title" href="gymPageNM?gymnum=' + snum + '">' + sname + '</a>'
-                          + '<p>' + sl + '</p></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-                  iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-        } else {
+        // if ([[${session.member == null}]]) {
+        //   var iwContent = '<div class="placeinfo"><a class="title" href="gymPageNM?gymnum=' + snum + '">' + sname + '</a>'
+        //                   + '<p>' + sl + '</p></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+        //           iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+        // } else {
           var iwContent = '<div class="placeinfo"><a class="title" href="gymPage?gymnum=' + snum + '">' + sname + '</a>'
                           + '<p>' + sl + '</p></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
                   iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-        }
+        //}
         // 인포윈도우를 생성합니다
         var infowindow = new kakao.maps.InfoWindow({
           content : iwContent,
