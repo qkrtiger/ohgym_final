@@ -69,16 +69,6 @@ public class MainController {
         return mv;
     }
 
-
-    // 찜 목록
-    @GetMapping("likelist")
-    public ModelAndView likeList(Integer membernum){
-        log.info("likeList()");
-        mv = miServ.mMarkGym(membernum);
-        mv.setViewName("wishList");
-        return mv;
-    }
-
     @GetMapping("terms")
     public String terms(){
         log.info("terms()");

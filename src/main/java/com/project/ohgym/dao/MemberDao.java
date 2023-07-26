@@ -28,5 +28,4 @@ public interface MemberDao {
     //회원 정보를 가져오는 메소드(form memeber 테이블
     MemberDto selectMember(String mid);
 
-    List<GmListDto> selectMarkedGyms(Integer membernum);
 }

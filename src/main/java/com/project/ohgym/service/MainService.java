@@ -4,6 +4,7 @@ import com.project.ohgym.dao.BoardDao;
 import com.project.ohgym.dao.GymDao;
 import com.project.ohgym.dao.MemberDao;
 import com.project.ohgym.dto.BoardDto;
+import com.project.ohgym.dto.FilterViewDto;
 import com.project.ohgym.dto.GmListDto;
 import com.project.ohgym.dto.GymDto;
 import com.project.ohgym.util.DeduplicationUtils;
@@ -77,7 +78,8 @@ public class MainService {
     public ModelAndView womanList(String wgender) {
         log.info("womanList()");
         List<GymDto> wList = gDao.getWomanList(wgender);
-        mv.addObject("gList", wList);
+        List<GymDto> gList = DeduplicationUtils.deduplication(wList, GymDto::getGname);
+        mv.addObject("gList", gList);
         mv.setViewName("gymList");
         return mv;
     }
@@ -85,15 +87,10 @@ public class MainService {
     public ModelAndView manList(String mgender) {
         log.info("manList()");
         List<GymDto> mList = gDao.getManList(mgender);
-        mv.addObject("gList", mList);
+        List<GymDto> gList = DeduplicationUtils.deduplication(mList, GymDto::getGname);
+        mv.addObject("gList", gList);
         mv.setViewName("gymList");
         return mv;
     }
 
-    public ModelAndView mMarkGym(Integer membernum) {
-        log.info("mMarkGym()");
-        List<GmListDto> gList = mDao.selectMarkedGyms(membernum);
-        mv.addObject("gList", gList);
-        return mv;
-    }
 }
