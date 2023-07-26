@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fccffff3c4ca6d5819e942ec3721ebc3&libraries=services"></script>
 
     <link rel="stylesheet" th:href="@{css/style.css}">
     <link rel="stylesheet" th:href="@{css/reset.css}">
@@ -57,6 +58,7 @@
                     </ul>
                 </div>
                 <div class="tit">헬스장 위치 안내</div>
+                <div id="map"></div>
             </div>
         </div>
     </div>
@@ -71,6 +73,47 @@
             var url = '/trainerPay?tgoodsint=' + tgoodsInt;
             window.location.href = url;
         });
+    });
+
+    // 지도
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new kakao.maps.LatLng(37.4389216594543, 126.671947966691), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+    // 지도를 생성합니다
+    var map = new kakao.maps.Map(mapContainer, mapOption);
+    // 주소-좌표 변환 객체를 생성합니다
+    var geocoder = new kakao.maps.services.Geocoder();
+    var imageSrcGYM = "images/marker2.png"; //파랑
+    var imageSize = new kakao.maps.Size(50, 55);
+
+
+    let l = [[${gym.glocation}]];
+    let n =[[${gym.gname}]];
+
+    geocoder.addressSearch(l, function (result, status) {
+        // 정상적으로 검색이 완료됐으면
+        if (status === kakao.maps.services.Status.OK) {
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+            var marker = new kakao.maps.Marker({  // 마커 생성
+                //map: map, // 마커를 표시할 지도
+                position: coords, // 마커를 표시할 위치
+                image : new kakao.maps.MarkerImage(imageSrcGYM, imageSize),
+                clickable: true  // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
+            });
+            marker.setMap(map);
+        }
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    });
+
+
+    // 챗
+    (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
+
+    ChannelIO('boot', {
+        "pluginKey": "f069de55-9d72-49b8-bcaa-458a85b28544"
     });
 </script>
 </html>

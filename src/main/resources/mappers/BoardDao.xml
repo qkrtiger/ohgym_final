@@ -62,10 +62,11 @@
         SELECT * FROM rlist WHERE rnum=#{rnum}
     </select>
     <select id="selectBoardCnt" resultType="Integer" parameterType="SearchDto">
-        SELECT count(*) FROM blist
+        SELECT count(*) FROM board
         <if test="colname != null and colname != ''">
             WHERE ${colname} LIKE concat('%', #{keyword},'%')
         </if>
+        ORDER BY boarddate DESC
     </select>
     <select id="bestBoard" resultType="BoardDto">
         SELECT * FROM mainboard ORDER BY boardcount DESC LIMIT 3;

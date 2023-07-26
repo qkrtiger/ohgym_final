@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>gImage</title>
+  <link rel="stylesheet" th:href="@{css/font.css}">
   <link rel="stylesheet" th:href="@{css/image.css}">
   <script th:src="@{js/popup.js}" defer></script>
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
@@ -20,7 +21,7 @@
     window.opener.location.reload(); // 부모 창 새로고침
   };
 </script>
-<body>
+<body class="renewal">
 <div id="popup">
   <div class="popup-content">
     <form th:action="@{gImage}" method="POST" enctype="multipart/form-data">

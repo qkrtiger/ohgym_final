@@ -4,6 +4,7 @@
     <script src="js/jquery-3.7.0.min.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fccffff3c4ca6d5819e942ec3721ebc3&libraries=services"></script>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{css/font.css}">
     <script th:inline="javascript">
         $(function () {
             let m = [[${msg}]]; // msg가 없으면 null
@@ -217,7 +218,7 @@
     <title>gymPage</title>
 </head>
 
-<body>
+<body class="renewal">
 <header>
     <th:block th:insert="~{header.html}"></th:block>
 </header>
@@ -394,7 +395,9 @@
             <div class="body-title tmemo">트레이너</div>
             <th:block th:each="titem:${tList}">
                 <th:block th:if="${titem?.tsysname == null}">
+                    <a th:href="@{trainerPage(membernum=${tm})}">
                     <img th:src="@{images/logo_main.png}" class="card-t">
+                    </a>
                 </th:block>
                 <th:block th:unless="${titem?.tsysname == null}">
                     <a th:href="@{trainerPage(membernum=${tm})}">

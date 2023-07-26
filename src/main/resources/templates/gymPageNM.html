@@ -4,6 +4,7 @@
   <script src="js/jquery-3.7.0.min.js"></script>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fccffff3c4ca6d5819e942ec3721ebc3&libraries=services"></script>
   <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{css/font.css}">
   <script th:inline="javascript">
     $(function () {
       let m = [[${msg}]]; // msg가 없으면 null
@@ -217,7 +218,7 @@
   <title>gymPage</title>
 </head>
 
-<body>
+<body class="renewal">
 <header>
   <th:block th:if="${session.gym == null}">
     <th:block th:insert="~{header.html}"></th:block>
@@ -380,7 +381,7 @@
            th:each="gGitem:${gGList}"
            th:data-goodsname="${gGitem?.ggoodsname}"
            th:data-goodsprice="${gGitem?.ggoodsprice}">
-        <div>
+        <div>ㅋ
           <h5>
             <a href="#"  onclick="return false"
                th:text="${gGitem?.ggoodsname}" id="memberOnly"></a>
