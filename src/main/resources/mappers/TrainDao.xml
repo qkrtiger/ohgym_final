@@ -48,7 +48,7 @@
         select * from traingoods where tgoodsint = #{tgoodsint}
     </select>
 
-    <select id="getGoods" resultType="Integer" parameterType="integer">
+    <select id="getGoods" resultType="String" parameterType="Integer">
         select membernum from traingoods where gymnum=#{gymnum};
     </select>
     <select id="trainGoods" resultType="TrainGoodsDto" parameterType="integer">
