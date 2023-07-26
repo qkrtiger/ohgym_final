@@ -20,12 +20,12 @@ public class ReviewController {
     private ModelAndView mv;
 
     // 후기
-    @GetMapping("gymReview")
-    public ModelAndView gymReview(MPayDto mpay) {
-        log.info("gymReview()");
-        mv = rServ.gymReview(mpay);
-        return mv;
-    }
+//    @GetMapping("gymReview")
+//    public ModelAndView gymReview(MPayDto mpay) {
+//        log.info("gymReview()");
+//        mv = rServ.gymReview(mpay);
+//        return mv;
+//    }
 
     // 후기 입력
     @PostMapping("reviewInput")

@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>memberMypage</title>
-  <script th:src="@{js/popup.js}" defer></script>
   <link rel="stylesheet" th:href="@{css/font.css}">
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   <style>
@@ -22,7 +21,7 @@
 
     .content-t{
       margin-left: clamp(300px, 25%, 25%);
-      margin-bottom: 100px
+      margin-bottom: 600px
     }
 
     .content {
@@ -73,8 +72,8 @@
 
     .paging .pno {
       background-color: #efefef;
-      border: 1px solid #6c6c6c;
-      border-radius: 3px;
+      /*border: 1px solid #6c6c6c;*/
+      /*border-radius: 3px;*/
       line-height: 1.5;
       font-size: 15px;
       height: 20px;
@@ -98,13 +97,91 @@
       margin-top: 30px;
     }
 
-    .review{
-      color: black;
+    .review {
+      margin-top: 3%;
+      width: 70%;
+      border: none;
+      background-color: #2c7fdf;
+      color: white;
+      padding: 3%;
+      font-size: 0.9em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
     }
 
-    .top-div{
-      min-height: 900px;
+    .review:hover {
+      background-color: #0056b3;
     }
+
+    .reviewBtn {
+      margin-top: 10px;
+      width: 50px;
+      height: 30px;
+      border: none;
+      background-color: #2c7fdf;
+      color: white;
+      /*padding: 3%;*/
+      font-size: 0.9em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .reviewBtn:hover {
+      background-color: #0056b3;
+    }
+
+
+
+    #myform fieldset {
+      display: inline-block;
+      direction: rtl;
+      border: 0;
+      text-align: left;
+    }
+
+    #myform fieldset legend {
+      text-align: right;
+    }
+
+    #myform input[type=radio] {
+      display: none;
+    }
+
+    #myform label {
+      font-size: 3em;
+      color: transparent;
+      text-shadow: 0 0 0 #f0f0f0;
+    }
+
+    #myform label:hover {
+      text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+    }
+
+    #myform label:hover ~ label {
+      text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+    }
+
+    #myform input[type=radio]:checked ~ label {
+      text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+    }
+
+    #reviewContents {
+      width: 100%;
+      height: 150px;
+      padding: 10px;
+      box-sizing: border-box;
+      border: solid 1.5px #D3D3D3;
+      border-radius: 5px;
+      font-size: 16px;
+      resize: none;
+    }
+
+
+
   </style>
 </head>
 <body class="renewal">
@@ -112,73 +189,103 @@
   <th:block th:insert="~{header.html}"></th:block>
 </header>
 <th:block th:insert="~{MemberSideBar.html}"></th:block>
-<div class="top-div">
-  <h2 class="info-title">결제내역</h2>
-  <div class="content-t">
-    <p style="display: none" th:text="${payType}"></p>
-    <select id="sel">
-      <th:block th:if="${payType == null}">
-        <option value="all" selected>전체</option>
-        <option value="membership">회원권</option>
-        <option value="daily">일일권</option>
-        <option value="pt">PT</option>
-      </th:block>
-      <th:block th:unless="${payType == null}">
-        <th:block th:switch="${payType}">
-          <th:block th:case="gpay">
-            <option value="all">전체</option>
-            <option value="membership" selected>회원권</option>
-            <option value="daily">일일권</option>
-            <option value="pt">PT</option>
-          </th:block>
-          <th:block th:case="dgpay">
-            <option value="all">전체</option>
-            <option value="membership">회원권</option>
-            <option value="daily" selected>일일권</option>
-            <option value="pt">PT</option>
-          </th:block>
-          <th:block th:case="tpay">
-            <option value="all">전체</option>
-            <option value="membership">회원권</option>
-            <option value="daily">일일권</option>
-            <option value="pt" selected>PT</option>
-          </th:block>
+
+<h2 class="info-title">결제내역</h2>
+<div class="content-t">
+  <p style="display: none" th:text="${payType}"></p>
+  <select id="sel">
+    <th:block th:if="${payType == null}">
+      <option value="all" selected>전체</option>
+      <option value="membership">회원권</option>
+      <option value="daily">일일권</option>
+      <option value="pt">PT</option>
+    </th:block>
+    <th:block th:unless="${payType == null}">
+      <th:block th:switch="${payType}">
+        <th:block th:case="gpay">
+          <option value="all">전체</option>
+          <option value="membership" selected>회원권</option>
+          <option value="daily">일일권</option>
+          <option value="pt">PT</option>
+        </th:block>
+        <th:block th:case="dgpay">
+          <option value="all">전체</option>
+          <option value="membership">회원권</option>
+          <option value="daily" selected>일일권</option>
+          <option value="pt">PT</option>
+        </th:block>
+        <th:block th:case="tpay">
+          <option value="all">전체</option>
+          <option value="membership">회원권</option>
+          <option value="daily">일일권</option>
+          <option value="pt" selected>PT</option>
         </th:block>
       </th:block>
-    </select>
-    <div id="content" class="content">
-      <div class="content-all">
-        <table style="width: 100%", id="mtable">
-          <tbody>
-          <thead>
-          <tr>
-            <th>결제일</th>
-            <th>헬스장</th>
-            <th>이용기간</th>
-            <th>가격</th>
-            <th>후기</th>
-          </tr>
-          </thead>
-          <tbody id="tb">
-          <div th:unless="${#lists.isEmpty(mPList)}">
-            <tr th:each=" MPitem: ${mPList}">
+    </th:block>
+  </select>
+  <div id="content" class="content">
+    <div class="content-all">
+      <table style="width: 100%", id="mtable">
+        <tbody>
+        <thead>
+        <tr>
+          <th>결제일</th>
+          <th>헬스장</th>
+          <th>이용기간</th>
+          <th>가격</th>
+          <th>후기</th>
+        </tr>
+        </thead>
+        <tbody id="tb">
+        <div th:unless="${#lists.isEmpty(mPList)}">
+          <div th:each=" MPitem: ${mPList}">
+            <tr>
               <td th:text="${MPitem.mpaydate}"></td>
               <td th:text="${MPitem.mpaygym}"></td>
               <td th:text="${MPitem.mpayperiod}"></td>
               <td th:text="${#numbers.formatInteger(MPitem.mpayprice, 3, 'COMMA') + '원'}"></td>
-              <td><a class="review" th:href="@{gymReview(mpaynum=${MPitem.mpaynum})}">후기등록</a></td>
+              <td><button class="review" id="reviewInput">후기등록</button></td>
+            </tr>
+
+            <tr class="hReview">
+              <td colspan="5">
+                <form th:action="@{reviewInput}" class="mb-3" name="myform" id="myform" method="post" th:object="${session.member}">
+                  <input type="hidden" class="" name="mnickname" th:value="*{mnickname}">
+                  <input type="hidden" class="" name="membernum" th:value="*{membernum}">
+                  <input type="hidden" class="" name="gymnum" th:value="${MPitem.gymnum}">
+                  <input type="hidden" class="" name="mpaynum" th:value="${MPitem.mpaynum}">
+                  <fieldset>
+                    <span class="text-bold">별점을 선택해주세요</span>
+                    <input type="radio" name="reviewstar" th:value="5" id="rate1"><label
+                          for="rate1">★</label>
+                    <input type="radio" name="reviewstar" th:value="4" id="rate2"><label
+                          for="rate2">★</label>
+                    <input type="radio" name="reviewstar" th:value="3" id="rate3"><label
+                          for="rate3">★</label>
+                    <input type="radio" name="reviewstar" th:value="2" id="rate4"><label
+                          for="rate4">★</label>
+                    <input type="radio" name="reviewstar" th:value="1" id="rate5"><label
+                          for="rate5">★</label>
+                  </fieldset>
+                  <div>
+                    <textarea class="col-auto form-control" type="text" id="reviewContents" name="reviewcontents"
+                    placeholder="헬스장 이용 후기를 남겨주세요~"></textarea>
+                  </div>
+                  <input type="submit" value="등록" id="sendRe" class="reviewBtn">
+                </form>
+              </td>
             </tr>
           </div>
-          <div th:if="${#lists.isEmpty(mPList)}">
-            <td colspan="5">결제 내역이 없습니다.</td>
-          </div>
-          </tbody>
-        </table>
-      </div>
+        </div>
+        <div th:if="${#lists.isEmpty(mPList)}">
+          <td colspan="5">결제 내역이 없습니다.</td>
+        </div>
+        </tbody>
+      </table>
     </div>
-    <div class="paging-area">
-      <div class="paging" th:utext="${paging}"></div>
-    </div>
+  </div>
+  <div class="paging-area">
+    <div class="paging" th:utext="${paging}"></div>
   </div>
 </div>
 <footer>
@@ -186,6 +293,18 @@
 </footer>
 </body>
 <script th:inline="javascript">
+  $(".hReview").hide();
+
+  //리뷰작성
+  $("#reviewInput").click(function (){
+    $(".hReview").show();
+  })
+
+  //리뷰전송
+  $("#sendRe").click(function (){
+    $(".hReview").hide();
+  })
+
   //검색기능
   $("#sel").change(function () {
     let select = $("#sel").val();
@@ -253,6 +372,8 @@
       }
     });
   });
+
+
 </script>
 </html>
 
