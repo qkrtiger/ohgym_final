@@ -93,10 +93,4 @@ public class MainService {
         return mv;
     }
 
-    public ModelAndView mMarkGym(Integer membernum) {
-        log.info("mMarkGym()");
-        List<GmListDto> gList = mDao.selectMarkedGyms(membernum);
-        mv.addObject("gList", gList);
-        return mv;
-    }
 }

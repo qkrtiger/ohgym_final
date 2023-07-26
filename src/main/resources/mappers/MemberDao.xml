@@ -36,8 +36,4 @@
     <select id="selectMember" resultType="MemberDto" parameterType="String">
         select * from member where mid=#{mid}
     </select>
-    <select id="selectMarkedGyms" resultType="GmListDto" parameterType="Integer">
-        select * from gmlist where membernum=#{membernum}
-    </select>
-
 </mapper>
