@@ -30,7 +30,7 @@
       margin-top: 30px;
       border: 1px solid;
       margin-left: clamp(300px, 25%, 25%);
-      margin-bottom: 340px
+      margin-bottom: 100px
     }
 
 
@@ -92,6 +92,9 @@
       margin-left: clamp(150px, 44%, 44%);
       margin-top: 30px;
     }
+    .top-div{
+      min-height: 900px;
+    }
   </style>
 </head>
 <body class="renewal">
@@ -104,7 +107,7 @@
   </th:block>
 </header>
 <th:block th:insert="~{GymSideBar.html}"></th:block>
-<div>
+<div class="top-div">
   <h2 class="info-title">트레이너 관리</h2>
   <div id="content" class="content">
     <div>
