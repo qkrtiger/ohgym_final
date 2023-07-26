@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>헬스장 이용 결제</title>
+  <title>오짐 - 헬스장 상품 결제</title>
+  <link rel="shortcut icon" href="/images/header/lgo_face.ico">
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
@@ -28,13 +29,16 @@
 
 </head>
 <body class="renewal">
+<header>
+  <th:block th:insert="~{header.html}"></th:block>
+</header>
 <div class="wrap">
   <div class="prod_info">
     <div class="title">
       상품정보
     </div>
     <div class="prod_info_con">
-      <div class="img" style="background: url(/images/1.png) no-repeat center; background-size: cover;"></div>
+      <img class="img" th:src="@{upload/gym/} + ${gym.gsysname}" style="background:no-repeat center; background-size: cover;">
       <div class="info">
         <div class="tit" th:text="${gym.gname}">
         </div>
@@ -64,7 +68,7 @@
           </div>
       </li>
     </ul>
-    <div class="title">
+    <div class="daily-title">
       일일권
     </div>
     <ul class="ticket_list">
@@ -90,9 +94,10 @@
     <button type="button" th:onclick="ka_request_pay()">카카오페이</button>
   </div>
 </div>
-
 </body>
-
+<footer>
+  <th:block th:insert="~{footer.html}"></th:block>
+</footer>
 <script th:inline="javascript">
 
   // selectedGoodsName이 없을 경우 알림창을 먼저 표시하는 함수
