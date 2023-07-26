@@ -61,7 +61,7 @@ public class BoardService {
 
         int maxNum = bDao.selectBoardCnt(search);
         int pageCnt = 5;
-        String listName = "bShowList";
+        String listName = "board";
         if (search.getColname() != null) {
             listName += "?colname=" + search.getColname() + "&keyword=" + search.getKeyword() + "&";
         } else {

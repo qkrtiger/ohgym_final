@@ -21,21 +21,21 @@ public class PagingUtil {
         int end = (curGroup * pageCnt) >= totalPage ? totalPage : curGroup * pageCnt;
 
         if(start != 1){
-            sb.append("<a class='pno' href='/" + listName + "pageNum=" + (start - 1) + "'>");
-            sb.append("&nbsp;이전&nbsp;</a>");
+            sb.append("<a class='arrow left' href='/" + listName + "pageNum=" + (start - 1) + "'>");
+            sb.append("&nbsp;<&nbsp;</a>");
         }
         for(int i = start; i <= end; i++){
             if(pageNum != i){
                 sb.append("<a class='pno' href='/" + listName + "pageNum=" + i + "'>");
                 sb.append("&nbsp;" + i + "&nbsp;</a>");
             } else {
-                sb.append("<font class ='pno' style='color:red;'>");
+                sb.append("<font class ='pno' style='color:blue;'>");
                 sb.append("&nbsp" + i + "&nbsp;</font>");
             }
         }
         if(end != totalPage){
-            sb.append("<a class='pno' href='/" + listName + "pageNum=" + (end + 1 ) + "'>");
-            sb.append("&nbsp;다음&nbsp;</a>");
+            sb.append("<a class='arrow right' href='/" + listName + "pageNum=" + (end + 1 ) + "'>");
+            sb.append("&nbsp;>&nbsp;</a>");
         }
         page = sb.toString();
         return page;
