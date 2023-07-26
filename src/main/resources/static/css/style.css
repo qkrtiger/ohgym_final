@@ -1,12 +1,4 @@
-@font-face {
-    font-family: 'SUIT-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
-body *{
-    font-family: 'SUIT-Regular';
-}
+
 .wrap{
     width: 1000px;
     margin: 50px auto 100px;
@@ -16,14 +8,23 @@ body *{
     font-weight: 700;
     margin-bottom: 30px;
 }
+.t_title{
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+
 
 .hidden{
     display: none;
 }
 .prod_info{
+    margin-top: 100px;
 }
 .prod_info .prod_info_con{
     display: flex;
+    margin-top: 200px;
 }
 .prod_info .prod_info_con > div{
     width: 50%;
@@ -36,16 +37,23 @@ body *{
 .prod_info .prod_info_con .img{
     border-radius: 10px;
     margin-right: 50px;
+    margin-top: 20px;
+    margin-bottom: 100px;
     box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.1);
 }
 .prod_info .prod_info_con .info .tit{
     font-size: 22px;
     font-weight: 700;
     margin-bottom: 20px;
-    margin-top: 20px;
+    margin-top: 2px;
 }
 .prod_info .prod_info_con .info .addr{
-    margin-bottom: 50px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.prod_info .prod_info_con .info .sub_addr{
+    margin-bottom: 30px;
 }
 .prod_info .prod_info_con .info input{
     width: 100%;
@@ -65,14 +73,22 @@ body *{
 
 
 /*하단 헬스장 위치 정보*/
-.gym_info .title{
-    padding: 20px 0;
+
+.g_location {
+    border-top: 1px solid #d4d4d4;
+}
+.g_location .t_title{
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 30px;
 }
 
 .ticket{
     margin-top: 50px;
     padding-bottom: 50px;
-    border-bottom: 1px solid #d4d4d4;
+
 }
 .ticket ul.ticket_list{
 }
@@ -175,4 +191,5 @@ body *{
 #map {
     width: 700px;
     height: 500px;
+    margin: 0 auto;
 }
