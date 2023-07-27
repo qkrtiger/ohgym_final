@@ -75,6 +75,11 @@ img {
 .prod_info .prod_info_con .info .sub_addr{
     margin-bottom: 30px;
 }
+
+.prod_info .prod_info_con .info .addr-location{
+    margin-bottom: 30px;
+    font-weight: 400;
+}
 .prod_info .prod_info_con .info input{
     width: 100%;
     height: 40px;

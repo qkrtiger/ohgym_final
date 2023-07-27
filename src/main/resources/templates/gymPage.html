@@ -36,6 +36,8 @@
         }
         .body-g div{
             box-sizing: border-box;
+            position: relative;
+            height: 90px;
         }
 
         .back {
@@ -110,6 +112,7 @@
             margin: 3px 0;
         }
 
+
         .tmemo {
             line-height: 115%;
             font-weight: 700;
@@ -140,11 +143,6 @@
             font-size: 14px;
         }
 
-        .body-g a{
-            font-size: 20px;
-            font-weight: 600;
-            color: #000;
-        }
 
         .body-i {
             line-height: 150%;
@@ -176,47 +174,50 @@
 
         }
 
+        .goods-div {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
         .body-g {
-            width: 100%;
+            width: 30%;
             line-height: 150%;
             background: rgb(251, 251, 251);
-            border: 1px solid rgb(238, 238, 238);
-            border-radius: 10px;
+            border: 3px solid rgb(238, 238, 238);
+            border-radius: 30px;
             box-sizing: border-box;
-            padding: 30px 15px;
+            padding: 0px 15px;
             position: relative;
-            margin-bottom: 10px;
+            text-align: center;
+            margin: 20px 50px;
             cursor: pointer;
         }
 
         .body-g:hover{
-            border: 2px solid #2c7fdf;
+            border: 3px solid #2c7fdf;
+        }
+
+        .body-g:hover::after{
+            color: #2c7fdf;
+        }
+
+
+        .body-g a{
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .card-t:hover{
-            border: 2px solid #2c7fdf;
+            border: 3px solid #2c7fdf;
         }
 
-        .goods {
-            position: absolute;
-            top: 10px;
-            font-size: large;
-        }
-
-        .price {
-            position: absolute;
-            right: 10px;
-        }
-
-        .body-r {
-            line-height: 150%;
-            background: rgb(251, 251, 251);
-            border: 1px solid rgb(238, 238, 238);
-            border-radius: 10px;
-            box-sizing: border-box;
-            padding: 30px 15px;
-            text-align: center;
-        }
 
         #map {
             width: 956px;
@@ -388,61 +389,61 @@
                     </th:block>
                     <th:block th:unless="${gymM?.gm_hyperextension == true}"></th:block>
                 </div>
-            </th:block>
-        <hr>
-        <div>
-            <div class="body-title tmemo">상품안내</div>
-            <div th:if="${#lists.isEmpty(gGList)}">
-                등록된 상품이 없습니다.
-            </div>
-            <li class="body-g"
-                 th:unless="${#lists.isEmpty(gGList)}"
-                 th:each="gGitem:${gGList}"
-                 th:data-goodsname="${gGitem?.ggoodsname}"
-                 th:data-goodsprice="${gGitem?.ggoodsprice}">
-                <div>
-                    <a th:href="@{gymPay(gymnum=${gGitem?.gymnum})}" th:text="${gGitem?.ggoodsname}" id="memberOnly"></a>
-                    <p th:text="${#numbers.formatInteger(gGitem.ggoodsprice, 3, 'COMMA') + ' 원'}"></p>
-                </div>
-            </li>
-        </div>
-
-        <hr>
-        <div>
-            <div class="body-title tmemo">트레이너</div>
-            <th:block th:each="titem:${tList}">
-                <th:block th:if="${titem?.tsysname == null}">
-                    <img th:src="@{images/logo_main.png}" class="card-t">
-                </th:block>
-                <th:block th:unless="${titem?.tsysname == null}">
-                    <a th:href="@{trainerPage(membernum=${titem.membernum})}">
-                        <img th:src="@{upload/trainer/} + ${titem.tsysname}" class="card-t" id="memberOnlyt" style="cursor: pointer">
-                    </a>
-                </th:block>
-            </th:block>
-            <hr>
-            <div class="body-btn">
-                <div class="body-title tmemo">이용후기</div>
-
-                <th:block th:if="${relen == 0}" class="body-r">
-                    등록된 이용후기가 없습니다.
-                </th:block>
-                <th:block th:unless="${relen == 0}">
-                    <a th:href="@{gymReviewList(gymnum=${gym.gymnum},pageNum=1)}"
-                       th:text="'이용후기 ' + ${relen} + '개 전체보기'"></a>
-                </th:block>
                 <hr>
-                <div class="body-title tmemo">위치</div>
-                <div id="map"></div>
-                <br>
-                <div class="memo">
-                    오짐은 통신판매의 중개자이며, 통신판매의 당사자가 아닙니다.<br>
-                    따라서 상품의 구매, 이용 및 환불 등과 관련된 의무와 책임은 각 판매자에게 있습니다.
+                <div>
+                    <div class="body-title tmemo">상품안내</div>
+                    <div th:if="${#lists.isEmpty(gGList)}">
+                        등록된 상품이 없습니다.
+                    </div>
+                    <div class="goods-div">
+                        <li class="body-g" th:unless="${#lists.isEmpty(gGList)}">
+                            <div th:onclick="|location.href='@{gymPay(gymnum=${gym.gymnum})}'|" class="memberOnly">
+                                <a>회원권</a>
+                            </div>
+                        </li>
+                        <li class="body-g" th:unless="${#lists.isEmpty(gGList)}">
+                            <div th:onclick="|location.href='@{dailyPay(gymnum=${gym.gymnum})}'|" class="memberOnly">
+                                <a>일일권</a>
+                            </div>
+                        </li>
+                    </div>
+                </div><!--상품안내-->
+                <hr>
+                <div>
+                    <div class="body-title tmemo">트레이너</div>
+                    <th:block th:each="titem:${tList}">
+                        <th:block th:if="${titem?.tsysname == null}">
+                            <img th:src="@{images/logo_main.png}" class="card-t">
+                        </th:block>
+                        <th:block th:unless="${titem?.tsysname == null}">
+                            <a th:href="@{trainerPage(membernum=${titem.membernum})}">
+                                <img th:src="@{upload/trainer/} + ${titem.tsysname}" class="card-t" id="memberOnlyt" style="cursor: pointer">
+                            </a>
+                        </th:block>
+                    </th:block>
+                    <hr>
+                    <div class="body-btn">
+                        <div class="body-title tmemo">이용후기</div>
+
+                        <th:block th:if="${relen == 0}" class="body-r">
+                            등록된 이용후기가 없습니다.
+                        </th:block>
+                        <th:block th:unless="${relen == 0}">
+                            <a th:href="@{gymReviewList(gymnum=${gym.gymnum},pageNum=1)}"
+                               th:text="'이용후기 ' + ${relen} + '개 전체보기'"></a>
+                        </th:block>
+                        <hr>
+                        <div class="body-title tmemo">위치</div>
+                        <div id="map"></div>
+                        <br>
+                        <div class="memo">
+                            오짐은 통신판매의 중개자이며, 통신판매의 당사자가 아닙니다.<br>
+                            따라서 상품의 구매, 이용 및 환불 등과 관련된 의무와 책임은 각 판매자에게 있습니다.
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-
+        </th:block>
     </div>
 </section>
 <footer>
@@ -597,7 +598,7 @@
 
     let member = [[${session.member}]];
 
-    $("#memberOnly").click(function () {
+    $(".memberOnly").click(function () {
         if (member == null) {
             alert("회원만 이용 가능합니다.");
             location.href = "gymPage?gymnum=" + [[${gym.gymnum}]];
