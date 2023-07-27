@@ -51,11 +51,14 @@
         .card-title a {
             padding: 0;
             margin: 0;
+            color: #000;
             width: 254px;
         }
 
         .card-subtitle {
             width: 254px;
+            color: #999;
+            font-weight: 300;
         }
         .null {
             text-align: center;
@@ -83,10 +86,10 @@
                         <div class="card">
                             <div class="col">
                                 <th:block th:if="${gitem.gsysname == null}">
-                                    <img th:src="@{images/no_image.jpg}" class="card-img-top">
+                                    <a th:href="@{gymPage(gymnum=${gitem.gymnum})}"><img th:src="@{images/no_image.jpg}" class="card-img-top"></a>
                                 </th:block>
                                 <th:block th:unless="${gitem.gsysname == null}">
-                                    <img th:src="@{upload/gym/} + ${gitem.gsysname}" class="card-img-top">
+                                    <a th:href="@{gymPage(gymnum=${gitem.gymnum})}"><img th:src="@{upload/gym/} + ${gitem.gsysname}" class="card-img-top"></a>
                                 </th:block>
                             </div>
                             <div class="card-body">
