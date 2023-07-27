@@ -5,6 +5,7 @@
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fccffff3c4ca6d5819e942ec3721ebc3&libraries=services"></script>
   <meta charset="UTF-8">
   <link rel="stylesheet" th:href="@{css/font.css}">
+  <link rel="stylesheet" th:href="@{css/gymPage.css}">
   <script th:inline="javascript">
     $(function () {
       let m = [[${msg}]]; // msg가 없으면 null
@@ -19,252 +20,6 @@
   </script>
   <title>오짐 - 헬스장 상세페이지</title>
   <link rel="shortcut icon" href="/images/header/lgo_face.ico">
-  <style>
-    #result {
-      margin: 150px auto 100px auto;
-      width: 100%;
-      max-width: 1000px;
-      background-color: #f8f7f7;
-    }
-
-    #imageContainer {
-      position: relative;
-      display: inline-block;
-
-    }
-    .body-g div{
-      box-sizing: border-box;
-      position: relative;
-      height: 90px;
-    }
-
-    .back {
-      margin-top: 5px;
-      position: absolute;
-      width: 35px;
-      height: 35px;
-      background: url('images/back.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      border: none;
-    }
-
-    .gymimg {
-      width: 1000px;
-      height: 750px;
-    }
-
-    .gymmake {
-      position: absolute;
-      bottom: 20px;
-      right: 15px;
-      padding: 5px;
-      cursor: pointer;
-      width: 5%;
-    }
-
-    hr {
-      background: #ddd;
-      height: 1px;
-      border: 0;
-      margin-top: 10px;
-      margin-bottom: 20px;
-    }
-
-    .intro {
-      display: flex;
-      flex-direction: column;
-      max-width: 1000px;
-      gap: 5px;
-      padding: 30px 22px 0px;
-    }
-
-    .intro-name {
-      font-size: 24px;
-      line-height: 115%;
-      font-weight: 700;
-      text-align: left;
-      letter-spacing: -0.2px;
-      color: rgb(88, 89, 91);
-      white-space: pre-line;
-      word-break: keep-all;
-    }
-
-    .intro-addr {
-      margin-top: 10px;
-    }
-
-    .intro-star {
-      width: 100%;
-      margin-bottom: 50px;
-      margin-top: 10px;
-    }
-
-    .star-ratings-fill {
-      color: rgba(250, 208, 0, 0.99);
-      font-size: 100%
-    }
-
-    .body-title {
-      font-size: 17px;
-      margin: 3px 0;
-    }
-
-    .body-sub-title {
-      font-size: 14px;
-      margin: 3px 0;
-      font-weight: 300;
-      color: #2c7fdf;
-    }
-
-
-    .tmemo {
-      line-height: 115%;
-      font-weight: 700;
-      text-align: left;
-      letter-spacing: -0.2px;
-      color: rgb(88, 89, 91);
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      margin: 10px 0;
-    }
-
-    .memo {
-      font-size: 15px;
-      line-height: 115%;
-      font-weight: 400;
-      text-align: left;
-      letter-spacing: -0.2px;
-      color: rgb(88, 89, 91);
-      word-break: keep-all;
-    }
-
-    .memo-1 {
-      white-space: pre-line;
-    }
-
-    .memo-2 {
-      font-size: 14px;
-    }
-
-
-    .body-i {
-      line-height: 150%;
-      background: rgb(251, 251, 251);
-      border: 1px solid rgb(238, 238, 238);
-      border-radius: 10px;
-      box-sizing: border-box;
-      padding: 30px 15px;
-    }
-
-    .body-p {
-      width: 100%;
-      margin: 0 auto;
-      background: rgb(255, 255, 255);
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-      padding-bottom: 80px;
-    }
-
-    .sp {
-      margin-top: 10px;
-    }
-
-    .card-t {
-      width: 170px;
-      height: 230px;
-      border-radius: 10px;
-
-    }
-
-    .goods-div {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      justify-content: center;
-    }
-
-    .body-g {
-      width: 30%;
-      line-height: 150%;
-      background: rgb(251, 251, 251);
-      border: 3px solid rgb(238, 238, 238);
-      border-radius: 30px;
-      box-sizing: border-box;
-      padding: 0px 15px;
-      position: relative;
-      text-align: center;
-      margin: 20px 50px;
-      cursor: pointer;
-    }
-
-    .body-g:hover{
-      border: 3px solid #2c7fdf;
-    }
-    .body-g:hover >div>a{
-      color: #2c7fdf;
-    }
-
-    .body-g a{
-      font-size: 20px;
-      font-weight: 600;
-      color: #000;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    .body-g a:hover{
-      color: #2c7fdf;
-    }
-
-    /*이용후기*/
-    .body-r {
-      width: 300px;
-      height: 50px;
-      background: rgb(251, 251, 251);
-      border: 3px solid rgb(238, 238, 238);
-      border-radius: 30px;
-      padding: 0px 15px;
-      position: relative;
-      text-align: center;
-      margin: 20px 50px;
-      cursor: pointer;
-    }
-
-    .body-r:hover{
-      border: 3px solid #2c7fdf;
-    }
-
-    .body-r a{
-      font-size: 15px;
-      font-weight: 600;
-      color: #000;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -60%);
-    }
-
-    .body-r:hover > a {
-      color: #2c7fdf;
-    }
-
-
-    .card-t:hover{
-      border: 3px solid #2c7fdf;
-    }
-
-
-    #map {
-      width: 956px;
-      height: 500px;
-    }
-
-  </style>
   <script th:inline="javascript">
     $(function () {
       let m = [[${msg}]]; // msg가 없으면 null
@@ -315,7 +70,7 @@
       <div class="intro">
         <div class="intro-name" th:text="${gym.gname}"></div>
         <div class="intro-addr tmemo" th:text="${gym.glocation}"></div>
-        <div class="intro-star memo">
+        <div class="intro-star tmemo">
           <th:block th:if="${avg == 0}">
             등록된 별점이 없습니다.
           </th:block>
@@ -324,31 +79,29 @@
           </th:block>
         </div>
 
-        <hr>
-        <div class="body-i memo memo-1">
-          <div th:text="${gym.gdescription}"></div>
+        <div class="body-i">
+          <div class="memo" th:text="${gym.gdescription}"></div>
         </div>
-
 
         <hr>
         <div class="body-p">
           <div class="body-title tmemo">공지사항</div>
-          <div th:text="${gym.gnotice}"></div>
+          <div class="memo" th:text="${gym.gnotice}"></div>
         </div>
 
         <hr>
         <div>
           <div class="body-title tmemo">운영시간</div>
-          <div class="memo memo-1" th:text="${gym.goperation}"></div>
+          <div class="memo" th:text="${gym.goperation}"></div>
         </div>
 
         <hr>
         <div>
           <div class="body-title tmemo">부가서비스</div>
           <div class="tmemo memo-2 sp">유료</div>
-          <div class="memo memo-1" th:text="${gym.gaddservpay}"></div>
+          <div class="memo" th:text="${gym.gaddservpay}"></div>
           <div class="tmemo memo-2 sp">무료</div>
-          <div class="memo memo-1" th:text="${gym.gaddservfree}"></div>
+          <div class="memo" th:text="${gym.gaddservfree}"></div>
         </div>
 
         <hr>
@@ -479,7 +232,7 @@
             <div class="body-title tmemo">위치</div>
             <div id="map"></div>
             <br>
-            <div class="memo">
+            <div class="tmemo">
               오짐은 통신판매의 중개자이며, 통신판매의 당사자가 아닙니다.<br>
               따라서 상품의 구매, 이용 및 환불 등과 관련된 의무와 책임은 각 판매자에게 있습니다.
             </div>
