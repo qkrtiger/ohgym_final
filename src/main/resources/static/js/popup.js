@@ -22,7 +22,3 @@ function openInfo(membernum) {
 function opengImage(gymnum) {
     var popupWindow = window.open("gImage?gymnum="+gymnum, "gymImage editing", "width=800,height=800");
 }
-
-function openFilter() {
-    var popupWindow = window.open("gymSetting", "GymSetting", "width=800, height=800");
-}
