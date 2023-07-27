@@ -1,15 +1,3 @@
--- drop table board;
--- drop table gym;
--- drop table gymconvenient;
--- drop table gymgoods;
--- drop table gymmachine;
--- drop table gymmark;
--- drop table member;
--- drop table mpay;
--- drop table reply;
--- drop table review;
--- drop table traingoods;
-
 -- drop view if exists blist;
 -- drop view if exists fillter;
 -- drop view if exists fillter2;
@@ -26,21 +14,19 @@
 -- drop view if exists mainboard;
 -- drop view if exists gymmember;
 
+-- drop table gymconvenient;
+-- drop table gymmachine;
+-- drop table gymmark;
+-- drop table reply;
+-- drop table board;
+-- drop table review;
+-- drop table mpay;
+-- drop table gymgoods;
+-- drop table traingoods;
+-- drop table gym;
+-- drop table member;
 
 commit;
-
--- 삭제
--- DROP TABLE IF EXISTS `GymConvenient`;
--- DROP TABLE IF EXISTS `GymMark`;
--- DROP TABLE IF EXISTS `Reply`;
--- DROP TABLE IF EXISTS `Board`;
--- DROP TABLE IF EXISTS `Review`;
--- DROP TABLE IF EXISTS `mpay`;
--- DROP TABLE IF EXISTS `traingoods`;
--- DROP TABLE IF EXISTS `GymGoods`;
--- DROP TABLE IF EXISTS `Member`;
-﻿-- DROP TABLE IF EXISTS `GymMachine`;
--- DROP TABLE IF EXISTS `Gym`;
 
 -- 전체 테이블
 -- 회원
