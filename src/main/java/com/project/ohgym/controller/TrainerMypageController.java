@@ -63,6 +63,7 @@ public class TrainerMypageController {
         MemberDto member = (MemberDto) session.getAttribute("member");
 
         mv.addObject("member", member);
+        mv.addObject("trainer", member);
 
         mv.setViewName("tGoodsForm");
 
@@ -102,7 +103,7 @@ public class TrainerMypageController {
     public String tMGoodsOnOff(@RequestBody TrainGoodsDto traingoods) {
         log.info("tMGoodsOnOff()");
 
-        //int membernum = ((MemberDto) session.getAttribute("member")).getMembernum();
+//        int membernum = ((MemberDto) session.getAttribute("member")).getMembernum();
 
         tServ.tMGoodsOnOff(traingoods);
 

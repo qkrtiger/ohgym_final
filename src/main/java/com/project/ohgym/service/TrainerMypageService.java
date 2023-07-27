@@ -2,10 +2,7 @@ package com.project.ohgym.service;
 
 
 import com.project.ohgym.dao.TrainDao;
-import com.project.ohgym.dto.MPayDto;
-import com.project.ohgym.dto.TrainGoodsDto;
-import com.project.ohgym.dto.TrainDto;
-import com.project.ohgym.dto.TrainerDto;
+import com.project.ohgym.dto.*;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,8 +60,10 @@ public class TrainerMypageService {
 
         //트레이너 상품정보 가져오기
         List<TrainGoodsDto> tGList = tDao.GettrainerGoods(membernum);
+        TrainerDto trainer = tDao.selectTrainer(membernum);
 
         mv.addObject("tGList",tGList);
+        mv.addObject("trainer", trainer);
 
         mv.setViewName("trainerGoods");
 
