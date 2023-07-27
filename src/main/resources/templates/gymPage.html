@@ -205,11 +205,9 @@
         .body-g:hover{
             border: 3px solid #2c7fdf;
         }
-
-        .body-g:hover::after{
+        .body-g:hover >div>a{
             color: #2c7fdf;
         }
-
 
         .body-g a{
             font-size: 20px;
@@ -220,6 +218,43 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
+
+        .body-g a:hover{
+            color: #2c7fdf;
+        }
+
+        /*이용후기*/
+        .body-r {
+            width: 300px;
+            height: 50px;
+            background: rgb(251, 251, 251);
+            border: 3px solid rgb(238, 238, 238);
+            border-radius: 30px;
+            padding: 0px 15px;
+            position: relative;
+            text-align: center;
+            margin: 20px 50px;
+            cursor: pointer;
+        }
+
+        .body-r:hover{
+            border: 3px solid #2c7fdf;
+        }
+
+        .body-r a{
+            font-size: 15px;
+            font-weight: 600;
+            color: #000;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+        }
+
+        .body-r:hover > a {
+            color: #2c7fdf;
+        }
+
 
         .card-t:hover{
             border: 3px solid #2c7fdf;
@@ -435,8 +470,10 @@
                             등록된 이용후기가 없습니다.
                         </th:block>
                         <th:block th:unless="${relen == 0}">
-                            <a class="body-sub-title" th:href="@{gymReviewList(gymnum=${gym.gymnum},pageNum=1)}"
-                               th:text="'이용후기 ' + ${relen} + '개 전체보기'"></a>
+                            <div class="body-r" th:onclick="|location.href='@{gymReviewList(gymnum=${gym.gymnum},pageNum=1)}'|">
+                                <a class="body-sub-title" th:href="@{gymReviewList(gymnum=${gym.gymnum},pageNum=1)}"
+                                   th:text="'이용후기 ' + ${relen} + '개 전체보기'"></a>
+                            </div>
                         </th:block>
                         <hr>
                         <div class="body-title tmemo">위치</div>
