@@ -391,8 +391,10 @@ public class GymMypageService {
 
         //헬스장 상품정보 가져오기
         List<GymGoodsDto> gGList = gDao.GetgymGoods(gymnum);
+        GymDto gym = gDao.selectGym(gymnum);
 
         mv.addObject("gGList",gGList);
+        mv.addObject("gym", gym);
 
         mv.setViewName("gymGoods");
 
