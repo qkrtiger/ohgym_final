@@ -35,7 +35,7 @@
                 <div class="tit">운동 시작일</div>
                 <div class="addr-low" th:text="${mpay.mpayperiod}"></div>
                 <div class="tit">결제 금액</div>
-                <div class="tit" style="color:#2c7fdf" th:text="금액 +${#numbers.formatInteger(mpay.mpayprice, 3, 'COMMA') + '원'}"></div>
+                <div class="tit" style="color:#2c7fdf" th:text="'금액&nbsp;'+${#numbers.formatInteger(mpay.mpayprice, 3, 'COMMA') + '원'}"></div>
             </div>
         </div>
     </div>
