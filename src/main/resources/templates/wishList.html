@@ -10,8 +10,8 @@
         *{margin: 0; padding: 0;}
 
         .sec{
-            margin-top: 150px;
-            margin-left: 400px;
+            /*margin-top: 150px;*/
+            /*margin-left: 400px;*/
         }
         hr {
             width: 1000px;
@@ -38,7 +38,7 @@
         .row {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(288px, auto));
-            width: 90%;
+            width: 100%;
             margin-left: auto;
             margin-right: auto;
             margin-bottom: 30px;
@@ -97,6 +97,13 @@
         }
 
 
+        .div-all {
+            width: 1300px;
+            min-height: 900px;
+            margin-top: 150px;
+            margin-left: 450px;
+            padding-bottom: 50px;
+        }
     </style>
 </head>
 <body class="renewal">
@@ -105,38 +112,40 @@
 </header>
 <th:block th:insert="~{MemberSideBar.html}"></th:block>
 <div class="top-div">
-    <section class="sec">
-        <div class="title">
-            <h1>찜 목록</h1>
-        </div>
-        <div id="result">
-            <div class="row">
-                <th:block th:if="${#lists.isEmpty(gList)}">
-                    등록된 헬스장이 없습니다.
-                </th:block>
-                <th:block th:unless="${#lists.isEmpty(gList)}">
-                    <th:block th:each="gitem:${gList}">
-                        <div class="card">
-                            <div class="col">
-                                <th:block th:if="${gitem.gsysname == null}">
-                                    <a th:href="@{gymPage(gymnum=${gitem.gymnum})}"><img th:src="@{images/no_image.jpg}" class="card-img-top" alt="..."></a>
-                                </th:block>
-                                <th:block th:unless="${gitem.gsysname == null}">
-                                    <a th:href="@{gymPage(gymnum=${gitem.gymnum})}"><img th:src="@{upload/gym/}+${gitem.gsysname}" class="card-img-top" alt="..."></a>
-                                </th:block>
-                            </div>
-                            <div class="card-body">
-                                <h3 class="card-title">
-                                    <a th:href="@{gymPage(gymnum=${gitem.gymnum})}" th:text="${gitem.gname}"></a>
-                                </h3>
-                                <h5 class="card-subtitle" th:text="${gitem.glocation}"></h5>
-                            </div>
-                        </div>
-                    </th:block>
-                </th:block>
+    <div class="div-all">
+        <section class="sec">
+            <div class="title">
+                <h1>찜 목록</h1>
             </div>
-        </div>
-    </section>
+            <div id="result">
+                <div class="row">
+                    <th:block th:if="${#lists.isEmpty(gList)}">
+                        등록된 헬스장이 없습니다.
+                    </th:block>
+                    <th:block th:unless="${#lists.isEmpty(gList)}">
+                        <th:block th:each="gitem:${gList}">
+                            <div class="card">
+                                <div class="col">
+                                    <th:block th:if="${gitem.gsysname == null}">
+                                        <a th:href="@{gymPage(gymnum=${gitem.gymnum})}"><img th:src="@{images/no_image.jpg}" class="card-img-top" alt="..."></a>
+                                    </th:block>
+                                    <th:block th:unless="${gitem.gsysname == null}">
+                                        <a th:href="@{gymPage(gymnum=${gitem.gymnum})}"><img th:src="@{upload/gym/}+${gitem.gsysname}" class="card-img-top" alt="..."></a>
+                                    </th:block>
+                                </div>
+                                <div class="card-body">
+                                    <h3 class="card-title">
+                                        <a th:href="@{gymPage(gymnum=${gitem.gymnum})}" th:text="${gitem.gname}"></a>
+                                    </h3>
+                                    <h5 class="card-subtitle" th:text="${gitem.glocation}"></h5>
+                                </div>
+                            </div>
+                        </th:block>
+                    </th:block>
+                </div>
+            </div>
+        </section>
+    </div>
 </div>
 <footer>
     <th:block th:insert="~{footer.html}"></th:block>
@@ -152,12 +161,6 @@
         const marginBottom = parseFloat(mainContentStyles.marginBottom);
 
         let sidebarHeight = mainContentHeight + marginTop + marginBottom;
-
-        if (mainContentStyles <= 901) {
-            sidebarHeight += 30;
-        }else {
-            sidebarHeight += 30;
-        }
 
         sidebar.style.height = sidebarHeight + 'px';
     }

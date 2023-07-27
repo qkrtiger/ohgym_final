@@ -63,9 +63,8 @@
 
     .content{
       border: 1px solid;
-      width: 70%;
+      width: 90%;
       margin-bottom: 100px;
-      margin-left: 450px;
     }
 
     .content-in {
@@ -92,14 +91,11 @@
     }
 
     .info-title{
-      margin-top: 150px;
-      margin-left: 450px;
       margin-bottom: 30px;
       padding-top: 50px;
     }
 
     .deletebtn{
-      margin-left: 100px;
       margin-bottom: 30px;
       padding: 10px 20px;
       background-color: #0099ff;
@@ -118,6 +114,14 @@
     .top-div{
       min-height: 900px;
     }
+
+    .div-all {
+      width: 1300px;
+      min-height: 900px;
+      margin-top: 150px;
+      margin-left: 450px;
+      padding-bottom: 50px;
+    }
   </style>
 </head>
 <body class="renewal">
@@ -131,52 +135,54 @@
 </header>
 <th:block th:insert="~{TrainerSideBar.html}"></th:block>
 <div class="top-div">
-  <h2 class="info-title">트레이너 상품 관리</h2>
-  <button class="deletebtn" type="button" th:onclick = "del()">삭제</button>
-  <div id="content" class="content">
-    <div class="content-in">
-      <table id="mtable">
-        <thead>
-        <tr>
-          <th><input type="checkbox" name="_selected_all_"></th>
-          <th>No.</th>
-          <th>상품명</th>
-          <th>횟수</th>
-          <th>가격(회당)</th>
-          <th>결제금액</th>
-          <th>추가사항</th>
-          <th>활성화</th>
-        </tr>
-        </thead>
-        <tbody id="tb">
-        <div th:unless="${#lists.isEmpty(tGList)}">
-          <tr th:each="tGitem, iterstat: ${tGList}">
-            <td>
-              <input type="checkbox" name="_selected_">
-              <input type="hidden" th:value="${tGitem.tgoodsint}">
-            </td>
-            <td th:text="${iterstat.count}"></td>
-            <td th:text="${tGitem.tgoodsname}"></td>
-            <td th:text="${tGitem.tgoodsnum} + '회'"></td>
-            <td th:text="${#numbers.formatInteger(tGitem.tgoodsprice div tGitem.tgoodsnum, 3, 'COMMA') + '원'}"></td>
-            <td th:text="${#numbers.formatInteger(tGitem.tgoodsprice, 3, 'COMMA') + '원'}"></td>
-            <td th:text="${tGitem.tgoodscontents}"></td>
-            <td>
-              <input type="checkbox" class="tgl" th:id="'toggle'+${iterstat.count}" th:checked="${tGitem.tgoodsturn}" hidden th:data-ts="${tGitem.tgoodsint}">
-              <label th:for="'toggle'+${iterstat.count}" class="toggleSwitch" th:classappend="${tGitem.tgoodsturn == false} ? 'active'">
-                <span class="toggleButton"></span>
-              </label>
-              </label>
-            </td>
+  <div class="div-all">
+    <h2 class="info-title">트레이너 상품 관리</h2>
+    <button class="deletebtn" type="button" th:onclick = "del()">삭제</button>
+    <div id="content" class="content">
+      <div class="content-in">
+        <table id="mtable">
+          <thead>
+          <tr>
+            <th><input type="checkbox" name="_selected_all_"></th>
+            <th>No.</th>
+            <th>상품명</th>
+            <th>횟수</th>
+            <th>가격(회당)</th>
+            <th>결제금액</th>
+            <th>추가사항</th>
+            <th>활성화</th>
           </tr>
-        </div>
-        <div th:if="${#lists.isEmpty(tGList)}">
-          <td colspan="5">등록된 상품이 없습니다.</td>
-        </div>
-        </tbody>
-      </table>
+          </thead>
+          <tbody id="tb">
+          <div th:unless="${#lists.isEmpty(tGList)}">
+            <tr th:each="tGitem, iterstat: ${tGList}">
+              <td>
+                <input type="checkbox" name="_selected_">
+                <input type="hidden" th:value="${tGitem.tgoodsint}">
+              </td>
+              <td th:text="${iterstat.count}"></td>
+              <td th:text="${tGitem.tgoodsname}"></td>
+              <td th:text="${tGitem.tgoodsnum} + '회'"></td>
+              <td th:text="${#numbers.formatInteger(tGitem.tgoodsprice div tGitem.tgoodsnum, 3, 'COMMA') + '원'}"></td>
+              <td th:text="${#numbers.formatInteger(tGitem.tgoodsprice, 3, 'COMMA') + '원'}"></td>
+              <td th:text="${tGitem.tgoodscontents}"></td>
+              <td>
+                <input type="checkbox" class="tgl" th:id="'toggle'+${iterstat.count}" th:checked="${tGitem.tgoodsturn}" hidden th:data-ts="${tGitem.tgoodsint}">
+                <label th:for="'toggle'+${iterstat.count}" class="toggleSwitch" th:classappend="${tGitem.tgoodsturn == false} ? 'active'">
+                  <span class="toggleButton"></span>
+                </label>
+                </label>
+              </td>
+            </tr>
+          </div>
+          <div th:if="${#lists.isEmpty(tGList)}">
+            <td colspan="5">등록된 상품이 없습니다.</td>
+          </div>
+          </tbody>
+        </table>
+      </div>
+      <button class="goodsbtn" th:onclick="|location.href='@{tGoodsForm}'|">상품 등록</button>
     </div>
-    <button class="goodsbtn" th:onclick="|location.href='@{tGoodsForm}'|">상품 등록</button>
   </div>
 </div>
 <footer class="footer">
@@ -288,12 +294,6 @@
 
     let sidebarHeight = mainContentHeight + marginTop + marginBottom;
 
-    if (mainContentStyles > 901) {
-      sidebarHeight += 100;
-    }
-    else {
-      sidebarHeight += 0;
-    }
 
     sidebar.style.height = sidebarHeight + 'px';
   }
