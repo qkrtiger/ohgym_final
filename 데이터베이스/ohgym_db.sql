@@ -59,9 +59,9 @@ CREATE TABLE `member` (
                           `mresolution` varchar(100) DEFAULT NULL,
                           `mregion` varchar(20) DEFAULT NULL,
                           `gymnum` int DEFAULT NULL,
-                          `tcareer` varchar(200) DEFAULT NULL,
-                          `tlicence` varchar(100) DEFAULT NULL,
-                          `tpr` varchar(200) DEFAULT NULL,
+                          `tcareer` varchar(1000) DEFAULT NULL,
+                          `tlicence` varchar(1000) DEFAULT NULL,
+                          `tpr` varchar(3000) DEFAULT NULL,
                           `toriname` varchar(50) DEFAULT NULL,
                           `tsysname` varchar(50) DEFAULT NULL,
                           PRIMARY KEY (`membernum`)
