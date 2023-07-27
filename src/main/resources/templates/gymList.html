@@ -236,7 +236,7 @@
                 </li>
                 <li>
                     <div class="search">
-                        <input type="text" placeholder="검색어 입력" id="keyword">
+                        <input type="text" placeholder="검색어 입력" id="keyword" th:onkeypress="if( event.keyCode == 13 ){searchinfo();}">
                         <button id="searchinfo" class="seachimg"></button>
                     </div>
                 </li>

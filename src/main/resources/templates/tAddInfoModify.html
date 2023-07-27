@@ -129,9 +129,7 @@
             border: none;
             resize: none;
         }
-        .textarea{
-            display: flex;
-        }
+
         .top-div{
             min-height: 900px;
         }
@@ -178,15 +176,15 @@
                             </div>
                             <div class="info-row">
                                 <span class="info-label">경력:</span>
-                                <input type="text" class="intext" name="tcareer" th:value="${trainer.tcareer}">
+                                <textarea rows="3" cols=20 wrap="hard" name="tcareer" class="intext" placeholder="경력을 입력해주세요">[[${trainer.tcareer}]]</textarea>
                             </div>
                             <div class="info-row">
                                 <span class="info-label">자격증:</span>
-                                <input type="text" class="intext" name="tlicence" th:value="${trainer.tlicence}">
+                                <textarea rows="3" cols=20 wrap="hard" name="tlicence" class="intext" placeholder="자격증을 입력해주세요">[[${trainer.tlicence}]]</textarea>
                             </div>
                             <div class="info-row textarea">
                                 <span class="info-label">설명:</span>
-                                <textarea rows="3" cols=20 wrap="hard" name="tpr" class="intext">[[${trainer.tpr}]]</textarea>
+                                <textarea rows="3" cols=20 wrap="hard" name="tpr" class="intext" placeholder="설명을 입력해주세요">[[${trainer.tpr}]]</textarea>
                             </div>
                         </div>
                     </div>
