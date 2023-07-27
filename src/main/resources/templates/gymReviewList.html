@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <script src="js/jquery-3.7.0.min.js"></script>
-    <title>ReviewList</title>
+    <title>오짐 - 이용 후기</title>
+    <link rel="shortcut icon" href="/images/header/lgo_face.ico">
     <link rel="stylesheet" th:href="@{css/font.css}">
     <style>
         .container {
             width: 800px;
-            height: 200px;
+            margin: 0 auto;
+            margin-top: 200px;
+            margin-bottom: 100px;
+        }
+
+        .container2 {
+            margin: 50px 0;
         }
 
         .blog-left {
@@ -62,42 +69,76 @@
             margin-top: 60px;
             font-size: 100%
         }
+        .btn {
+            text-decoration: none;
+            cursor: pointer;
+            color: white;
+            padding: 4px 10px;
+            margin-bottom: 12px;
+            display: inline-block;
+            position: relative;
+            border-bottom: 4px solid rgba(0,0,0,0.21);
+            border-radius: 15px;
+            text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+            background: rgb(101, 168, 245);
+        }
+
+        .paging-area {
+            margin: 0 auto;
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 100px;
+        }
 
     </style>
 </head>
 <body class="renewal">
-<h2>이용 후기</h2>
-<th:block th:if="${#lists.isEmpty(reList)}">
-    등록된 후기가 없습니다.
-</th:block>
-<th:block th:unless="${#lists.isEmpty(reList)}">
-    <th:block th:each="ritem:${reList}">
-        <div class="container">
-            <div class="blog-left">
-                <div class="blog-profile">
-                    <th:block th:if="${ritem.msysname == null}">
-                        <img class="blog-profile_image" th:src="@{images/review-icon.png}">
-                    </th:block>
-                    <th:block th:unless="${ritem.msysname == null}">
-                        <img class="star-ratings-fill space-x-2 text-lg" th:src="@{upload/}+${ritem.gsysname}">
-                    </th:block>
-                    <div class="blog-profile_text">
-                        <h4 class="blog-nickname" th:text="${ritem.mnickname}"></h4>
-                        <img class="blog-pay" th:src="@{images/pay.png}">
-                        <div class="star-ratings-fill" th:text="${ritem.ratingOptions}"></div>
-                        <div class="time" th:text="${#dates.format(ritem.reviewdate, 'yyyy.MM.dd')}"></div>
+<header>
+    <th:block th:if="${session.gym == null}">
+        <th:block th:insert="~{header.html}"></th:block>
+    </th:block>
+    <th:block th:unless="${session.gym == null}">
+        <th:block th:insert="~{headerGym.html}"></th:block>
+    </th:block>
+</header>
+<div class="container">
+    <a class="btn" onclick=history.back() readonly="">이전으로</a>
+    <h2>이용 후기</h2>
+    <th:block th:if="${#lists.isEmpty(reList)}">
+        등록된 후기가 없습니다.
+    </th:block>
+    <th:block th:unless="${#lists.isEmpty(reList)}">
+        <th:block th:each="ritem:${reList}">
+            <div class="container2">
+                <div class="blog-left">
+                    <div class="blog-profile">
+                        <th:block th:if="${ritem.msysname == null}">
+                            <img class="blog-profile_image" th:src="@{images/review-icon.png}">
+                        </th:block>
+                        <th:block th:unless="${ritem.msysname == null}">
+                            <img class="star-ratings-fill space-x-2 text-lg" th:src="@{upload/}+${ritem.gsysname}">
+                        </th:block>
+                        <div class="blog-profile_text">
+                            <h4 class="blog-nickname" th:text="${ritem.mnickname}"></h4>
+                            <img class="blog-pay" th:src="@{images/pay.png}">
+                            <div class="star-ratings-fill" th:text="${ritem.ratingOptions}"></div>
+                            <div class="time" th:text="${#dates.format(ritem.reviewdate, 'yyyy.MM.dd')}"></div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="blog-content">
+                        <div th:text="${ritem.reviewcontents}"></div>
                     </div>
                 </div>
-                <br>
-                <div class="blog-content">
-                    <div th:text="${ritem.reviewcontents}"></div>
-                </div>
-            </div>
-        </div>
+            </div><!--container2-->
+        </th:block>
     </th:block>
-</th:block>
-<div class="paging-area">
-    <div class="paging" th:utext="${paging}"></div>
+    <div class="paging-area">
+        <div class="paging" th:utext="${paging}"></div>
+    </div>
 </div>
 </body>
+<footer>
+    <th:block th:insert="~{footer.html}"></th:block>
+</footer>
 </html>
