@@ -328,9 +328,16 @@
                     for (var i = 0; i < data.length; i++) {
                         str += "<div class='card'><div class='col'>"
                         if (data[i].gsysname == null) {
-                            str += '<img src="images/no_image.jpg" class="card-img-top"></div>';
+                            str += '<a href=' + '"gymPage?gymnum='
+                                + data[i].gymnum
+                                + '"><img src="images/no_image.jpg"'
+                                + '" class="card-img-top"></a></div>';
                         } else {
-                            str += '<img src="upload/gym/' + data[i].gsysname + '" class="card-img-top"></div>';
+                            str += '<a href=' + '"gymPage?gymnum='
+                                + data[i].gymnum
+                                + '"><img src="upload/gym/'
+                                + data[i].gsysname
+                                + '" class="card-img-top"></a></div>';
                         }
                         str += "<div class='card-body'><h3 class='card-title'>"
                             + "<a href='gymPage?gymnum=" + data[i].gymnum + "'>" + data[i].gname
@@ -365,9 +372,16 @@
                     for (var i = 0; i < data.length; i++) {
                         str += "<div class='card'><div class='col'>"
                         if (data[i].gsysname == null) {
-                            str += '<img src="images/no_image.jpg" class="card-img-top"></div>';
+                            str += '<a href=' + '"gymPage?gymnum='
+                                + data[i].gymnum
+                                + '"><img src="images/no_image.jpg"'
+                                + '" class="card-img-top"></a></div>';
                         } else {
-                            str += '<img src="upload/gym/' + data[i].gsysname + '" class="card-img-top"></div>';
+                            str += '<a href=' + '"gymPage?gymnum='
+                                + data[i].gymnum
+                                + '"><img src="upload/gym/'
+                                + data[i].gsysname
+                                + '" class="card-img-top"></a></div>';
                         }
                         str += "<div class='card-body'><h3 class='card-title'>"
                             + "<a href='gymPage?gymnum=" + data[i].gymnum + "'>" + data[i].gname
