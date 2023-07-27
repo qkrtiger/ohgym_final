@@ -287,29 +287,29 @@
 
                 <hr>
                 <div class="body-i memo memo-1">
-                    <div th:text="${gym.gdescription}"></div>
+                    <textarea th:text="${gym.gdescription}"></textarea>
                 </div>
 
 
                 <hr>
                 <div class="body-p">
                     <div class="body-title tmemo">공지사항</div>
-                    <div th:text="${gym.gnotice}"></div>
+                    <textarea th:text="${gym.gnotice}"></textarea>
                 </div>
 
                 <hr>
                 <div>
                     <div class="body-title tmemo">운영시간</div>
-                    <div class="memo memo-1" th:text="${gym.goperation}"></div>
+                    <textarea class="memo memo-1" th:text="${gym.goperation}"></textarea>
                 </div>
 
                 <hr>
                 <div>
                     <div class="body-title tmemo">부가서비스</div>
                     <div class="tmemo memo-2 sp">유료</div>
-                    <div class="memo memo-1" th:text="${gym.gaddservpay}"></div>
+                    <textarea class="memo memo-1" th:text="${gym.gaddservpay}"></textarea>
                     <div class="tmemo memo-2 sp">무료</div>
-                    <div class="memo memo-1" th:text="${gym.gaddservfree}"></div>
+                    <textarea class="memo memo-1" th:text="${gym.gaddservfree}"></textarea>
                 </div>
 
                 <hr>

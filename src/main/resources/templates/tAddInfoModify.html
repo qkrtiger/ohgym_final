@@ -13,10 +13,10 @@
         }
 
         .entire{
-            margin: 0 auto;
-            margin-top: 165px;
-            width: 80%;
+            margin-top: 150px;
+            width: 70%;
             min-width: 700px;
+            margin-left: 450px;
         }
         .content-b{
             border: 1px solid grey;
@@ -31,6 +31,7 @@
             font-size: 32px;
             font-weight: bold;
             margin-bottom: 20px;
+            padding-top: 50px;
         }
 
         .info-row {
@@ -70,7 +71,7 @@
             width: 300px;
             margin: 20px;
         }
-        .image {
+        .timage {
             width: 300px;
             margin: 20px;
         }
@@ -131,6 +132,9 @@
         .textarea{
             display: flex;
         }
+        .top-div{
+            min-height: 900px;
+        }
     </style>
 </head>
 <body class="renewal">
@@ -142,65 +146,68 @@
         <th:block th:insert="~{headerGym.html}"></th:block>
     </th:block>
 </header>
-<div class="entire">
-    <form th:action="@{tAddInfoMo}" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="membernum" th:value="${trainer.membernum}">
-        <h2 class="info-title">추가 정보</h2>
-        <div class="content-b">
-            <div class="content-t">
-                <div id="content" class="content">
-                    <div class="info-row">
-                        <span class="info-label">트레이너 이름:</span>
-                        <input type="text" class="intext" th:value="${trainer.mname}" readonly>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">헬스장 이름:</span>
-                        <input type="text" class="intext" th:value="${trainer.gname}" readonly>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">성별:</span>
-                        <input type="text" class="intext" name="mgender" th:value="${trainer.mgender}">
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">경력:</span>
-                        <input type="text" class="intext" name="tcareer" th:value="${trainer.tcareer}">
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">자격증:</span>
-                        <input type="text" class="intext" name="tlicence" th:value="${trainer.tlicence}">
-                    </div>
-                    <div class="info-row textarea">
-                        <span class="info-label">설명:</span>
-                        <textarea rows="3" cols=20 wrap="hard" name="tpr" class="intext">[[${trainer.tpr}]]</textarea>
+<th:block th:insert="~{TrainerSideBar.html}"></th:block>
+<div class="top-div">
+    <div class="entire">
+        <form th:action="@{tAddInfoMo}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="membernum" th:value="${trainer.membernum}">
+            <h2 class="info-title">추가 정보</h2>
+            <div class="content-b">
+                <div class="content-t">
+                    <div id="content" class="content">
+                        <div class="info-row">
+                            <span class="info-label">트레이너 이름:</span>
+                            <input type="text" class="intext" th:value="${trainer.mname}" readonly>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">헬스장 이름:</span>
+                            <input type="text" class="intext" th:value="${trainer.gname}" readonly>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">성별:</span>
+                            <input type="text" class="intext" name="mgender" th:value="${trainer.mgender}">
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">경력:</span>
+                            <input type="text" class="intext" name="tcareer" th:value="${trainer.tcareer}">
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">자격증:</span>
+                            <input type="text" class="intext" name="tlicence" th:value="${trainer.tlicence}">
+                        </div>
+                        <div class="info-row textarea">
+                            <span class="info-label">설명:</span>
+                            <textarea rows="3" cols=20 wrap="hard" name="tpr" class="intext">[[${trainer.tpr}]]</textarea>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div>
-            <div class="imgbox">
-                <h2 class="img-title">사진 등록</h2>
-                <div class="files">
-                    <label for="file" class="file-plus">파일 추가</label>
-                    <input type="file" name="files" id="file" onchange="readURL(this);">
-                </div>
-                <div class="img-entire">
-                    <div th:if="${trainer.tsysname == null}">
-                        <h3 id="noImage">등록된 이미지가 없습니다</h3>
+            <div>
+                <div class="imgbox">
+                    <h2 class="img-title">사진 등록</h2>
+                    <div class="files">
+                        <label for="file" class="file-plus">파일 추가</label>
+                        <input type="file" name="files" id="file" onchange="readURL(this);">
                     </div>
-                    <div th:unless="${trainer.tsysname == null}">
-                        <img th:src="@{upload/trainer/} + ${trainer.tsysname}" class="image">
-                        <input type="hidden" name="tsysname" th:value="${trainer.tsysname}">
-                        <input type="hidden" name="toriname" th:value="${trainer.toriname}">
+                    <div class="img-entire">
+                        <div th:if="${trainer.tsysname == null}">
+                            <h3 id="noImage">등록된 이미지가 없습니다</h3>
+                        </div>
+                        <div th:unless="${trainer.tsysname == null}">
+                            <img th:src="@{upload/trainer/} + ${trainer.tsysname}" class="timage">
+                            <input type="hidden" name="tsysname" th:value="${trainer.tsysname}">
+                            <input type="hidden" name="toriname" th:value="${trainer.toriname}">
+                        </div>
+                        <img id="preview" />
                     </div>
-                    <img id="preview" />
                 </div>
             </div>
-        </div>
-        <div class="btn">
-            <input type="submit" value="저장하기">
-            <input type="button" value="이전으로" th:onclick ="|back(membernum=${trainer.membernum})|">
-        </div>
-    </form>
+            <div class="btn">
+                <input type="submit" value="저장하기">
+                <input type="button" value="이전으로" th:onclick ="|back(membernum=${trainer.membernum})|">
+            </div>
+        </form>
+    </div>
 </div>
 <footer class="footer">
     <th:block th:insert="~{footer.html}"></th:block>
@@ -229,6 +236,28 @@
     function back(membernum) {
         location.href = '/tAdditionInfo?membernum=' + membernum;
     }
+
+    function setSidebarHeight() {
+        const sidebar = document.querySelector('.aside');
+        const mainContent = document.querySelector('.top-div');
+        const mainContentStyles = window.getComputedStyle(mainContent);
+        const mainContentHeight = parseFloat(mainContentStyles.height);
+        const marginTop = parseFloat(mainContentStyles.marginTop);
+        const marginBottom = parseFloat(mainContentStyles.marginBottom);
+
+        let sidebarHeight = mainContentHeight + marginTop + marginBottom;
+
+        if (mainContentStyles <= 901) {
+            sidebarHeight += 50;
+        }else {
+            sidebarHeight += 50;
+        }
+
+        sidebar.style.height = sidebarHeight + 'px';
+    }
+
+    window.addEventListener('load', setSidebarHeight);
+    window.addEventListener('resize', setSidebarHeight);
 
 </script>
 </html>
