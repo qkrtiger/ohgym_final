@@ -2,7 +2,8 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>wishList</title>
+    <title>오짐 - 찜 목록</title>
+    <link rel="shortcut icon" href="/images/header/lgo_face.ico">
     <link rel="stylesheet" th:href="@{css/font.css}">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <style>
@@ -53,6 +54,17 @@
             border-radius: 10px;
         }
 
+        .card-title a {
+            width: 254px;
+            color: #000;
+        }
+
+        .card-subtitle {
+            width: 254px;
+            color: #999;
+            font-weight: 300;
+        }
+
         .col {
             width: 288px;
             height: 200px;
@@ -96,7 +108,6 @@
     <section class="sec">
         <div class="title">
             <h1>찜 목록</h1>
-            <h1>검색결과출력</h1>
         </div>
         <div id="result">
             <div class="row">
@@ -108,15 +119,17 @@
                         <div class="card">
                             <div class="col">
                                 <th:block th:if="${gitem.gsysname == null}">
-                                    <img th:src="@{images/no_image.jpg}" class="card-img-top" alt="...">
+                                    <a th:href="@{gymPage(gymnum=${gitem.gymnum})}"><img th:src="@{images/no_image.jpg}" class="card-img-top" alt="..."></a>
                                 </th:block>
                                 <th:block th:unless="${gitem.gsysname == null}">
-                                    <img th:src="@{upload/gym/}+${gitem.gsysname}" class="card-img-top" alt="...">
+                                    <a th:href="@{gymPage(gymnum=${gitem.gymnum})}"><img th:src="@{upload/gym/}+${gitem.gsysname}" class="card-img-top" alt="..."></a>
                                 </th:block>
                             </div>
                             <div class="card-body">
-                                <a class="gymname" th:href="@{gymPage(gymnum=${gitem.gymnum})}" th:text="${gitem.gname}"></a>
-                                <p th:text="${gitem.glocation}"></p>
+                                <h3 class="card-title">
+                                    <a th:href="@{gymPage(gymnum=${gitem.gymnum})}" th:text="${gitem.gname}"></a>
+                                </h3>
+                                <h5 class="card-subtitle" th:text="${gitem.glocation}"></h5>
                             </div>
                         </div>
                     </th:block>
