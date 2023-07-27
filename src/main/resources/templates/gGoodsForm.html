@@ -16,18 +16,19 @@
     }
 
     .info-title{
-      margin-top: 180px;
-      margin-left: 185px;
+      margin-top: 150px;
+      margin-left: 450px;
       margin-bottom: 50px;
       font-size: 1.5rem;
+      padding-top: 50px;
     }
 
     .content-all{
       border: 1px solid;
-      margin: 0 auto;
-      width: 80%;
+      width: 70%;
       margin-bottom: 50px;
       min-width: 850px;
+      margin-left: 450px;
     }
 
     .content{
@@ -90,47 +91,54 @@
       font-size: 1.2rem;
       margin-left: 30px;
     }
+
+    .top-div{
+      min-height: 900px;
+    }
   </style>
 </head>
 <body class="renewal">
 <header class="header">
   <th:block th:insert="~{headerGym.html}"></th:block>
 </header>
-<div class="content-top">
-  <form th:action="@{gMGoodsSave}" method="post" enctype="multipart/form-data">
-    <h2 class="info-title">상품 등록</h2>
-    <div class="content-all">
-      <div id="content" class="content">
-        <div class="info-row">
-          <span class="info-label">상품명:</span>
-          <input class="input-t" type="text" name="ggoodsname" autofocus>
-        </div>
-        <div class="info-row">
-          <span class="info-label">이용기간:</span>
-          <select class="option" name="ggoodsperiod">
-            <option value="1">1개월</option>
-            <option value="3">3개월</option>
-            <option value="6">6개월</option>
-            <option value="12">12개월</option>
-            <option value="1">일일권</option>
-          </select>
-        </div>
-        <div class="info-row">
-          <span class="info-label">총 가격:</span>
-          <input class="input-t" type="text" name="ggoodsprice">
-        </div>
-        <div class="info-row">
-          <span class="info-label">추가사항:</span>
-          <input class="input-t" type="text" name="ggoodsadd">
-          <input type="hidden" name="gymnum" th:value="${session.gym.gymnum}">
+<th:block th:insert="~{GymSideBar.html}"></th:block>
+<div class="top-div">
+  <div class="content-top">
+    <form th:action="@{gMGoodsSave}" method="post" enctype="multipart/form-data">
+      <h2 class="info-title">상품 등록</h2>
+      <div class="content-all">
+        <div id="content" class="content">
+          <div class="info-row">
+            <span class="info-label">상품명:</span>
+            <input class="input-t" type="text" name="ggoodsname" autofocus>
+          </div>
+          <div class="info-row">
+            <span class="info-label">이용기간:</span>
+            <select class="option" name="ggoodsperiod">
+              <option value="1">1개월</option>
+              <option value="3">3개월</option>
+              <option value="6">6개월</option>
+              <option value="12">12개월</option>
+              <option value="1">일일권</option>
+            </select>
+          </div>
+          <div class="info-row">
+            <span class="info-label">총 가격:</span>
+            <input class="input-t" type="text" name="ggoodsprice">
+          </div>
+          <div class="info-row">
+            <span class="info-label">추가사항:</span>
+            <input class="input-t" type="text" name="ggoodsadd">
+            <input type="hidden" name="gymnum" th:value="${session.gym.gymnum}">
+          </div>
         </div>
       </div>
-    </div>
-    <div class="btn">
-      <input class="btn-sub" type="submit" value="저장하기">
-      <input class="btn-back" type="button" value="이전으로" th:onclick ="|back(${session.gym.gymnum})|">
-    </div>
-  </form>
+      <div class="btn">
+        <input class="btn-sub" type="submit" value="저장하기">
+        <input class="btn-back" type="button" value="이전으로" th:onclick ="|back(${session.gym.gymnum})|">
+      </div>
+    </form>
+  </div>
 </div>
 <footer class="footer">
   <th:block th:insert="~{footer.html}"></th:block>
@@ -160,6 +168,23 @@
   function back(gymnum) {
     location.href = '/gymGoods?gymnum=' + gymnum;
   }
+
+
+  function setSidebarHeight() {
+    const sidebar = document.querySelector('.aside');
+    const mainContent = document.querySelector('.top-div');
+    const mainContentStyles = window.getComputedStyle(mainContent);
+    const mainContentHeight = parseFloat(mainContentStyles.height);
+    const marginTop = parseFloat(mainContentStyles.marginTop);
+    const marginBottom = parseFloat(mainContentStyles.marginBottom);
+
+    let sidebarHeight = mainContentHeight + marginTop + marginBottom;
+
+    sidebar.style.height = sidebarHeight + 'px';
+  }
+
+  window.addEventListener('load', setSidebarHeight);
+  window.addEventListener('resize', setSidebarHeight);
 
 </script>
 </html>
