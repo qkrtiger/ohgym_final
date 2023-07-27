@@ -16,9 +16,8 @@
 
   .entire{
     margin-top: 150px;
-    width: 70%;
+    width: 100%;
     min-width: 600px;
-    margin-left: 450px;
   }
   .content-b{
     display: flex;
@@ -54,7 +53,7 @@
   .intext{
     font-size: 1.2rem;
     border: none;
-    width: 70%;
+    width: 90%;
   }
 
   .imgbox{
@@ -129,6 +128,14 @@
   .top-div{
     min-height: 900px;
   }
+
+  .div-all {
+    width: 1300px;
+    min-height: 900px;
+    margin-top: 150px;
+    margin-left: 450px;
+    padding-bottom: 50px;
+  }
 </style>
 <body class="renewal">
 <header class="header">
@@ -141,77 +148,79 @@
 </header>
 <th:block th:insert="~{TrainerSideBar.html}"></th:block>
 <div class="top-div">
-  <div class="entire">
-    <form th:action="AddInfoMo" method="get" enctype="multipart/form-data">
-      <input type="hidden" name="membernum" th:value="${trainer.membernum}">
-      <div>
-        <div id="content" class="content">
-          <h2 class="info-title">추가 정보</h2>
-          <div class="content-b">
-            <div class="imgbox">
-              <div th:if="${trainer.tsysname == null}">
-                <h3 class="noimg">등록된 이미지가 없습니다</h3>
+  <div class="div-all">
+    <div class="entire">
+      <form th:action="AddInfoMo" method="get" enctype="multipart/form-data">
+        <input type="hidden" name="membernum" th:value="${trainer.membernum}">
+        <div>
+          <div id="content" class="content">
+            <h2 class="info-title">추가 정보</h2>
+            <div class="content-b">
+              <div class="imgbox">
+                <div th:if="${trainer.tsysname == null}">
+                  <h3 class="noimg">등록된 이미지가 없습니다</h3>
+                </div>
+                <div th:unless="${trainer.tsysname == null}" class="imgdiv">
+                  <img th:src="@{upload/trainer/} + ${trainer.tsysname}" class="timage">
+                </div>
               </div>
-              <div th:unless="${trainer.tsysname == null}" class="imgdiv">
-                <img th:src="@{upload/trainer/} + ${trainer.tsysname}" class="timage">
-              </div>
-            </div>
-            <div class="content-t">
-              <div class="info-row">
-                <span class="info-label">트레이너 이름:</span>
-                <input type="text" class="intext" th:value="${trainer.mname}" readonly>
-              </div>
-              <div class="info-row">
-                <span class="info-label">헬스장 이름:</span>
-                <input type="text" class="intext" th:value="${trainer.gname}" readonly>
-              </div>
-              <div class="info-row">
-                <span class="info-label">성별:</span>
-                <input type="text" class="intext" th:value="${trainer.mgender}" readonly>
-              </div>
-              <div class="info-row">
-                <span class="info-label">경력:</span>
-                <input type="text" class="intext" th:value="${trainer.tcareer}" readonly>
-              </div>
-              <div class="info-row">
-                <span class="info-label">자격증:</span>
-                <input type="text" class="intext" th:value="${trainer.tlicence}" readonly>
-              </div>
-              <div class="info-row textarea">
-                <span class="info-label">설명:</span>
-                <textarea rows="3" cols=20 wrap="hard" name="tpr" class="intext" readonly>[[${trainer.tpr}]]</textarea>
+              <div class="content-t">
+                <div class="info-row">
+                  <span class="info-label">트레이너 이름:</span>
+                  <input type="text" class="intext" th:value="${trainer.mname}" readonly>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">헬스장 이름:</span>
+                  <input type="text" class="intext" th:value="${trainer.gname}" readonly>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">성별:</span>
+                  <input type="text" class="intext" th:value="${trainer.mgender}" readonly>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">경력:</span>
+                  <input type="text" class="intext" th:value="${trainer.tcareer}" readonly>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">자격증:</span>
+                  <input type="text" class="intext" th:value="${trainer.tlicence}" readonly>
+                </div>
+                <div class="info-row textarea">
+                  <span class="info-label">설명:</span>
+                  <textarea rows="3" cols=20 wrap="hard" name="tpr" class="intext" readonly>[[${trainer.tpr}]]</textarea>
+                </div>
               </div>
             </div>
           </div>
+          <div>
+            <table id="myTable">
+              <thead>
+              <tr>
+                <th>No.</th>
+                <th>상품명</th>
+                <th>횟수</th>
+                <th>결제금액</th>
+                <th>추가사항</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="item : ${tgList}">
+                <td th:text="${item.tgoodsint}">No.</td>
+                <td th:text="${item.tgoodsname}">상품명</td>
+                <td th:text="${item.tgoodsnum}">횟수</td>
+                <td th:text="${item.tgoodsprice}">가격</td>
+                <td th:text="${item.tgoodscontents}">추가사항</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="btn">
+            <input type="submit" value="수정하기">
+            <input type="button" value="이전으로" th:onclick ="|back(membernum=${trainer.membernum})|">
+          </div>
         </div>
-        <div>
-          <table id="myTable">
-            <thead>
-            <tr>
-              <th>No.</th>
-              <th>상품명</th>
-              <th>횟수</th>
-              <th>결제금액</th>
-              <th>추가사항</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="item : ${tgList}">
-              <td th:text="${item.tgoodsint}">No.</td>
-              <td th:text="${item.tgoodsname}">상품명</td>
-              <td th:text="${item.tgoodsnum}">횟수</td>
-              <td th:text="${item.tgoodsprice}">가격</td>
-              <td th:text="${item.tgoodscontents}">추가사항</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="btn">
-          <input type="submit" value="수정하기">
-          <input type="button" value="이전으로" th:onclick ="|back(membernum=${trainer.membernum})|">
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </div>
 <footer class="footer">
@@ -240,11 +249,6 @@
 
     let sidebarHeight = mainContentHeight + marginTop + marginBottom;
 
-    if (mainContentStyles <= 901) {
-      sidebarHeight += 50;
-    }else {
-      sidebarHeight += 50;
-    }
 
     sidebar.style.height = sidebarHeight + 'px';
   }
