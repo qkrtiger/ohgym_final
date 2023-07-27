@@ -299,7 +299,7 @@ public class LoginService {
 
                 //로그인 성공 후 페이지 이동처리
                 //테스트 페이지로 이동(나중에 변경하기)
-                view = "redirect:/";
+                view = "redirect:login";
                 msg = "로그인 성공";
 
             } else {
@@ -345,7 +345,7 @@ public class LoginService {
 
                 //로그인 성공 후 페이지 이동처리
                 //테스트 페이지로 이동(나중에 변경하기)
-                view = "redirect:/";
+                view = "redirect:login";
                 msg = "로그인 성공";
 
             } else {
