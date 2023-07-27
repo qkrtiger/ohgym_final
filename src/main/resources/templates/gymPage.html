@@ -112,6 +112,13 @@
             margin: 3px 0;
         }
 
+        .body-sub-title {
+            font-size: 14px;
+            margin: 3px 0;
+            font-weight: 300;
+            color: #2c7fdf;
+        }
+
 
         .tmemo {
             line-height: 115%;
@@ -424,12 +431,11 @@
                     <hr>
                     <div class="body-btn">
                         <div class="body-title tmemo">이용후기</div>
-
                         <th:block th:if="${relen == 0}" class="body-r">
                             등록된 이용후기가 없습니다.
                         </th:block>
                         <th:block th:unless="${relen == 0}">
-                            <a th:href="@{gymReviewList(gymnum=${gym.gymnum},pageNum=1)}"
+                            <a class="body-sub-title" th:href="@{gymReviewList(gymnum=${gym.gymnum},pageNum=1)}"
                                th:text="'이용후기 ' + ${relen} + '개 전체보기'"></a>
                         </th:block>
                         <hr>
