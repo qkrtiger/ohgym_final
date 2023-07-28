@@ -120,20 +120,15 @@
     resize: none;
   }
 
-  .textarea{
-    display: flex;
-
-  }
-
   .top-div{
     min-height: 900px;
   }
 
   .div-all {
-    width: 1300px;
+    width: 1400px;
     min-height: 900px;
     margin-top: 150px;
-    margin-left: 450px;
+    margin-left: 500px;
     padding-bottom: 50px;
   }
 </style>
@@ -179,11 +174,11 @@
                 </div>
                 <div class="info-row">
                   <span class="info-label">경력:</span>
-                  <input type="text" class="intext" th:value="${trainer.tcareer}" readonly>
+                  <textarea rows="3" cols=20 wrap="hard" name="tcareer" class="intext" readonly>[[${trainer.tcareer}]]</textarea>
                 </div>
                 <div class="info-row">
                   <span class="info-label">자격증:</span>
-                  <input type="text" class="intext" th:value="${trainer.tlicence}" readonly>
+                  <textarea rows="3" cols=20 wrap="hard" name="tlicence" class="intext" readonly>[[${trainer.tlicence}]]</textarea>
                 </div>
                 <div class="info-row textarea">
                   <span class="info-label">설명:</span>
