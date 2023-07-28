@@ -354,7 +354,7 @@ select {
 
 .card-title {
     width: 95%;
-    height: 70px;
+    height: 40px;
     overflow: hidden;
     font-size: 25px;
     margin: 0;
@@ -362,10 +362,9 @@ select {
 }
 
 .card-text {
-    margin-top: 10px;
     margin-left: 7px;
     padding-bottom: 10px;
-    height: 78px;
+    height: 105px;
     overflow: hidden;
     width: 95%;
     border-bottom: 1px solid #ccc;
