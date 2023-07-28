@@ -164,5 +164,13 @@
   window.addEventListener('load', setSidebarHeight);
   window.addEventListener('resize', setSidebarHeight);
 
+
+  $(function () {
+    let m = [[${msg}]]; // msg 변수를 가져옴
+    if (m != null) {
+      alert(m); // 경고창 띄우기
+    }
+  });
+
 </script>
 </html>

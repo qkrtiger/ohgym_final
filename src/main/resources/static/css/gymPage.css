@@ -23,7 +23,7 @@
     position: absolute;
     width: 35px;
     height: 35px;
-    background: url('images/back.png');
+    background: url('../images/back.png');
     background-size: contain;
     background-repeat: no-repeat;
     border: none;
