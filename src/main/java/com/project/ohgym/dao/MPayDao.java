@@ -13,5 +13,6 @@ public interface MPayDao {
     MPayDto selectPayment(String mpaynum);
 
 
+    void updateReview(String mpayDel);
 }
 

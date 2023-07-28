@@ -6,6 +6,19 @@
         INSERT INTO review
         VALUES (null, #{membernum}, #{gymnum}, #{mnickname}, #{reviewcontents}, #{reviewstar}, DEFAULT, #{mpaynum})
     </insert>
+
+
+    <update id="updatempay" parameterType="reviewDto">
+        update mpay
+        set review=1
+        where mpaynum=#{mpaynum}
+    </update>
+
+    <delete id="deleteReview" parameterType="String">
+        delete from review where mpaynum=#{mpaynum}
+    </delete>
+
+
     <select id="selectPass" resultType="java.lang.String" parameterType="String">
         SELECT mpass FROM member WHERE mid=#{mid}
     </select>

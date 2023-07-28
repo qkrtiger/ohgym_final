@@ -18,4 +18,5 @@ public class MPayDto {
     private int tgoodsint;
     private int gymnum;
     private String mname;
+    private int review;
 }

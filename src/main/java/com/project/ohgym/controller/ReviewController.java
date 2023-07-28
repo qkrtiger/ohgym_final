@@ -4,6 +4,7 @@ import com.project.ohgym.dto.MPayDto;
 import com.project.ohgym.dto.ReviewDto;
 import com.project.ohgym.dto.SearchDto;
 import com.project.ohgym.service.ReviewService;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,5 +42,13 @@ public class ReviewController {
         log.info("rvList()");
         mv = rServ.rvList(search);
         return mv;
+    }
+
+    //후기 삭제
+    @GetMapping("deleteR")
+    public String deleteR(String mpaynum, HttpSession session, RedirectAttributes rttr){
+        log.info("deleteR");
+        String view = rServ.deleteR(mpaynum, session, rttr);
+        return view;
     }
 }

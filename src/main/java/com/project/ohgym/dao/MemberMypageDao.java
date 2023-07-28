@@ -1,9 +1,6 @@
 package com.project.ohgym.dao;
 
-import com.project.ohgym.dto.GmListDto;
-import com.project.ohgym.dto.MPayDto;
-import com.project.ohgym.dto.MemberDto;
-import com.project.ohgym.dto.SearchDto;
+import com.project.ohgym.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -41,4 +38,6 @@ public interface MemberMypageDao {
     MemberDto selectMemberSearch(SearchDto search);
 
     void updateData(MemberDto member);
+
+    List<ReviewDto> selectReview(SearchDto search);
 }

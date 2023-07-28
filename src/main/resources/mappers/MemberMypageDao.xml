@@ -56,6 +56,9 @@
     <select id="selectMemberSearch" resultType="MemberDto" parameterType="SearchDto">
         select * from member where membernum=#{membernum}
     </select>
+    <select id="selectReview" resultType="ReviewDto" parameterType="SearchDto">
+        select * from review where membernum=#{membernum}
+    </select>
 
 
 </mapper>

@@ -5,13 +5,19 @@
     <insert id="insertMPay" parameterType="mPayDto">
         insert into mpay
         values (#{mpaynum},#{membernum}, #{mpaymethod}, #{mpayproduct}, #{mpayprice}, #{mpaydate},
-                #{mpaygym}, #{mpayperiod}, #{mpaytime},#{trainername}, #{ggoodsnum}, null, #{gymnum})
+                #{mpaygym}, #{mpayperiod}, #{mpaytime},#{trainername}, #{ggoodsnum}, null, #{gymnum}, 0)
     </insert>
     <insert id="insertTMPay" parameterType="MPayDto">
         insert into mpay
         values (#{mpaynum},#{membernum}, #{mpaymethod}, #{mpayproduct}, #{mpayprice}, #{mpaydate},
-                #{mpaygym}, #{mpayperiod}, #{mpaytime},#{trainername}, null, #{tgoodsint}, #{gymnum})
+                #{mpaygym}, #{mpayperiod}, #{mpaytime},#{trainername}, null, #{tgoodsint}, #{gymnum}, null)
     </insert>
+
+    <update id="updateReview" parameterType="String">
+        update mpay
+        set review=0
+        where mpaynum=#{mpaynum}
+    </update>
 
     <select id="selectPayment" resultType="MPayDto" parameterType="String">
         select * from mpay where mpaynum=#{mpaynum}

@@ -2,10 +2,7 @@ package com.project.ohgym.service;
 
 import com.project.ohgym.dao.GymMypageDao;
 import com.project.ohgym.dao.MemberMypageDao;
-import com.project.ohgym.dto.GmListDto;
-import com.project.ohgym.dto.MPayDto;
-import com.project.ohgym.dto.MemberDto;
-import com.project.ohgym.dto.SearchDto;
+import com.project.ohgym.dto.*;
 import com.project.ohgym.util.PagingUtil;
 import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.Session;
@@ -230,8 +227,16 @@ public class MemberMypageService {
         //회원정보 가져오기
         MemberDto member = mDao.selectMemberSearch(search);
 
+        List<ReviewDto> rList = mDao.selectReview(search);
+
+        for (ReviewDto re : rList) {
+            int reviewStar = re.getReviewstar();
+            re.setRatingOptions( getRatingOption(reviewStar));
+        }
+
         mv.addObject("mPList", mPList);
         mv.addObject("member", member);
+        mv.addObject("rList", rList);
 
         //페이징 처리
         search.setPageNum(num);
@@ -253,6 +258,25 @@ public class MemberMypageService {
 
         mv.setViewName("myPayList");
         return mv;
+    }
+
+    private String getRatingOption(int reviewStar) {
+        switch (reviewStar) {
+            case 0:
+                return "☆☆☆☆☆";
+            case 1:
+                return "★☆☆☆☆";
+            case 2:
+                return "★★☆☆☆";
+            case 3:
+                return "★★★☆☆";
+            case 4:
+                return "★★★★☆";
+            case 5:
+                return "★★★★★";
+            default:
+                return "";
+        }
     }
 
     //페이징 처리 메소드
@@ -294,6 +318,14 @@ public class MemberMypageService {
             search.setPageNum(num);
             String pageHtml = getMpayPaging(search);
             rmap.put("paging", pageHtml);
+
+            List<ReviewDto> rList = mDao.selectReview(search);
+
+            for (ReviewDto re : rList) {
+                int reviewStar = re.getReviewstar();
+                re.setRatingOptions( getRatingOption(reviewStar));
+            }
+            rmap.put("rList", rList);
 
         } catch (Exception e){
             e.printStackTrace();

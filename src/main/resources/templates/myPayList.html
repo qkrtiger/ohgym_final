@@ -19,8 +19,13 @@
       box-sizing: border-box;
     }
 
+    .content-t{
+      margin-left: clamp(300px, 25%, 25%);
+      margin-bottom: 600px
+    }
+
     .content {
-      width: 100%;
+      width: 90%;
       box-sizing: border-box;
       margin-top: 30px;
       border: 1px solid;
@@ -30,7 +35,9 @@
     .info-title {
       font-size: 1.5em;
       font-weight: bold;
+      margin-top: 150px;
       margin-bottom: 10px;
+      margin-left: clamp(300px, 25%, 25%);
       padding-top: 50px;
     }
 
@@ -108,6 +115,24 @@
       background-color: #0056b3;
     }
 
+    .delete{
+      margin-top: 10px;
+      width: 100px;
+      border: none;
+      background-color: #2c7fdf;
+      color: white;
+      padding: 5px;
+      font-size: 0.9em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .delete:hover {
+      background-color: #0056b3;
+    }
+
     .reviewBtn {
       margin-top: 10px;
       width: 50px;
@@ -162,7 +187,7 @@
       text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
     }
 
-    #reviewContents {
+    .reviewContents {
       width: 100%;
       height: 150px;
       padding: 10px;
@@ -171,6 +196,17 @@
       border-radius: 5px;
       font-size: 16px;
       resize: none;
+    }
+
+    .reDelContents {
+      width: 100%;
+      height: 150px;
+      padding: 10px;
+      box-sizing: border-box;
+      border: solid 1.5px #D3D3D3;
+      border-radius: 5px;
+      font-size: 16px;
+      white-space: pre-line;
     }
 
     .top-div{
@@ -191,106 +227,121 @@
   <th:block th:insert="~{header.html}"></th:block>
 </header>
 <th:block th:insert="~{MemberSideBar.html}"></th:block>
-<div class="top-div">
-  <div class="div-all">
-    <h2 class="info-title">결제내역</h2>
-    <div class="content-t">
-      <p style="display: none" th:text="${payType}"></p>
-      <select id="sel">
-        <th:block th:if="${payType == null}">
-          <option value="all" selected>전체</option>
-          <option value="membership">회원권</option>
+
+<h2 class="info-title">결제내역</h2>
+<div class="content-t">
+  <p style="display: none" th:text="${payType}"></p>
+  <select id="sel">
+    <th:block th:if="${payType == null}">
+      <option value="all" selected>전체</option>
+      <option value="membership">회원권</option>
+      <option value="daily">일일권</option>
+      <option value="pt">PT</option>
+    </th:block>
+    <th:block th:unless="${payType == null}">
+      <th:block th:switch="${payType}">
+        <th:block th:case="gpay">
+          <option value="all">전체</option>
+          <option value="membership" selected>회원권</option>
           <option value="daily">일일권</option>
           <option value="pt">PT</option>
         </th:block>
-        <th:block th:unless="${payType == null}">
-          <th:block th:switch="${payType}">
-            <th:block th:case="gpay">
-              <option value="all">전체</option>
-              <option value="membership" selected>회원권</option>
-              <option value="daily">일일권</option>
-              <option value="pt">PT</option>
-            </th:block>
-            <th:block th:case="dgpay">
-              <option value="all">전체</option>
-              <option value="membership">회원권</option>
-              <option value="daily" selected>일일권</option>
-              <option value="pt">PT</option>
-            </th:block>
-            <th:block th:case="tpay">
-              <option value="all">전체</option>
-              <option value="membership">회원권</option>
-              <option value="daily">일일권</option>
-              <option value="pt" selected>PT</option>
-            </th:block>
-          </th:block>
+        <th:block th:case="dgpay">
+          <option value="all">전체</option>
+          <option value="membership">회원권</option>
+          <option value="daily" selected>일일권</option>
+          <option value="pt">PT</option>
         </th:block>
-      </select>
-      <div id="content" class="content">
-        <div class="content-all">
-          <table style="width: 100%", id="mtable">
-            <tbody>
-            <thead>
-            <tr>
-              <th>결제일</th>
-              <th>헬스장</th>
-              <th>이용기간</th>
-              <th>가격</th>
-              <th>후기</th>
+        <th:block th:case="tpay">
+          <option value="all">전체</option>
+          <option value="membership">회원권</option>
+          <option value="daily">일일권</option>
+          <option value="pt" selected>PT</option>
+        </th:block>
+      </th:block>
+    </th:block>
+  </select>
+  <div id="content" class="content">
+    <div class="content-all">
+      <table style="width: 100%", id="mtable">
+        <tbody>
+        <thead>
+        <tr>
+          <th>결제일</th>
+          <th>헬스장</th>
+          <th>이용기간</th>
+          <th>가격</th>
+          <th>후기</th>
+        </tr>
+        </thead>
+        <tbody id="tb">
+        <div th:unless="${#lists.isEmpty(mPList)}">
+          <div th:each=" MPitem,status: ${mPList}">
+            <tr class="payNreview">
+              <td th:text="${MPitem.mpaydate}"></td>
+              <td th:text="${MPitem.mpaygym}"></td>
+              <td th:text="${MPitem.mpayperiod}"></td>
+              <td th:text="${#numbers.formatInteger(MPitem.mpayprice, 3, 'COMMA') + '원'}"></td>
+              <td>
+                <th:block th:if="${MPitem.review == 0}">
+                  <button class="review">후기등록</button>
+                </th:block>
+                <th:block th:unless="${MPitem.review == 0}">
+                  <button class="review" style="background-color: #df2c5c;">후기확인</button>
+                </th:block>
+              </td>
             </tr>
-            </thead>
-            <tbody id="tb">
-            <div th:unless="${#lists.isEmpty(mPList)}">
-              <div th:each=" MPitem: ${mPList}">
-                <tr>
-                  <td th:text="${MPitem.mpaydate}"></td>
-                  <td th:text="${MPitem.mpaygym}"></td>
-                  <td th:text="${MPitem.mpayperiod}"></td>
-                  <td th:text="${#numbers.formatInteger(MPitem.mpayprice, 3, 'COMMA') + '원'}"></td>
-                  <td><button class="review" id="reviewInput">후기등록</button></td>
-                </tr>
-
-                <tr class="hReview">
-                  <td colspan="5">
-                    <form th:action="@{reviewInput}" class="mb-3" name="myform" id="myform" method="post" th:object="${session.member}">
-                      <input type="hidden" class="" name="mnickname" th:value="*{mnickname}">
-                      <input type="hidden" class="" name="membernum" th:value="*{membernum}">
-                      <input type="hidden" class="" name="gymnum" th:value="${MPitem.gymnum}">
-                      <input type="hidden" class="" name="mpaynum" th:value="${MPitem.mpaynum}">
-                      <fieldset>
-                        <span class="text-bold">별점을 선택해주세요</span>
-                        <input type="radio" name="reviewstar" th:value="5" id="rate1"><label
-                              for="rate1">★</label>
-                        <input type="radio" name="reviewstar" th:value="4" id="rate2"><label
-                              for="rate2">★</label>
-                        <input type="radio" name="reviewstar" th:value="3" id="rate3"><label
-                              for="rate3">★</label>
-                        <input type="radio" name="reviewstar" th:value="2" id="rate4"><label
-                              for="rate4">★</label>
-                        <input type="radio" name="reviewstar" th:value="1" id="rate5"><label
-                              for="rate5">★</label>
-                      </fieldset>
-                      <div>
-                    <textarea class="col-auto form-control" type="text" id="reviewContents" name="reviewcontents"
+            <tr class="hReview">
+              <td colspan="5">
+                <th:block th:if="${MPitem.review == 0}">
+                  <form th:action="@{reviewInput}" class="mb-3" name="myform" id="myform" method="post" th:object="${session.member}">
+                    <input type="hidden" class="" name="mnickname" th:value="*{mnickname}">
+                    <input type="hidden" class="" name="membernum" th:value="*{membernum}">
+                    <input type="hidden" class="" name="gymnum" th:value="${MPitem.gymnum}">
+                    <input type="hidden" class="mpayNum" name="mpaynum" th:value="${MPitem.mpaynum}">
+                    <fieldset>
+                      <span class="text-bold">별점을 선택해주세요</span>
+                      <input type="radio" name="reviewstar" th:value="5" th:id="'rate1'+${status.count}"><label
+                            th:for="'rate1'+${status.count}">★</label>
+                      <input type="radio" name="reviewstar" th:value="4" th:id="'rate2'+${status.count}"><label
+                            th:for="'rate2'+${status.count}">★</label>
+                      <input type="radio" name="reviewstar" th:value="3" th:id="'rate3'+${status.count}"><label
+                            th:for="'rate3'+${status.count}">★</label>
+                      <input type="radio" name="reviewstar" th:value="2" th:id="'rate4'+${status.count}"><label
+                            th:for="'rate4'+${status.count}">★</label>
+                      <input type="radio" name="reviewstar" th:value="1" th:id="'rate5'+${status.count}"><label
+                            th:for="'rate5'+${status.count}">★</label>
+                    </fieldset>
+                    <div>
+                    <textarea class="reviewContents" type="text" name="reviewcontents"
                               placeholder="헬스장 이용 후기를 남겨주세요~"></textarea>
-                      </div>
-                      <input type="submit" value="등록" id="sendRe" class="reviewBtn">
-                    </form>
-                  </td>
-                </tr>
-              </div>
-            </div>
-            <div th:if="${#lists.isEmpty(mPList)}">
-              <td colspan="5">결제 내역이 없습니다.</td>
-            </div>
-            </tbody>
-          </table>
+                    </div>
+                    <input type="submit" value="등록" id="sendRe" class="reviewBtn">
+                  </form>
+                </th:block>
+                <th:block th:unless="${MPitem.review == 0}">
+                  <div th:each="ritem:${rList}">
+                    <th:block th:if="${ritem.mpaynum} == ${MPitem.mpaynum}">
+                      <div class="star-ratings-fill" th:text="${ritem.ratingOptions}"></div>
+                      <div class="reDelContents" th:text="${ritem.reviewcontents}"></div>
+                      <button class="delete">후기삭제</button>
+                      <input type="hidden" class="mpaynumR" th:value="${ritem.mpaynum}">
+                    </th:block>
+                  </div>
+                </th:block>
+              </td>
+            </tr>
+          </div>
         </div>
-      </div>
-      <div class="paging-area">
-        <div class="paging" th:utext="${paging}"></div>
-      </div>
+        <div th:if="${#lists.isEmpty(mPList)}">
+          <td colspan="5">결제 내역이 없습니다.</td>
+        </div>
+        </tbody>
+      </table>
     </div>
+  </div>
+  <div class="paging-area">
+    <div class="paging" th:utext="${paging}"></div>
   </div>
 </div>
 <footer>
@@ -298,17 +349,40 @@
 </footer>
 </body>
 <script th:inline="javascript">
+
   $(".hReview").hide();
 
   //리뷰작성
-  $("#reviewInput").click(function (){
-    $(".hReview").toggle();
+  //$(".review").click(function (){
+  $(document).on("click", ".review", function () {
+    let other = $(".review").not(this).parents(".payNreview").next(".hReview");
+    //let otherP = $(".review").not(this).parents(".payNreview").prevAll(".hReview");
+    //let under = $(".review").not(this).parents(".payNreview").nextAll(".checkR");
+    //let underP = $(".review").not(this).parents(".payNreview").prevAll(".checkR");
+    other.hide();
+    //otherP.hide();
+    //under.hide();
+    //underP.hide();
+    let target = $(this).parents(".payNreview").next(".hReview");
+    target.toggle();
+    // $(".hReview").toggle();
   });
 
   //리뷰전송
-  $("#sendRe").click(function (){
+  // $("#sendRe").click(function (){
+  $(document).on("click", "#sendRe", function (){
     $(".hReview").hide();
   });
+
+  //리뷰삭제
+  $(document).on("click", ".delete", function (){
+    let mpayDel = $(this).next(".mpaynumR").val();
+    console.log(mpayDel);
+    let conf = confirm("해당리뷰를 삭제하시겠습니까?");
+    if (conf == true){
+      location.href = "deleteR?mpaynum=" + mpayDel;
+    }
+  })
 
   //검색기능
   $("#sel").change(function () {
@@ -342,6 +416,10 @@
         let paging = res.paging;
         console.log(paging);
         $(".paging").html(paging);
+        let ritem = res.rList;
+        console.log(ritem);
+        // let mpaynumR = ritem.mpaynum;
+        // console.log(mpaynumR);
 
         if (res != null && mPList.length != 0) {
           // 서버에서 받은 데이터를 처리하고 출력하는 로직을 여기에 작성
@@ -351,16 +429,62 @@
           tbody.empty(); // 기존 데이터 삭제
           for (var i = 0; i < mPList.length; i++) {
             var mpayItem = mPList[i];
-            var mpaynum = mpayItem.mpaynum;
-            var row = "<tr>" +
+            var member = [[${session.member}]];
+            var row = "<tr class='payNreview'>" +
                     "<td>" + mpayItem.mpaydate + "</td>" +
                     "<td>" + mpayItem.mpaygym + "</td>" +
                     "<td>" + mpayItem.mpayperiod + "</td>" +
-                    "<td>" + mpayItem.mpayprice.toLocaleString('ko-KR') + '원' + "</td>" +
-                    "<td><a class='review' href='gymReview?mpaynum="+ mpaynum +"'>후기등록</a></td>" +
-                    "</tr>";
+                    "<td>" + mpayItem.mpayprice.toLocaleString('ko-KR') + '원' + "</td>";
+
+            if (mpayItem.review == 0){
+              row += "<td><button class='review'>후기등록</button></td>";
+            } else {
+              row += "<td><button class='review' style='background-color: #df2c5c;'>후기확인</button></td>";
+            }
+
+            row += "</tr>" +
+                    "<tr class='hReview'>" +
+                    "<td colspan='5'> ";
+
+            if (mpayItem.review == 0){
+              row +="<form action='reviewInput' class='mb-3' name='myform' id='myform' method='post'>" +
+                      "<input type='hidden' class='' name='mnickname' value='" + member.mnickname + "'>" +
+                      "<input type='hidden' class='' name='membernum' value='" + member.membernum + "'>" +
+                      "<input type='hidden' class='' name='gymnum' value='" + mpayItem.gymnum +"'>" +
+                      "<input type='hidden' class='mpayNum' name='mpaynum' value='" + mpayItem.mpaynum + "'>" +
+                      "<fieldset>" +
+                      "<span class='text-bold'>별점을 선택해주세요</span>";
+
+              row += "<input type='radio' name='reviewstar' id='rate1"+ i +"' value='5'><label for='rate1"+ i +"'>★</label>" +
+                      "<input type='radio' name='reviewstar' id='rate2"+ i +"' value='4'><label for='rate2"+ i +"'>★</label>" +
+                      "<input type='radio' name='reviewstar' id='rate3"+ i +"' value='3'><label for='rate3"+ i +"'>★</label>" +
+                      "<input type='radio' name='reviewstar' id='rate4"+ i +"' value='4'><label for='rate4"+ i +"'>★</label>" +
+                      "<input type='radio' name='reviewstar' id='rate5"+ i +"' value='5'><label for='rate5"+ i +"'>★</label>";
+
+              row += "</fieldset>" +
+                      "<div><textarea class='reviewContents' type='text' id='reviewContents' name='reviewcontents' placeholder='헬스장 이용 후기를 남겨주세요~'></textarea></div>" +
+                      "<input type='submit' value='등록' id='sendRe' class='reviewBtn'></form>";
+            } else {
+
+              for (var r = 0; r < ritem.length; r++) {
+              //for(var r of ritem){
+                var re = ritem[r];
+                console.log(re.mpaynum);
+                console.log(mpayItem.mpaynum);
+                if (re.mpaynum == mpayItem.mpaynum){
+                  row += "<div class='star-ratings-fill'>" + re.ratingOptions + "<div>" +
+                          "<div class='reDelContents'>" + re.reviewcontents + "</div>" +
+                          "<button class='delete'>후기삭제</button>" +
+                          "<input type='hidden' class='mpaynumR' value='" + re.mpaynum + "'>";
+                }
+              }
+            }
+
+            row += "</td></tr>";
+
             tbody.append(row);
           }
+          $(".hReview").hide();
         } else {
           var tbody = $("#tb");
           tbody.empty(); // 기존 데이터 삭제

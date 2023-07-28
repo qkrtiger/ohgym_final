@@ -140,6 +140,7 @@ CREATE TABLE `mpay` (
                         `ggoodsnum` int,
                         `tgoodsint` int,
                         `gymnum` int NOT NULL,
+                        `review` boolean ,
                         CONSTRAINT `PK_MPAY` PRIMARY KEY (`mpaynum`,`membernum`),
                         CONSTRAINT `FK_Member_TO_MPay_1` FOREIGN KEY (`membernum`) REFERENCES `Member` (`membernum`),
                         CONSTRAINT `FK_GymGoods_TO_MPay_1` FOREIGN KEY (`ggoodsnum`) REFERENCES `GymGoods` (`ggoodsnum`),

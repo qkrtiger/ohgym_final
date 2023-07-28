@@ -21,4 +21,7 @@ public interface ReviewDao {
     // 후기 갯수 가져오는 메소드 선언
     int selectReviewCnt(SearchDto search);
 
+    void updatempay(ReviewDto review);
+
+    void deleteReview(String mpayDel);
 }

@@ -3,9 +3,11 @@ package com.project.ohgym.service;
 import com.project.ohgym.dao.MPayDao;
 import com.project.ohgym.dao.ReviewDao;
 import com.project.ohgym.dto.MPayDto;
+import com.project.ohgym.dto.MemberDto;
 import com.project.ohgym.dto.ReviewDto;
 import com.project.ohgym.dto.SearchDto;
 import com.project.ohgym.util.PagingUtil;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +34,7 @@ public class ReviewService {
         String msg = null;
         try {
             rDao.insertreview(review);
+            rDao.updatempay(review);
             view = "redirect:myPayList?membernum=" + review.getMembernum();
             msg = "후기 작성 성공";
         }catch (Exception e){
@@ -117,5 +120,29 @@ public class ReviewService {
         mv.addObject("mpay", mPay);
         mv.setViewName("gymReview");
         return mv;
+    }
+
+    public String deleteR(String mpaynum, HttpSession session, RedirectAttributes rttr) {
+        log.info("deleteR()");
+        String view = null;
+        String msg = null;
+
+        MemberDto member = (MemberDto) session.getAttribute("member");
+        int membernum = member.getMembernum();
+
+        try {
+            rDao.deleteReview(mpaynum);
+            mPDao.updateReview(mpaynum);
+            view = "redirect:myPayList?membernum=" + membernum;
+            msg = "삭제 성공";
+        }catch (Exception e){
+            e.printStackTrace();
+            view = "redirect:myPayList?membernum=" + membernum;
+            msg = "삭제 성공";
+        }
+
+
+        rttr.addFlashAttribute("msg", msg);
+        return view;
     }
 }
