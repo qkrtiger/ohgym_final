@@ -18,7 +18,6 @@
 
     .info-title{
       /*margin-top: 50px;*/
-      margin-left: 450px;
       margin-bottom: 50px;
       font-size: 1.5rem;
     }
@@ -26,9 +25,7 @@
     .content-all{
       border: 1px solid;
       margin: 0 auto;
-      width: 70%;
       margin-bottom: 50px;
-      margin-left: 450px;
     }
 
     .content{
@@ -88,6 +85,14 @@
     .top-div{
       min-height: 900px;
     }
+
+    .div-all {
+      width: 70%;
+      min-height: 900px;
+      margin-top: 150px;
+      margin-left: clamp(370px, 22%, 22%);
+      padding-bottom: 100px;
+    }
   </style>
 </head>
 <body class="renewal">
@@ -101,36 +106,38 @@
 </header>
 <th:block th:insert="~{TrainerSideBar.html}"></th:block>
 <div class="top-div">
-  <div class="content-top">
-    <form th:action="@{tMGoodsSave}" method="post" enctype="multipart/form-data">
-      <h2 class="info-title">상품 등록</h2>
-      <div class="content-all">
-        <div id="content" class="content">
-          <div class="info-row">
-            <span class="info-label">상품명:</span>
-            <input class="input-t in-t" type="text" name="tgoodsname" autofocus>
-          </div>
-          <div class="info-row">
-            <span class="info-label">횟수:</span>
-            <input class="input-t in-t" type="text" name="tgoodsnum">
-          </div>
-          <div class="info-row">
-            <span class="info-label">총 가격:</span>
-            <input class="input-t in-t" type="text" name="tgoodsprice">
-          </div>
-          <div class="info-row">
-            <span class="info-label">추가사항:</span>
-            <input class="input-t" type="text" name="tgoodscontents">
-            <input type="hidden" name="membernum" th:value="${member.membernum}">
-            <input type="hidden" name="gymnum" th:value="${member.gymnum}">
+  <div class="div-all">
+    <div class="content-top">
+      <form th:action="@{tMGoodsSave}" method="post" enctype="multipart/form-data">
+        <h2 class="info-title">상품 등록</h2>
+        <div class="content-all">
+          <div id="content" class="content">
+            <div class="info-row">
+              <span class="info-label">상품명:</span>
+              <input class="input-t in-t" type="text" name="tgoodsname" autofocus>
+            </div>
+            <div class="info-row">
+              <span class="info-label">횟수:</span>
+              <input class="input-t in-t" type="text" name="tgoodsnum">
+            </div>
+            <div class="info-row">
+              <span class="info-label">총 가격:</span>
+              <input class="input-t in-t" type="text" name="tgoodsprice">
+            </div>
+            <div class="info-row">
+              <span class="info-label">추가사항:</span>
+              <input class="input-t" type="text" name="tgoodscontents">
+              <input type="hidden" name="membernum" th:value="${member.membernum}">
+              <input type="hidden" name="gymnum" th:value="${member.gymnum}">
+            </div>
           </div>
         </div>
-      </div>
-      <div class="btn">
-        <input class="btn-sub" type="submit" value="저장하기">
-        <input class="btn-back" type="button" value="이전으로" th:onclick ="|back(${member.membernum})|">
-      </div>
-    </form>
+        <div class="btn">
+          <input class="btn-sub" type="submit" value="저장하기">
+          <input class="btn-back" type="button" value="이전으로" th:onclick ="|back(${member.membernum})|">
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 <footer class="footer">
