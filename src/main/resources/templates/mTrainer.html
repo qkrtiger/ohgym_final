@@ -12,7 +12,7 @@
 <body class="renewal">
 <div id="popup" class="popup-hidden">
     <div class="popup-content">
-        <form th:action="@{Change}" method="POST" target="_blank" onsubmit="return check()">
+        <form th:action="@{Change}" method="POST" name="tfrm">
             <input type="hidden" name="membernum" th:value="${member.membernum}">
             <div class="popup-top">
                 <h1>트레이너 등록</h1>
@@ -23,7 +23,7 @@
             </div>
             <div class="popup-btns">
                 <input type="button" value="닫기" onclick="closePopup()">
-                <input type="submit" value="등록">
+                <input type="button" value="등록" onclick="check()">
             </div>
         </form>
     </div>
@@ -71,11 +71,13 @@
         //고유번호 확인이 되었는지
         if(ck == false){
             alert("고유번호 확인이 필요합니다.");
-            return false;//submit 중지!(전송 안됨)
+            return;//submit 중지!(전송 안됨)
         }
-        window.close();
+        //document.domain = "localhost";
+        document.tfrm.target = opener.name;
+        document.tfrm.submit();
 
-        return ck;
+        self.close();
     }
 
     $(function () {
