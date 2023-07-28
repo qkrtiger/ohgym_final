@@ -38,7 +38,7 @@
 
         .card-header {
             border-radius: 5px 5px 0 0;
-            color: #0061F2;
+            color: #2c7fdf;
             font-weight: 500;
             border: 1px solid #2c7fdf;
             padding: 20px 30px;
@@ -123,6 +123,7 @@
             color: #fff;
             background-color: #0061F2;
             border-color: #2c7fdf;
+            cursor: pointer;
         }
 
         .w-3 {
@@ -215,7 +216,7 @@
                 <div class="btn-area">
                     <button class="btn-write" id="upbtn">수정</button>
                     <button class="btn-write" id="delbtn">삭제</button>
-                    <button class="btn-write w-3" id="backbtn">뒤로가기</button>
+                    <button class="btn-write w-3" id="backbtn" onclick=history.back() >이전으로</button>
                 </div>
 
                 <hr class="line">
@@ -309,10 +310,10 @@
         location.href = "boardUpdate?boardnum=" + [[${bdetail.boardnum}]];
     });
 
-    $("#backbtn").click(function () {
-        console.log("#backbtn");
-        location.href = "board";
-    });
+    // $("#backbtn").click(function () {
+    //     console.log("#backbtn");
+    //     location.href = "board";
+    // });
 
     // 댓글
     function replyInsert() {
