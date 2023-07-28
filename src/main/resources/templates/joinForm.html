@@ -35,11 +35,11 @@
         <input type="button" class="emailcheck-btn" id="mcheck" value="인증">
         <input type="text" class="login-input" name="mname" title="이름" placeholder="이름" >
         <div class="effectiveness">* 한글만 입력바랍니다.</div>
-        <input type="text" class="login-input" name="mbirth" title="생년월일" placeholder="생년월일" >
+        <input type="text" class="login-input" name="mbirth" title="생년월일" placeholder="생년월일" oninput="hypenBrith(this)" maxlength="10">
         <div class="effectiveness">* yyyy-mm-dd 형식으로 입력바랍니다.</div>
         <input type="text" class="login-input" name="mgender" title="성별" placeholder="성별" >
         <div class="effectiveness">* 한글만 입력바랍니다.</div>
-        <input type="text" class="login-input" name="mphone" title="연락처" placeholder="연락처" >
+        <input type="text" class="login-input" name="mphone" title="연락처" placeholder="연락처" oninput="hypenTel(this)" maxlength="13">
         <div class="effectiveness">* (-)을 포함하여 입력바랍니다.</div>
         <input type="text" class="login-input" id="mnickname" name="mnickname" title="닉네임" placeholder="닉네임" >
         <input type="button" class="nicknamecheck-btn" value="중복확인" onclick="nicknamecheck()">
@@ -51,6 +51,19 @@
     <th:block th:insert="~{footer.html}"></th:block>
 </footer>
 <script  th:inline="javascript">
+
+    // 하이픈 자동 생성 생일, 전화번호
+    const hypenBrith = (target) => {
+        target.value = target.value
+            .replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3');
+    }
+
+    const hypenTel = (target) => {
+        target.value = target.value
+            .replace(/[^0-9]/g, '')
+            .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+    }
+
 
     ////////////////////////////////////////////유효성 검사/////////////////////////////////////////////////////////
 
