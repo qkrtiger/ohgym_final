@@ -155,7 +155,7 @@ hr {
     width: 170px;
     height: 230px;
     border-radius: 10px;
-
+    cursor: pointer;
 }
 
 .goods-div {
