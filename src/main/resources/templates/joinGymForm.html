@@ -29,7 +29,7 @@
     <input type="button" class="idcheck-btn" value="중복확인" onclick="idcheck()">
     <input type="password" class="login-input" name="gpass" title="비밀번호" placeholder="비밀번호" required>
     <div class="effectiveness">* 4~12자의 영문 대소문자와 숫자로만 입력바랍니다.</div>
-    <input type="text" class="login-input" name="gphone" title="연락처" placeholder="관리자 연락처" required>
+    <input type="text" class="login-input" name="gphone" title="연락처" placeholder="관리자 연락처" required oninput="hypenTel(this)" maxlength="13">
     <div class="effectiveness">* (-)을 포함하여 입력바랍니다.</div>
     <input type="submit" class="login-btn" value="회원가입">
   </form>
@@ -39,6 +39,13 @@
   <th:block th:insert="~{footer.html}"></th:block>
 </footer>
 <script  th:inline="javascript">
+
+  // 전화번호 하이픈 자동
+  const hypenTel = (target) => {
+    target.value = target.value
+            .replace(/[^0-9]/g, '')
+            .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+  }
 
   ////////////////////////////////////////////유효성 검사/////////////////////////////////////////////////////////
 
