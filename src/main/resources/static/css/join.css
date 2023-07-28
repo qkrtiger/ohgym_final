@@ -184,6 +184,7 @@ ul>li{list-style: none}
 .footBtwrap{
     margin-top: 250px;
     margin-bottom: 150px;
+    min-height: 200px;
     /*display: flex;*/
     /*flex-direction: column;*/
 }
