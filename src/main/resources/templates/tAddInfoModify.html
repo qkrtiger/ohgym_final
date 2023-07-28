@@ -2,7 +2,8 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>tAddInfoModify</title>
+    <title>트레이너 - 정보 수정</title>
+    <link rel="shortcut icon" href="/images/header/lgo_face.ico">
     <link rel="stylesheet" th:href="@{css/font.css}">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <style>
@@ -20,6 +21,7 @@
 
         .content-b{
             border: 1px solid grey;
+            border-radius: 30px;
             margin-bottom: 50px;
         }
         .content-t{
@@ -56,6 +58,7 @@
         .imgbox{
             margin: 30px 0;
             border: 1px solid grey;
+            border-radius: 30px;
         }
 
         .img-title{
@@ -135,11 +138,15 @@
         }
 
         .div-all {
-            width: 1400px;
+            width: 1300px;
             min-height: 900px;
             margin-top: 150px;
-            margin-left: 500px;
+            margin-left: 450px;
             padding-bottom: 50px;
+        }
+
+        .img-intitle{
+            text-align: center;
         }
     </style>
 </head>
@@ -201,11 +208,15 @@
                                 <h3 id="noImage">등록된 이미지가 없습니다</h3>
                             </div>
                             <div th:unless="${trainer.tsysname == null}">
+                                <h3 class="img-intitle">등록된 이미지</h3>
                                 <img th:src="@{upload/trainer/} + ${trainer.tsysname}" class="timage">
                                 <input type="hidden" name="tsysname" th:value="${trainer.tsysname}">
                                 <input type="hidden" name="toriname" th:value="${trainer.toriname}">
                             </div>
-                            <img id="preview" />
+                            <div>
+                                <h3 class="img-intitle">변경할 이미지</h3>
+                                <img id="preview" />
+                            </div>
                         </div>
                     </div>
                 </div>
