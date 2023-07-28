@@ -2,7 +2,8 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>gymTrainer</title>
+  <title>헬스장 - 트레이너 관리</title>
+  <link rel="shortcut icon" href="/images/header/lgo_face.ico">
   <link rel="stylesheet" th:href="@{css/font.css}">
   <script th:src="@{js/popup.js}" defer></script>
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
@@ -25,12 +26,13 @@
     }
 
     .content {
-      width: 70%;
+      width: 100%;
       box-sizing: border-box;
       margin-top: 30px;
       border: 1px solid;
-      margin-left: clamp(300px, 25%, 25%);
-      margin-bottom: 100px
+      border-radius: 30px;
+      margin-bottom: 100px;
+      padding: 10px;
     }
 
 
@@ -39,7 +41,6 @@
       font-weight: bold;
       margin-top: 150px;
       margin-bottom: 10px;
-      margin-left: clamp(300px, 25%, 25%);
       padding-top: 50px;
     }
 
@@ -88,12 +89,17 @@
       color: #575757;
     }
 
-    .paging-area {
-      margin-left: clamp(150px, 44%, 44%);
-      margin-top: 30px;
-    }
+
     .top-div{
       min-height: 900px;
+    }
+
+    .div-all {
+      width: 1300px;
+      min-height: 900px;
+      margin-top: 150px;
+      margin-left: 450px;
+      padding-bottom: 50px;
     }
   </style>
 </head>
@@ -108,41 +114,43 @@
 </header>
 <th:block th:insert="~{GymSideBar.html}"></th:block>
 <div class="top-div">
-  <h2 class="info-title">트레이너 관리</h2>
-  <div id="content" class="content">
-    <div>
-      <table>
-        <thead>
-        <tr>
-          <th>No.</th>
-          <th>이름</th>
-          <th>아이디</th>
-          <th>생년월일</th>
-          <th>휴대전화</th>
-          <th>성별</th>
-          <th>삭제</th>
-        </tr>
-        </thead>
-        <tbody>
-        <div th:unless="${#lists.isEmpty(trains)}">
-          <tr th:each="trainer: ${trains}">
-            <td th:text="${trainer.membernum}">No.</td>
-            <td th:text="${trainer.mname}">이름</td>
-            <td th:text="${trainer.mid}">아이디</td>
-            <td th:text="${trainer.mbirth}">생년월일</td>
-            <td th:text="${trainer.mphone}">휴대전화</td>
-            <td th:text="${trainer.mgender}">성별</td>
-            <td><input type="button" value="삭제" th:onclick="|delCheck(${trainer.membernum})|"></td>
+  <div class="div-all">
+    <h2 class="info-title">트레이너 관리</h2>
+    <div id="content" class="content">
+      <div>
+        <table>
+          <thead>
+          <tr>
+            <th>No.</th>
+            <th>이름</th>
+            <th>아이디</th>
+            <th>생년월일</th>
+            <th>휴대전화</th>
+            <th>성별</th>
+            <th>삭제</th>
           </tr>
-        </div>
-        <div th:if="${#lists.isEmpty(trains)}">
-          <td colspan="6">트레이너 내역이 없습니다.</td>
-        </div>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+          <div th:unless="${#lists.isEmpty(trains)}">
+            <tr th:each="trainer: ${trains}">
+              <td th:text="${trainer.membernum}">No.</td>
+              <td th:text="${trainer.mname}">이름</td>
+              <td th:text="${trainer.mid}">아이디</td>
+              <td th:text="${trainer.mbirth}">생년월일</td>
+              <td th:text="${trainer.mphone}">휴대전화</td>
+              <td th:text="${trainer.mgender}">성별</td>
+              <td><input type="button" value="삭제" th:onclick="|delCheck(${trainer.membernum})|"></td>
+            </tr>
+          </div>
+          <div th:if="${#lists.isEmpty(trains)}">
+            <td colspan="6">트레이너 내역이 없습니다.</td>
+          </div>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-</div>
+  </div>
 <footer>
   <th:block th:insert="~{footer.html}"></th:block>
 </footer>
