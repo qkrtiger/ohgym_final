@@ -61,9 +61,11 @@ public class TrainerMypageService {
         //트레이너 상품정보 가져오기
         List<TrainGoodsDto> tGList = tDao.GettrainerGoods(membernum);
         TrainerDto trainer = tDao.selectTrainer(membernum);
+        session.getAttribute("member");
 
         mv.addObject("tGList",tGList);
         mv.addObject("trainer", trainer);
+
 
         mv.setViewName("trainerGoods");
 
@@ -91,6 +93,7 @@ public class TrainerMypageService {
         rttr.addFlashAttribute("msg", msg);
         return view;
     }
+
 
     //트레이너 상품 삭제
     public void tMGoodsDelete(int tgoodsint) {

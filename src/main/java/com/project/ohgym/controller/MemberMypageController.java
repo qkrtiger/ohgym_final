@@ -99,6 +99,7 @@ public class MemberMypageController {
         return view;
     }
 
+
     @GetMapping("memberInfo")
     public ModelAndView memberInfo(Integer membernum, HttpSession session){
         log.info("memberInfo()");
