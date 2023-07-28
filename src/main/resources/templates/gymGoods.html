@@ -2,7 +2,8 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>헬스장 상품관리</title>
+  <title>헬스장 - 상품관리</title>
+  <link rel="shortcut icon" href="/images/header/lgo_face.ico">
   <link rel="stylesheet" th:href="@{css/font.css}">
   <script th:src="@{js/popup.js}" defer></script>
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
@@ -63,6 +64,7 @@
 
     .content{
       border: 1px solid;
+      border-radius: 30px;
       width: 100%;
     }
 
@@ -72,7 +74,7 @@
 
     .goodsbtn{
       margin-top: 30px;
-      margin-left: 1070px;
+      margin-left: 1175px;
       padding: 10px 20px;
       background-color: #0099ff;
       color: #fff;
@@ -281,12 +283,6 @@
     const marginBottom = parseFloat(mainContentStyles.marginBottom);
 
     let sidebarHeight = mainContentHeight + marginTop + marginBottom;
-
-    if (mh == 900) {
-      sidebarHeight = 900;
-    }else if(mh > 900) {
-      sidebarHeight = mh;
-    }
 
     sidebar.style.height = sidebarHeight + 'px';
   }

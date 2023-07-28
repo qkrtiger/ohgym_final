@@ -2,7 +2,8 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>gymMypage</title>
+  <title>헬스장 - 마이페이지</title>
+  <link rel="shortcut icon" href="/images/header/lgo_face.ico">
   <script th:src="@{js/popup.js}" defer></script>
   <link rel="stylesheet" th:href="@{css/font.css}">
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
@@ -27,6 +28,7 @@
       margin-top: 30px;
       margin-bottom: 100px;
       border: 1px solid;
+      border-radius: 30px;
     }
 
     .info-title {
@@ -36,7 +38,6 @@
 
     .info-row {
       display: flex;
-      align-items: center;
       margin: 1%;
       border-radius: 4px;
       border-bottom: 1px solid grey;
@@ -52,10 +53,22 @@
 
     .info-value {
       margin-left: 1%;
+      font-size: 1.1rem;
     }
 
     .top-div{
       min-height: 900px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 6.25em;
+      border: none;
+      resize: none;
+    }
+
+    textarea:focus {
+      outline: none;
     }
 
     .div-all {
@@ -63,7 +76,7 @@
       min-height: 900px;
       margin-top: 150px;
       margin-left: 450px;
-      padding-bottom: 50px;
+      padding-bottom: 100px;
     }
   </style>
 </head>
@@ -98,23 +111,23 @@
       </div>
       <div class="info-row">
         <label class="info-label">헬스장 소개:</label>
-        <span class="info-value" th:text="${gym.gdescription}"></span>
+        <textarea rows="3" cols=20 wrap="hard" name="gdescription" class="info-value" readonly>[[${gym.gdescription}]]</textarea>
       </div>
       <div class="info-row">
         <label class="info-label">공지사항:</label>
-        <span class="info-value" th:text="${gym.gnotice}"></span>
+        <textarea rows="3" cols=20 wrap="hard" name="gnotice" class="info-value" readonly>[[${gym.gnotice}]]</textarea>
       </div>
       <div class="info-row">
         <label class="info-label">부가서비스(무료):</label>
-        <span class="info-value" th:text="${gym.gaddservfree}"></span>
+        <textarea rows="3" cols=20 wrap="hard" name="gaddservfree" class="info-value" readonly>[[${gym.gaddservfree}]]</textarea>
       </div>
       <div class="info-row">
         <label class="info-label">부가서비스(유료):</label>
-        <span class="info-value" th:text="${gym.gaddservpay}"></span>
+        <textarea rows="3" cols=20 wrap="hard" name="gaddservpay" class="info-value" readonly>[[${gym.gaddservpay}]]</textarea>
       </div>
       <div class="info-row">
         <label class="info-label">운영시간:</label>
-        <span class="info-value" th:text="${gym.goperation}"></span>
+        <textarea rows="3" cols=20 wrap="hard" name="goperation" class="info-value" readonly>[[${gym.goperation}]]</textarea>
       </div>
     </div>
   </div>

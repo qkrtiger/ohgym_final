@@ -2,7 +2,8 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>gAdditionInfo</title>
+  <title>헬스장 - 추가정보</title>
+  <link rel="shortcut icon" href="/images/header/lgo_face.ico">
   <link rel="stylesheet" th:href="@{css/font.css}">
   <script th:src="@{js/popup.js}" defer></script>
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
@@ -72,7 +73,7 @@
   }
 
   .timage {
-    max-width: 300px;
+    width: 350px;
     margin: 20px;
   }
 
@@ -200,6 +201,13 @@
     margin-top: 150px;
     margin-left: 450px;
     padding-bottom: 50px;
+  }
+
+  input:focus {
+    outline: none;
+  }
+  textarea:focus {
+    outline: none;
   }
 </style>
 <body class="renewal">
