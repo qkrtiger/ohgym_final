@@ -377,7 +377,7 @@ select {
 }
 
 .card-text a:hover, .card-title a:hover  {
-    color: rgb(0, 132, 255);
+    color: #2c7fdf;
 }
 
 .view {

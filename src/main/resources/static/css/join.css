@@ -87,7 +87,7 @@
 }
 
 .login-btn {
-    background-color: #2c7fdf;
+    background-color: #394f77;
     color: white;
     margin-top: 20px;
     padding: 10px 20px;
@@ -117,6 +117,11 @@
 
 .emailsend-btn {
     margin-bottom: 2px;
+    background-color: #2c7fdf;
+}
+
+.emailcheck-btn {
+    background-color: #2c7fdf;
 }
 
 .idcheck-btn:hover,
@@ -179,6 +184,7 @@ ul>li{list-style: none}
 .footBtwrap{
     margin-top: 250px;
     margin-bottom: 150px;
+    min-height: 200px;
     /*display: flex;*/
     /*flex-direction: column;*/
 }

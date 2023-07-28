@@ -153,7 +153,6 @@ public class MemberMypageService {
         String view = null;
         String msg = null;
 
-
         member.setGymnum(gymnum);
         member.setMembernum(member.getMembernum());
 
@@ -168,6 +167,7 @@ public class MemberMypageService {
             msg = "트레이너 전환 실패";
         }
         rttr.addFlashAttribute("msg", msg);
+        session.setAttribute("member", member);
 
         return view;
     }
