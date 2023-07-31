@@ -4,7 +4,7 @@ function openPopup(membernum) {
 }
 
 //헬스장 프로필 변경
-function openGymPopup(membernum) {
+function openGymPopup(gymnum) {
     var popupWindow = window.open("gImage?gymnum="+gymnum, "Image editing", "width=800,height=500");
 }
 

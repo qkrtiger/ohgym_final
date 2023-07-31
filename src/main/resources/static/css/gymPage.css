@@ -164,7 +164,7 @@ hr {
     width: 170px;
     height: 230px;
     border-radius: 10px;
-    cursor: pointer;
+    margin-right: 10px;
 }
 
 .goods-div {

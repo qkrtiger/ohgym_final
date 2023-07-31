@@ -74,7 +74,7 @@
 
     .goodsbtn{
       margin-top: 30px;
-      margin-left: 1175px;
+      margin-left: clamp(370px, 22%, 22%);
       padding: 10px 20px;
       background-color: #0099ff;
       color: #fff;
@@ -121,6 +121,11 @@
       margin-top: 150px;
       margin-left: clamp(370px, 22%, 22%);
       padding-bottom: 100px;
+    }
+
+    .btnflex{
+      display: flex;
+      flex-direction: row-reverse;
     }
   </style>
 </head>
@@ -180,7 +185,9 @@
         </table>
       </div>
     </div>
-    <button class="goodsbtn" th:onclick="|location.href='@{gGoodsForm}'|">상품 등록</button>
+    <div class="btnflex">
+      <button class="goodsbtn" th:onclick="|location.href='@{gGoodsForm}'|">상품 등록</button>
+    </div>
   </div>
 </div>
 <footer class="footer">
