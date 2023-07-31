@@ -82,7 +82,7 @@ public class LoginService {
 
         try {
             loginnDao.memberInsert(member);
-            view = "redirect:login";
+            view = "redirect:memberLoginForm";
             msg = member.getMname() + "고객님! " + "회원 가입이 완료되었습니다.";
         } catch (Exception e){
             e.printStackTrace();
@@ -130,7 +130,7 @@ public class LoginService {
             gc.setGymnum(gym.getGymnum());
             loginnDao.insertCheckC(gc);
             loginnDao.insertCheckM(gm);
-            view = "redirect:login";
+            view = "redirect:gymLoginForm";
             msg = gym.getGname() + " 관리자님! 회원 가입이 완료되었습니다.";
         } catch (Exception e){
             e.printStackTrace();

@@ -70,7 +70,6 @@ public class LoginController {
     public String joinProc(MemberDto member, RedirectAttributes rttr){
         log.info("joinProc()");
         String view = loginServ.memberJoin(member, rttr);
-
         return view;
     }
 
