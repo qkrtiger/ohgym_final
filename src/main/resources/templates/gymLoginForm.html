@@ -5,38 +5,9 @@
   <link rel="shortcut icon" href="/images/header/lgo_face.ico">
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   <link rel="stylesheet" th:href="@{css/font.css}">
+  <link rel="stylesheet" th:href="@{css/join.css}">
   <th:block th:insert="~{headerGym.html}"></th:block>
   <style>
-    /*전체*/
-    * {
-      margin: 0;
-      padding: 0;
-    }
-
-    /*바디*/
-    .wrap {
-      max-width: 400px;
-      margin: 0 auto;
-      margin-bottom: 50px;
-      padding: 20px;
-      min-height: 500px;
-    }
-
-    .login-header {
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 28px;
-    }
-
-
-    .login-input {
-      margin-bottom: 2px;
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 6px;
-      border: 2px solid #ccc;
-    }
-
 
     .login-btn {
       background-color: #2c7fdf;
@@ -53,7 +24,6 @@
       opacity: 0.8;
     }
 
-    ul>li{list-style: none}
 
     .login-form {
       margin-top: 200px;
@@ -63,32 +33,21 @@
 
     }
 
-    .footBtwrap a{
-      cursor: pointer;
-    }
 
-    .linkfindid{
-      color: black;
-      margin-top: 10px;
-      text-align: center;
-      cursor: pointer;
-    }
-
-    .linkfindid:hover{
-      color: #2c7fdf;
-    }
   </style>
 </head>
 <body class="renewal">
-<div class="wrap">
+<div class="wrap2">
+
   <form th:action="@{gymLoginProc}" method="post" class="login-form" name="jForm" onsubmit="return check()">
-    <h2 class="login-header">헬스장 로그인</h2>
+    <h2 class="login-header2">헬스장 로그인</h2>
     <input type="text" class="login-input" id="gid" name="gid" title=" 헬스장 아이디" autofocus placeholder="헬스장 아이디">
     <input type="password" class="login-input" name="gpass" title="비밀번호" placeholder="비밀번호">
     <input type="submit" class="login-btn" value="헬스장 로그인">
   </form>
   <a th:href="@{loginGymFind}" class="linkfindid">ID 찾기</a>
 </div>
+
 </body>
 <footer class="footer">
   <th:block th:insert="~{footer.html}"></th:block>

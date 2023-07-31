@@ -6,83 +6,8 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"
             integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <link rel="stylesheet" th:href="@{css/font.css}">
+    <link rel="stylesheet" th:href="@{css/join.css}">
     <th:block th:insert="~{header.html}"></th:block>
-    <style>
-        /*전체*/
-
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        /*바디*/
-        .wrap {
-            max-width: 400px;
-            margin: 0 auto;
-            margin-top: 160px;
-            padding: 20px;
-        }
-
-
-        ul > li {
-            list-style: none
-        }
-
-        .footBtwrap {
-            margin-top: 150px;
-            margin-bottom: 150px;
-            min-height: 200px;
-        }
-
-        .footBtwrap a {
-            cursor: pointer;
-        }
-
-        .idid {
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .idwrap {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-
-        .idtext {
-            width: 80px;
-            font-size: 20px;
-            margin-top: 5px;
-        }
-
-        .idres {
-            display: flex;
-            justify-content: inherit;
-            width: 190px;
-            height: 30px;
-            font-size: 25px;
-            font-weight: bold;
-        }
-
-        .btn {
-            color: white;
-            padding: 10px 15px;
-            font-size: 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            margin: 0 auto;
-            margin-bottom: 10px;
-            font-weight: bold;
-            width: 250px;
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-        }
-
-
-    </style>
 </head>
 <body class="renewal">
 <div class="wrap">
@@ -92,7 +17,7 @@
             <div class="idtext">아이디 :</div>
             <div class="idres" th:text="${session.id}"></div>
         </div>
-        <a th:href="@{loginIdOut}" class="btn" style="margin-top:20px; background-color: #219dd2">회원/트레이너 로그인</a>
+        <a th:href="@{memberLoginForm}" class="btn" style="margin-top:20px; background-color: #219dd2">회원/트레이너 로그인</a>
         <a th:href="@{passChange}" class="btn" style="background-color: #394f77;">비밀번호 재설정</a>
     </div>
 </div>

@@ -203,11 +203,11 @@ public class LoginService {
 
         try {
             loginnDao.passChange(member);
-            msg = "비밀번호가 제설정 되었습니다. 다시 로그인하세요.";
-            view = "redirect:/";
+            msg = "비밀번호가 재설정 되었습니다. 다시 로그인하세요.";
+            view = "redirect:memberLoginForm";
         } catch (Exception e){
             e.printStackTrace();
-            view = "redirect:/";
+            view = "redirect:passChange";
             msg = "비밀번호 변경에 실패했습니다. 다시 시도해주세요.";
         }
 
@@ -235,7 +235,7 @@ public class LoginService {
         } catch (Exception e){
             e.printStackTrace();
             view = "redirect:loginGymFind";
-            msg = "id 찾기 실패";
+            msg = "id 찾기를 다시 시도해 주세요.";
         }
 
         session.setAttribute("id", id);
@@ -258,11 +258,11 @@ public class LoginService {
 
         try{
             loginnDao.passGymChange(gym);
-            msg = "비밀번호가 제설정 되었습니다. 다시 로그인하세요.";
-            view = "redirect:/";
+            msg = "비밀번호가 재설정 되었습니다. 다시 로그인하세요.";
+            view = "redirect:gymLoginForm";
         } catch (Exception e){
             e.printStackTrace();
-            view = "redirect:/";
+            view = "redirect:passGymChange";
             msg = "비밀번호 변경에 실패했습니다. 다시 시도해주세요.";
         }
 

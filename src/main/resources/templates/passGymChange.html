@@ -6,13 +6,13 @@
     <link rel="stylesheet" th:href="@{css/join.css}">
     <link rel="stylesheet" th:href="@{css/font.css}">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-
+    <th:block th:insert="~{headerGym.html}"></th:block>
 </head>
 <body class="renewal">
 
-<div class="wrap">
+<div class="wrap3">
     <form th:action="passGymProc" method="post" class="login-form" name="jForm" onsubmit="return check()">
-        <h2 class="login-header">비밀번호 재설정</h2>
+        <h2 class="login-header2">비밀번호 재설정</h2>
         <input type="text" class="login-input" id="gid" name="gid" title="헬스장 아이디" autofocus placeholder="헬스장 아이디" >
         <input type="button" class="idcheck-btn" value="id확인" onclick="idcheck()" style="margin-bottom: 2px;">
         <p>비밀번호를 재설정합니다.</p>
@@ -24,7 +24,9 @@
         <input type="submit" class="login-btn" value="비밀번호 재설정">
     </form>
 </div>
-
+<footer class="footer">
+    <th:block th:insert="~{footer.html}"></th:block>
+</footer>
 </body>
 
 <script th:inline="javascript">
