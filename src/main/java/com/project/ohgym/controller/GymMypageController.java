@@ -154,7 +154,7 @@ public class GymMypageController {
 
     //헬스장 상품 등록 페이지로 이동
     @GetMapping("gGoodsForm")
-    public ModelAndView tGoodsForm(HttpSession session) {
+    public ModelAndView gGoodsForm(HttpSession session) {
         log.info("gGoodsForm()");
 
         mv = new ModelAndView();
