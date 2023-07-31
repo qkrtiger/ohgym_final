@@ -64,8 +64,8 @@ public class GymService {
     }
 
     // 필터 검색
-    public ModelAndView hGymFilterList(String ggoodsname, String mgender, List<String> check) {
-        log.info("hGymFilterList()");
+    public ModelAndView GymListChange(String ggoodsname, String mgender, List<String> check) {
+        log.info("GymListChange()");
         mv = new ModelAndView();
         Map<String, String> fMap = new HashMap<>();
         fMap.put("ggoodsname", ggoodsname);
@@ -211,4 +211,6 @@ public class GymService {
         mv.setViewName("gymList");
         return mv;
     }
+
+
 }

@@ -297,8 +297,12 @@ public class GymMypageService {
             //헬스장 정보 가져오기
             GymDto gym = gDao.selectgPay(search);
 
+            //후기 리스트 가져오기
+            List<ReviewDto> rList = gDao.GetReviewList(search);
+
             mv.addObject("mPList", mPList);
             mv.addObject("gym", gym);
+            mv.addObject("rList", rList);
 
             //페이징 처리
             search.setPageNum(num);

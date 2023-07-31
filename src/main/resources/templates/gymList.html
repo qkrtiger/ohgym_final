@@ -204,7 +204,7 @@
     <div class="nav-bar">
         <div class="first-bar">
             <img th:src="@{images/map.png}" id="mapimg" th:onclick="|location.href='@{kakao}'|">
-            <button class="fillterbtn" th:onclick="|location.href='@{gymSetting}'|">필터검색</button>
+            <button class="fillterbtn" th:onclick="openFilter()">필터검색</button>
         </div>
         <div class="selectmap">
             <h2 class="selectbox" id="name1">지역검색</h2>
@@ -280,6 +280,14 @@
 </body>
 
 <script th:inline="javascript">
+
+    //필터 팝업
+    function openFilter(){
+        window.open("gymSetting", "GymSetting", "width=800, height=800");
+    }
+
+    window.name = "popParent";
+
     // 시군구 기준 select 생성
     var cnt = new Array();
     cnt[0] = new Array('전체');

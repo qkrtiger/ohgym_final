@@ -1,5 +1,6 @@
 package com.project.ohgym.controller;
 
+import com.project.ohgym.dto.FilterViewDto;
 import com.project.ohgym.dto.GymDto;
 import com.project.ohgym.dto.MemberDto;
 import com.project.ohgym.service.GymService;
@@ -75,12 +76,13 @@ public class GymController {
     }
 
     // 검색 필터 목록
-    @PostMapping("hGymFilterList")
-    public ModelAndView hGymFilterList(String ggoodsname, String mgender, @RequestParam("used")List<String> check) {
+    @PostMapping("GymListChange")
+    public ModelAndView GymListChange(String ggoodsname, String mgender, @RequestParam("used")List<String> check) {
         log.info("hGymFilterList()");
-        mv = gServ.hGymFilterList(ggoodsname, mgender, check);
+        mv = gServ.GymListChange(ggoodsname, mgender, check);
         return mv;
     }
+
 
     // 헬스장 상세 페이지
     @GetMapping("gymPage")
