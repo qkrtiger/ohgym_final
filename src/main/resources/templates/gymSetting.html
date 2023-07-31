@@ -12,8 +12,8 @@
             width: 600px;
             background-color: #eee;
             border-radius: 10px;
-            margin-top: 200px;
-            margin-bottom: 20px;
+            margin-top: 10px;
+            /*margin-bottom: 20px;*/
         }
 
         form {
@@ -21,7 +21,7 @@
             flex-direction: column;
             flex-wrap: wrap;
             padding: 20px;
-            margin-bottom: 100px;
+            /*margin-bottom: 100px;*/
         }
 
         .checkdiv {
@@ -91,7 +91,7 @@
             border-radius: 10px;
         }
 
-        input[type="submit"] {
+        input[type="button"] {
             display: block;
             width: 70%;
             margin: auto;
@@ -108,11 +108,9 @@
     </style>
 </head>
 <body class="renewal">
-<header>
-    <th:block th:insert="~{header.html}"></th:block>
-</header>
+
 <section class="filler_style">
-    <form th:action="@{hGymFilterList}" method="post">
+    <form th:action="@{GymListChange}" method="post" name="hform">
         <h3>종류</h3><br>
         <div class="checkdiv1">
             <input type="radio" id="pay-type1" name="ggoodsname" value="일일권">
@@ -179,16 +177,22 @@
         <br>
         </div>
         <div>
-            <input type="submit" value="적용하기">
+            <input type="button" value="적용하기" onclick="check()">
+<!--            <input type="button"-->
         </div>
     </form>
 
 </section>
-<footer>
-    <th:block th:insert="~{footer.html}"></th:block>
-</footer>
 </body>
 <script th:inline="javascript">
+    function check() {
+
+        document.hform.target = opener.name;
+        document.hform.submit();
+
+        self.close();
+    }
+
     var checklist = [];
     $("used:checked").each(function (){
         checklist.push($(this).val())

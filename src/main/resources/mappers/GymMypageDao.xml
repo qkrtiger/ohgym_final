@@ -111,4 +111,7 @@
     <select id="selectGGoods" resultType="GymGoodsDto">
         select * from gymgoods where ggoodsnum = #{ggoodsnum}
     </select>
+    <select id="GetReviewList" resultType="ReviewDto" parameterType="SearchDto">
+        select * from review where membernum=#{membernum}
+    </select>
 </mapper>

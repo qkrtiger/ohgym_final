@@ -63,4 +63,6 @@ public interface GymMypageDao {
     void gGoodsOnOff(GymGoodsDto gymgoods);
 
     GymGoodsDto selectGGoods(int ggoodsnum);
+
+    List<ReviewDto> GetReviewList(SearchDto search);
 }

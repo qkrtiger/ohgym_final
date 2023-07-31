@@ -149,5 +149,24 @@
   <th:block th:insert="~{footer.html}"></th:block>
 </footer>
 </body>
+<script>
+  function setSidebarHeight() {
+    const sidebar = document.querySelector('.aside');
+    const mainContent = document.querySelector('.top-div');
+    const mainContentStyles = window.getComputedStyle(mainContent);
+    const mainContentHeight = parseFloat(mainContentStyles.height);
+    const marginTop = parseFloat(mainContentStyles.marginTop);
+    const marginBottom = parseFloat(mainContentStyles.marginBottom);
+
+    let sidebarHeight = mainContentHeight + marginTop + marginBottom;
+
+
+    sidebar.style.height = sidebarHeight + 'px';
+  }
+
+  window.addEventListener('load', setSidebarHeight);
+  window.addEventListener('resize', setSidebarHeight);
+
+</script>
 </html>
 
