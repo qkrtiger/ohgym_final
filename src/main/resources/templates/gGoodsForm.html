@@ -19,7 +19,6 @@
 
     .info-title{
       margin-top: 150px;
-      margin-left: 450px;
       margin-bottom: 50px;
       font-size: 1.5rem;
       padding-top: 50px;
@@ -27,10 +26,9 @@
 
     .content-all{
       border: 1px solid;
-      width: 70%;
+      border-radius: 30px;
       margin-bottom: 50px;
       min-width: 850px;
-      margin-left: 450px;
     }
 
     .content{
@@ -41,7 +39,6 @@
     .btn{
       display: flex;
       flex-direction: row-reverse;
-      margin-right: 135px;
       margin-bottom: 90px;
     }
 
@@ -97,6 +94,14 @@
     .top-div{
       min-height: 900px;
     }
+
+    .div-all {
+      width: 70%;
+      min-height: 900px;
+      margin-top: 150px;
+      margin-left: clamp(370px, 22%, 22%);
+      padding-bottom: 100px;
+    }
   </style>
 </head>
 <body class="renewal">
@@ -105,44 +110,46 @@
 </header>
 <th:block th:insert="~{GymSideBar.html}"></th:block>
 <div class="top-div">
-  <div class="content-top">
-    <form th:action="@{gMGoodsSave}" method="post" enctype="multipart/form-data">
-      <h2 class="info-title">상품 등록</h2>
-      <div class="content-all">
-        <div id="content" class="content">
-          <div class="info-row">
-            <span class="info-label">상품 종류:</span>
-            <select class="option" name="ggoodsname">
-              <option value="회원권">회원권</option>
-              <option value="일일권">일일권</option>
-            </select>
-          </div>
-          <div class="info-row">
-            <span class="info-label">이용기간:</span>
-            <select class="option" name="ggoodsperiod">
-              <option value="1">1개월</option>
-              <option value="3">3개월</option>
-              <option value="6">6개월</option>
-              <option value="12">12개월</option>
-              <option value="1">일일권</option>
-            </select>
-          </div>
-          <div class="info-row">
-            <span class="info-label">총 가격:</span>
-            <input class="input-t" type="text" name="ggoodsprice">
-          </div>
-          <div class="info-row">
-            <span class="info-label">추가사항:</span>
-            <input class="input-t" type="text" name="ggoodsadd">
-            <input type="hidden" name="gymnum" th:value="${session.gym.gymnum}">
+  <div class="div-all">
+    <div class="content-top">
+      <form th:action="@{gMGoodsSave}" method="post" enctype="multipart/form-data">
+        <h2 class="info-title">상품 등록</h2>
+        <div class="content-all">
+          <div id="content" class="content">
+            <div class="info-row">
+              <span class="info-label">상품 종류:</span>
+              <select class="option" name="ggoodsname">
+                <option value="회원권">회원권</option>
+                <option value="일일권">일일권</option>
+              </select>
+            </div>
+            <div class="info-row">
+              <span class="info-label">이용기간:</span>
+              <select class="option" name="ggoodsperiod">
+                <option value="1">1개월</option>
+                <option value="3">3개월</option>
+                <option value="6">6개월</option>
+                <option value="12">12개월</option>
+                <option value="1">일일권</option>
+              </select>
+            </div>
+            <div class="info-row">
+              <span class="info-label">총 가격:</span>
+              <input class="input-t" type="text" name="ggoodsprice">
+            </div>
+            <div class="info-row">
+              <span class="info-label">추가사항:</span>
+              <input class="input-t" type="text" name="ggoodsadd">
+              <input type="hidden" name="gymnum" th:value="${session.gym.gymnum}">
+            </div>
           </div>
         </div>
-      </div>
-      <div class="btn">
-        <input class="btn-sub" type="submit" value="저장하기">
-        <input class="btn-back" type="button" value="이전으로" th:onclick ="|back(${session.gym.gymnum})|">
-      </div>
-    </form>
+        <div class="btn">
+          <input class="btn-sub" type="submit" value="저장하기">
+          <input class="btn-back" type="button" value="이전으로" th:onclick ="|back(${session.gym.gymnum})|">
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 <footer class="footer">

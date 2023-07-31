@@ -22,6 +22,9 @@
             row-gap: 40px;
         }
 
+        .title{
+            color: black;
+        }
         .card {
             width: 288px;
             height: 286px;
@@ -82,7 +85,7 @@
 <section>
     <div class="nav-bar">
         <div id="result">
-            <h1>맞춤검색결과</h1>
+            <h1 class="title">맞춤검색결과</h1>
             <div class="row">
                 <th:block th:if="${#lists.isEmpty(gList)}">
                     <div class="null">등록된 헬스장이 없습니다.</div>
