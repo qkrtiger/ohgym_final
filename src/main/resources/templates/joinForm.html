@@ -37,8 +37,11 @@
         <div class="effectiveness">* 한글만 입력바랍니다.</div>
         <input type="text" class="login-input" name="mbirth" title="생년월일" placeholder="생년월일" oninput="hypenBrith(this)" maxlength="10">
         <div class="effectiveness">* 생년월일(yyyy-mm-dd)을 입력바랍니다.</div>
-        <input type="text" class="login-input" name="mgender" title="성별" placeholder="성별" >
-        <div class="effectiveness">* 한글만 입력바랍니다.</div>
+        <p>성별</p>
+        <div class="login-mgender">
+            <input type="radio" class="login-input2" name="mgender" title="성별" value="남">남자
+            <input type="radio" class="login-input2" name="mgender" title="성별" value="여">여자
+        </div>
         <input type="text" class="login-input" name="mphone" title="연락처" placeholder="연락처" oninput="hypenTel(this)" maxlength="13">
         <div class="effectiveness">* 연락처를 입력바랍니다.</div>
         <input type="text" class="login-input" id="mnickname" name="mnickname" title="닉네임" placeholder="닉네임" >

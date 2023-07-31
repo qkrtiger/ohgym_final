@@ -81,6 +81,19 @@
     border: 2px solid #ccc;
 }
 
+.login-mgender {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    vertical-align: middle;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.login-input2 {
+    margin: 0 10px;
+}
+
 .login-find {
     margin: 100px 0;
     float: left;
