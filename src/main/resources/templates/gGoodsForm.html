@@ -2,7 +2,8 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>헬스장 상품 등록</title>
+  <title>오짐 - 헬스장 상품 등록</title>
+  <link rel="shortcut icon" href="/images/header/lgo_face.ico">
   <link rel="stylesheet" th:href="@{css/font.css}">
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   <style>
@@ -109,8 +110,11 @@
       <div class="content-all">
         <div id="content" class="content">
           <div class="info-row">
-            <span class="info-label">상품명:</span>
-            <input class="input-t" type="text" name="ggoodsname" autofocus>
+            <span class="info-label">상품 종류:</span>
+            <select class="option" name="ggoodsname">
+              <option value="회원권">회원권</option>
+              <option value="일일권">일일권</option>
+            </select>
           </div>
           <div class="info-row">
             <span class="info-label">이용기간:</span>
