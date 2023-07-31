@@ -39,7 +39,12 @@
                 <div th:unless="${mpay.tgoodsint} == null">
                     <div class="t_title" style="color: #2c7fdf; font-weight: 400" th:text="'트레이너 ' +${trainer.mname}"></div>
                 </div>
-                <div class="tit">운동 시작일</div>
+                <div th:if="${mpay.tgoodsint} == null">
+                    <div class="tit">운동 시작일</div>
+                </div>
+                <div th:unless="${mpay.tgoodsint} == null">
+                    <div class="tit">수업 일자</div>
+                </div>
                 <div class="addr-low" th:text="${mpay.mpayperiod}"></div>
                 <div class="tit">결제 금액</div>
                 <div class="tit" style="color:#2c7fdf" th:text="'금액&nbsp;'+${#numbers.formatInteger(mpay.mpayprice, 3, 'COMMA') + '원'}"></div>

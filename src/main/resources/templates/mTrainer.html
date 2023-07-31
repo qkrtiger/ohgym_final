@@ -2,7 +2,8 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>mTrainer</title>
+    <title>오짐 - 트레이너 등록</title>
+    <link rel="shortcut icon" href="/images/header/lgo_face.ico">
     <link rel="stylesheet" th:href="@{css/font.css}">
     <link rel="stylesheet" th:href="@{css/mTrainer.css}">
     <script th:src="@{js/popup.js}" defer></script>
@@ -18,11 +19,11 @@
                 <h1>트레이너 등록</h1>
                 <div>
                     <input type="number" id="gnum" name="gymnum" placeholder="헬스장 고유번호를 입력하세요">
-                    <input type="button" value="확인" onclick="numCheck()">
+                    <input type="button" value="확인" onclick="numCheck()" style="cursor: pointer">
                 </div>
             </div>
             <div class="popup-btns">
-                <input type="button" value="닫기" onclick="closePopup()">
+                <input type="button" value="닫기" onclick="closePopup()" style="color: #2c7fdf">
                 <input type="button" value="등록" onclick="check()">
             </div>
         </form>
