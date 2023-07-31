@@ -296,7 +296,7 @@
                   </td>
                 </tr>
                 <tr class="hReview">
-                  <td colspan="5">
+                  <td colspan="6">
                     <th:block th:if="${MPitem.review == 0}">
                       <form th:action="@{reviewInput}" class="mb-3" name="myform" id="myform" method="post" th:object="${session.member}">
                         <input type="hidden" class="" name="mnickname" th:value="*{mnickname}">
@@ -451,7 +451,7 @@
 
             row += "</tr>" +
                     "<tr class='hReview'>" +
-                    "<td colspan='5'> ";
+                    "<td colspan='6'> ";
 
             if (mpayItem.review == 0){
               row +="<form action='reviewInput' class='mb-3' name='myform' id='myform' method='post'>" +
