@@ -358,5 +358,18 @@
         console.log(select, keyword);
         location.href = "/board?colname=" + select + "&keyword=" + keyword + "&pageNum=1";
     });
+
+    $("#keyword").on("keypress",function (key) {
+        if(key.keyCode == '13'){
+            let keyword = $("#keyword").val();
+            if (keyword == "") {
+                alert("검색어를 입력하세요.")
+                return;
+            }
+            let select = $("#sel").val();
+            console.log(select, keyword);
+            location.href = "/board?colname=" + select + "&keyword=" + keyword + "&pageNum=1";
+            }
+        });
 </script>
 </html>

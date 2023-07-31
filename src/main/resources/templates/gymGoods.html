@@ -74,7 +74,7 @@
 
     .goodsbtn{
       margin-top: 30px;
-      margin-left: 1175px;
+      margin-left: clamp(370px, 22%, 22%);
       padding: 10px 20px;
       background-color: #0099ff;
       color: #fff;
@@ -122,6 +122,11 @@
       margin-left: clamp(370px, 22%, 22%);
       padding-bottom: 100px;
     }
+
+    .btnflex{
+      display: flex;
+      flex-direction: row-reverse;
+    }
   </style>
 </head>
 <body class="renewal">
@@ -155,7 +160,12 @@
                 <input type="hidden" th:value="${gGitem.ggoodsnum}">
               </td>
               <td th:text="${iterstat.count}"></td>
-              <td th:text="${gGitem.ggoodsname}"></td>
+              <div th:if="${gGitem.ggoodsname} =='일일권'">
+                <td th:text="${gGitem.ggoodsname}"></td>
+              </div>
+              <div th:unless="${gGitem.ggoodsname} =='일일권'">
+                <td th:text="${gGitem.ggoodsperiod}+'개월'"></td>
+              </div>
               <td th:text="${#numbers.formatInteger(gGitem.ggoodsprice div gGitem.ggoodsperiod, 3, 'COMMA') + '원'}"></td>
               <td th:text="${#numbers.formatInteger(gGitem.ggoodsprice, 3, 'COMMA') + '원'}"></td>
               <td th:text="${gGitem.ggoodsadd}"></td>
@@ -175,7 +185,9 @@
         </table>
       </div>
     </div>
-    <button class="goodsbtn" th:onclick="|location.href='@{gGoodsForm}'|">상품 등록</button>
+    <div class="btnflex">
+      <button class="goodsbtn" th:onclick="|location.href='@{gGoodsForm}'|">상품 등록</button>
+    </div>
   </div>
 </div>
 <footer class="footer">
