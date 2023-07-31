@@ -3,7 +3,8 @@
 <head>
     <title>오짐 - 로그인</title>
     <link rel="shortcut icon" href="/images/header/lgo_face.ico">
-  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <link rel="stylesheet" th:href="@{css/font.css}">
     <th:block th:insert="~{header.html}"></th:block>
     <style>
@@ -18,35 +19,47 @@
         .wrap {
             max-width: 400px;
             margin: 0 auto;
-            margin-top: 200px;
+            margin-top: 160px;
             padding: 20px;
         }
 
 
-        ul>li{list-style: none}
+        ul > li {
+            list-style: none
+        }
 
+        .footBtwrap {
+            margin-top: 150px;
+            margin-bottom: 150px;
+            min-height: 200px;
+        }
 
-        .footBtwrap a{
+        .footBtwrap a {
             cursor: pointer;
         }
 
-        .idid{
-            text-align: center;
+        .idid {
+            margin-left: auto;
+            margin-right: auto;
             margin-bottom: 10px;
+            text-align: center;
         }
 
-        .idtext{
-            float: left;
-            width: 200px;
-            text-align: right;
+        .idwrap {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .idtext {
+            width: 80px;
             font-size: 20px;
             margin-top: 5px;
-
         }
-        .idres{
-            margin-left: 10px;
-            display: inline-block;
-            /*float: right;*/
+
+        .idres {
+            display: flex;
+            justify-content: inherit;
             width: 190px;
             height: 30px;
             font-size: 25px;
@@ -73,11 +86,13 @@
 </head>
 <body class="renewal">
 <div class="wrap">
-    <div class="idid">요청하신 아이디는 다음과 같습니다.</div>
-    <div class="idtext">아이디 : </div>
-    <div class="idres" th:text="${session.id}"></div>
     <div class="footBtwrap">
-        <a th:href="@{loginIdOut}" class="btn" style="margin-top:20px; background-color: #219dd2">로그인</a>
+        <div class="idid">요청하신 아이디는 다음과 같습니다.</div>
+        <div class="idwrap">
+            <div class="idtext">아이디 :</div>
+            <div class="idres" th:text="${session.id}"></div>
+        </div>
+        <a th:href="@{loginIdOut}" class="btn" style="margin-top:20px; background-color: #219dd2">회원/트레이너 로그인</a>
         <a th:href="@{passChange}" class="btn" style="background-color: #394f77;">비밀번호 재설정</a>
     </div>
 </div>
@@ -86,8 +101,9 @@
 <footer class="footer">
     <th:block th:insert="~{footer.html}"></th:block>
 </footer>
-<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-<script  th:inline="javascript">
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script th:inline="javascript">
 
 </script>
 </html>

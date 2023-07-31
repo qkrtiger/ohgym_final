@@ -248,11 +248,18 @@
           </div>
         </li>
         <li>
-        <li>
+        <th:block th:if="${session.gym == null}">
+          <a href="#" class="whiteB">등록</a>
+          <ul class="submenu sub3">
+            <li><a href="#" class="whiteC">헬스장 등록</a></li>
+          </ul>
+        </th:block>
+        <th:block th:unless="${session.gym == null}">
           <a th:href="@{gAdditionInfo(gymnum=${session.gym.gymnum})}"class="whiteB">등록</a>
           <ul class="submenu sub3">
             <li><a th:href="@{gAdditionInfo(gymnum=${session.gym.gymnum})}" class="whiteC">헬스장 등록</a></li>
           </ul>
+        </th:block>
         </li>
         <li>
           <a th:href="@{board}">커뮤니티</a>

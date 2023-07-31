@@ -227,8 +227,8 @@ public class LoginService {
         try {
             id = loginnDao.findGym(gym);
             if (id == null){
-                view = "redirect:loginGymFind";
-                msg = "우리회원 아님 ㅅㄱ";
+                view = "redirect:terms";
+                msg = "등록된 헬스장 회원이 아닙니다. 회원가입 해 주세요.";
             } else {
                 view = "redirect:idGymComplete";
             }

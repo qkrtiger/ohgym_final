@@ -5,6 +5,7 @@
     <title>헬스장 아이디 찾기</title>
     <link rel="stylesheet" th:href="@{css/join.css}">
     <link rel="stylesheet" th:href="@{css/font.css}">
+    <th:block th:insert="~{header.html}"></th:block>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script th:inline="javascript">
       $(function (){
@@ -26,7 +27,9 @@
       <input type="submit" class="login-btn" value="다음">
     </form>
 </div>
-
+<footer class="footer">
+    <th:block th:insert="~{footer.html}"></th:block>
+</footer>
 </body>
 
 <script th:inline="javascript">

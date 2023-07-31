@@ -5,7 +5,7 @@
   <link rel="shortcut icon" href="/images/header/lgo_face.ico">
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   <link rel="stylesheet" th:href="@{css/font.css}">
-  <th:block th:insert="~{header.html}"></th:block>
+  <th:block th:insert="~{headerGym.html}"></th:block>
   <style>
     /*전체*/
     * {
@@ -118,6 +118,13 @@
     if (m != null) {
       alert(m);
     }
+  });
+
+  $(".whiteB").on("click", function (){
+    alert("로그인 후 이용바랍니다.")
+  });
+  $(".whiteC").on("click", function (){
+    alert("로그인 후 이용바랍니다.")
   });
 </script>
 </html>
