@@ -28,9 +28,16 @@
             결제가 완료되었습니다.
         </div>
         <div class="prod_info_con">
-            <img class="img" th:src="@{upload/gym/} + ${gym.gsysname}" style="background:no-repeat center; background-size: cover;">
+            <div th:if="${mpay.tgoodsint} == null">
+                <img class="img" th:src="@{upload/gym/} + ${gym.gsysname}" style="background:no-repeat center; background-size: cover;">
+            </div>
+            <div th:unless="${mpay.tgoodsint} == null">
+                <img class="img" th:src="@{upload/trainer/} + ${trainer.tsysname}" style="background:no-repeat center; background-size: cover;">
+            </div>
             <div class="info">
-                <div class="tit" th:text="${mpay.mpaygym}">
+                <div class="tit" th:text="${mpay.mpaygym}"></div>
+                <div th:unless="${mpay.tgoodsint} == null">
+                    <div class="t_title" style="color: #2c7fdf; font-weight: 400" th:text="'트레이너 ' +${trainer.mname}"></div>
                 </div>
                 <div class="tit">운동 시작일</div>
                 <div class="addr-low" th:text="${mpay.mpayperiod}"></div>

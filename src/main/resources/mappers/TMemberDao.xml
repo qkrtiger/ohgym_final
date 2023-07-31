@@ -29,5 +29,14 @@
             WHERE tgoodsint=#{tgoodsint}
         )
     </select>
+    <select id="selectTrain" resultType="TrainDto">
+        SELECT *
+        FROM train
+        WHERE membernum IN (
+            SELECT membernum
+            FROM traingoods
+            WHERE tgoodsint = #{tgoodsint}
+        );
+    </select>
 
 </mapper>

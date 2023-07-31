@@ -24,4 +24,7 @@ public interface TMemberDao {
 
     //헬스장 이름 가져오는 메소드
     GymDto selectGymName(Integer tgoodsint);
+
+    //tgoodsint 값으로 트레이너 정보 가져오는 메소드
+    TrainDto selectTrain(int tgoodsint);
 }
