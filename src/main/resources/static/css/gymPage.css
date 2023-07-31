@@ -21,8 +21,8 @@
 .back {
     margin-top: 5px;
     position: absolute;
-    width: 35px;
-    height: 35px;
+    width: 80px;
+    height: 80px;
     background: url('../images/back.png');
     background-size: contain;
     background-repeat: no-repeat;
