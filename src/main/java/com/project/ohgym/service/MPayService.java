@@ -81,6 +81,7 @@ public class MPayService {
         //트레이너 정보 가져오기
         TrainDto trainer = tMDao.selectTrain(tgoodsint);
 
+
         mv.addObject("gym", gym);
         mv.addObject("trainer", trainer);
 
