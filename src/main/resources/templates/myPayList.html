@@ -271,6 +271,7 @@
             <tr>
               <th>결제일</th>
               <th>헬스장</th>
+              <th>트레이너</th>
               <th>이용기간</th>
               <th>가격</th>
               <th>후기</th>
@@ -282,6 +283,7 @@
                 <tr class="payNreview">
                   <td th:text="${MPitem.mpaydate}"></td>
                   <td th:text="${MPitem.mpaygym}"></td>
+                  <td th:text="${MPitem.trainername}"></td>
                   <td th:text="${MPitem.mpayperiod}"></td>
                   <td th:text="${#numbers.formatInteger(MPitem.mpayprice, 3, 'COMMA') + '원'}"></td>
                   <td>
@@ -437,6 +439,7 @@
             var row = "<tr class='payNreview'>" +
                     "<td>" + mpayItem.mpaydate + "</td>" +
                     "<td>" + mpayItem.mpaygym + "</td>" +
+                    "<td>" + mpayItem.trainername + "</td>" +
                     "<td>" + mpayItem.mpayperiod + "</td>" +
                     "<td>" + mpayItem.mpayprice.toLocaleString('ko-KR') + '원' + "</td>";
 
