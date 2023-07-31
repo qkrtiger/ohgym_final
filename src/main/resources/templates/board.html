@@ -220,7 +220,7 @@
         .tr-2 {
             width: 500px;
         }
-        .tr-2:hover > #title {
+        .tr-2:hover > .title {
             color: #2c7fdf;
         }
         .tr-2 a {
@@ -311,11 +311,11 @@
                                         <td class="tr-2">
                                             <th:block th:if="${session.member == null && session.gym == null}">
                                                 <a th:href="@{boardDetailM(boardnum=${bitem.boardnum})}"
-                                                   th:text="${bitem.boardtitle}" id="title"></a>
+                                                   th:text="${bitem.boardtitle}" class="title"></a>
                                             </th:block>
                                             <th:block th:unless="${session.member == null && session.gym == null}">
                                                 <a th:href="@{boardDetail(boardnum=${bitem.boardnum})}"
-                                                   th:text="${bitem.boardtitle}"></a>
+                                                   th:text="${bitem.boardtitle}" class="title"></a>
                                             </th:block>
                                         </td>
                                         <th:block th:if="${bitem.gname == null}">

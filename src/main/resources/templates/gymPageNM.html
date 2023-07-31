@@ -52,7 +52,7 @@
     <th:block th:unless="${gym == null}">
 
       <div id="imageContainer">
-        <input type="button" class="back" value="" onclick=history.back()>
+        <a class="back" onclick=history.back() readonly="">뒤로가기</a>
 
         <th:block th:if="${gym.gsysname == null}">
           <img th:src="@{images/no_image.png}" class="gymimg">
