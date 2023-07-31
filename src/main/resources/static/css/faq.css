@@ -45,6 +45,10 @@
     /* border-radius: 5px; */
 }
 
+.title > a:hover {
+    color: #2c7fdf;
+}
+
 /** 현재 활성화된 요소에 적용할 배경이미지 지정 */
 .selected {
     background: #ccc;
