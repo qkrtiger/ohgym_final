@@ -160,7 +160,12 @@
                 <input type="hidden" th:value="${gGitem.ggoodsnum}">
               </td>
               <td th:text="${iterstat.count}"></td>
-              <td th:text="${gGitem.ggoodsname}"></td>
+              <div th:if="${gGitem.ggoodsname} =='일일권'">
+                <td th:text="${gGitem.ggoodsname}"></td>
+              </div>
+              <div th:unless="${gGitem.ggoodsname} =='일일권'">
+                <td th:text="${gGitem.ggoodsperiod}+'개월'"></td>
+              </div>
               <td th:text="${#numbers.formatInteger(gGitem.ggoodsprice div gGitem.ggoodsperiod, 3, 'COMMA') + '원'}"></td>
               <td th:text="${#numbers.formatInteger(gGitem.ggoodsprice, 3, 'COMMA') + '원'}"></td>
               <td th:text="${gGitem.ggoodsadd}"></td>
