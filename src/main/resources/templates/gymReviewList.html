@@ -91,6 +91,9 @@
             margin-bottom: 100px;
         }
 
+        .reviewcontent{
+            white-space: pre-line;
+        }
     </style>
 </head>
 <body class="renewal">
@@ -128,7 +131,7 @@
                     </div>
                     <br>
                     <div class="blog-content">
-                        <div th:text="${ritem.reviewcontents}"></div>
+                        <div class="reviewcontent" th:text="${ritem.reviewcontents}"></div>
                     </div>
                 </div>
             </div><!--container2-->

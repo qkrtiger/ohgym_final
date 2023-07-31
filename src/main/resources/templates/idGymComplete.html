@@ -6,7 +6,7 @@
     <link rel="stylesheet" th:href="@{css/font.css}">
   <link rel="stylesheet" th:href="@{css/join.css}">
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-
+    <th:block th:insert="~{headerGym.html}"></th:block>
 </head>
 <body class="renewal">
 
@@ -15,11 +15,13 @@
     <div class="idtext">아이디 : </div>
     <div class="idres" th:text="${session.id}"></div>
     <div class="footBtwrap">
-        <a th:href="@{loginIdOut}" class="btn" style="margin-top:20px;">login</a>
-        <a th:href="@{passGymChange}" class="btn" style="background-color:#01a401;">비밀번호 재설정</a>
+        <a th:href="@{loginIdOut}" class="btn" style="margin-top:20px; background-color:#2c7fdf;">헬스장 로그인</a>
+        <a th:href="@{passGymChange}" class="btn" style="background-color: #394f77;">비밀번호 재설정</a>
     </div>
 </div>
-
+<footer class="footer">
+    <th:block th:insert="~{footer.html}"></th:block>
+</footer>
 </body>
 </script>
 </html>
