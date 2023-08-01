@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <style>
+        * {margin: 0; padding: 0;}
+        li{list-style: none}
+        a{text-decoration: none;}
+
+        .base-header-wrap {
+            position: relative;
+            margin: 0 auto;
+            z-index: 1;
+            border-bottom: 1px solid #76b2ec
+        }
+
+        header {
+            /*width: 100%;*/
+            height: 150px;
+            color: white;
+            background: #2c7fdf;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo{
+            width: 240px;
+            cursor: pointer;
+        }
+
+        .logomain {
+            height: 50px;
+            width: 200px;
+            margin-bottom: 10px;
+            margin: 50px auto;
+        }
+
+        .menu {
+            width: 1000px;
+            height: 150px;
+            margin: 0 auto;
+            z-index: 2;
+            /*bottom: 0;*/
+            /*left: 300px;*/
+        }
+
+        .nav {
+            float: left;
+            /*width: 100%;*/
+            /*height: 150px;*/
+            overflow: hidden;
+            /*position: absolute;*/
+            /*top: 0;*/
+            /*display: relative;*/
+        }
+
+        .nav>li {
+            float: left;
+            width: 200px;
+            box-sizing: border-box;
+        }
+
+        .nav>li>a {
+            display: block;
+            width: 100%;
+            text-align: center;
+            line-height: 150px;
+            /*line-height: 15px;*/
+            color: #fff;
+            font-size: 20px;
+            position: relative;
+        }
+
+        .nav>li>a:hover::before{
+            background-color: #2c7fdf;
+            display: block;
+            /*삼각형*/
+            position: absolute;
+            border-top: 15px solid transparent;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 15px solid #fff;
+            content: " ";
+            left: 50%;
+            top: 100%;
+            transform: translate(-50%, -100%);
+        }
+
+
+        .submenu {
+            width: 200px;
+            margin: 0 auto;
+            /*position: absolute;*/
+            /*top: 50px;*/
+            /*left: 0;*/
+            z-index: 1;
+            display: none;
+            position: absolute;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .submenu:hover::before {
+            position: absolute;
+            border-top: 15px solid transparent;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 15px solid #fff;
+            content: " ";
+            left: 50%;
+            top: 0;
+            transform: translate(-50%, -100%);
+        }
+
+        .submenu>li {
+            width: 200px;
+            height: 50px;
+            /*border-bottom: 1px solid #000;*/
+            color: #000;
+            background-color: #fff;
+            box-sizing: border-box;
+        }
+
+        .submenu>li:last-child {
+            border: 0;
+        }
+
+        .submenu>li>a:hover {
+            background-color: #aacaef;
+            color: #000;
+        }
+
+        .submenu>li>a {
+            display: block;
+            width: 100%;
+            color: #000;
+            text-align: center;
+            line-height: 3.4;
+            /*line-height: 15px;*/
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+
+        .login-header {
+            /*float: right !important;*/
+            z-index: 3;
+            position: absolute;
+            top: 8px;
+            right: 150px;
+        }
+
+        .login-nav {
+            list-style: none;
+            padding: 0px;
+            margin: 10px 50px 0 30px;
+        }
+
+        .login-nav li {
+            float: left;
+            padding-left: 20px;
+            font-size: 12px;
+        }
+
+        .login-nav li .login {
+            text-decoration: none;
+            background: #fff;
+            border-radius: 20px;
+            padding: 3px 12px;
+            font-size: 12px;
+            color: #2c7fdf;
+        }
+
+        .login-nav li .logout {
+            text-decoration: none;
+            background: #fff;
+            border-radius: 20px;
+            padding: 3px 12px;
+            font-size: 12px;
+            color: #2c7fdf;
+        }
+        .login-nav li .join {
+            color: #fff;
+            font-size: 12px;
+        }
+        .login-nav li .login:visited {
+            color: #2c7fdf;
+        }
+        .login-nav li .join:visited {
+            color: #fff;
+        }
+        .login-nav li a:hover {
+            color: #8c8c8c;
+        }
+
+        .suc {
+            display: block;
+        }
+
+        .bef {
+            display: block;
+        }
+    </style>
+</head>
+<body class="renewal">
+    <header>
+        <div class="base-header-wrap">
+            <div class="login-header">
+                <ul class="login-nav">
+                    <th:block th:if="${session.member == null}">
+                        <li class="bef"><a th:href="@{login}" class="login">로그인</a></li>
+                        <li class="bef"><a th:href="@{terms}" class="join">회원가입</a></li>
+                    </th:block>
+                    <th:block th:unless="${session.member == null}">
+                        <li class="suc" id="mname" th:text="${session.member.mid}"></li>
+                        <li class="suc">
+                            <th:block th:if="${session.member.gymnum == null}">
+                                <a th:href="@{memberMypage(membernum=${session.member.membernum})}" class="mypage">마이페이지</a>
+                            </th:block>
+                            <th:block th:unless="${session.member.gymnum == null}">
+                                <a th:href="@{trainerMypage(membernum=${session.member.membernum})}" class="whiteA">마이페이지</a>
+                            </th:block>
+                        </li>
+                        <li class="suc"><a th:href="@{homeLogout}" class="logout">로그아웃</a></li>
+                    </th:block>
+                </ul>
+            </div>
+            <div class="menu">
+                <ul class="nav">
+                    <li>
+                       <a th:href="@{introduce}">오짐</a>
+                       <ul class="submenu">
+                           <li><a th:href="@{introduce}">회사소개</a></li>
+                           <li><a th:href="@{guide}">오짐 가이드</a></li>
+                       </ul>
+                    </li>
+                    <li>
+                        <th:block th:if="${session.member == null}">
+                            <a th:href="@{hGymList}">운동하기</a>
+                        </th:block>
+                        <th:block th:unless="${session.member == null}">
+                            <a th:href="@{hGymMList}">운동하기</a>
+                        </th:block>
+                        <ul class="submenu sub2">
+                            <li>
+                                <th:block th:if="${session.member == null}">
+                                    <a th:href="@{hGymList}">검색</a>
+                                </th:block>
+                                <th:block th:unless="${session.member == null}">
+                                    <a th:href="@{hGymMList}">검색</a>
+                                </th:block>
+                            </li>
+                            <li><a th:href="@{kakao}">지도</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="logo">
+                            <img alt="로고" th:src="@{images/main/logo_main.png}" class="logomain" th:onclick="|location.href='@{/}'|">
+                            <!--                <h2>오짐</h2>-->
+                        </div>
+                    </li>
+                    <li>
+                        <a th:href="@{calendar}">기록</a>
+                        <ul class="submenu sub3">
+                            <li><a th:href="@{calendar}">캘린더</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a th:href="@{board}">커뮤니티</a>
+                        <ul class="submenu sub4">
+                            <li><a th:href="@{board}">게시글</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+</body>
+<script  th:inline="javascript">
+    $(".nav li").hover(function() {
+        $(this).children("ul").stop().slideToggle(500);
+    })
+</script>
+</html>
