@@ -6,6 +6,8 @@
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   <link rel="stylesheet" th:href="@{css/font.css}">
   <link rel="stylesheet" th:href="@{css/join.css}">
+  <!-- 카카오 스크립트 -->
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
   <th:block th:insert="~{header.html}"></th:block>
   <style>
 
@@ -20,7 +22,25 @@
       cursor: pointer;
     }
 
+    .kakao-btn{
+      margin-top: -10px;
+      margin-bottom: 10px;
+      padding: 10px 20px;
+      border: none;
+      background: #FEE500;
+      color: #3c1d1e;
+      font-size: 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+    }
+
     .login-btn:hover {
+      opacity: 0.8;
+    }
+
+    .kakao-btn:hover {
       opacity: 0.8;
     }
 
@@ -29,8 +49,8 @@
       margin-bottom: 15px;
       display: flex;
       flex-direction: column;
-
     }
+
 
   </style>
 </head>
@@ -43,6 +63,10 @@
     <input type="password" class="login-input" name="mpass" title="비밀번호" placeholder="비밀번호">
     <input type="submit" class="login-btn" value="회원/트레이너 로그인">
   </form>
+  <div class="kakao-btn" onclick="kakaoLogin()">
+        <a>카카오톡으로 간편로그인</a>
+  </div>
+
     <a th:href="@{loginfind}" class="linkfindid">ID 찾기</a>
 </div>
 
@@ -76,5 +100,18 @@
    alert(m);
  }
  });
+
+ function kakaoLogin() {
+   $.ajax({
+     url:'/memberLoginForm/getKakaoAuthUrl',
+     type:'post',
+     async: false,
+     dataType: 'text',
+     success: function (res) {
+       location.href = res;
+     }
+   });
+ }
+
 </script>
 </html>

@@ -4,14 +4,19 @@ import com.project.ohgym.dto.GymDto;
 import com.project.ohgym.dto.MemberDto;
 import com.project.ohgym.service.LoginService;
 import com.project.ohgym.service.RegisterMail;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jdk.jfr.Description;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.mbeans.UserMBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.HashMap;
 
 @Controller
 @Slf4j
@@ -217,4 +222,35 @@ public class LoginController {
         String view = loginServ.homeLogout(session);
         return view;
     }
+
+    @RequestMapping(value = "/memberLoginForm/getKakaoAuthUrl")
+    public @ResponseBody String getKakaoAuthUrl(HttpServletRequest request) throws Exception {
+
+        String reqUrl =
+                "https://kauth.kakao.com/oauth/authorize?client_id=e762f553da5154a3348fed056e2a0b57&redirect_uri=http://localhost:8880/auth_kakao&response_type=code";
+
+        return reqUrl;
+    }
+
+    @RequestMapping(value = "/auth_kakao")
+    public String oauthKakao(
+            @RequestParam(value = "code",required = false) String code
+            , Model model, HttpSession session) throws Exception {
+
+        System.out.println("#######" + code);
+        String access_Token = loginServ.getAccessToken(code);
+        HashMap<String, Object> member = loginServ.getuserinfo(access_Token);
+
+        System.out.println("###access_Token### : " + access_Token);
+        System.out.println("###id#### : " + member.get("id"));
+        System.out.println("###nickname#### : " + member.get("nickname"));
+        System.out.println("###email#### : " + member.get("email"));
+
+
+        model.addAttribute("member", member);
+        session.setAttribute("access_Token", access_Token);
+
+        return "redirect:/";
+    }
+
 }

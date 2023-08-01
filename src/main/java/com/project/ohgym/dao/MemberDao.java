@@ -3,11 +3,16 @@ package com.project.ohgym.dao;
 import com.project.ohgym.dto.GmListDto;
 import com.project.ohgym.dto.MemberDto;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
+import java.util.HashMap;
+
 
 @Mapper
 public interface MemberDao {
+    //이미 가입된 회원인지 확인하는 메소드
+
     int idCheck(String mId);
 
     int nicknameCheck(String mnickname);
