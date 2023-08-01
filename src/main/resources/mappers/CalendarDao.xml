@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.project.ohgym.dao.CalendarDao">
+    <insert id="calInsert" parameterType="CalendarDto">
+        insert into calendar
+        values (null, #{membernum}, #{title}, #{start}, #{end}, #{allDay})
+    </insert>
+
+    <delete id="deleteCal" parameterType="Integer">
+        delete from calendar where calendarnum=#{calendarnum}
+    </delete>
+
+    <select id="cShowList" resultType="CalendarDto" parameterType="Integer">
+        select * from calendar
+        where membernum=#{membernum}
+    </select>
+</mapper>

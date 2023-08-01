@@ -12,6 +12,7 @@
     <link rel="stylesheet" th:href="@{css/font.css}">
     <link rel="stylesheet" th:href="@{css/style.css}">
     <link rel="stylesheet" th:href="@{css/reset.css}">
+    <link rel="stylesheet" th:href="@{css/map.css}">
 </head>
 <body class="renewal">
 <header>
@@ -102,7 +103,7 @@ geocoder.addressSearch(l, function (result, status) {
 
         console.log(l);
 
-        var iwContent = '<div class="placeinfo">' + '<a class="title" href="http://localhost:8880/gymPage?gymnum='+ num +'" target="_blank">' + n +'</a>'
+        var iwContent = '<div class="placeinfo">' + '<a class="title" href="http://localhost:8880/gymPage?gymnum='+ num +'" style="color: white">' + n +'</a>'
                 + '<p>' + l + '</p></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
             iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
