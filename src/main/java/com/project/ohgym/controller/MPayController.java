@@ -46,4 +46,12 @@ public class MPayController {
         mv = mPServ.paymentContents(mpaynum, session);
         return mv;
     }
+
+    @GetMapping("tpayment")
+    public ModelAndView tpaymentContents(String mpaynum, HttpSession session){
+        log.info("tpaymentContents()");
+
+        mv = mPServ.tpaymentContents(mpaynum, session);
+        return mv;
+    }
 }
