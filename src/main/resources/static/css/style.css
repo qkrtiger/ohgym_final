@@ -9,6 +9,9 @@
     margin-bottom: 30px;
 }
 
+.placeinfo .title {
+    color: #2c7fdf;
+}
 .daily-title{
     font-size: 32px;
     font-weight: 700;

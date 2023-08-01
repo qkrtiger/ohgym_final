@@ -55,7 +55,7 @@ public class MPayService {
         try {
             mPDao.insertTMPay(mpay);
 
-            view = "payment?mpaynum=" + mpay.getMpaynum();
+            view = "tpayment?mpaynum=" + mpay.getMpaynum();
             log.info(view);
         } catch (Exception e){
             e.printStackTrace();
@@ -78,14 +78,35 @@ public class MPayService {
 
         //헬스장 정보 가져오기
         GymDto gym = GGDao.selectGym(gymnum);
+
+        mv.addObject("gym", gym);
+
+        mv.setViewName("payment");
+
+        return mv;
+    }
+
+    public ModelAndView tpaymentContents(String mpaynum, HttpSession session) {
+        log.info("tpaymentContents()");
+        mv = new ModelAndView();
+
+        //주문정보 가져오기
+        MPayDto mpay = mPDao.selectPayment(mpaynum);
+
+        mv.addObject("mpay", mpay);
+
+        int gymnum = mpay.getGymnum();
+        int tgoodsint = mpay.getTgoodsint();
+
+        //헬스장 정보 가져오기
+        GymDto gym = GGDao.selectGym(gymnum);
         //트레이너 정보 가져오기
         TrainDto trainer = tMDao.selectTrain(tgoodsint);
-
 
         mv.addObject("gym", gym);
         mv.addObject("trainer", trainer);
 
-        mv.setViewName("payment");
+        mv.setViewName("tpayment");
 
         return mv;
     }
