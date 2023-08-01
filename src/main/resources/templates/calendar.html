@@ -36,9 +36,34 @@
 
   </style>
   <script src='../js/index.global.js'></script>
-  <script>
+  <script th:inline="javascript">
+
+    let cList = [[${cList}]];
+    console.log(cList);
+    //function (){
+      let eList = new Array();
+      console.log(cList);
+      for (let i = 0; i < cList.length; i++) {
+        let cItem = cList[i];
+        console.log(cItem);
+        let calcontent =
+                {
+                  title: cItem.title,
+                  start: cItem.start,
+                  end: cItem.end,
+                  allDay: cItem.allDay
+                };
+        console.log(calcontent);
+        //calendar.addEvent(calcontent);
+        eList.push(calcontent);
+
+      }
+      console.log(eList);
+
     document.addEventListener('DOMContentLoaded', function() {
       var calendarEl = document.getElementById('calendar');
+
+      console.log(cList);
 
       var calendar = new FullCalendar.Calendar(calendarEl, {
         headerToolbar: {
@@ -50,84 +75,71 @@
         navLinks: true, // can click day/week names to navigate views
         selectable: true,
         selectMirror: true,
-        select: function(arg) {
+        select: function (arg) {
           var title = prompt('무엇을 기록할까요?');
-          if (title) {
-            calendar.addEvent({
-              title: title,
-              start: arg.start,
-              end: arg.end,
-              allDay: arg.allDay
-            })
+
+          let membernum = [[${session.member.membernum}]];
+
+          function dateFormat(date){
+            let dateFormat2 = date.getFullYear() + '-' +
+                    ((date.getMonth()+1) < 9 ? "0" + (date.getMonth()+1) : (date.getMonth()+1)) + '-' +
+                    ((date.getDate()) < 9 ? "0" + (date.getDate()) : (date.getDate()) );
+            return dateFormat2;
           }
-          calendar.unselect()
+          let startA = dateFormat(arg.start);
+          let endA = dateFormat(arg.end);
+
+          let result = {
+            "membernum": membernum,
+            "title": title,
+            "start": startA,
+            "end": endA,
+            "allDay": arg.allDay
+          }
+          console.log(result);
+
+          $.ajax({
+            url: 'insertCal',
+            type: 'post',
+            data: result,
+            success: function (res) {
+              if (res = "ok") {
+                if (title) {
+                  calendar.addEvent({
+                    title: title,
+                    start: arg.start,
+                    end: arg.end,
+                    allDay: arg.allDay
+                  })
+                }
+                calendar.unselect()
+                console.log(res);
+              } else {
+                alert("등록에 실패하였습니다.")
+              }
+            },
+            error: function (err) {
+              alert("등록에 실패하였습니다.");
+            }
+          });
+
+
         },
-        eventClick: function(arg) {
+        eventClick: function (arg) {
           if (confirm('삭제하시겠습니까?')) {
+            console.log(arg);
+            var calendarnum = $(this).data('calendarnum');
+            location.href = "calDelete?calendarnum=" + calendarnum;
             arg.event.remove()
           }
         },
         editable: true,
         dayMaxEvents: true, // allow "more" link when too many events
-        events: [
-          {
-            title: 'All Day Event',
-            start: '2023-01-01'
-          },
-          {
-            title: 'Long Event',
-            start: '2023-01-07',
-            end: '2023-01-10'
-          },
-          {
-            groupId: 999,
-            title: 'Repeating Event',
-            start: '2023-01-09T16:00:00'
-          },
-          {
-            groupId: 999,
-            title: 'Repeating Event',
-            start: '2023-01-16T16:00:00'
-          },
-          {
-            title: 'Conference',
-            start: '2023-01-11',
-            end: '2023-01-13'
-          },
-          {
-            title: 'Meeting',
-            start: '2023-01-12T10:30:00',
-            end: '2023-01-12T12:30:00'
-          },
-          {
-            title: 'Lunch',
-            start: '2023-01-12T12:00:00'
-          },
-          {
-            title: 'Meeting',
-            start: '2023-01-12T14:30:00'
-          },
-          {
-            title: 'Happy Hour',
-            start: '2023-01-12T17:30:00'
-          },
-          {
-            title: 'Dinner',
-            start: '2023-01-12T20:00:00'
-          },
-          {
-            title: 'Birthday Party',
-            start: '2023-01-13T07:00:00'
-          },
-          {
-            title: 'Click for Google',
-            url: 'http://google.com/',
-            start: '2023-01-28'
-          }
-        ]
+        events: eList
       });
 
       calendar.render();
+
     });
 
   </script>

@@ -118,10 +118,10 @@ public class GymController {
     }
 
     //캘린더
-    @GetMapping("calendar")
-    public String calendar(){
-        log.info("calendar()");
-        return "calendar";
-    }
+//    @GetMapping("calendar")
+//    public String calendar(){
+//        log.info("calendar()");
+//        return "calendar";
+//    }
 
 }
