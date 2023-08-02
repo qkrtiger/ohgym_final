@@ -28,6 +28,12 @@ public class CalendarController {
         return mv;
     }
 
+    @GetMapping("calendarN")
+    public String calendarN(){
+        log.info("calendarN()");
+        return "calendarN";
+    }
+
     @PostMapping("insertCal")
     @ResponseBody
     public String insertCal(CalendarDto cal){
@@ -37,7 +43,7 @@ public class CalendarController {
     }
 
     @GetMapping("calDelete")
-    public String calDelete(Integer calendarnum, HttpSession session, RedirectAttributes rttr){
+    public String calDelete(Integer calendarnum,  HttpSession session, RedirectAttributes rttr){
         log.info("calDelete()");
         String view = cServ.calDelete(calendarnum, session, rttr);
         return view;

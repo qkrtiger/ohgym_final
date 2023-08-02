@@ -38,9 +38,9 @@
   <script src='../js/index.global.js'></script>
   <script th:inline="javascript">
 
-    let cList = [[${cList}]];
-    console.log(cList);
-    //function (){
+      let cList = [[${cList}]];
+      console.log(cList);
+      //function (){
       let eList = new Array();
       console.log(cList);
       for (let i = 0; i < cList.length; i++) {
@@ -48,6 +48,7 @@
         console.log(cItem);
         let calcontent =
                 {
+                  calendarnum: cItem.calendarnum,
                   title: cItem.title,
                   start: cItem.start,
                   end: cItem.end,
@@ -60,87 +61,91 @@
       }
       console.log(eList);
 
-    document.addEventListener('DOMContentLoaded', function() {
-      var calendarEl = document.getElementById('calendar');
+      function dateFormat(date) {
+        let dateFormat2 = date.getFullYear() + '-' +
+                ((date.getMonth() + 1) < 9 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + '-' +
+                ((date.getDate()) < 9 ? "0" + (date.getDate()) : (date.getDate())) + ' ' +
+                ((date.getHours()) < 10 ? "0" + (date.getHours()) : (date.getHours())) + ":" +
+                ((date.getMinutes()) < 10 ? "0" + (date.getMinutes()) : (date.getMinutes()));
+        return dateFormat2;
+      }
 
-      console.log(cList);
+      document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
 
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        headerToolbar: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        },
-        locale: "ko",
-        navLinks: true, // can click day/week names to navigate views
-        selectable: true,
-        selectMirror: true,
-        select: function (arg) {
-          var title = prompt('무엇을 기록할까요?');
+        //console.log(cList);
 
-          let membernum = [[${session.member.membernum}]];
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          },
+          locale: "ko",
+          navLinks: true, // can click day/week names to navigate views
+          selectable: true,
+          selectMirror: true,
+          select: function (arg) {
+            var title = prompt('무엇을 기록할까요?');
 
-          function dateFormat(date){
-            let dateFormat2 = date.getFullYear() + '-' +
-                    ((date.getMonth()+1) < 9 ? "0" + (date.getMonth()+1) : (date.getMonth()+1)) + '-' +
-                    ((date.getDate()) < 9 ? "0" + (date.getDate()) : (date.getDate()) );
-            return dateFormat2;
-          }
-          let startA = dateFormat(arg.start);
-          let endA = dateFormat(arg.end);
+            let membernum = [[${session.member.membernum}]];
 
-          let result = {
-            "membernum": membernum,
-            "title": title,
-            "start": startA,
-            "end": endA,
-            "allDay": arg.allDay
-          }
-          console.log(result);
 
-          $.ajax({
-            url: 'insertCal',
-            type: 'post',
-            data: result,
-            success: function (res) {
-              if (res = "ok") {
-                if (title) {
-                  calendar.addEvent({
-                    title: title,
-                    start: arg.start,
-                    end: arg.end,
-                    allDay: arg.allDay
-                  })
-                }
-                calendar.unselect()
-                console.log(res);
-              } else {
-                alert("등록에 실패하였습니다.")
-              }
-            },
-            error: function (err) {
-              alert("등록에 실패하였습니다.");
+            let startA = dateFormat(arg.start);
+            let endA = dateFormat(arg.end);
+
+            let result = {
+              "membernum": membernum,
+              "title": title,
+              "start": startA,
+              "end": endA,
+              "allDay": arg.allDay
             }
-          });
+            console.log(result);
+
+            $.ajax({
+              url: 'insertCal',
+              type: 'post',
+              data: result,
+              success: function (res) {
+                if (res = "ok") {
+                  if (title) {
+                    calendar.addEvent({
+                      title: title,
+                      start: arg.start,
+                      end: arg.end,
+                      allDay: arg.allDay
+                    })
+                  }
+                  calendar.unselect()
+                  console.log(res);
+                } else {
+                  alert("등록에 실패하였습니다.")
+                }
+              },
+              error: function (err) {
+                alert("등록에 실패하였습니다.");
+              }
+            });
 
 
-        },
-        eventClick: function (arg) {
-          if (confirm('삭제하시겠습니까?')) {
-            console.log(arg);
-            var calendarnum = $(this).data('calendarnum');
-            location.href = "calDelete?calendarnum=" + calendarnum;
-            arg.event.remove()
-          }
-        },
-        editable: true,
-        dayMaxEvents: true, // allow "more" link when too many events
-        events: eList
+          },
+          eventClick: function (arg) {
+            if (confirm('삭제하시겠습니까?')) {
+              console.log(arg.event._def.extendedProps.calendarnum);
+              let calendarnum = arg.event._def.extendedProps.calendarnum;
+              location.href = "calDelete?calendarnum=" + calendarnum;
+              arg.event.remove()
+            }
+          },
+          editable: true,
+          dayMaxEvents: true, // allow "more" link when too many events
+          events: eList
+        });
+
+        calendar.render();
+
       });
-
-      calendar.render();
-
-    });
 
   </script>
 
