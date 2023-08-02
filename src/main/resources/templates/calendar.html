@@ -88,9 +88,12 @@
           select: function (arg) {
             var title = prompt('무엇을 기록할까요?');
 
+            if (title == "" || title == null){
+              alert("내용을 입력해주세요");
+              return;
+            }
+
             let membernum = [[${session.member.membernum}]];
-
-
             let startA = dateFormat(arg.start);
             let endA = dateFormat(arg.end);
 
@@ -108,7 +111,7 @@
               type: 'post',
               data: result,
               success: function (res) {
-                if (res = "ok") {
+                if (res == "ok") {
                   if (title) {
                     calendar.addEvent({
                       title: title,
@@ -117,7 +120,8 @@
                       allDay: arg.allDay
                     })
                   }
-                  calendar.unselect()
+                  calendar.unselect();
+                  location.reload();
                   console.log(res);
                 } else {
                   alert("등록에 실패하였습니다.")
