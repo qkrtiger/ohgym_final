@@ -18,17 +18,18 @@ drop view if exists gymmember;
 commit;
 
 -- 삭제
-drop table gymconvenient;
-drop table gymmachine;
-drop table reply;
-drop table board;
-drop table review;
-drop table mpay;
-drop table traingoods;
-drop table gymgoods;
-drop table gymmark;
-drop table member;
-drop table gym;
+drop table if exists gymconvenient;
+drop table if exists gymmachine;
+drop table if exists reply;
+drop table if exists board;
+drop table if exists review;
+drop table if exists mpay;
+drop table if exists traingoods;
+drop table if exists gymgoods;
+drop table if exists gymmark;
+drop table if exists calendar;
+drop table if exists member;
+drop table if exists gym;
 
 
 -- 전체 테이블
@@ -217,6 +218,18 @@ CREATE TABLE `gymconvenient` (
                                  `gc_sauna` tinyint(1) DEFAULT NULL,
                                  PRIMARY KEY (`gymnum`),
                                  CONSTRAINT `FK_Gym_TO_GymConvenient_1` FOREIGN KEY (`gymnum`) REFERENCES `gym` (`gymnum`)
+);
+
+-- 캘린더
+CREATE TABLE `calendar` (
+                                 `calendarnum` int NOT NULL AUTO_INCREMENT,
+                                 `membernum` int NOT NULL,
+                                 `title` varchar(200),
+                                 `start` varchar(200),
+                                 `end` varchar(200),
+                                 `allDay` tinyint(1),
+                                 PRIMARY KEY (`calendarnum`),
+                                 CONSTRAINT `FK_Member_TO_Calendar_1` FOREIGN KEY (`membernum`) REFERENCES `member` (`membernum`)
 );
 
 
