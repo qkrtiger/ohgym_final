@@ -11,7 +11,12 @@ import java.util.HashMap;
 
 @Mapper
 public interface MemberDao {
+
     //이미 가입된 회원인지 확인하는 메소드
+    MemberDto findkakao(HashMap<String, Object> userInfo);
+
+    //카카오 로그인 회원정보 저장
+    void kakaoinsert(HashMap<String, Object> userInfo);
 
     int idCheck(String mId);
 

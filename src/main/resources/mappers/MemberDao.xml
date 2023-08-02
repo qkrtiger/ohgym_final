@@ -6,7 +6,11 @@
         values (null, #{mid}, #{mpass}, #{mmail}, #{mname}, #{mbirth}, #{mgender}, #{mphone}, #{mnickname},
                 null, null, null, null, null, null, null, null, null, null)
     </insert>
-
+    <insert id="kakaoinsert">
+        insert into member
+        values (null, #{mid}, null, #{mmail}, null, null, null, null, #{mnickname},
+                null, null, null, null, null, null, null, null, null, null)
+    </insert>
 
     <update id="passChange" parameterType="String">
         update member
@@ -35,5 +39,8 @@
     </select>
     <select id="selectMember" resultType="MemberDto" parameterType="String">
         select * from member where mid=#{mid}
+    </select>
+    <select id="findkakao" resultType="MemberDto" parameterType="HashMap">
+        select * from member where mid=#{mid} and mmail=#{mmail} and mnickname=#{mnickname}
     </select>
 </mapper>

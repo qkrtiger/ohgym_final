@@ -18,8 +18,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.HashMap;
 
@@ -30,6 +28,9 @@ public class LoginService {
     @Autowired
     private LoginDao loginnDao;
 
+    @Autowired
+    private MemberDao memberDao;
+
     private BCryptPasswordEncoder pEncoder = new BCryptPasswordEncoder();
 
     public String idCheck(String mid) {
@@ -39,7 +40,7 @@ public class LoginService {
         //아이디가 중복이면 1, 아니면 0
         int cnt = loginnDao.idCheck(mid);
 
-        if(cnt == 0){
+        if (cnt == 0) {
             res = "ok";
         } else {
             res = "fail";
@@ -55,7 +56,7 @@ public class LoginService {
         //아이디가 중복이면 1, 아니면 0
         int cnt = loginnDao.nicknameCheck(mnickname);
 
-        if(cnt == 0){
+        if (cnt == 0) {
             res = "ok";
         } else {
             res = "fail";
@@ -71,7 +72,7 @@ public class LoginService {
         //아이디가 중복이면 1, 아니면 0
         int cnt = loginnDao.mailDoubleCheck(mmail);
 
-        if(cnt == 0){
+        if (cnt == 0) {
             res = "ok";
         } else {
             res = "fail";
@@ -95,7 +96,7 @@ public class LoginService {
             loginnDao.memberInsert(member);
             view = "redirect:memberLoginForm";
             msg = member.getMname() + "고객님! " + "회원 가입이 완료되었습니다.";
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             view = "redirect:joinFrom";
             msg = "가입 실패";
@@ -112,7 +113,7 @@ public class LoginService {
         //아이디가 중복이면 1, 아니면 0
         int cnt = loginnDao.gidCheck(gid);
 
-        if(cnt == 0){
+        if (cnt == 0) {
             res = "ok";
         } else {
             res = "fail";
@@ -143,7 +144,7 @@ public class LoginService {
             loginnDao.insertCheckM(gm);
             view = "redirect:gymLoginForm";
             msg = gym.getGname() + " 관리자님! 회원 가입이 완료되었습니다.";
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             view = "redirect:joinGymFrom";
             msg = "가입 실패";
@@ -160,7 +161,7 @@ public class LoginService {
 
         String db = loginnDao.idFind(mmail);
 
-        if (db.equals(mname)){
+        if (db.equals(mname)) {
             res = "ok";
         } else {
             res = "notok";
@@ -181,7 +182,7 @@ public class LoginService {
         try {
             id = loginnDao.loginFind(member);
             view = "redirect:idComplete";
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             view = "redirect:loginfind";
             msg = "id 찾기 실패";
@@ -216,7 +217,7 @@ public class LoginService {
             loginnDao.passChange(member);
             msg = "비밀번호가 재설정 되었습니다. 다시 로그인하세요.";
             view = "redirect:memberLoginForm";
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             view = "redirect:passChange";
             msg = "비밀번호 변경에 실패했습니다. 다시 시도해주세요.";
@@ -237,13 +238,13 @@ public class LoginService {
 
         try {
             id = loginnDao.findGym(gym);
-            if (id == null){
+            if (id == null) {
                 view = "redirect:terms";
                 msg = "등록된 헬스장 회원이 아닙니다. 회원가입 해 주세요.";
             } else {
                 view = "redirect:idGymComplete";
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             view = "redirect:loginGymFind";
             msg = "id 찾기를 다시 시도해 주세요.";
@@ -267,11 +268,11 @@ public class LoginService {
         //평문인 비밀번호를 암호문으로 덮어씀.
         gym.setGpass(encpwd);
 
-        try{
+        try {
             loginnDao.passGymChange(gym);
             msg = "비밀번호가 재설정 되었습니다. 다시 로그인하세요.";
             view = "redirect:gymLoginForm";
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             view = "redirect:passGymChange";
             msg = "비밀번호 변경에 실패했습니다. 다시 시도해주세요.";
@@ -293,9 +294,9 @@ public class LoginService {
         //encPwd에 담겨있을 수 있는 데이터
         // 1) null : 비회원인 경우
         // 2) 암호화된 비밀번호 문자열 : 회원인 경우
-        if(encPwd != null){
+        if (encPwd != null) {
             //아이디는 맞음.(회원의 아이디)
-            if(pEncoder.matches(member.getMpass(), encPwd)){
+            if (pEncoder.matches(member.getMpass(), encPwd)) {
                 //matches 메소드 : Spring Security 에서 제공하는
                 //암호문과 평문 비교 메소드.
                 //matches(평문, 암호문) 형식으로 작성하면,
@@ -329,7 +330,6 @@ public class LoginService {
     }
 
 
-
     public String gymLoginProc(GymDto gym, HttpSession session, RedirectAttributes rttr) {
         String view = null;
         String msg = null;
@@ -339,9 +339,9 @@ public class LoginService {
         //encPwd에 담겨있을 수 있는 데이터
         // 1) null : 비회원인 경우
         // 2) 암호화된 비밀번호 문자열 : 회원인 경우
-        if(encPwd != null){
+        if (encPwd != null) {
             //아이디는 맞음.(회원의 아이디)
-            if(pEncoder.matches(gym.getGpass(), encPwd)){
+            if (pEncoder.matches(gym.getGpass(), encPwd)) {
                 //matches 메소드 : Spring Security 에서 제공하는
                 //암호문과 평문 비교 메소드.
                 //matches(평문, 암호문) 형식으로 작성하면,
@@ -399,7 +399,7 @@ public class LoginService {
             conn.setDoOutput(true);
 
             //    POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
-// BufferedWriter 간단하게 파일을 끊어서 보내기로 토큰값을 받아오기위해 전송
+            // BufferedWriter 간단하게 파일을 끊어서 보내기로 토큰값을 받아오기위해 전송
 
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             StringBuilder sb = new StringBuilder();
@@ -411,9 +411,9 @@ public class LoginService {
             bw.flush();
 
             //    결과 코드가 200이라면 성공
-// 여기서 안되는경우가 많이 있어서 필수 확인 !! **
+            // 여기서 안되는경우가 많이 있어서 필수 확인 !! **
             int responseCode = conn.getResponseCode();
-            System.out.println("responseCode : " + responseCode+"확인");
+            System.out.println("responseCode : " + responseCode + "확인");
 
             //    요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -423,7 +423,7 @@ public class LoginService {
             while ((line = br.readLine()) != null) {
                 result += line;
             }
-            System.out.println("response body : " + result+"결과");
+            System.out.println("response body : " + result + "결과");
 
             //    Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
             JsonParser parser = new JsonParser();
@@ -446,10 +446,13 @@ public class LoginService {
 
     }
 
-    public HashMap<String, Object> getuserinfo(String access_Token) {
-        HashMap<String, Object> userInfo = new HashMap<String, Object>();
+    public String getuserinfo(String access_Token, HttpSession session, RedirectAttributes rttr) {
+        HashMap<String, Object> userInfo = new HashMap<>();
+        log.info("getuserinfo()");
 
         String requestURL = "https://kapi.kakao.com/v2/user/me";
+        String view = null;
+        String msg = null;
 
         try {
             URL url = new URL(requestURL); //1.url 객체만들기
@@ -458,40 +461,59 @@ public class LoginService {
             conn.setRequestMethod("GET"); // 3.URL 연결구성
             conn.setRequestProperty("Authorization", "Bearer " + access_Token);
 
-            //키값, 속성 적용
+            //키 값, 속성 적용
             int responseCode = conn.getResponseCode(); //서버에서 보낸 http 상태코드 반환
-            System.out.println("responseCode :" + responseCode+ "여긴가");
+            System.out.println("responseCode :" + responseCode + "여긴가");
             BufferedReader buffer = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            // 버퍼를 사용하여 일근ㄴ것
+            // 버퍼를 사용하여 읽은 것
             String line = "";
             String result = "";
             while ((line = buffer.readLine()) != null) {
-                result +=line;
+                result += line;
             }
             //readLine()) ==> 입력 String 값으로 리턴값 고정
 
-            System.out.println("response body :" +result);
+            System.out.println("response body :" + result);
 
-            // 읽엇으니깐 데이터꺼내오기
+            // 읽었으니깐 데이터꺼내오기
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result); //Json element 문자열변경
             JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
             JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
-            String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-            String email = kakao_account.getAsJsonObject().get("email").getAsString();
+            String mnickname = properties.getAsJsonObject().get("nickname").getAsString();
+            String mmail = kakao_account.getAsJsonObject().get("email").getAsString();
 
-            userInfo.put("nickname", nickname);
-            userInfo.put("email", email);
+            userInfo.put("mid", mmail);
+            userInfo.put("mnickname", mnickname);
+            userInfo.put("mmail", mmail);
 
+            log.info(String.valueOf(userInfo));
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        //여기에 추가 필요
-        return userInfo;
-    }
+        MemberDto member = memberDao.findkakao(userInfo);
+        // 저장되어있는지 확인
+        log.info("S :" + member);
 
+        if (member == null) {
+            //member null 이면 정보가 저장 안되어있는거라서 정보를 저장.
+            memberDao.kakaoinsert(userInfo);
+            member = loginnDao.selectMember((String)userInfo.get("mid"));
+            session.setAttribute("member", member);
+
+            view = "redirect:/";
+            msg = "로그인 성공";
+        } else {
+            session.setAttribute("member", member);
+            view = "redirect:/";
+            msg = "로그인 성공";
+
+        }
+        rttr.addFlashAttribute("msg", msg);
+        return view;
     }
+}
 

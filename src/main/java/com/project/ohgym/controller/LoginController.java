@@ -235,22 +235,19 @@ public class LoginController {
     @RequestMapping(value = "/auth_kakao")
     public String oauthKakao(
             @RequestParam(value = "code",required = false) String code
-            , Model model, HttpSession session) throws Exception {
+            , HttpSession session, RedirectAttributes rttr) throws Exception {
 
-        System.out.println("#######" + code);
+        log.info("#######" + code);
         String access_Token = loginServ.getAccessToken(code);
-        HashMap<String, Object> member = loginServ.getuserinfo(access_Token);
+        String view = loginServ.getuserinfo(access_Token, session, rttr);
 
-        System.out.println("###access_Token### : " + access_Token);
-        System.out.println("###id#### : " + member.get("id"));
-        System.out.println("###nickname#### : " + member.get("nickname"));
-        System.out.println("###email#### : " + member.get("email"));
+//        log.info("###access_Token### : " + access_Token);
+//        log.info("###nickname#### : " + member.get("nickname"));
+//        log.info("###email#### : " + member.get("email"));
+//
+        //session.setAttribute("access_Token", access_Token);
 
-
-        model.addAttribute("member", member);
-        session.setAttribute("access_Token", access_Token);
-
-        return "redirect:/";
+        return view;
     }
 
 }

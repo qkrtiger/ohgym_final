@@ -19,6 +19,10 @@
         controls: false,
         captions: true,
       })
+      let m = [[${msg}]]; // msg가 없으면 null
+      if (m != null) {
+        alert(m);
+      }
     });
 
     function check(){
