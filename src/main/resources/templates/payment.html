@@ -56,12 +56,7 @@
             <img class="img" th:src="@{upload/gym/} + ${gym.gsysname}" style="background:no-repeat center; background-size: cover;">
             <div class="info">
                 <div class="tit" th:text="${mpay.mpaygym}"></div>
-                <div th:if="${mpay.tgoodsint} == null">
-                    <div class="tit">운동 시작일</div>
-                </div>
-                <div th:unless="${mpay.tgoodsint} == null">
-                    <div class="tit">수업 일자</div>
-                </div>
+                <div class="tit">운동 시작일</div>
                 <div class="addr-low" th:text="${mpay.mpayperiod}"></div>
                 <div class="tit">결제 금액</div>
                 <div class="tit" style="color:#2c7fdf" th:text="'금액&nbsp;'+${#numbers.formatInteger(mpay.mpayprice, 3, 'COMMA') + '원'}"></div>
