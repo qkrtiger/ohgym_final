@@ -262,9 +262,21 @@
                         </div>
                     </li>
                     <li>
-                        <a th:href="@{calendar}">기록</a>
+                        <th:block th:if="${session.member == null}">
+                            <a th:href="@{calendarN}">기록</a>
+                        </th:block>
+                        <th:block th:unless="${session.member == null}">
+                            <a th:href="@{calendar}">기록</a>
+                        </th:block>
                         <ul class="submenu sub3">
-                            <li><a th:href="@{calendar}">캘린더</a></li>
+                            <li>
+                                <th:block th:if="${session.member == null}">
+                                    <a th:href="@{calendarN}">기록</a>
+                                </th:block>
+                                <th:block th:unless="${session.member == null}">
+                                    <a th:href="@{calendar}">캘린더</a>
+                                </th:block>
+                            </li>
                         </ul>
                     </li>
                     <li>
