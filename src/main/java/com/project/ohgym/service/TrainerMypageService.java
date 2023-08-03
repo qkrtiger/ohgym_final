@@ -181,6 +181,8 @@ public class TrainerMypageService {
         String realPath = session.getServletContext().getRealPath("/");
         realPath += "upload/trainer/";//업로드용 폴더 : upload
         File folber = new File(realPath);
+        String upFile = files.get(0).getOriginalFilename();
+        String image = trainer.getTsysname();
         if (folber.isDirectory() == false) {
             folber.mkdir();//폴더 생성.
         }
@@ -191,6 +193,11 @@ public class TrainerMypageService {
             String oriname = mf.getOriginalFilename();
             if (oriname.equals("")) {
                 return;
+            }
+
+            if(image != null && !upFile.equals("")){
+                //기존 파일이 있고, 새파일이 들어왔을 경우.
+                fileDelete(image, session);
             }
 
             //파일 정보 저장
@@ -207,6 +214,15 @@ public class TrainerMypageService {
             //파일 정보 저장(DB)
             trainer.setTsysname(sysname);
             trainer.setToriname(oriname);
+        }
+    }
+    private void fileDelete(String image, HttpSession session) throws Exception {
+        log.info("fileDelete()");
+        String realPath = session.getServletContext().getRealPath("/");
+        realPath += "upload/trainer/" + image;
+        File file = new File(realPath);
+        if(file.exists()){
+            file.delete();
         }
     }
 }

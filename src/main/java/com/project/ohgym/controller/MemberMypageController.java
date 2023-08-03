@@ -45,7 +45,8 @@ public class MemberMypageController {
 
     //이미지수정
     @PostMapping("mImage")
-    public String mImage(@RequestPart(required = false) List<MultipartFile> files, MemberDto member, HttpSession session, RedirectAttributes rttr) {
+    public String mImage(@RequestPart(required = false) List<MultipartFile> files,
+                         MemberDto member, HttpSession session, RedirectAttributes rttr) {
         log.info("mImage()");
         String view = mServ.insertImage(files, member, session, rttr);
         return view;

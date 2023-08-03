@@ -65,17 +65,25 @@ public class MemberMypageService {
         return mv;
     }
 
-    public String insertImage(@RequestPart List<MultipartFile> files, MemberDto member, HttpSession session, RedirectAttributes rttr) {
+    public String insertImage(@RequestPart List<MultipartFile> files,
+                              MemberDto member, HttpSession session,
+                              RedirectAttributes rttr) {
         log.info("insertImage()");
         String view = null;
         String msg = null;
         //업로드하는 파일의 이름을 먼저 꺼낸다.
         String upFile = files.get(0).getOriginalFilename();
+        String image = member.getMsysname();
 
         try{
             //파일 업로드 처리
             if (!upFile.equals("")){
                 fileUpload(files,session,member);
+            }
+
+            if(image != null && !upFile.equals("")){
+                //기존 파일이 있고, 새파일이 들어왔을 경우.
+                fileDelete(image, session);
             }
             view = "redirect:image?membernum=" + member.getMembernum();
             msg = "등록 성공";
@@ -86,6 +94,16 @@ public class MemberMypageService {
         }
         rttr.addFlashAttribute("msg", msg);
         return view;
+    }
+
+    private void fileDelete(String image, HttpSession session) throws Exception {
+        log.info("fileDelete()");
+        String realPath = session.getServletContext().getRealPath("/");
+        realPath += "upload/member/" + image;
+        File file = new File(realPath);
+        if(file.exists()){
+            file.delete();
+        }
     }
 
     private void fileUpload(List<MultipartFile> files, HttpSession session, MemberDto member) throws Exception {

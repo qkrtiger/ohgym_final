@@ -59,6 +59,7 @@ public class GymMypageService {
         String msg = null;
         //업로드하는 파일의 이름을 먼저 꺼낸다.
         String upFile = files.get(0).getOriginalFilename();
+        String image = gym.getGsysname();
 
         GymDto gyms = (GymDto) session.getAttribute("gym");
         int gymnum = gyms.getGymnum();
@@ -67,6 +68,11 @@ public class GymMypageService {
             //파일 업로드 처리
             if (!upFile.equals("")){
                 fileUpload(files,session,gym);
+            }
+
+            if(image != null && !upFile.equals("")){
+                //기존 파일이 있고, 새파일이 들어왔을 경우.
+                fileDelete(image, session);
             }
             view = "redirect:gImage?gymnum=" + gymnum;
             msg = "등록 성공";
