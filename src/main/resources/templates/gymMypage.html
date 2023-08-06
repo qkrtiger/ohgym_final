@@ -131,6 +131,10 @@
         <label class="info-label">운영시간:</label>
         <textarea rows="3" cols=20 wrap="hard" name="goperation" class="info-value" readonly>[[${gym.goperation}]]</textarea>
       </div>
+      <div class="info-row">
+        <label class="info-label">헬스장 고유번호:</label>
+        <span class="info-value" th:text="${gym.gymnum}"></span>
+      </div>
     </div>
   </div>
 </div>
