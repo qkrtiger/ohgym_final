@@ -31,11 +31,11 @@
                 <div th:text="${gym.gname}" style="color: #d4d4d4; font-size: 15px"></div>
                 <div class="tit" th:text="'트레이너 ' + ${train.mname}"></div>
                 <div class="addr">경력사항</div>
-                    <div class="sub_addr" th:text="${train.tcareer}"></div>
-
+                <textarea rows="3" cols=20 wrap="hard" class="intext" readonly>[[${train.tcareer}]]</textarea>
+<!--                <div class="sub_addr" th:text="${train.tcareer}"></div>-->
                 <div class="addr">자격사항</div>
-                    <div class="sub_addr" th:text="${train.tlicence}"></div>
-
+                <textarea rows="3" cols=20 wrap="hard" class="intext" readonly>[[${train.tlicence}]]</textarea>
+<!--                    <div class="sub_addr" th:text="${train.tlicence}"></div>-->
                 <div class="ticket">
                     <div class="t_title">
                         PT
