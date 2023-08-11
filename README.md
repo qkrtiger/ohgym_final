@@ -6,10 +6,10 @@
 
 # 개발도구
 
-∙ 개발산출문서 – ERDCloud, Excel
-∙ DB설계 - MySQL Workbench
-∙ IDE 도구 - IntelliJ
-∙ 웹 서버 - Apache Tomcat 9.0
-∙ 언어 - JAVA / JavaScript / HTML
-∙ 주요 라이브러리 - jQuery / Gson (JSON) / Thymeleaf / MyBatis 
-∙ 프레임워크 – Spring Boot
+∙ 개발산출문서 – ERDCloud, Excel 
+∙ DB설계 - MySQL Workbench 
+∙ IDE 도구 - IntelliJ 
+∙ 웹 서버 - Apache Tomcat 9.0 
+∙ 언어 - JAVA / JavaScript / HTML 
+∙ 주요 라이브러리 - jQuery / Gson (JSON) / Thymeleaf / MyBatis  
+∙ 프레임워크 – Spring Boot 
