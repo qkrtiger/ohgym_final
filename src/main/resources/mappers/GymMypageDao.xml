@@ -4,9 +4,6 @@
 
 
     <insert id="insertgGoodsSave" parameterType="GymGoodsDto" useGeneratedKeys="true" keyProperty="ggoodsnum">
-<!--        <selectKey keyProperty="ggoodsnum" resultType="Integer" order="AFTER">-->
-<!--            select last_insert_id()-->
-<!--        </selectKey>-->
         insert into gymgoods (ggoodsnum, ggoodsname, ggoodsprice, ggoodsaction, ggoodsadd, ggoodsperiod, gymnum)
         values (null, #{ggoodsname}, #{ggoodsprice}, 1, #{ggoodsadd}, #{ggoodsperiod}, #{gymnum})
     </insert>

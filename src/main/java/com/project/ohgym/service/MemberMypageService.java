@@ -96,17 +96,8 @@ public class MemberMypageService {
         return view;
     }
 
-    private void fileDelete(String image, HttpSession session) throws Exception {
-        log.info("fileDelete()");
-        String realPath = session.getServletContext().getRealPath("/");
-        realPath += "upload/member/" + image;
-        File file = new File(realPath);
-        if(file.exists()){
-            file.delete();
-        }
-    }
-
-    private void fileUpload(List<MultipartFile> files, HttpSession session, MemberDto member) throws Exception {
+    private void fileUpload(List<MultipartFile> files, HttpSession session,
+                            MemberDto member) throws Exception {
         log.info("fileUpload()");
         //파일 저장 위치
         String realPath = session.getServletContext().getRealPath("/");
@@ -139,6 +130,18 @@ public class MemberMypageService {
             mDao.mImage(image);
         }
     }
+
+    private void fileDelete(String image, HttpSession session) throws Exception {
+        log.info("fileDelete()");
+        String realPath = session.getServletContext().getRealPath("/");
+        realPath += "upload/member/" + image;
+        File file = new File(realPath);
+        if(file.exists()){
+            file.delete();
+        }
+    }
+
+
 
     public ModelAndView getProfile(Integer membernum) {
         log.info("getProfile()");
