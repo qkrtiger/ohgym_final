@@ -134,10 +134,7 @@ public class MemberMypageController {
     @ResponseBody
     public Map<String, Object> selectedMpay(@RequestBody SearchDto search){
         log.info("selectedMpay()");
-        //String mpayType = (String)map.get("mpayType");
-        //int membernum = (Integer)map.get("membernum");
 
-        //List<MPayDto> mPList = mServ.selectedMpay(mpayType, membernum);
         Map<String, Object> rmap = mServ.selectedMpay(search);
 
         return rmap;
