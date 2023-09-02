@@ -9,7 +9,7 @@
 
 # 1. 목표와 기능
 ## 1-1. 목표
-∙ Spring Boot를 활용한 Web application 개발 경험 및 학습<br><br>
+∙ Spring Boot를 활용한 Web application 개발 경험 및 학습<br>
 ∙ Spring Framework에 대한 이해, 활용을 통한 기술 고도화<br><br>
 ∙ MyBatis연동을 통한 데이터 구조 및 데이터 흐름 학습<br><br>
 ∙ 화면 설계 경험을 통한 페이지 구성 요소간 관계 이해<br><br>
