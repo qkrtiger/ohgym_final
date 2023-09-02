@@ -10,18 +10,18 @@
 # 1. 목표와 기능
 ## 1-1. 목표
 ∙ Spring Boot를 활용한 Web application 개발 경험 및 학습<br>
-∙ Spring Framework에 대한 이해, 활용을 통한 기술 고도화<br><br>
-∙ MyBatis연동을 통한 데이터 구조 및 데이터 흐름 학습<br><br>
-∙ 화면 설계 경험을 통한 페이지 구성 요소간 관계 이해<br><br>
-∙ API 활용 경험<br><br>
+∙ Spring Framework에 대한 이해, 활용을 통한 기술 고도화<br>
+∙ MyBatis연동을 통한 데이터 구조 및 데이터 흐름 학습<br>
+∙ 화면 설계 경험을 통한 페이지 구성 요소간 관계 이해<br>
+∙ API 활용 경험<br>
 ∙ 프로젝트 진행을 통한 협업 경험
 
 # 2. 개발도구
 
-∙ 개발산출문서 – ERDCloud, Excel<br><br>
-∙ DB설계 - MySQL Workbench<br><br>
-∙ IDE 도구 - IntelliJ<br><br>
-∙ 웹 서버 - Apache Tomcat 9.0<br><br>
-∙ 언어 - JAVA / JavaScript / HTML<br><br>
-∙ 주요 라이브러리 - jQuery / Gson (JSON) / Thymeleaf / MyBatis<br><br>
+∙ 개발산출문서 – ERDCloud, Excel<br>
+∙ DB설계 - MySQL Workbench<br>
+∙ IDE 도구 - IntelliJ<br>
+∙ 웹 서버 - Apache Tomcat 9.0<br>
+∙ 언어 - JAVA / JavaScript / HTML<br>
+∙ 주요 라이브러리 - jQuery / Gson (JSON) / Thymeleaf / MyBatis<br>
 ∙ 프레임워크 – Spring Boot
