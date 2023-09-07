@@ -50,13 +50,12 @@
 
 # 2. 개발도구
 - 개발산출문서 – ERDCloud, Excel<br>
-- DB설계 - MySQL Workbench<br>
+- DB설계 - <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> 
 - IDE 도구 - IntelliJ<br>
 - 웹 서버 - Apache Tomcat 9.0<br>
 - 언어 - <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
-
 - 주요 라이브러리 - jQuery / Gson (JSON) / Thymeleaf / MyBatis<br>
-- 프레임워크 – Spring Boot
+- 프레임워크 – <img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
 
 # 3. 데이터베이스 모델링(ERD)
 ![image](https://github.com/qkrtiger/ohgym_final/assets/133315262/51ff2059-50ac-4225-8c89-3242e367a1e0)
