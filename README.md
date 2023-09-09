@@ -60,4 +60,3 @@
 # 3. 데이터베이스 모델링(ERD)
 ![image](https://github.com/qkrtiger/ohgym_final/assets/133315262/51ff2059-50ac-4225-8c89-3242e367a1e0)
 
-# 4. 
