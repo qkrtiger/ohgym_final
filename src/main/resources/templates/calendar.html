@@ -6,6 +6,8 @@
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   <link rel="shortcut icon" href="/images/header/lgo_face.ico">
   <link rel="stylesheet" th:href="@{css/font.css}">
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     body {
       z-index: 0;
@@ -35,6 +37,7 @@
     /*}*/
 
   </style>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
   <script src='../js/index.global.js'></script>
   <script th:inline="javascript">
 
@@ -89,12 +92,14 @@
           selectable: true,
           selectMirror: true,
           select: function (arg) {
-            var title = prompt('무엇을 기록할까요?');
+            $('#myModal').modal('show');
+            // var title = prompt('무엇을 기록할까요?');
+            //
+            // if (title == "" || title == null){
+            //   alert("내용을 입력해주세요");
+            //   return;
+            // }
 
-            if (title == "" || title == null){
-              alert("내용을 입력해주세요");
-              return;
-            }
 
             let membernum = [[${session.member.membernum}]];
             let startA = dateFormat(arg.start);
@@ -166,6 +171,42 @@
 </div>
 
 <br><br><br><br><br><br>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!-- 스프링부트 타임리프의 form action 사용 -->
+      <form id="modalForm" th:action="@{/insertCal}" method="post">
+        <div class="modal-header">
+          <h5 class="modal-title">식단 및 운동 기록</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="닫기">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="diet">식단</label>
+            <input type="text" class="form-control" id="diet" name="diet" placeholder="식단 내용을 입력하세요">
+          </div>
+          <div class="form-group">
+            <label for="exercise">운동</label>
+            <input type="text" class="form-control" id="exercise" name="exercise" placeholder="운동 내용을 입력하세요">
+          </div>
+          <!-- 선택된 날짜를 저장하는 hidden 필드 -->
+          <input type="hidden" id="startDate" name="start">
+          <input type="hidden" id="endDate" name="end">
+          <!-- 세션에 저장된 회원 번호 (타임리프 변수 사용) -->
+          <input type="hidden" name="membernum" th:value="${session.member.membernum}">
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">저장</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 </body>
 <th:block>
   <th:block th:insert="~{footer.html}"></th:block>
